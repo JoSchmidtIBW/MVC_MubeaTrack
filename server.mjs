@@ -5,7 +5,7 @@ const port = process.env.port || 7088;
 
 
 //setup
-app.set("case sensitive routing", false); //um url gross oder klein schreiben link /users   /Users
+app.set("case sensitive routing", false); // um url gross oder klein schreiben link /users   /Users
 app.set("view engine", "ejs");
 
 
