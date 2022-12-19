@@ -1,5 +1,6 @@
 import express from "express";
 import mariaDB from 'mariadb';
+import poolDB from "./lib/db.mjs";
 
 const app = express();
 const port = process.env.port || 7088;
@@ -28,7 +29,7 @@ app.get('/', (req, res) => {
 
 
 
-
+/*
 const pool = mariaDB.createPool({
     host: 'localhost',
     user: 'root',
@@ -36,7 +37,7 @@ const pool = mariaDB.createPool({
     database: 'mubeaVerkaufDataBase',
     connectionLimit: 5
 });
-
+*/
 /*
 async function asyncFunction() {
     let conn;
@@ -60,7 +61,7 @@ app.get('/d', async(req, res) => {
     console.log('Halloooo from /d');
     let conn;
     try {
-        conn = await pool.getConnection();
+        conn = await poolDB.getConnection();
         const rows = await conn.query(`SELECT * FROM userVerkaufMubea WHERE ID_User=1;`);
         //console.log(rows); //[ {val: 1}, meta: ... ]
         const jsonS = JSON.stringify(rows);
