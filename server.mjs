@@ -1,9 +1,29 @@
+import dotenv from 'dotenv';
 import express from "express";
 import mariaDB from 'mariadb';
 import poolDB from "./lib/db.mjs";
 
+
 const app = express();
-const port = process.env.port || 7088;
+let PORT;// = process.env.PORT || 7088;
+
+
+
+const resultDotenv = dotenv.config()
+
+if (resultDotenv.error) {
+    throw resultDotenv.error
+}
+
+const buf = Buffer.from('BASIC=basic')
+const config = dotenv.parse(buf) // will return an object
+console.log(typeof config, config) // object { BASIC : 'basic' }
+
+process.env.STATUS === 'production' ? (PORT = process.env.DEV_PORT) : (PORT = process.env.PROD_PORT);
+
+
+console.log("resultDotenv: "+resultDotenv.parsed);  // [object Object]
+
 
 
 //setup
@@ -95,6 +115,6 @@ function a_Plus_b(a,b){
     console.log("a+b= "+ result);
 }
 
-app.listen(port, () => {
-    console.log(`Server running on port: http://localhost:${port}`);
+app.listen(PORT, () => {
+    console.log(`Server running on port: http://localhost:${PORT}`);
 });
