@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="de">
+
+    <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Infos zu my Website google suche">
+
+    <!--<link type="text/css" rel="stylesheet" href="/public/css/styleLogin.css" media="all">-->
+    <link type="text/css" rel="stylesheet" href="/css/styleLogin.css" media="all">
+
+        <!-- <link rel="/public/stylesheet" href="styleLogin.css" type="text/css"> -->
+    <!-- <link rel="stylesheet" href="public/styleLogin.css"> -->
+   <!-- <link rel="preload" href="/js/mainLogin.mjs" as="script" /> -->
+    <!-- <link  rel="script preload" href="/js/mainLogin.mjs" rel="preload" as="script"> -->
+
+   <!--  <script type="application/json"  src="mainLogin.mjs" defer></script>   -->
+    <!-- type="text/javascript" -->
+   <!-- <script type="text/javascript"  src="mainLogin.mjs" defer></script> -->
+   <!-- <script src='./public/mainLogin.mjs' type="application/json"></script> -->
+    <!-- <link type="text/css" rel="stylesheet" href="/public/css/styleLogin.css" media="all"> -->
+    <!-- <link src="/css/styleLogin.css" rel="stylesheet" type="text/css"> -->
+   <!-- <link href="/css/styleLogin.css" rel="stylesheet" type="text/css"> -->
+
+
+
+   <!-- zum Ausprobieren, ev löschen -->
+       <!-- the form awesome library is used to add icons to our form -->
+       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+    <title>Login-Verkauf_Mubea</title>
+</head>
+
+
+    <header>
+        <div class="MubeaLogo">
+            <!--<img src="/images/Mubea_Logo_white_without_transparent.gif" alt="sollte Mubea-LogoBild sein" height="50" class="logo1">-->
+            <img src="/images/Mubea_logo.svg.png" alt="sollte Mubea-LogoBild sein" class="logo" height="50" width="185">
+            <a class="MubeaTrack">Track</a>
+        </div>
+    </header>
+
+<body>
+
+
+
+    <main>
+    <div class="container">
+      <div id="Dreieck">
+        <div class="login">
+         <div class="stage__content-container">
+                    <div class="stage_content-container-inner">
+                        <div class="stage_headline-container">
+                            <h1>Looogin</h1>
+                            <h1>das ist login.ejs xxxxin  views</h1>
+                            <br>
+
+                            <form action="/api/v1/login/l" method="post">
+                                <label for="username">
+                                    <!-- font awesome icon -->
+                                    <i class="fas fa-user"></i>
+                                </label>
+                                maNummerL: <input name="maNummerLEingabe" type="text" id="inputMaNummerL"/>
+                                <!-- <input type="submit" value="Ma-Nummer bestätigen" id="btnMaNummerL" onclick="btnMaNummerLOK()"/>  -->
+                                <button type="button" id="btnMaNummerL" onclick="btnMaNummerLOK()">OK</button>
+                                <a>Eingegebe Ma-Nummer: </a>
+                                <a id="lbAusgabeMaNummerLClient"></a>
+                                <a id="lbAusgabeMaNummerLServer"><%= maNummerLServer %></a>
+                                <!-- <input type="submit" value="Passwort bestätigen"/> -->
+                                <!-- </form>
+                                <br>
+                                <form action="/api/login/l" method="post"> -->
+                                <br>
+                                <label for="password">
+                                    <i class="fas fa-lock"></i>
+                                </label>
+                                passwortL: <input name="passwortLEingabe" type="text" id="inputPasswortL"/>
+                                <button type="button" id="btnPasswortL" onclick="btnPasswortLOK()">OK</button>
+                                <a>Eingegebes Passwort: </a>
+                                <!-- <input type="submit" value="Passwort bestätigen" id="btnPasswortL" onclick="btnPasswortLOK()"/> -->
+                                <a id="lbAusgabePasswortLClient"></a>
+                                <a id="lbAusgabePasswortLServer"><%= passwortLServer %></a>
+                                <br>
+                                <input type="submit" value="Passwort bestätigen"/>
+                            </form>
+                            <br>
+
+                            <input type="button" onclick="location.href='/api/v1/registrieren';" value="Go to Registrieren" />
+                                <li id="google"><a href="https://www.google.ch/">GOOGLE</a></li>
+                                <button class = 'btn btn-primary' onclick = "<%= xClicker %>">Click Me!</button>
+                        </div>
+                    </div>
+                </div>
+    </div>
+
+    <a>Haaaalllllllo</a>
+    <button class = 'btnClickyyy' onclick = "myFunctionClicky()">OK</button>
+    <br>
+    <a href="#" id="joke" onclick="loadJoke()">Nächsten Witz anzeigen!</a>
+    <p id="j"></p>
+
+    <br>
+    <% for(let i = 0; i<5;i++) { %>
+        <% let text = "ungerade"
+        if(i%2===0) {
+            text = "gerade"
+        }%>
+        <!-- <p>Hallo <%=  %>  Welt, <%= i %> : <%= text%>   </p> -->
+        <p>Hallo  mit Level  Welt, <%= i %> : <%= text%>   </p>
+    <% } %>
+    <!-- %... wird server seitig ausgeführt -->
+    <br>
+
+
+    <!-- das ist hier serversitiges javascript -->
+
+
+
+</main>
+<footer class="footer-Login">
+        <!-- Reihenfolge -->
+        <div style="float: left; background-color: lightgray;"><a class="pCopyRFooterLogin">© C.Tschenet / J.Schmidt</a></div>
+        <div style="float: right; background-color: lightgray;"><a class="pDateFooterLogin">Dez. 2022 / Jan. 2023</a></div>
+        <div style="margin: 0 auto; width: 100px;"><a>Version 1.0</a></a></div>
+</footer>
+
+    <!-- <script type="application/json"  src="../public/mainLogin.mjs"></script> -->
+    <!-- <script type="application/json"  href="../public/mainLogin.mjs" crossorigin="anonymous"></script> -->
+    <script>
+        console.log("Ich bin main.js in views, werde aufgerufen durch login.ejs in views und ich stehe in der console vom browser");
+        // <script nonce="// cspNonce %>">
+
+        // helmet sagen, das dies erlaubt ist, wenn script von server kommt, also nicht das untere
+        //for(let i = 0; i<5;i++){
+        //    document.write('<p>hallööö</p>');
+        //}
+
+        // helmet muss dafür deaktiviert sein
+        // weil es inline ist, müsste hashwert haben zeugs
+        // über script wird client seitig ausgeführt
+        for(let i = 0; i<5;i++){
+            document.write('<p>hallööö</p>');
+        }
+        </script>
+
+        <!-- <script type="text/javascript" src="/public/js/mainLogin.mjs"></script> -->
+        <script type="text/javascript" src="/js/mainLogin.mjs"></script>
+        <!--<script type="module" src="/public/js/mainLogin.mjs"></script>-->
+
+</body>
+
+</html>
+
+<!--
+<h1>Mein SSR-Template</h1>
+<a>server-side-rendering mit ejs</a>
+-->
+<!-- <link rel="./public/stylesheet" href="styleLogin.css" type="text/css">  -->
+    <!-- <link rel="/public/stylesheet" href="styleLogin.css" type="text/css"> -->
+    <!-- <link rel="stylesheet" href="public/styleLogin.css"> -->
+   <!-- <link rel="preload" href="/js/mainLogin.mjs" as="script" /> -->
+    <!-- <link  rel="script preload" href="/js/mainLogin.mjs" rel="preload" as="script"> -->
+
+   <!--  <script type="application/json"  src="mainLogin.mjs" defer></script>   -->
+    <!-- type="text/javascript" -->
+   <!-- <script type="text/javascript"  src="mainLogin.mjs" defer></script> -->
+   <!-- <script src='./public/mainLogin.mjs' type="application/json"></script> -->
+
+
+<!--
+ <div class="vierEckHaupt">
+        <div class="triangle">
+
+        </div>
+    </div>
+
+
+
+    <div class="title1">
+      <a href="#">Baustellenbedarf</a>
+    </div>
+
+    <div class="container">
+      <div class="corner">
+        <span>20% Special Offer</span>
+      </div>
+    </div>
+
+ <div class="vierEckHaupt">
+ <div class="jallo">jallooo</div>
+        <div class="triangle">
+
+        </div>
+    </div>
+
+-->

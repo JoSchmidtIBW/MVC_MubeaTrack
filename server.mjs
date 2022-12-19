@@ -3,6 +3,8 @@ import express from "express";
 import mariaDB from 'mariadb';
 import poolDB from "./lib/db.mjs";
 
+import loginRoutes from './routes/loginRoute.mjs'
+
 
 const app = express();
 let PORT;// = process.env.PORT || 7088;
@@ -36,7 +38,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use( express.static( "./public" ) );
-
+app.use('/api/v1/login', loginRoutes);
 
 
 
