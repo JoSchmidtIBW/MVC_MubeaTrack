@@ -4,7 +4,8 @@ import mariaDB from 'mariadb';
 //import poolDB from "./lib/db.mjs";
 import bodyParser from "body-parser";
 
-import loginRoutes from './routes/loginRoute.mjs'
+import loginRoutes from './routes/loginRoute.mjs';
+import adminUserNewDeleteChangeRoute from "./routes/adminUserNewDeleteChangeRoute.mjs";
 
 
 const app = express();
@@ -41,8 +42,11 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use( express.static( "./public" ) );
 app.use('/api/v1/login', loginRoutes);
+app.use('/q', adminUserNewDeleteChangeRoute);
 
-
+app.get('/w', (req, res) => {
+    res.send('Hello WWWWWWWW!');
+});
 
 app.get('/', (req, res) => {
     res.send('Hello World!');
@@ -80,7 +84,7 @@ async function asyncFunction() {
 }
 */
 
-
+/*
 app.get('/d', async(req, res) => {
     console.log('Halloooo from /d');
     let conn;
@@ -100,7 +104,7 @@ app.get('/d', async(req, res) => {
         if (conn) return conn.end();
     }
 });
-
+*/
 
 
 //------------------------------------------------------------------------------------------------------
