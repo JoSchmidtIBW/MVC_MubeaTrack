@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 import express from "express";
 import mariaDB from 'mariadb';
 //import poolDB from "./lib/db.mjs";
+import bodyParser from "body-parser";
 
 import loginRoutes from './routes/loginRoute.mjs'
 
@@ -36,6 +37,7 @@ app.set("view engine", "ejs");
 //Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use( express.static( "./public" ) );
 app.use('/api/v1/login', loginRoutes);

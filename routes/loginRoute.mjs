@@ -428,7 +428,7 @@ async function sucheInDBmaNummer(maNummer){
        // const rows = await conn.query("SELECT * FROM userVerkaufMubea WHERE MA_Nummer="+maNummer+";");
         //const rows = await conn.query(`SELECT * FROM userVerkaufMubea WHERE MA_Nummer=`+${maNummer}+`;`);
        // const rows = await conn.query("`SELECT * FROM userVerkaufMubea WHERE MA_Nummer=`'+maNummer+'`;`");
-        let sql = "SELECT * FROM userVerkaufMubea WHERE MA_Nummer="+maNummer+";";// ab hier wieder getconnection probleme
+        let sql = 'SELECT * FROM userVerkaufMubea WHERE MA_Nummer='+maNummer+';';// ab hier wieder getconnection probleme
         const rows = await conn.query(sql);
         console.log("sucheInDBmaNummer-Funktion-jsonS: "+jsonS)
         //conn.end();

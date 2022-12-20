@@ -17,6 +17,7 @@ Frameworks:
 // ev helmet installieren
 // ev fetch... für juck norris witz
 `npm install dotenv --save` für passwort, und KEY für hashcode
+npm install body-parser
 
 start server with `npm run dev` --> start with nodemon (server start automatically, when do some code- changes)
 
