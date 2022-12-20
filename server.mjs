@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import express from "express";
 import mariaDB from 'mariadb';
-import poolDB from "./lib/db.mjs";
+//import poolDB from "./lib/db.mjs";
 
 import loginRoutes from './routes/loginRoute.mjs'
 
