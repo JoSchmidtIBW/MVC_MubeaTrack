@@ -4,6 +4,10 @@ import mariaDB from 'mariadb';
 //import poolDB from "./lib/db.mjs";
 import bodyParser from "body-parser";
 
+import cookieParser from 'cookie-parser';
+import session from 'express-session';
+
+
 import loginRoutes from './routes/loginRoute.mjs';
 import adminUserNewDeleteChangeRoute from "./routes/adminUserNewDeleteChangeRoute.mjs";
 
@@ -37,12 +41,70 @@ app.set("view engine", "ejs");
 
 //Middleware
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+// parsing the incoming data
+app.use(express.urlencoded({ extended: false }));//cookie was mit true
 app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use( express.static( "./public" ) );
 app.use('/api/v1/login', loginRoutes);
 app.use('/q', adminUserNewDeleteChangeRoute);
+
+
+// cookie parser middleware
+app.use(cookieParser());
+//app.use(session({secret: "Shh, its a secret!"}));
+
+
+// creating 24 hours from milliseconds
+const oneDay = 1000 * 60 * 60 * 24;
+
+//session middleware
+app.use(session({
+    secret: "Shh, its a secret!",//"thisismysecrctekeyfhrgfgrfrty84fwir767",
+    saveUninitialized:true,
+    cookie: { maxAge: oneDay },
+    resave: false
+}));
+
+// a variable to save a session
+//var session;
+//var x = 1;
+//let x = 1;
+app.get('/xx',(req,res) => {
+    let x = 1;
+    let session=req.session;
+   // session = x;
+    console.log(req.session);
+    console.log(session)
+    // if(session.userid){
+    //     res.send("Welcome User <a href=\'/logout'>click to logout</a>");
+    // }else
+    //     res.sendFile('views/index.html',{root:__dirname})
+    //res.send("session:" + session)
+    res.send('Hello XXXXXXXX!');
+});
+
+/*
+app.get('/logout',(req,res) => {
+    req.session.destroy();
+    res.redirect('/');
+});
+ */
+
+
+
+app.get('/c', function(req, res){
+    console.log("bin in cccccccc")
+    if(req.session.page_views){
+        req.session.page_views++;
+        res.send("You visited this page " + req.session.page_views + " times");
+    } else {
+        req.session.page_views = 1;
+        res.send("Welcome to this page for the first time!");
+    }
+});
+
+
 
 app.get('/w', (req, res) => {
     res.send('Hello WWWWWWWW!');

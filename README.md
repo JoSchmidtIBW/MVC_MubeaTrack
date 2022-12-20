@@ -18,6 +18,8 @@ Frameworks:
 // ev fetch... für juck norris witz
 `npm install dotenv --save` für passwort, und KEY für hashcode
 npm install body-parser
+`npm install --save express-session`
+`npm install  cookie-parser`
 
 start server with `npm run dev` --> start with nodemon (server start automatically, when do some code- changes)
 
