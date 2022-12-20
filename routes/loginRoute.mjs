@@ -428,12 +428,17 @@ async function sucheInDBmaNummer(maNummer){
        // const rows = await conn.query("SELECT * FROM userVerkaufMubea WHERE MA_Nummer="+maNummer+";");
         //const rows = await conn.query(`SELECT * FROM userVerkaufMubea WHERE MA_Nummer=`+${maNummer}+`;`);
        // const rows = await conn.query("`SELECT * FROM userVerkaufMubea WHERE MA_Nummer=`'+maNummer+'`;`");
-        let sql = 'SELECT * FROM userVerkaufMubea WHERE MA_Nummer='+maNummer+';';// ab hier wieder getconnection probleme
+        //let sql = '`SELECT * FROM userVerkaufMubea WHERE MA_Nummer= `'+maNummer+'`;`';// ab hier wieder getconnection probleme
+        //let sql = "'SELECT * FROM userVerkaufMubea WHERE MA_Nummer= '"+maNummer+"';'";
+        //let sql = "SELECT * FROM userVerkaufMubea WHERE MA_Nummer= "+maNummer+"';'";
+        //let sql = `SELECT * FROM ?? ORDER BY ??`;
+       // const values = ['userVerkaufMubea', maNummer];
+        //let sql = `'SELECT * FROM userVerkaufMubea WHERE MA_Nummer=  '`+maNummer+`';'`;
+        let sql = `SELECT * FROM userVerkaufMubea WHERE MA_Nummer=`+maNummer+`;`;
         const rows = await conn.query(sql);
-        console.log("sucheInDBmaNummer-Funktion-jsonS: "+jsonS)
         //conn.end();
         //console.log("SQL-Text: "+)
-        console.log("counterDB: "+counterDB);
+        console.log("counterDB: "+counterDB);//
         conn.end();
         return jsonS;
 
