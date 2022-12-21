@@ -1,8 +1,10 @@
-import express from "express";
-import dbPool from "../lib/db.mjs";
+import express, {query} from "express";
+//import dbPool from "../lib/db.mjs";
 //import User from '../Controllers/UserInLoggt.mjs';
 import CryptoJS from 'crypto-js';
-import poolDB from "../lib/db.mjs";
+//import poolDB from "../lib/db.mjs";
+//pool = require("../utils/db.js");
+import pooool from '../lib/db.mjs'
 //import user222 from '../Controllers/user222.mjs'
 //import student from "../Controllers/student.mjs";
 
@@ -389,6 +391,7 @@ async function sucheInDBmaNummer(maNummer){
 
     let conn;
     let jsonS;
+    /*
     try {
         counterDB = counterDB + 1;
         console.log("counterDB: "+counterDB);
@@ -412,7 +415,39 @@ async function sucheInDBmaNummer(maNummer){
             return conn.end();
         }
     }
-//
+*/
+
+//todo har neuen fehler, wenn statt nummer ein buchstabe eingibt...
+    //Connection Pools with MariaDB Connector/Node.js (Promise API)
+    try {
+        counterDB = counterDB + 1;
+        conn = await pooool.getConnection();
+        //let sql = "SELECT * FROM userVerkaufMubea WHERE MA_Nummer="+maNummer+";";//`SELECT * FROM userVerkaufMubea WHERE MA_Nummer=`+maNummer+`;`;//"SELECT id,username,email,role FROM USERS";
+       // const rows = await conn.query(sql);                               '" + convID + "'    '$name'
+        //const rows = await conn.query("'SELECT * FROM userVerkaufMubea WHERE MA_Nummer='"+maNummer+"';'");
+       // const rows = await conn.query("SELECT * FROM userVerkaufMubea WHERE MA_Nummer="+maNummer+";");
+        //const rows = await conn.query(`SELECT * FROM userVerkaufMubea WHERE MA_Nummer=`+${maNummer}+`;`);
+       // const rows = await conn.query("`SELECT * FROM userVerkaufMubea WHERE MA_Nummer=`'+maNummer+'`;`");
+        //let sql = '`SELECT * FROM userVerkaufMubea WHERE MA_Nummer= `'+maNummer+'`;`';// ab hier wieder getconnection probleme
+        //let sql = "'SELECT * FROM userVerkaufMubea WHERE MA_Nummer= '"+maNummer+"';'";
+        //let sql = "SELECT * FROM userVerkaufMubea WHERE MA_Nummer= "+maNummer+"';'";
+        //let sql = `SELECT * FROM ?? ORDER BY ??`;
+       // const values = ['userVerkaufMubea', maNummer];
+        //let sql = `'SELECT * FROM userVerkaufMubea WHERE MA_Nummer=  '`+maNummer+`';'`;
+        let sql = `SELECT * FROM userVerkaufMubea WHERE MA_Nummer=`+maNummer+`;`;
+        const rows = await conn.query(sql);
+        //conn.end();
+        //console.log("SQL-Text: "+)
+        console.log("counterDB: "+counterDB);//
+        conn.end();
+        return jsonS;
+
+    } catch (err) {
+        console.log("DB-Error..........")
+        //conn.end();
+        throw err;
+    }
+
 }
 
 export async function erstelleUser(maNummer, passwortL){
