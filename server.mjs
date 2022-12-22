@@ -10,6 +10,7 @@ import session from 'express-session';
 
 import loginRoutes from './routes/loginRoute.mjs';
 import adminUserNewDeleteChangeRoute from "./routes/adminUserNewDeleteChangeRoute.mjs";
+import login2Route from './routes/login2Route.mjs';
 
 
 const app = express();
@@ -46,8 +47,9 @@ app.use(express.urlencoded({ extended: false }));//cookie was mit true
 app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use( express.static( "./public" ) );
-app.use('/api/v1/login', loginRoutes);
+//app.use('/api/v1/login', loginRoutes);
 app.use('/q', adminUserNewDeleteChangeRoute);
+app.use('/api/v1/login2', login2Route);
 
 
 // cookie parser middleware

@@ -55,7 +55,7 @@
                             <h1>das ist login.ejs xxxxin  views</h1>
                             <br>
 
-                            <form action="/api/v1/login/l" method="post">
+                            <form action="/api/v1/login2/" method="post">
                                 <label for="username">
                                     <!-- font awesome icon -->
                                     <i class="fas fa-user"></i>
@@ -86,8 +86,10 @@
                             <br>
 
                             <input type="button" onclick="location.href='/api/v1/registrieren';" value="Go to Registrieren" />
+                            <input type="button" onclick="location.href='/api/v1/inHome';" value="Go to inHome" />
                                 <li id="google"><a href="https://www.google.ch/">GOOGLE</a></li>
-                                <button class = 'btn btn-primary' onclick = "<%= xClicker %>">Click Me!</button>
+                                <!-- xClicker sollte eine funktion aufrufen, als Versuch, funktioniert, jedoch wiso sollte button sein? -->
+                                <button class = 'btn btn-primary' onclick = "<%= xClicker %>">xClicker</button>
                         </div>
                     </div>
                 </div>
