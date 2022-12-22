@@ -1,8 +1,6 @@
-import router from "../routes/login2Route.mjs";
-import CryptoJS from "crypto-js";
-import pooool from "../lib/db.mjs";
 import {sucheInDBmaNummer, sucheInDBmaNummerPasswort} from "../models/loginMaNummerPasswortDB.mjs";
 import {checkMaNummer,checkPasswort} from "../utils/authenticateUser.mjs";
+import CryptoJS from "crypto-js";
 
 let maNummerLEingabeClient;
 let passwortLEingabeClient;
@@ -19,41 +17,21 @@ export let loginControllerGet = (req, res) => {
 };
 //----POST-Down-------------------------------------------------------------------------
 
-let person;
-var userArr33;
-let name1 = "hallo"
-export { name1};
-//export { userArr33};
 let maNummerLClient;
 let passwortLClient;
 export let loginControllerPost = async(req, res)=>{
+    console.log("loginControllerPost")
     let isMa_NummerInDB = false;
     let isPasswortUserInDB = false;
-    console.log("bin Post -----------------------------------------------------")
-    //werIstAngemeldet12= req.body.werIstAngemeldetH;
     maNummerLClient = req.body.maNummerLEingabe;
-    //maNummerL = "haaannnnssoooo"
     console.log("maaaaNummerL: "+maNummerLClient)
     passwortLClient = req.body.passwortLEingabe;
     console.log("paaaaasswortL: "+passwortLClient)
-//*******************************************************
-    //---------------------------------------------------------------------------------
-//import CryptoJS from 'crypto-js';         erstellt jedesmal ein neuer hash
-    let cipherPasswortL = CryptoJS.AES.encrypt("1", 'secret key 123').toString();////
-    console.log("cipherPasswortL: "+cipherPasswortL)
-//problem: man kann ma-nummer suchen, objekt erstellen mit pw, wenn pw gleich decrypt dann gut
-    //aber mann möchte ma_nummer und pw suchen in db, was wenn es zwei gleiche ma_nummern hat
-// Decrypt
-    let bytes  = CryptoJS.AES.decrypt("U2FsdGVkX1+nJNyUfcMjzGmoApYQeogYR3oBzoCB19Q=", 'secret key 123');
-    console.log("bytespasswortL: "+bytes)
-    let originalText = bytes.toString(CryptoJS.enc.Utf8);
 
-    console.log("originalTextpasswortL: "+originalText); // 'my message'
-//---------------------------------------------------------------------------------
     //***************************************************************************//
     let data= passwortLClient;//Message to Encrypt
     let iv  = CryptoJS.enc.Base64.parse("");//giving empty initialization vector
-    let key=CryptoJS.SHA256("mySecretKey1");//hashing the key using SHA256
+    let key=CryptoJS.SHA256("mySecretKey1");//hashing the key using SHA256  --> diesen in config oder in .env Datei auslagern!!!!
     var encryptedStringPasswortLClient=encryptData(data,iv,key);//muss var sein//
     console.log("encryptedString: "+encryptedStringPasswortLClient);//genrated encryption String:  swBX2r1Av2tKpdN7CYisMg==
 
@@ -79,6 +57,8 @@ export let loginControllerPost = async(req, res)=>{
 //var iv  = CryptoJS.enc.Base64.parse("");
 //var key=CryptoJS.SHA256("Message");
 
+
+    //das ist zum wieder das normale pw anzeigen, möchte das später einbauen
     let decrypteddata=decryptData(encryptedStringPasswortLClient,iv,key);
     console.log("decrypteddata: "+decrypteddata);//genrated decryption string:  Example1
 
@@ -93,12 +73,6 @@ export let loginControllerPost = async(req, res)=>{
     //***************************************************************************
 
 
-
-
-
-
-
-   // console.log("cheeeeeck- MaNummer: "+ await checkMaNummer(maNummerL));
 
     isMa_NummerInDB = await checkMaNummer(maNummerLClient);
     console.log("isMa_NummerInDB: "+isMa_NummerInDB);
@@ -131,7 +105,7 @@ export let loginControllerPost = async(req, res)=>{
         console.log("encryptedString: "+encryptedStringPasswortLClient)
 
 
-        console.log("//////////////////////////////////////////////////////////////////////////////////////");
+        console.log("////////////////////////// hier käme inHome....////////////////////////////////////////////////////////////");
 
        // res.redirect('/api/v1/inHome/:'+entries+" "+propertyValues);
         res.render('pages/login',{
@@ -204,56 +178,20 @@ export async function erstelleUser(maNummerLClient, passwortL){
 
 
 
-
-
-
-
-// function splitDB_DBObj(ausgabeDBZumSplitten){
-//     //let ausgabeDBZumSplitten = ausgabeDBZumSplitten;
-//     //console.log("ausgabeDBZumSplitten: "+ausgabeDBZumSplitten);
-//     //let text = "[{"ID_User":8,"MA_Nummer":"70999","Vorname":"urs","Nachname":"meier","Passwort_User":"12","IstChef":"keinChef"}]";
-//     //const myArray = [];
-//     let myArray = ausgabeDBZumSplitten.split("[");
-//     // console.log("arr: "+myArray[1]);
-//     const myArray1 = myArray[1].split("]");
-//     //todo ev gibt es eine funktion, die beide eckigen klammmern entfernt
-//     // console.log("ar2: "+myArray1[0]);
-//
-//     //wenn mehrere manummern vorhanden
-//     const myArray3 = myArray1[0].split(",{");
-//     // console.log("ar3: "+myArray3[0])
-//     //if()
-//
-//     const dbObj = JSON.parse(myArray3[0]);
-//
-//     //console.log("dbObj in splitDB_DBObj: "+dbObj)
-//     //console.log(dbObj.MA_Nummer);
-//
-//     return dbObj;
-//     //todo: setter und getter, ev eigene Klasse
-// }
-//export default userArr;
-//export default {router, userArr};
-export { userArr33};
-//export default router;
-/*
- router.post('/l', async(req,res) =>{//achtung, es muss hier async sein sonst geht nivcht
-   let conn;
-   try{
-       conn = await dbPool.getConnection();
-       const rows = await conn.query(`SELECT * FROM userVerkaufMubea WHERE MA_Nummer=`+"70999"+`;`);
-       //console.log(rows);
-       const jsonS = JSON.stringify(rows);
-       console.log("jsonSss: "+jsonS)
-       res.writeHead(200, {'Content-Type': 'text/html'});
-       res.end(jsonS);
-   }
-   catch(e){
-   }
- })
-*/
-
-//export default loginControllerGet;
-//module.exports = loginControllerGet;
 export default {loginControllerGet, loginControllerPost};
-//export default {loginControllerGet, loginControllerPost};
+
+
+
+//------------------------------+++++++++++++-+--------------------------------------------------
+//import CryptoJS from 'crypto-js';         erstellt jedesmal ein neuer hash
+let cipherPasswortL = CryptoJS.AES.encrypt("1", 'secret key 123').toString();////
+console.log("cipherPasswortL: "+cipherPasswortL)
+//problem: man kann ma-nummer suchen, objekt erstellen mit pw, wenn pw gleich decrypt dann gut
+//aber mann möchte ma_nummer und pw suchen in db, was wenn es zwei gleiche ma_nummern hat
+// Decrypt
+let bytes  = CryptoJS.AES.decrypt("U2FsdGVkX1+nJNyUfcMjzGmoApYQeogYR3oBzoCB19Q=", 'secret key 123');
+console.log("bytespasswortL: "+bytes)
+let originalText = bytes.toString(CryptoJS.enc.Utf8);
+
+console.log("originalTextpasswortL: "+originalText); // 'my message'
+//------------------------------------+++++++++++++++++---------------------------------------------
