@@ -1,7 +1,8 @@
 import router from "../routes/login2Route.mjs";
 import CryptoJS from "crypto-js";
 import pooool from "../lib/db.mjs";
-import sucheInDBmaNummer from "../models/loginMaNummerPasswortDB.mjs";
+import {sucheInDBmaNummer, sucheInDBmaNummerPasswort} from "../models/loginMaNummerPasswortDB.mjs";
+import {checkMaNummer,checkPasswort} from "../utils/authenticateUser.mjs";
 
 let maNummerLEingabeClient;
 let passwortLEingabeClient;
@@ -35,15 +36,75 @@ export let loginControllerPost = async(req, res)=>{
     console.log("maaaaNummerL: "+maNummerLClient)
     passwortLClient = req.body.passwortLEingabe;
     console.log("paaaaasswortL: "+passwortLClient)
+//*******************************************************
+    //---------------------------------------------------------------------------------
+//import CryptoJS from 'crypto-js';         erstellt jedesmal ein neuer hash
+    let cipherPasswortL = CryptoJS.AES.encrypt("1", 'secret key 123').toString();////
+    console.log("cipherPasswortL: "+cipherPasswortL)
+//problem: man kann ma-nummer suchen, objekt erstellen mit pw, wenn pw gleich decrypt dann gut
+    //aber mann möchte ma_nummer und pw suchen in db, was wenn es zwei gleiche ma_nummern hat
+// Decrypt
+    let bytes  = CryptoJS.AES.decrypt("U2FsdGVkX1+nJNyUfcMjzGmoApYQeogYR3oBzoCB19Q=", 'secret key 123');
+    console.log("bytespasswortL: "+bytes)
+    let originalText = bytes.toString(CryptoJS.enc.Utf8);
+
+    console.log("originalTextpasswortL: "+originalText); // 'my message'
+//---------------------------------------------------------------------------------
+    //***************************************************************************//
+    let data= passwortLClient;//Message to Encrypt
+    let iv  = CryptoJS.enc.Base64.parse("");//giving empty initialization vector
+    let key=CryptoJS.SHA256("mySecretKey1");//hashing the key using SHA256
+    var encryptedStringPasswortLClient=encryptData(data,iv,key);//muss var sein//
+    console.log("encryptedString: "+encryptedStringPasswortLClient);//genrated encryption String:  swBX2r1Av2tKpdN7CYisMg==
+
+    function encryptData(data,iv,key){
+        if(typeof data=="string"){
+            data=data.slice();
+            encryptedStringPasswortLClient = CryptoJS.AES.encrypt(data, key, {
+                iv: iv,
+                mode: CryptoJS.mode.CBC,
+                padding: CryptoJS.pad.Pkcs7
+            });
+        }
+        else{
+            encryptedStringPasswortLClient = CryptoJS.AES.encrypt(JSON.stringify(data), key, {
+                iv: iv,
+                mode: CryptoJS.mode.CBC,
+                padding: CryptoJS.pad.Pkcs7
+            });
+        }
+        return encryptedStringPasswortLClient.toString();
+    }
+
+//var iv  = CryptoJS.enc.Base64.parse("");
+//var key=CryptoJS.SHA256("Message");
+
+    let decrypteddata=decryptData(encryptedStringPasswortLClient,iv,key);
+    console.log("decrypteddata: "+decrypteddata);//genrated decryption string:  Example1
+
+    function decryptData(encrypted,iv,key){
+        let decrypted = CryptoJS.AES.decrypt(encrypted, key, {
+            iv: iv,
+            mode: CryptoJS.mode.CBC,
+            padding: CryptoJS.pad.Pkcs7
+        });
+        return decrypted.toString(CryptoJS.enc.Utf8)
+    }
+    //***************************************************************************
+
+
+
+
+
 
 
    // console.log("cheeeeeck- MaNummer: "+ await checkMaNummer(maNummerL));
 
     isMa_NummerInDB = await checkMaNummer(maNummerLClient);
- //   console.log("isMa_NummerInDB: "+isMa_NummerInDB);
+    console.log("isMa_NummerInDB: "+isMa_NummerInDB);
 
-    //  isPasswortUserInDB = await checkPasswort(maNummerL,encryptedString);//
-    //  console.log("isPasswortInDB: "+isPasswortUserInDB);
+    isPasswortUserInDB = await checkPasswort(maNummerLClient,encryptedStringPasswortLClient);//
+    console.log("isPasswortInDB: "+isPasswortUserInDB);
 
     if(isMa_NummerInDB===true && isPasswortUserInDB===false){
 
@@ -67,12 +128,17 @@ export let loginControllerPost = async(req, res)=>{
         });
     }else if(isMa_NummerInDB===true&&isPasswortUserInDB===true){
         console.log("isMa_NummerInDB und isPasswortUserInDB sind true");
-        console.log("encryptedString: "+encryptedString)
+        console.log("encryptedString: "+encryptedStringPasswortLClient)
 
 
         console.log("//////////////////////////////////////////////////////////////////////////////////////");
 
-        res.redirect('/api/v1/inHome/:'+entries+" "+propertyValues);
+       // res.redirect('/api/v1/inHome/:'+entries+" "+propertyValues);
+        res.render('pages/login',{
+            maNummerLServer : maNummerLClient,
+            passwortLServer : encryptedStringPasswortLClient,
+            xClicker: clicker()
+        });
 
         /*
         res.redirect('/api/v1/inHome/:',({
@@ -108,34 +174,6 @@ function clicker() {
 };
 //----------------------------------------------------------------------------------
 
-async function sucheInDBmaNummerPasswort(maNummerLClient,passwort){
-    console.log('bin sucheInDBmaNummerPasswort-Funktion, habe bekommen: '+maNummer+', '+passwort);
-
-    let conn;
-    let jsonS;
-    try {
-        //counterDB = counterDB + 1;
-        console.log("counterDB: "+counterDB);
-        conn = await poolDB.getConnection();
-        //console.log("conn: "+conn);//[object object]
-        const rows = await conn.query(`SELECT * FROM userVerkaufMubea WHERE MA_Nummer=`+maNummer+` AND Passwort_User = '`+passwort+`';`);
-        //console.log(rows); //[ {val: 1}, meta: ... ]
-        jsonS = JSON.stringify(rows);
-        console.log("sucheInDBmaNummer-Funktion-jsonS: "+jsonS)
-        //const res = await conn.query("INSERT INTO myTable value (?, ?)", [1, "mariadb"]);
-        //console.log(res); // { affectedRows: 1, insertId: 1, warningStatus: 0 }
-        //res.send(jsonS)
-        return jsonS;
-    } catch (err) {
-        console.log("DB-Error, irgendwas ist passiert, weil connection limit auf 8??? max 150??? ")
-        throw err;
-    } finally {
-        if (conn) return conn.end();
-    }
-
-}
-
-
 
 export async function erstelleUser(maNummerLClient, passwortL){
     console.log("Bin erstelle User, habe bekommen: "+maNummerLClient+", "+passwortL)
@@ -166,108 +204,34 @@ export async function erstelleUser(maNummerLClient, passwortL){
 
 
 
-//todo wenn ma_nummer zweimal vorkommt???? und getconnection-problem!!!!
-async function checkPasswort(maNummer,passwort){
-    console.log("bin checkPasswort-Funktion, habe bekommen: "+maNummer+', '+passwort);
-    let isPasswort = false;
-    let ausgabeDB = "";
-    ausgabeDB = await sucheInDBmaNummerPasswort(maNummer, passwort);//das geht nicht
-    console.log("ausgabeDB: Wenn Mehrmals???????: "+ausgabeDB)
-    if(ausgabeDB==='[]'||ausgabeDB===undefined){//wenn manummer mehrmals????
-        // console.log("ausgabeDB ist leeeeer!!!! sowas existiert nicht in der DB!!");
-        //console.log("Diese Passwort ist falsch!!!");
-        isPasswort= false;
-    }else{
-        //console.log('AusgabeDB ist voll, hat was gefunden :)');
-        splitDB_DBObj(ausgabeDB);
-        /// console.log(splitDB_DBObj(ausgabeDB))
-        //let u1 = new User("x","x","x","x","x");
-        /*
-        let u1 = new User();
-        u1.setMa_NummerU(splitDB_DBObj(ausgabeDB).MA_Nummer);
-        u1.setVornameU(splitDB_DBObj(ausgabeDB).Vorname);
-        u1.setNachnameU(splitDB_DBObj(ausgabeDB).Nachname);
-        u1.setPasswortU(splitDB_DBObj(ausgabeDB).Passwort_User);
-        u1.setIstChefU(splitDB_DBObj(ausgabeDB).IstChef);
-        console.log("U1-MaNummer:   "+ u1.getMa_NummerU())
-        console.log("U1-Vorname:   "+ u1.getVornameU())
-        console.log("U1-Nachname:   "+ u1.getNachnameU())
-        console.log("U1-Passwort:   "+ u1.getPasswortU())
-        console.log("U1-istChef:   "+ u1.getIstChefU())
-        //console.log("oo2: "+splitDB_DBObj(ausgabeDB).MA_Nummer)
-         */
-        isPasswort = true;
-    }
-    return isPasswort;
-}
 
-async function checkMaNummer(maNummer){
-    console.log("bin checkMaNummer-Funktion, habe bekommen: "+maNummer);
-    let isMaNummer = false;
-    let ausgabeDB = "";
-    ausgabeDB = await sucheInDBmaNummer(maNummer);//das geht nicht
-    console.log("***********************ausgabeDB: "+ausgabeDB)
-    if(ausgabeDB==='[]'||ausgabeDB===undefined){//wenn manummer mehrmals????
-        console.log("ausgabeDB ist leeeeer!!!! sowas existiert nicht in der DB!!");
-        console.log("Diese MitarbeiterNummer gibt es nicht in der Datenbank!!!");
-        isMaNummer= false;
-    }else{
-        console.log('AusgabeDB ist voll, hat was gefunden :)');
-        splitDB_DBObj(ausgabeDB);
-        /// console.log(splitDB_DBObj(ausgabeDB))
-        //let u1 = new User("x","x","x","x","x");
-        /*
-        let u1 = new User();
-        u1.setMa_NummerU(splitDB_DBObj(ausgabeDB).MA_Nummer);
-        u1.setVornameU(splitDB_DBObj(ausgabeDB).Vorname);
-        u1.setNachnameU(splitDB_DBObj(ausgabeDB).Nachname);
-        u1.setPasswortU(splitDB_DBObj(ausgabeDB).Passwort_User);
-        u1.setIstChefU(splitDB_DBObj(ausgabeDB).IstChef);
-        console.log("U1-MaNummer:   "+ u1.getMa_NummerU())
-        console.log("U1-Vorname:   "+ u1.getVornameU())
-        console.log("U1-Nachname:   "+ u1.getNachnameU())
-        console.log("U1-Passwort:   "+ u1.getPasswortU())
-        console.log("U1-istChef:   "+ u1.getIstChefU())
-        //console.log("oo2: "+splitDB_DBObj(ausgabeDB).MA_Nummer)
-        */
-        isMaNummer = true;
-    }
-    /*
-     if(maNummer==="70220" && passwort==="q"){
-         isMaNummerPasswort = true;
-         console.log(isMaNummerPasswort)
-     }else{
-         isMaNummerPasswort= false;
-     }
-     */
-    ausgabeDB = "";
-    return isMaNummer;
-}
 
-function splitDB_DBObj(ausgabeDBZumSplitten){
-    //let ausgabeDBZumSplitten = ausgabeDBZumSplitten;
-    //console.log("ausgabeDBZumSplitten: "+ausgabeDBZumSplitten);
-    //let text = "[{"ID_User":8,"MA_Nummer":"70999","Vorname":"urs","Nachname":"meier","Passwort_User":"12","IstChef":"keinChef"}]";
-    //const myArray = [];
-    let myArray = ausgabeDBZumSplitten.split("[");
-    // console.log("arr: "+myArray[1]);
-    const myArray1 = myArray[1].split("]");
-    //todo ev gibt es eine funktion, die beide eckigen klammmern entfernt
-    // console.log("ar2: "+myArray1[0]);
 
-    //wenn mehrere manummern vorhanden
-    const myArray3 = myArray1[0].split(",{");
-    // console.log("ar3: "+myArray3[0])
-    //if()
 
-    const dbObj = JSON.parse(myArray3[0]);
-
-    //console.log("dbObj in splitDB_DBObj: "+dbObj)
-    //console.log(dbObj.MA_Nummer);
-
-    return dbObj;
-    //todo: setter und getter, ev eigene Klasse
-}
+// function splitDB_DBObj(ausgabeDBZumSplitten){
+//     //let ausgabeDBZumSplitten = ausgabeDBZumSplitten;
+//     //console.log("ausgabeDBZumSplitten: "+ausgabeDBZumSplitten);
+//     //let text = "[{"ID_User":8,"MA_Nummer":"70999","Vorname":"urs","Nachname":"meier","Passwort_User":"12","IstChef":"keinChef"}]";
+//     //const myArray = [];
+//     let myArray = ausgabeDBZumSplitten.split("[");
+//     // console.log("arr: "+myArray[1]);
+//     const myArray1 = myArray[1].split("]");
+//     //todo ev gibt es eine funktion, die beide eckigen klammmern entfernt
+//     // console.log("ar2: "+myArray1[0]);
+//
+//     //wenn mehrere manummern vorhanden
+//     const myArray3 = myArray1[0].split(",{");
+//     // console.log("ar3: "+myArray3[0])
+//     //if()
+//
+//     const dbObj = JSON.parse(myArray3[0]);
+//
+//     //console.log("dbObj in splitDB_DBObj: "+dbObj)
+//     //console.log(dbObj.MA_Nummer);
+//
+//     return dbObj;
+//     //todo: setter und getter, ev eigene Klasse
+// }
 //export default userArr;
 //export default {router, userArr};
 export { userArr33};
