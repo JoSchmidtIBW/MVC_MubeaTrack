@@ -3,12 +3,14 @@ import express from "express";
 import inHomeControllerGet from '../controllers/inHomeController.mjs';
 //import checkAuthentication from "../utils/authentifizierungUser.mjs";
 import checkAuthentication from "../utils/authentifizierungUser.mjs";
+import {authentificateUser} from "../utils/authenticateUser.mjs";
+
 
 const router = express.Router();
 
 // localhost:/api/v1/inHome
 //router.route('/:maNummer',checkAuthentication).get(inHomeControllerGet);//.post(inHomeControllerPost);
-router.get('/:maNummer',checkAuthentication,inHomeControllerGet);
+router.get('/:irgendwas',authentificateUser,inHomeControllerGet);
 // router.get('/:maNummer',checkAuthentication, async (req,res)=>{
 //
 //         console.log("bin im inHomeRoute.mjs - GET")

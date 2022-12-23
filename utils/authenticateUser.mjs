@@ -1,6 +1,38 @@
 import {sucheInDBmaNummer, sucheInDBmaNummerPasswort} from "../models/loginMaNummerPasswortDB.mjs";
 import splitDB_DBObj from "./splitDB_DBObj_General.mjs";
 
+
+//mit der User-Rolle, admin, chef, mitarbeiter, nein, nur vorwärts oder rückwärts
+export function authentificateUser(req, res, next){
+    console.log("ich bin authentificateUser-Funktion in utils/authentificateUser.js")
+    //return isIrgendwas;
+    //
+    return next();//next is not defined
+    //return res.end("401 Unautorized :) ");
+    //res.send("401 Unautorized :) ");
+
+    //  res.render('pages/layoutInHomeAdmin',{
+    //      maNummerLServer : maNummerLClient,
+    //      passwortLServer : encryptedStringPasswortLClient,
+    //      xClicker: clicker()
+    //  });
+    /*
+        return next();
+          } else {
+            return res.end("401 Unautorized :)");
+          }
+        } else {
+          return next();
+        }
+      } else {
+        res.redirect('/api/v1/login2)
+     */
+}
+
+
+
+
+
 export async function checkMaNummer(maNummer){
     console.log("bin checkMaNummer-Funktion, habe bekommen: "+maNummer);
     let isMaNummer = false;

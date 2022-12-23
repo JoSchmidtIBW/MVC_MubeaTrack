@@ -1,7 +1,9 @@
 import {sucheInDBmaNummer, sucheInDBmaNummerPasswort} from "../models/loginMaNummerPasswortDB.mjs";
 import {checkMaNummer,checkPasswort} from "../utils/authenticateUser.mjs";
+import splitDB_DBObj from "../utils/splitDB_DBObj_General.mjs";
 import CryptoJS from "crypto-js";
 import {encryptData, decryptData} from "../utils/crypto.mjs";
+import User from "../utils/User.mjs";
 
 let maNummerLEingabeClient;
 let passwortLEingabeClient;
@@ -20,6 +22,7 @@ export let loginControllerGet = (req, res) => {
 
 let maNummerLClient;
 let passwortLClient;
+var encryptedStringPasswortLClient;
 export let loginControllerPost = async(req, res)=>{
     console.log("loginControllerPost")
     let isMa_NummerInDB = false;
@@ -33,7 +36,8 @@ export let loginControllerPost = async(req, res)=>{
     let data= passwortLClient;//Message to Encrypt
     let iv  = CryptoJS.enc.Base64.parse("");//giving empty initialization vector
     let key=CryptoJS.SHA256("mySecretKey1");//hashing the key using SHA256  --> diesen in config oder in .env Datei auslagern!!!!
-    var encryptedStringPasswortLClient=encryptData(data,iv,key);//muss var sein//
+    //var encryptedStringPasswortLClient=encryptData(data,iv,key);//muss var sein//
+    encryptedStringPasswortLClient=encryptData(data,iv,key);//muss var sein//
     console.log("encryptedString: "+encryptedStringPasswortLClient);//genrated encryption String:  swBX2r1Av2tKpdN7CYisMg==
     //--------------------------------------------------------------------------
     //das ist zum wieder das normale pw anzeigen, möchte das später einbauen
@@ -73,10 +77,18 @@ export let loginControllerPost = async(req, res)=>{
         console.log("isMa_NummerInDB und isPasswortUserInDB sind true");
         console.log("encryptedString: "+encryptedStringPasswortLClient)
 
+        let user1 = erstelleUser(maNummerLClient,encryptedStringPasswortLClient)
+
+        console.log("user1: " + (await user1).getRolleU())
+        console.log("user1: " + (await user1).getID())
+        let userXX = (await user1).getID()===1;
+        //console.log("userXXX mit id 1" + userXX.getname)
+
+
 
         console.log("////////////////////////// hier käme inHome....////////////////////////////////////////////////////////////");
 
-        res.redirect('/api/v1/inHome/:'+maNummerLClient)
+        res.redirect('/api/v1/inHome/:'+(await user1).getMaNummerU()+(await user1).getPasswortU()+(await user1).getID()+(await user1).getRolleU())
        // res.redirect('/api/v1/inHome/:'+entries+" "+propertyValues);
        //  res.render('pages/login',{
        //      maNummerLServer : maNummerLClient,
@@ -119,10 +131,10 @@ function clicker() {
 //----------------------------------------------------------------------------------
 
 
-export async function erstelleUser(maNummerLClient, passwortL){
-    console.log("Bin erstelle User, habe bekommen: "+maNummerLClient+", "+passwortL)
+export async function erstelleUser(maNummerLClient, encryptedStringPasswortLClient){
+    console.log("Bin erstelle User, habe bekommen: "+maNummerLClient+", "+encryptedStringPasswortLClient)
     let ausgabeDB = "";
-    ausgabeDB = await sucheInDBmaNummerPasswort(maNummerLClient, passwortL);
+    ausgabeDB = await sucheInDBmaNummerPasswort(maNummerLClient, encryptedStringPasswortLClient);
     //User.id1=0;
 
     let u1 = new User();
@@ -131,17 +143,24 @@ export async function erstelleUser(maNummerLClient, passwortL){
     //console.log(u1.id1)
     console.log(u1.getID());
     console.log("-*-*-*-*-*-*-*-*-*-*-*-*-**-*-*-*-*");
-    u1.setMa_NummerU(splitDB_DBObj(ausgabeDB).MA_Nummer);
+
+    u1.setErfasstDatumU(splitDB_DBObj(ausgabeDB).Erfasst_D_U);
+    u1.setErfasstZeitU(splitDB_DBObj(ausgabeDB).Erfasst_Z_U);
+    u1.setMaNummerU(splitDB_DBObj(ausgabeDB).MA_Nummer);
     u1.setVornameU(splitDB_DBObj(ausgabeDB).Vorname);
     u1.setNachnameU(splitDB_DBObj(ausgabeDB).Nachname);
     u1.setPasswortU(splitDB_DBObj(ausgabeDB).Passwort_User);
-    u1.setIstChefU(splitDB_DBObj(ausgabeDB).IstChef);
+    u1.setRolleU(splitDB_DBObj(ausgabeDB).RolleUser);
+    u1.setAvatarFarbeU(splitDB_DBObj(ausgabeDB).AvatarFarbe);
 
-    console.log("U1--MaNummer:   "+ u1.getMa_NummerU())
+    console.log("U1--ErfasstDatumU:   "+ u1.getErfasstDatumU())
+    console.log("U1--ErfasstZeitU:   "+ u1.getErfasstZeitU())
+    console.log("U1--MaNummer:   "+ u1.getMaNummerU())
     console.log("U1--Vorname:   "+ u1.getVornameU())
     console.log("U1--Nachname:   "+ u1.getNachnameU())
     console.log("U1--Passwort:   "+ u1.getPasswortU())
-    console.log("U1--istChef:   "+ u1.getIstChefU())
+    console.log("U1--RolleUser:   "+ u1.getRolleU())
+    console.log("U1--AvatarFarbeU:   "+ u1.getAvatarFarbeU())
     console.log("u1--"+u1)
     return u1;
 }
