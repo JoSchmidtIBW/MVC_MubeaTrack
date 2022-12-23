@@ -36,8 +36,8 @@ export default function checkAuthentication(req, res, next){
     console.log("ich bin checkAuthentication-Funktion in utils/authentifizierungUser.js")
     //return isIrgendwas;
     //
-    return next();//next is not defined
-    //return res.end("401 Unautorized :) ");
+    //return next();//next is not defined
+    return res.end("401 Unautorized :) ");
     //res.send("401 Unautorized :) ");
 
 
