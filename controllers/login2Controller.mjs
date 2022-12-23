@@ -1,6 +1,7 @@
 import {sucheInDBmaNummer, sucheInDBmaNummerPasswort} from "../models/loginMaNummerPasswortDB.mjs";
 import {checkMaNummer,checkPasswort} from "../utils/authenticateUser.mjs";
 import CryptoJS from "crypto-js";
+import {encryptData, decryptData} from "../utils/crypto.mjs";
 
 let maNummerLEingabeClient;
 let passwortLEingabeClient;
@@ -28,49 +29,17 @@ export let loginControllerPost = async(req, res)=>{
     passwortLClient = req.body.passwortLEingabe;
     console.log("paaaaasswortL: "+passwortLClient)
 
-    //***************************************************************************//
+    //**************************************************************************
     let data= passwortLClient;//Message to Encrypt
     let iv  = CryptoJS.enc.Base64.parse("");//giving empty initialization vector
     let key=CryptoJS.SHA256("mySecretKey1");//hashing the key using SHA256  --> diesen in config oder in .env Datei auslagern!!!!
     var encryptedStringPasswortLClient=encryptData(data,iv,key);//muss var sein//
     console.log("encryptedString: "+encryptedStringPasswortLClient);//genrated encryption String:  swBX2r1Av2tKpdN7CYisMg==
-
-    function encryptData(data,iv,key){
-        if(typeof data=="string"){
-            data=data.slice();
-            encryptedStringPasswortLClient = CryptoJS.AES.encrypt(data, key, {
-                iv: iv,
-                mode: CryptoJS.mode.CBC,
-                padding: CryptoJS.pad.Pkcs7
-            });
-        }
-        else{
-            encryptedStringPasswortLClient = CryptoJS.AES.encrypt(JSON.stringify(data), key, {
-                iv: iv,
-                mode: CryptoJS.mode.CBC,
-                padding: CryptoJS.pad.Pkcs7
-            });
-        }
-        return encryptedStringPasswortLClient.toString();
-    }
-
-//var iv  = CryptoJS.enc.Base64.parse("");
-//var key=CryptoJS.SHA256("Message");
-
-
+    //--------------------------------------------------------------------------
     //das ist zum wieder das normale pw anzeigen, möchte das später einbauen
     let decrypteddata=decryptData(encryptedStringPasswortLClient,iv,key);
-    console.log("decrypteddata: "+decrypteddata);//genrated decryption string:  Example1
-
-    function decryptData(encrypted,iv,key){
-        let decrypted = CryptoJS.AES.decrypt(encrypted, key, {
-            iv: iv,
-            mode: CryptoJS.mode.CBC,
-            padding: CryptoJS.pad.Pkcs7
-        });
-        return decrypted.toString(CryptoJS.enc.Utf8)
-    }
-    //***************************************************************************
+    console.log("decrypteddata: "+decrypteddata);
+    //**************************************************************************
 
 
 
@@ -107,12 +76,13 @@ export let loginControllerPost = async(req, res)=>{
 
         console.log("////////////////////////// hier käme inHome....////////////////////////////////////////////////////////////");
 
+        res.redirect('/api/v1/inHome/:'+maNummerLClient)
        // res.redirect('/api/v1/inHome/:'+entries+" "+propertyValues);
-        res.render('pages/login',{
-            maNummerLServer : maNummerLClient,
-            passwortLServer : encryptedStringPasswortLClient,
-            xClicker: clicker()
-        });
+       //  res.render('pages/login',{
+       //      maNummerLServer : maNummerLClient,
+       //      passwortLServer : encryptedStringPasswortLClient,
+       //      xClicker: clicker()
+       //  });
 
         /*
         res.redirect('/api/v1/inHome/:',({

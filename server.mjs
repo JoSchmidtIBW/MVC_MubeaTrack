@@ -11,6 +11,7 @@ import session from 'express-session';
 import loginRoutes from './routes/loginRoute.mjs';
 import adminUserNewDeleteChangeRoute from "./routes/adminUserNewDeleteChangeRoute.mjs";
 import login2Route from './routes/login2Route.mjs';
+import inHomeRoutes from "./routes/inHomeRoute.mjs";
 
 
 const app = express();
@@ -50,6 +51,7 @@ app.use( express.static( "./public" ) );
 //app.use('/api/v1/login', loginRoutes);
 app.use('/q', adminUserNewDeleteChangeRoute);
 app.use('/api/v1/login2', login2Route);
+app.use('/api/v1/inHome', inHomeRoutes);
 
 
 // cookie parser middleware
