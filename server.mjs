@@ -7,6 +7,8 @@ import bodyParser from "body-parser";
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 
+import jwt from "jsonwebtoken";
+
 
 import loginRoutes from './routes/loginRoute.mjs';
 import adminUserNewDeleteChangeRoute from "./routes/adminUserNewDeleteChangeRoute.mjs";
@@ -44,6 +46,7 @@ app.set("view engine", "ejs");
 //Middleware
 app.use(express.json());
 // parsing the incoming data
+// parse requests of content-type - application/x-www-form-urlencoded   bei true
 app.use(express.urlencoded({ extended: false }));//cookie was mit true
 app.use(bodyParser.urlencoded({ extended: false }))
 
@@ -51,7 +54,7 @@ app.use( express.static( "./public" ) );
 //app.use('/api/v1/login', loginRoutes);
 app.use('/q', adminUserNewDeleteChangeRoute);
 app.use('/api/v1/login2', login2Route);
-app.use('/api/v1/inHome', inHomeRoutes);
+
 
 
 // cookie parser middleware
@@ -72,6 +75,16 @@ app.use(session({
     cookie: { maxAge: date },
     resave: false
 }));
+
+// app.use(session({
+//     secret: 'keyboard cat',
+//     resave: false,
+//     saveUninitialized: false,
+//     cookie: { secure: true }
+// }));
+
+app.use('/api/v1/inHome', inHomeRoutes);
+
 
 // a variable to save a session
 //var session;

@@ -5,20 +5,20 @@ export let inHomeControllerGet = async (req, res) => {
     //router.get('/:maNummer', async(req, res)=> {
 
         console.log("bin im inHomeRoute.mjs - GET")
-        console.log("req: " + req.query)
-        console.log("pathname: " + req.path)
-
+        console.log("inHomeRoute.mjs req: " + JSON.stringify(req.query))
+        console.log("inHomeRoute.mjs pathname inHomeController: " + req.path)
+        console.log("inHomeRoute.mjs req.session: "+JSON.stringify(req.session));
 
         const myArr = req.path.split(':');
         let gesplittetVonURLdenUserTeil = myArr[1];
-        console.log("gesplittetVonURLdenUserTeil: " + gesplittetVonURLdenUserTeil)
+        console.log("inHomeRoute.mjs gesplittetVonURLdenUserTeil: " + gesplittetVonURLdenUserTeil)
 
 
 
 
-        console.log("gesplittetVonURLdenUserTeiiiil: " + gesplittetVonURLdenUserTeil)
+        console.log("inHomeRoute.mjs gesplittetVonURLdenUserTeiiiil: " + gesplittetVonURLdenUserTeil)
         const myArr1 = gesplittetVonURLdenUserTeil.split('*');
-        console.log(" gesplittet myArr1[0]: " + myArr1[0] + " gesplittet myArr1[1]: " + myArr1[1]);
+        console.log("inHomeRoute.mjs gesplittet myArr1[0]: " + myArr1[0] + "inHomeRoute.mjs gesplittet myArr1[1]: " + myArr1[1]);
 
 
         res.render('pages/layoutInHomeUser', {

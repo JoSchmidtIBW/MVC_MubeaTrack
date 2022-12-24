@@ -1,10 +1,70 @@
 import {sucheInDBmaNummer, sucheInDBmaNummerPasswort} from "../models/loginMaNummerPasswortDB.mjs";
 import splitDB_DBObj from "./splitDB_DBObj_General.mjs";
+import userArray from "./userArray.mjs";
+
+import session from "express-session";
+
+//const jwt = require('jsonwebtoken');
+//
+// module.exports = (req, res, next) => {
+//     try {
+//         const token = req.headers.authorization.split(' ')[1];
+//         const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
+//         const userId = decodedToken.userId;
+//         if (req.body.userId && req.body.userId !== userId) {
+//             throw 'Invalid user ID';
+//         } else {
+//             next();
+//         }
+//     } catch {
+//         res.status(401).json({
+//             error: new Error('Invalid request!')
+//         });
+//     }
+// };
 
 
+function isAuthorized(req, res, next) {
+    const auth = req.headers.authorization;
+    if (auth === 'secretpassword') {
+        next();
+    } else {
+        res.status(401);
+        res.send('Not permitted');
+    }
+}
 //mit der User-Rolle, admin, chef, mitarbeiter, nein, nur vorwärts oder rückwärts
 export function authentificateUser(req, res, next){
     console.log("ich bin authentificateUser-Funktion in utils/authentificateUser.js")
+    const auth = req.headers.authorization;
+    console.log("was ist das: "+req.headers)
+    console.log("was ist das: "+req.headers.toString())
+    console.log("was ist das req.body: "+req.body)
+    console.log("req: " + req.query)
+    console.log("pathname authentificateUser: " + req.path)
+    console.log("auth: "+auth)
+    console.log("req.json: "+req.json)
+
+    console.log("userArray.length: "+userArray.length)
+    console.log("userArray[0]: "+userArray[0])
+    console.log("pathname JSON.stringifyauthentificateUser: " + JSON.stringify(req.path))
+
+    //if(userArray.find()) {}
+
+    // const { user, pwd } = req.body;
+    // if (!user || !pwd) return res.status(400).json({ 'message': 'Username and password are required.' });
+    // const foundUser = usersDB.users.find(person => person.username === user);
+    // if (!foundUser) return res.sendStatus(401); //Unauthorized
+    // // evaluate password
+    // const match = await bcrypt.compare(pwd, foundUser.password);
+    // if (match) {
+    //     // create JWTs
+    //     res.json({ 'success': `User ${user} is logged in!` });
+    // } else {
+    //     res.sendStatus(401);
+    // }
+
+
     //return isIrgendwas;
     //
     return next();//next is not defined

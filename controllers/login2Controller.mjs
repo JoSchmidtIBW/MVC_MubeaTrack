@@ -4,6 +4,10 @@ import splitDB_DBObj from "../utils/splitDB_DBObj_General.mjs";
 import CryptoJS from "crypto-js";
 import {encryptData, decryptData} from "../utils/crypto.mjs";
 import User from "../utils/User.mjs";
+import userArray from "../utils/userArray.mjs";
+import session from "express-session";
+
+import jwt from 'jsonwebtoken';
 
 let maNummerLEingabeClient;
 let passwortLEingabeClient;
@@ -78,17 +82,121 @@ export let loginControllerPost = async(req, res)=>{
         console.log("encryptedString: "+encryptedStringPasswortLClient)
 
         let user1 = erstelleUser(maNummerLClient,encryptedStringPasswortLClient)
+        // console.log("user1--ErfasstDatumU:   "+ (await user1).getErfasstDatumU())
+        // console.log("user1--ErfasstZeitU:   "+ (await user1).getErfasstZeitU())
+        // console.log("user1--MaNummer:   "+ (await user1).getMaNummerU())
+        // console.log("user1--Vorname:   "+ (await user1).getVornameU())
+        // console.log("user1--Nachname:   "+ (await user1).getNachnameU())
+        // console.log("user1--Passwort:   "+ (await user1).getPasswortU())
+        // console.log("user1--RolleUser:   "+ (await user1).getRolleU())
+        // console.log("user1--AvatarFarbeU:   "+ (await user1).getAvatarFarbeU())
+        // console.log("user1--ID:   "+ (await user1).getID())
 
-        console.log("user1: " + (await user1).getRolleU())
-        console.log("user1: " + (await user1).getID())
-        let userXX = (await user1).getID()===1;
+        //userArray.push(user1);
+
+        let userData1 = {
+            "ErfasstDatumU_D": (await user1).getErfasstZeitU(),
+            "ErfasstZeitU_D": (await user1).getErfasstZeitU(),
+            "MaNummer_D": (await user1).getMaNummerU(),
+            "Vorname_D": (await user1).getVornameU(),
+            "Nachname_D": (await user1).getNachnameU(),
+            "Passwort_D": (await user1).getPasswortU(),
+            "RolleUser_D": (await user1).getRolleU(),
+            "AvatarFarbeU_D": (await user1).getAvatarFarbeU(),
+            "userID_D": (await user1).getID()
+        }
+        let userData2 = {
+            "name": "hans"
+        }
+        userArray.push(userData1,userData2);
+        console.log("userData1: "+ JSON.stringify(userData1))
+        console.log("userData2: "+ JSON.stringify(userData2))
+        console.log("userArrayuserArray.toString(): "+ JSON.stringify(userArray[0]))
+       // console.log("finde: "+ JSON.stringify(userArray.find(userE => userE.MaNummer_D === "MaNummer_D")))
+
+
+
+        let userGefunden = userArray.find(userE => userE.MaNummer_D === "70220")
+        console.log("userGefunden: "+JSON.stringify(userGefunden));
+
+        //let userGefunden2 = userArray.find(userE => {userE.MaNummer_D === "70220" , userE.Passwort_D === "1234"})
+        //let userGefunden2 = userArray.find(userE => (userE.MaNummer_D === "70220" && userE.Passwort_D === "1234"))
+        //let userGefunden2 = userArray.find(userE => (userE.MaNummer_D === "70220" , userE.Passwort_D === "1234"))
+        //let userGefunden2 = userArray.find(userE => userE.MaNummer_D === "70220" && userE.Passwort_D === "1234")
+        //let userGefunden2 = userArray.find(userE => userE.MaNummer_D === "70220" , userE.Passwort_D === "1234")
+        //let userGefunden2 = userArray.find(userE => userE.MaNummer_D === "70220" +   userE.Passwort_D === "1234")
+        //let userGefunden2 = userArray.find(userE => userE.MaNummer_D,userE.Passwort_D === "70220","1234")// +   userE.Passwort_D === "1234")
+        //console.log("userGefunden2: "+JSON.stringify(userGefunden2));
+
+        // let flightDetails = [{  "airline": "B-201",  "from": "Bangaluru(BLR)",  "to": "Delhi(DEL)",  "detail": [{    "date": "2019-12-30",    "price": "3900",    "departTime": "12:00 PM",    "arriveTime": "14:00 PM",    "seats": "10"  }, {    "date": "2019-12-31",    "price": "3000",    "departTime": "17:30 PM",    "arriveTime": "19:30 PM",    "seats": "3"  }, {    "date": "2019-06-01",    "price": "2100",    "departTime": "09:00 AM",    "arriveTime": "11:00 AM",    "seats": "7"  }]}, {  "airline": "B-202",  "from": "Delhi(DEL)",  "to": "Bangaluru(BLR)",  "detail": [{    "date": "2019-12-30",    "price": "3000",    "departTime": "12:00 PM",    "arriveTime": "14:00 PM",    "seats": "10"  }, {    "date": "2019-12-31",    "price": "3000",    "departTime": "17:30 PM",    "arriveTime": "19:30 PM",    "seats": "3"  }, {    "date": "2019-06-01",    "price": "2100",    "departTime": "09:00 AM",    "arriveTime": "11:00 AM",    "seats": "7"  }]}],
+        //     MaNummer_D = "70220",
+        //     Passwort_D = "1234",
+            let found = userArray.find(userE =>({from, to}) => from.includes(userE.MaNummer_D = "70220") && to.includes(userE.Passwort_D = "1234"));
+        console.log("found: "+JSON.stringify(found));
+
+
+        function findResults(userArray, searchObj) {
+            return userArray.filter(el => {
+                return Object.entries(searchObj).every(([key, value]) => searchMatch(el[key], value));
+                //return Object.entries(searchObj).every(el[key], value);// => searchMatch(el[key], value));
+            })
+        }
+        function searchMatch(target, search) {
+            search = String(search);//.trim().toLowerCase();
+            return String(target)//;.toLowerCase().includes(search);
+        }
+        console.log("Result 3: ", findResults(userArray, { MaNummer_D: '70220', Passwort_D: '1234'}));
+
+
+
+        let arr = [
+            { name:"string 1", value:"this", other: "that" },
+            { name:"string 2", value:"this", other: "that" }
+        ];
+
+        let obj = arr.find(o => o.name === 'string 1');
+        console.log(obj);
+        console.log("obj: "+JSON.stringify(obj));
+
+        // console.log("user1: " + (await user1).getRolleU())
+        // console.log("user1: " + (await user1).getID())
+        // let userXX = (await user1).getID()===1;
         //console.log("userXXX mit id 1" + userXX.getname)
 
+     //  req.session.userId = (await user1).getID();
 
+        //username and password
+        const myusername = 'user1'
+        const mypassword = 'mypassword'
+
+        // a variable to save a session
+        var session;
+
+
+        // const JWT_SECRET =
+        //     "goK!pusp6ThEdURUtRenOwUhAsWUCLheBazl!uJLPlS8EbreWLdrupIwabRAsiBu";
+        //
+        // const accessToken = jwt.sign(
+        //     { "sub": "123", "name": "Alice" },
+        //     JWT_SECRET,
+        //     {
+        //         expiresIn:process.env.NODE_ENV=== "production" ?"6h" :"2 days",
+        //     }
+        // );
+        //res.json({msg: "User logged in!",accessToken});
+       // console.log("accessToken: "+accessToken);
+        //console.log("res.json: "+res.json());
+        //console.log("res.json: "+res.json);
+
+        //console.log("req.session: "+req.session);
 
         console.log("////////////////////////// hier käme inHome....////////////////////////////////////////////////////////////");
 
-        res.redirect('/api/v1/inHome/:'+(await user1).getMaNummerU()+(await user1).getPasswortU()+(await user1).getID()+(await user1).getRolleU())
+        res.redirect('/api/v1/inHome/:'+ (await user1).getMaNummerU()+"*"+(await user1).getPasswortU());
+        //res.redirect('/api/v1/inHome/:'+JSON.stringify(userData1));
+
+        //res.redirect('/api/v1/inHome/:'+accessToken);
+        //res.redirect('/api/v1/inHome/:'+(await user1).getMaNummerU()+(await user1).getPasswortU()+(await user1).getID()+(await user1).getRolleU())
        // res.redirect('/api/v1/inHome/:'+entries+" "+propertyValues);
        //  res.render('pages/login',{
        //      maNummerLServer : maNummerLClient,
@@ -138,11 +246,11 @@ export async function erstelleUser(maNummerLClient, encryptedStringPasswortLClie
     //User.id1=0;
 
     let u1 = new User();
-    console.log("-*-*-*-*-*-*-*-*-*-*-*-*-**-*-*-*-*");
+    //console.log("-*-*-*-*-*-*-*-*-*-*-*-*-**-*-*-*-*");
     //console.log(u1.Id)
     //console.log(u1.id1)
-    console.log(u1.getID());
-    console.log("-*-*-*-*-*-*-*-*-*-*-*-*-**-*-*-*-*");
+   // console.log(u1.getID());
+   // console.log("-*-*-*-*-*-*-*-*-*-*-*-*-**-*-*-*-*");
 
     u1.setErfasstDatumU(splitDB_DBObj(ausgabeDB).Erfasst_D_U);
     u1.setErfasstZeitU(splitDB_DBObj(ausgabeDB).Erfasst_Z_U);
@@ -153,15 +261,15 @@ export async function erstelleUser(maNummerLClient, encryptedStringPasswortLClie
     u1.setRolleU(splitDB_DBObj(ausgabeDB).RolleUser);
     u1.setAvatarFarbeU(splitDB_DBObj(ausgabeDB).AvatarFarbe);
 
-    console.log("U1--ErfasstDatumU:   "+ u1.getErfasstDatumU())
-    console.log("U1--ErfasstZeitU:   "+ u1.getErfasstZeitU())
-    console.log("U1--MaNummer:   "+ u1.getMaNummerU())
-    console.log("U1--Vorname:   "+ u1.getVornameU())
-    console.log("U1--Nachname:   "+ u1.getNachnameU())
-    console.log("U1--Passwort:   "+ u1.getPasswortU())
-    console.log("U1--RolleUser:   "+ u1.getRolleU())
-    console.log("U1--AvatarFarbeU:   "+ u1.getAvatarFarbeU())
-    console.log("u1--"+u1)
+    // console.log("U1--ErfasstDatumU:   "+ u1.getErfasstDatumU())
+    // console.log("U1--ErfasstZeitU:   "+ u1.getErfasstZeitU())
+    // console.log("U1--MaNummer:   "+ u1.getMaNummerU())
+    // console.log("U1--Vorname:   "+ u1.getVornameU())
+    // console.log("U1--Nachname:   "+ u1.getNachnameU())
+    // console.log("U1--Passwort:   "+ u1.getPasswortU())
+    // console.log("U1--RolleUser:   "+ u1.getRolleU())
+    // console.log("U1--AvatarFarbeU:   "+ u1.getAvatarFarbeU())
+    // console.log("u1--"+u1)
     return u1;
 }
 
