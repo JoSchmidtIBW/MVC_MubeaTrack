@@ -5,9 +5,14 @@
             <a class="MubeaTrack">Track</a>
             <a class="headerUser">headerUser</a>
 
+                                       <!-- <form action="/api/v1/login2/" method="delete"> -->
                                         <form action="" method="post">
-                                            <input type="submit" onclick="location.href='/api/v1/login2';" value="LogOut"/>
+                                        @method('DELETE')
+                                        @csrf
+                                            <input type="submit"  value="LogOut"/>
                                         </form>
+
+                      <!-- <button class = 'btn btn-primary' onclick = "%= xLogOut %">xClicker</button> -->
 
         </div>
     </header>

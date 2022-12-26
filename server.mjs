@@ -37,7 +37,7 @@ console.log(typeof config, config) // object { BASIC : 'basic' }
 process.env.STATUS === 'production' ? (PORT = process.env.DEV_PORT) : (PORT = process.env.PROD_PORT);
 
 
-console.log("resultDotenv: "+resultDotenv.parsed);  // [object Object]
+//console.log("resultDotenv: "+resultDotenv.parsed);  // [object Object]
 
 
 

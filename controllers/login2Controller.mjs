@@ -32,9 +32,9 @@ export let loginControllerPost = async(req, res)=>{
     let isMa_NummerInDB = false;
     let isPasswortUserInDB = false;
     maNummerLClient = req.body.maNummerLEingabe;
-    console.log("maaaaNummerL: "+maNummerLClient)
+ //   console.log("maaaaNummerL: "+maNummerLClient)
     passwortLClient = req.body.passwortLEingabe;
-    console.log("paaaaasswortL: "+passwortLClient)
+ //   console.log("paaaaasswortL: "+passwortLClient)
 
     //**************************************************************************
     let data= passwortLClient;//Message to Encrypt
@@ -42,20 +42,20 @@ export let loginControllerPost = async(req, res)=>{
     let key=CryptoJS.SHA256("mySecretKey1");//hashing the key using SHA256  --> diesen in config oder in .env Datei auslagern!!!!
     //var encryptedStringPasswortLClient=encryptData(data,iv,key);//muss var sein//
     encryptedStringPasswortLClient=encryptData(data,iv,key);//muss var sein//
-    console.log("encryptedString: "+encryptedStringPasswortLClient);//genrated encryption String:  swBX2r1Av2tKpdN7CYisMg==
+ //   console.log("encryptedString: "+encryptedStringPasswortLClient);//genrated encryption String:  swBX2r1Av2tKpdN7CYisMg==
     //--------------------------------------------------------------------------
     //das ist zum wieder das normale pw anzeigen, möchte das später einbauen
     let decrypteddata=decryptData(encryptedStringPasswortLClient,iv,key);
-    console.log("decrypteddata: "+decrypteddata);
+  //  console.log("decrypteddata: "+decrypteddata);
     //**************************************************************************
 
 
 
     isMa_NummerInDB = await checkMaNummer(maNummerLClient);
-    console.log("isMa_NummerInDB: "+isMa_NummerInDB);
+ //   console.log("isMa_NummerInDB: "+isMa_NummerInDB);
 
     isPasswortUserInDB = await checkPasswort(maNummerLClient,encryptedStringPasswortLClient);//
-    console.log("isPasswortInDB: "+isPasswortUserInDB);
+  //  console.log("isPasswortInDB: "+isPasswortUserInDB);
 
     if(isMa_NummerInDB===true && isPasswortUserInDB===false){
 
@@ -78,8 +78,8 @@ export let loginControllerPost = async(req, res)=>{
             xClicker: clicker()
         });
     }else if(isMa_NummerInDB===true&&isPasswortUserInDB===true){
-        console.log("isMa_NummerInDB und isPasswortUserInDB sind true");
-        console.log("encryptedString: "+encryptedStringPasswortLClient)
+     //   console.log("isMa_NummerInDB und isPasswortUserInDB sind true");
+    //    console.log("encryptedString: "+encryptedStringPasswortLClient)
 
         let user1 = erstelleUser(maNummerLClient,encryptedStringPasswortLClient)
         // console.log("user1--ErfasstDatumU:   "+ (await user1).getErfasstDatumU())
@@ -109,15 +109,15 @@ export let loginControllerPost = async(req, res)=>{
             "name": "hans"
         }
         userEingeloggtArray.push(userData1,userData2);
-        console.log("userData1: "+ JSON.stringify(userData1))
-        console.log("userData2: "+ JSON.stringify(userData2))
-        console.log("userArrayuserArray.toString(): "+ JSON.stringify(userEingeloggtArray[0]))
+       // console.log("userData1: "+ JSON.stringify(userData1))
+      //  console.log("userData2: "+ JSON.stringify(userData2))
+     //   console.log("userArrayuserArray.toString(): "+ JSON.stringify(userEingeloggtArray[0]))
        // console.log("finde: "+ JSON.stringify(userArray.find(userE => userE.MaNummer_D === "MaNummer_D")))
 
 
 
         let userGefunden = userEingeloggtArray.find(userE => userE.MaNummer_D === "70220")
-        console.log("userGefunden: "+JSON.stringify(userGefunden));
+    //    console.log("userGefunden: "+JSON.stringify(userGefunden));
 
         //let userGefunden2 = userArray.find(userE => {userE.MaNummer_D === "70220" , userE.Passwort_D === "1234"})
         //let userGefunden2 = userArray.find(userE => (userE.MaNummer_D === "70220" && userE.Passwort_D === "1234"))
@@ -132,7 +132,7 @@ export let loginControllerPost = async(req, res)=>{
         //     MaNummer_D = "70220",
         //     Passwort_D = "1234",
             let found = userEingeloggtArray.find(userE =>({from, to}) => from.includes(userE.MaNummer_D = "70220") && to.includes(userE.Passwort_D = "1234"));
-        console.log("found: "+JSON.stringify(found));
+      //  console.log("found: "+JSON.stringify(found));
 
 
         function findResults(userArray, searchObj) {
@@ -145,7 +145,7 @@ export let loginControllerPost = async(req, res)=>{
             search = String(search);//.trim().toLowerCase();
             return String(target)//;.toLowerCase().includes(search);
         }
-        console.log("Result 3: ", findResults(userEingeloggtArray, { MaNummer_D: '70220', Passwort_D: '1234'}));
+       // console.log("Result 3: ", findResults(userEingeloggtArray, { MaNummer_D: '70220', Passwort_D: '1234'}));
 
 
 
@@ -155,8 +155,8 @@ export let loginControllerPost = async(req, res)=>{
         ];
 
         let obj = arr.find(o => o.name === 'string 1');
-        console.log(obj);
-        console.log("obj: "+JSON.stringify(obj));
+       // console.log(obj);
+      //  console.log("obj: "+JSON.stringify(obj));
 
         // console.log("user1: " + (await user1).getRolleU())
         // console.log("user1: " + (await user1).getID())

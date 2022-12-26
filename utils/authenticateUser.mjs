@@ -35,36 +35,36 @@ function isAuthorized(req, res, next) {
 }
 //mit der User-Rolle, admin, chef, mitarbeiter, nein, nur vorwärts oder rückwärts
 export function authentificateUser(req, res, next){
-    console.log("ich bin authentificateUser-Funktion in utils/authentificateUser.js")
+   // console.log("ich bin authentificateUser-Funktion in utils/authentificateUser.js")
     const auth = req.headers.authorization;
-    console.log("was ist das: "+req.headers)
-    console.log("was ist das: "+req.headers.toString())
-    console.log("was ist das req.body: "+req.body)
-    console.log("req: " + req.query)
-    console.log("pathname authentificateUser: " + req.path)
-    console.log("auth: "+auth)
-    console.log("req.json: "+req.json)
-
-    console.log("userEingeloggtArray.length: "+userEingeloggtArray.length)
-    console.log("userEingeloggtArray[0]: "+JSON.stringify(userEingeloggtArray[0]))
-    console.log("pathname JSON.stringifyauthentificateUser: " + JSON.stringify(req.path))
+    // console.log("was ist das: "+req.headers)
+    // console.log("was ist das: "+req.headers.toString())
+    // console.log("was ist das req.body: "+req.body)
+    // console.log("req: " + req.query)
+    // console.log("pathname authentificateUser: " + req.path)
+    // console.log("auth: "+auth)
+    // console.log("req.json: "+req.json)
+    //
+    // console.log("userEingeloggtArray.length: "+userEingeloggtArray.length)
+    // console.log("userEingeloggtArray[0]: "+JSON.stringify(userEingeloggtArray[0]))
+    // console.log("pathname JSON.stringifyauthentificateUser: " + JSON.stringify(req.path))
 
     const myArr = req.path.split(':');
     let gesplittetVonURLdenUserTeil = myArr[1];
-    console.log("authentificateUser-Funktion.mjs gesplittetVonURLdenUserTeil: " + gesplittetVonURLdenUserTeil)
+   // console.log("authentificateUser-Funktion.mjs gesplittetVonURLdenUserTeil: " + gesplittetVonURLdenUserTeil)
 
-    console.log("authentificateUser-Funktion gesplittetVonURLdenUserTeiiiil: " + gesplittetVonURLdenUserTeil)
+   // console.log("authentificateUser-Funktion gesplittetVonURLdenUserTeiiiil: " + gesplittetVonURLdenUserTeil)
     const myArr1 = gesplittetVonURLdenUserTeil.split('*');
-    console.log("authentificateUser-Funktion gesplittet myArr1[0]: " + myArr1[0] + "    authentificateUser-Funktion.mjs gesplittet myArr1[1]: " + myArr1[1]);
+//    console.log("authentificateUser-Funktion gesplittet myArr1[0]: " + myArr1[0] + "    authentificateUser-Funktion.mjs gesplittet myArr1[1]: " + myArr1[1]);
 
     let maNummerURL = myArr1[0];
     let passwortURL = myArr1[1];
 
-    console.log("maNummerURL: " + maNummerURL);
-    console.log("passwortURL: "+passwortURL)
+    // console.log("maNummerURL: " + maNummerURL);
+    // console.log("passwortURL: "+passwortURL)
 
     let foundImEingeloggt = userEingeloggtArray.find(userE =>({from, to}) => from.includes(userE.MaNummer_D = maNummerURL) && to.includes(userE.Passwort_D = passwortURL));
-    console.log("foundImEingeloggt: "+JSON.stringify(foundImEingeloggt));
+ //   console.log("foundImEingeloggt: "+JSON.stringify(foundImEingeloggt));
 
     //console.log("wer? "+foundImEingeloggt.ErfasstDatumU_D)//funktioniert
     //console.log("split???: "+splitDB_DBObj(foundImEingeloggt))
@@ -127,17 +127,17 @@ export function authentificateUser(req, res, next){
 
 
 export async function checkMaNummer(maNummer){
-    console.log("bin checkMaNummer-Funktion, habe bekommen: "+maNummer);
+  //  console.log("bin checkMaNummer-Funktion, habe bekommen: "+maNummer);
     let isMaNummer = false;
     let ausgabeDB = "";
     ausgabeDB = await sucheInDBmaNummer(maNummer);//das geht nicht
-    console.log("***********************ausgabeDB: "+ausgabeDB)
+  //  console.log("***********************ausgabeDB: "+ausgabeDB)
     if(ausgabeDB==='[]'||ausgabeDB===undefined){//wenn manummer mehrmals????
-        console.log("ausgabeDB ist leeeeer!!!! sowas existiert nicht in der DB!!");
-        console.log("Diese MitarbeiterNummer gibt es nicht in der Datenbank!!!");
+    //    console.log("ausgabeDB ist leeeeer!!!! sowas existiert nicht in der DB!!");
+   //     console.log("Diese MitarbeiterNummer gibt es nicht in der Datenbank!!!");
         isMaNummer= false;
     }else{
-        console.log('AusgabeDB ist voll, hat was gefunden :)');
+   //     console.log('AusgabeDB ist voll, hat was gefunden :)');
         splitDB_DBObj(ausgabeDB);
         /// console.log(splitDB_DBObj(ausgabeDB))
         //let u1 = new User("x","x","x","x","x");
@@ -171,11 +171,11 @@ export async function checkMaNummer(maNummer){
 
 //todo wenn ma_nummer zweimal vorkommt???? und getconnection-problem!!!!
 export async function checkPasswort(maNummer,passwort){
-    console.log("bin checkPasswort-Funktion, habe bekommen: "+maNummer+', '+passwort);
+   // console.log("bin checkPasswort-Funktion, habe bekommen: "+maNummer+', '+passwort);
     let isPasswort = false;
     let ausgabeDB = "";
     ausgabeDB = await sucheInDBmaNummerPasswort(maNummer, passwort);//das geht nicht
-    console.log("ausgabeDB: Wenn Mehrmals???????: "+ausgabeDB)
+  //  console.log("ausgabeDB: Wenn Mehrmals???????: "+ausgabeDB)
     if(ausgabeDB==='[]'||ausgabeDB===undefined){//wenn manummer mehrmals????
         // console.log("ausgabeDB ist leeeeer!!!! sowas existiert nicht in der DB!!");
         //console.log("Diese Passwort ist falsch!!!");

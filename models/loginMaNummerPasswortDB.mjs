@@ -5,7 +5,7 @@ import {loginControllerGet, loginControllerPost} from "../controllers/login2Cont
 
 let counterDB = 0;
 export async  function sucheInDBmaNummer(maNummerLClient){
-    console.log('bin MODEL sucheInDBmaNummer-Funktion, habe bekommen: '+maNummerLClient);
+  //  console.log('bin MODEL sucheInDBmaNummer-Funktion, habe bekommen: '+maNummerLClient);
 
     let conn;
     let jsonS;
@@ -86,8 +86,8 @@ export async  function sucheInDBmaNummer(maNummerLClient){
         const res = await conn.query("SELECT * FROM userVerkaufMubea WHERE MA_Nummer = (?)", [maNummerLClient]);
         //conn.end();
         jsonS = JSON.stringify(res);
-        console.log("SQL-Text: "+jsonS)
-        console.log("counterDB: "+counterDB);//////
+      //  console.log("SQL-Text: "+jsonS)
+    //    console.log("counterDB: "+counterDB);//////
         conn.end();
         return jsonS;
 
@@ -98,7 +98,7 @@ export async  function sucheInDBmaNummer(maNummerLClient){
 }
 
 export async function sucheInDBmaNummerPasswort(maNummerLClient,encryptedStringPasswortLClient){
-    console.log('bin sucheInDBmaNummerPasswort-Funktion, habe bekommen: '+maNummerLClient+', '+encryptedStringPasswortLClient);
+ //   console.log('bin sucheInDBmaNummerPasswort-Funktion, habe bekommen: '+maNummerLClient+', '+encryptedStringPasswortLClient);
 
     let conn;
     let jsonS;

@@ -1,6 +1,7 @@
 import express from "express";
 //import {inHomeControllerGet, inHomeControllerPost} from "../controllers/login2Controller.mjs";
-import inHomeControllerGet from '../controllers/inHomeController.mjs';
+//import inHomeControllerGet from '../controllers/inHomeController.mjs';
+import {inHomeControllerGet, inHomeControllerDelete} from '../controllers/inHomeController.mjs';
 //import checkAuthentication from "../utils/authentifizierungUser.mjs";
 import checkAuthentication from "../utils/authentifizierungUser.mjs";
 import {authentificateUser} from "../utils/authenticateUser.mjs";
@@ -10,7 +11,18 @@ const router = express.Router();
 
 // localhost:/api/v1/inHome
 //router.route('/:maNummer',checkAuthentication).get(inHomeControllerGet);//.post(inHomeControllerPost);
+//router.route('/:irgendwas',authentificateUser).get(inHomeControllerGet).post(inHomeControllerDelete);//.post(inHomeControllerPost);
+//router.route('/:irgendwas',authentificateUser).get(inHomeControllerGet).delete(inHomeControllerDelete);//so geht authenti nicht;
+//router.get('/:irgendwas',authentificateUser,inHomeControllerGet);//funktioniert
+//router.get('/:irgendwas',authentificateUser,inHomeControllerGet);
+//router.get('/:irgendwas',authentificateUser,inHomeControllerGet);//,inHomeControllerDelete); funktioniert
+//router.use('/:irgendwas',authentificateUser,inHomeControllerDelete)
+//router.route('/:irgendwas',authentificateUser).get(inHomeControllerGet).delete(inHomeControllerDelete)//geht nicht
+// mit .route geht auth. nicht!!
 router.get('/:irgendwas',authentificateUser,inHomeControllerGet);
+router.delete('/:irgendwas',authentificateUser,inHomeControllerDelete);
+//https://dev.to/moz5691/method-override-for-put-and-delete-in-html-3fp2
+//router.post('/:irgendwas',authentificateUser,inHomeControllerDelete);
 // router.get('/:maNummer',checkAuthentication, async (req,res)=>{
 //
 //         console.log("bin im inHomeRoute.mjs - GET")
