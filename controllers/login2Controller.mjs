@@ -4,7 +4,7 @@ import splitDB_DBObj from "../utils/splitDB_DBObj_General.mjs";
 import CryptoJS from "crypto-js";
 import {encryptData, decryptData} from "../utils/crypto.mjs";
 import User from "../utils/User.mjs";
-import userArray from "../utils/userArray.mjs";
+import userEingeloggtArray from "../utils/userEingeloggtArray.mjs";
 import session from "express-session";
 
 import jwt from 'jsonwebtoken';
@@ -108,15 +108,15 @@ export let loginControllerPost = async(req, res)=>{
         let userData2 = {
             "name": "hans"
         }
-        userArray.push(userData1,userData2);
+        userEingeloggtArray.push(userData1,userData2);
         console.log("userData1: "+ JSON.stringify(userData1))
         console.log("userData2: "+ JSON.stringify(userData2))
-        console.log("userArrayuserArray.toString(): "+ JSON.stringify(userArray[0]))
+        console.log("userArrayuserArray.toString(): "+ JSON.stringify(userEingeloggtArray[0]))
        // console.log("finde: "+ JSON.stringify(userArray.find(userE => userE.MaNummer_D === "MaNummer_D")))
 
 
 
-        let userGefunden = userArray.find(userE => userE.MaNummer_D === "70220")
+        let userGefunden = userEingeloggtArray.find(userE => userE.MaNummer_D === "70220")
         console.log("userGefunden: "+JSON.stringify(userGefunden));
 
         //let userGefunden2 = userArray.find(userE => {userE.MaNummer_D === "70220" , userE.Passwort_D === "1234"})
@@ -131,7 +131,7 @@ export let loginControllerPost = async(req, res)=>{
         // let flightDetails = [{  "airline": "B-201",  "from": "Bangaluru(BLR)",  "to": "Delhi(DEL)",  "detail": [{    "date": "2019-12-30",    "price": "3900",    "departTime": "12:00 PM",    "arriveTime": "14:00 PM",    "seats": "10"  }, {    "date": "2019-12-31",    "price": "3000",    "departTime": "17:30 PM",    "arriveTime": "19:30 PM",    "seats": "3"  }, {    "date": "2019-06-01",    "price": "2100",    "departTime": "09:00 AM",    "arriveTime": "11:00 AM",    "seats": "7"  }]}, {  "airline": "B-202",  "from": "Delhi(DEL)",  "to": "Bangaluru(BLR)",  "detail": [{    "date": "2019-12-30",    "price": "3000",    "departTime": "12:00 PM",    "arriveTime": "14:00 PM",    "seats": "10"  }, {    "date": "2019-12-31",    "price": "3000",    "departTime": "17:30 PM",    "arriveTime": "19:30 PM",    "seats": "3"  }, {    "date": "2019-06-01",    "price": "2100",    "departTime": "09:00 AM",    "arriveTime": "11:00 AM",    "seats": "7"  }]}],
         //     MaNummer_D = "70220",
         //     Passwort_D = "1234",
-            let found = userArray.find(userE =>({from, to}) => from.includes(userE.MaNummer_D = "70220") && to.includes(userE.Passwort_D = "1234"));
+            let found = userEingeloggtArray.find(userE =>({from, to}) => from.includes(userE.MaNummer_D = "70220") && to.includes(userE.Passwort_D = "1234"));
         console.log("found: "+JSON.stringify(found));
 
 
@@ -145,7 +145,7 @@ export let loginControllerPost = async(req, res)=>{
             search = String(search);//.trim().toLowerCase();
             return String(target)//;.toLowerCase().includes(search);
         }
-        console.log("Result 3: ", findResults(userArray, { MaNummer_D: '70220', Passwort_D: '1234'}));
+        console.log("Result 3: ", findResults(userEingeloggtArray, { MaNummer_D: '70220', Passwort_D: '1234'}));
 
 
 

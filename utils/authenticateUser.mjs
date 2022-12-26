@@ -1,6 +1,6 @@
 import {sucheInDBmaNummer, sucheInDBmaNummerPasswort} from "../models/loginMaNummerPasswortDB.mjs";
 import splitDB_DBObj from "./splitDB_DBObj_General.mjs";
-import userArray from "./userArray.mjs";
+import userEingeloggtArray from "./userEingeloggtArray.mjs";
 
 import session from "express-session";
 
@@ -45,9 +45,35 @@ export function authentificateUser(req, res, next){
     console.log("auth: "+auth)
     console.log("req.json: "+req.json)
 
-    console.log("userArray.length: "+userArray.length)
-    console.log("userArray[0]: "+userArray[0])
+    console.log("userEingeloggtArray.length: "+userEingeloggtArray.length)
+    console.log("userEingeloggtArray[0]: "+JSON.stringify(userEingeloggtArray[0]))
     console.log("pathname JSON.stringifyauthentificateUser: " + JSON.stringify(req.path))
+
+    const myArr = req.path.split(':');
+    let gesplittetVonURLdenUserTeil = myArr[1];
+    console.log("authentificateUser-Funktion.mjs gesplittetVonURLdenUserTeil: " + gesplittetVonURLdenUserTeil)
+
+    console.log("authentificateUser-Funktion gesplittetVonURLdenUserTeiiiil: " + gesplittetVonURLdenUserTeil)
+    const myArr1 = gesplittetVonURLdenUserTeil.split('*');
+    console.log("authentificateUser-Funktion gesplittet myArr1[0]: " + myArr1[0] + "authentificateUser-Funktion.mjs gesplittet myArr1[1]: " + myArr1[1]);
+
+    let maNummerURL = myArr1[0];
+    let passwortURL = myArr1[1];
+
+    console.log("maNummerURL: " + maNummerURL);
+    console.log("passwortURL: "+passwortURL)
+
+    let foundImEingeloggt = userEingeloggtArray.find(userE =>({from, to}) => from.includes(userE.MaNummer_D = maNummerURL) && to.includes(userE.Passwort_D = passwortURL));
+    console.log("foundImEingeloggt: "+JSON.stringify(foundImEingeloggt));
+
+    console.log("wer? "+foundImEingeloggt.ErfasstDatumU_D)//funktioniert
+    //console.log("split???: "+splitDB_DBObj(foundImEingeloggt))
+    if(foundImEingeloggt.MaNummer_D.length===0 || foundImEingeloggt.MaNummer_D === undefined
+    || foundImEingeloggt.Passwort_D.length===0 || foundImEingeloggt.Passwort_D === undefined){
+        res.send("401 Unautorized :) :)");
+    } else {
+        return next();
+    }
 
     //if(userArray.find()) {}
 
@@ -67,9 +93,9 @@ export function authentificateUser(req, res, next){
 
     //return isIrgendwas;
     //
-    return next();//next is not defined
+    //return next();//next is not defined
     //return res.end("401 Unautorized :) ");
-    //res.send("401 Unautorized :) ");
+    //res.send("401 Unautorized :) :)");
 
     //  res.render('pages/layoutInHomeAdmin',{
     //      maNummerLServer : maNummerLClient,
