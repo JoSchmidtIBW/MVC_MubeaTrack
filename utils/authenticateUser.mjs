@@ -55,7 +55,7 @@ export function authentificateUser(req, res, next){
 
     console.log("authentificateUser-Funktion gesplittetVonURLdenUserTeiiiil: " + gesplittetVonURLdenUserTeil)
     const myArr1 = gesplittetVonURLdenUserTeil.split('*');
-    console.log("authentificateUser-Funktion gesplittet myArr1[0]: " + myArr1[0] + "authentificateUser-Funktion.mjs gesplittet myArr1[1]: " + myArr1[1]);
+    console.log("authentificateUser-Funktion gesplittet myArr1[0]: " + myArr1[0] + "    authentificateUser-Funktion.mjs gesplittet myArr1[1]: " + myArr1[1]);
 
     let maNummerURL = myArr1[0];
     let passwortURL = myArr1[1];
@@ -66,15 +66,22 @@ export function authentificateUser(req, res, next){
     let foundImEingeloggt = userEingeloggtArray.find(userE =>({from, to}) => from.includes(userE.MaNummer_D = maNummerURL) && to.includes(userE.Passwort_D = passwortURL));
     console.log("foundImEingeloggt: "+JSON.stringify(foundImEingeloggt));
 
-    console.log("wer? "+foundImEingeloggt.ErfasstDatumU_D)//funktioniert
+    //console.log("wer? "+foundImEingeloggt.ErfasstDatumU_D)//funktioniert
     //console.log("split???: "+splitDB_DBObj(foundImEingeloggt))
-    if(foundImEingeloggt.MaNummer_D.length===0 || foundImEingeloggt.MaNummer_D === undefined
+    if(foundImEingeloggt===undefined||foundImEingeloggt.MaNummer_D.length===0 || foundImEingeloggt.MaNummer_D === undefined
     || foundImEingeloggt.Passwort_D.length===0 || foundImEingeloggt.Passwort_D === undefined){
+       //return res.send("401 Unautorized :) :)");
         res.send("401 Unautorized :) :)");
-    } else {
+    } else if(maNummerURL != foundImEingeloggt.MaNummer_D){
+        // achtung, wenn server neustartet ist user nicht im array!!!!!!
+        res.send("MaNummer ist falsch, 401 Unautorized :) :)");
+    }
+    else if(passwortURL != foundImEingeloggt.Passwort_D){
+        res.send("passwort ist falsch, 401 Unautorized :) :)");
+    }
+    else{
         return next();
     }
-
     //if(userArray.find()) {}
 
     // const { user, pwd } = req.body;

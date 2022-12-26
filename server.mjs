@@ -16,6 +16,9 @@ import login2Route from './routes/login2Route.mjs';
 import inHomeRoutes from "./routes/inHomeRoute.mjs";
 
 
+//import {authentificateUser} from "../utils/authenticateUser.mjs";
+
+
 const app = express();
 let PORT;// = process.env.PORT || 7088;
 
