@@ -51,7 +51,8 @@ export let inHomeControllerGet = async (req, res) => {
             MaNummerServer: user.getMa_NummerU()*/
             werIstAngemeldetH: foundImEingeloggt.MaNummer_D + " " + foundImEingeloggt.Vorname_D,
             kundeIHServer: "hoi kunde",
-            MaNummerServer: foundImEingeloggt.MaNummer_D
+            MaNummerServer: foundImEingeloggt.MaNummer_D,
+            FooterWerIstAngemeldet: foundImEingeloggt.MaNummer_D + " " + foundImEingeloggt.Vorname_D
         });
     } else if(foundImEingeloggt.RolleUser_D==="Chef" || foundImEingeloggt.RolleUser_D==="Mitarbeiter"){
         // achtung, wenn server neustartet ist user nicht im array!!!!!!
@@ -64,7 +65,8 @@ export let inHomeControllerGet = async (req, res) => {
             MaNummerServer: user.getMa_NummerU()*/
             werIstAngemeldetH: foundImEingeloggt.MaNummer_D + " " + foundImEingeloggt.Vorname_D,
             kundeIHServer: "hoi kunde",
-            MaNummerServer: foundImEingeloggt.MaNummer_D
+            MaNummerServer: foundImEingeloggt.MaNummer_D,
+            FooterWerIstAngemeldet: foundImEingeloggt.MaNummer_D + " " + foundImEingeloggt.Vorname_D
         });
     }
 
