@@ -141,7 +141,8 @@ export let inHomeControllerDelete = async (req, res) => {
     console.log("userEingeloggtArray.toString() "+userEingeloggtArray.toString()) // [object Object],[object Object]
     console.log("JSON.stringify(userEingeloggtArray) "+JSON.stringify(userEingeloggtArray))
 
-    let foundImEingeloggt = userEingeloggtArray.find(userE =>({from, to}) => from.includes(userE.MaNummer_D = maNummerURLdelete) && to.includes(userE.Passwort_D = passwortURLdelete));
+    //let foundImEingeloggt = userEingeloggtArray.find(userE =>({from, to}) => from.includes(userE.MaNummer_D = maNummerURLdelete) && to.includes(userE.Passwort_D = passwortURLdelete));
+    let foundImEingeloggt = userEingeloggtArray.find(x => (x.MaNummer_D === maNummerURLdelete && x.Passwort_D===passwortURLdelete))
     console.log("foundImEingeloggt: "+JSON.stringify(foundImEingeloggt));
 
    // var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];

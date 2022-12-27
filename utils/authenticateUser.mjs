@@ -85,14 +85,15 @@ export function authentificateUser(req, res, next){
     if(foundImEingeloggt===undefined||foundImEingeloggt.MaNummer_D.length===0 || foundImEingeloggt.MaNummer_D === undefined
     || foundImEingeloggt.Passwort_D.length===0 || foundImEingeloggt.Passwort_D === undefined){
        //return res.send("401 Unautorized :) :)");
-        res.send("401 Unautorized :) :)");
+        //res.send("401 Unautorized :) :), hätte gerne hier noch einen Button, wo man zur login seite gehen könnte, aber nicht automatisch, möchte fehlermeldung sehen"+<input type="button" onclick="location.href='/api/v1/login2';" value="Go to login" />);
+        res.send("<h1>401 Unautorized :) :)</h1><input type=\"button\" onclick=\"location.href='/api/v1/login2';\" value=\"Go to login\" />")
     } else if(maNummerURLAuth != foundImEingeloggt.MaNummer_D){
         // achtung, wenn server neustartet ist user nicht im array!!!!!!
         // einen Button, wo man zur login seite gehen könnte, aber nicht automatisch, möchte fehlermeldung sehen
-        res.send("MaNummer ist falsch, 401 Unautorized :) :)");
+        res.send("<h1>MaNummer ist falsch, 401 Unautorized :) :)</h1><input type=\"button\" onclick=\"location.href='/api/v1/login2';\" value=\"Go to login\" />");
     }
     else if(passwortURLAuth != foundImEingeloggt.Passwort_D){
-        res.send("passwort ist falsch, 401 Unautorized :) :)");
+        res.send("<h1>passwort ist falsch, 401 Unautorized :) :)</h1><input type=\"button\" onclick=\"location.href='/api/v1/login2';\" value=\"Go to login\" />");
     }
     else{
         return next();
