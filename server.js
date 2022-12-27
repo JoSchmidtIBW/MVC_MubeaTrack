@@ -1,8 +1,8 @@
-import mongoose from 'mongoose';
-import dotenv from 'dotenv';
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 
 dotenv.config({ path: './config.env' });
-import app from './app';
+const app = require('./app');
 
 const DB = process.env.DATABASE.replace(
   '<PASSWORD>',
@@ -14,12 +14,12 @@ dbConnect().catch((err) => console.log(err));
 
 
 async function dbConnect() {
-    mongoose.set('strictQuery', false);
-    await mongoose.connect(DB);
-    console.log('DB connection successful!');
+  mongoose.set('strictQuery', false);
+  await mongoose.connect(DB);
+  console.log('DB connection successful!');
 }
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
-    console.log(`App running on port ${port}...`);
+  console.log(`App running on port ${port}...`);
 });

@@ -25,7 +25,7 @@ start server with `npm run dev` --> start with nodemon (server start automatical
 
 or
 
-start server with `node server.mjs`
+start server with `node server.js`
 or
 start serve with `npm run start`
 
