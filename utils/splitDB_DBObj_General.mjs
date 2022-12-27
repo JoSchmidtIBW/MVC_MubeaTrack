@@ -1,5 +1,6 @@
 export function splitDB_DBObj(ausgabeDBZumSplitten){
-    console.log("bin splitDB_DBObj")
+    //console.log("bin splitDB_DBObj")
+
     //let ausgabeDBZumSplitten = ausgabeDBZumSplitten;
     //console.log("ausgabeDBZumSplitten: "+ausgabeDBZumSplitten);
     //let text = "[{"ID_User":8,"MA_Nummer":"70999","Vorname":"urs","Nachname":"meier","Passwort_User":"12","IstChef":"keinChef"}]";

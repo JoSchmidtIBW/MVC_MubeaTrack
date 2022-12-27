@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="de">
+
+    <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- <link type="text/css" rel="stylesheet" href="/public/css/styleInHome.css" media="all"> -->
+    <link type="text/css" rel="stylesheet" href="/css/styleInHome.css" media="all">
+
+    <title>Home</title>
+</head>
+
+<body>
+
+<%- include('../partials/headerUser'); %>
+
+
+   <main>
+
+       <h1>Wellcome <%=werIstAngemeldetH%> inHome</h1>
+       <br>
+
+       <a>hi <%=MaNummerServer%></a>
+       <% if(werIstAngemeldetH==='Admin Administrator'){ %>
+               <button>Hallo Admin</button>
+               <input type="button" onclick="location.href='/api/v1/registrieren';" value="Go to Registrieren Admin" />
+           <% } %>
+
+
+           <h2>Achtung !!! Kunde schreiben "1" , "2" oder "3"</h2>
+
+          <!-- <input type="button" onclick="location.href='/api/v1/inHome/passwordChange';" value="Passwort Ändern" /> -->
+          <!-- nicht der Button öffnet neuen Link, sondern gibt ein boolean retour, welcher dan ein Post mit redirekt macht -->
+          <form action="" method="post">
+
+           </form>
+
+           <form action="" method="post">
+       <!-- <form action="/api/inHome/:"+MaNummerServer  method="post"> -->
+       <!--<form method="post"></form>-->
+       <!--<form action="/api/inHome/:maNummer" method="post">-->
+           kunde: <input name="kundeIHEingabe" type="text" id="inputKundeIH"/>
+           <!-- <input type="submit" value="Ma-Nummer bestätigen" id="btnMaNummerL" onclick="btnMaNummerLOK()"/>  -->
+           <button type="button" id="btnKundeIH" onclick="btnKundeIHOK()">OK</button>
+           <a>Eingegebener Kunde: </a>
+            <a id="lbAusgabeKundeIHClient"></a>
+           <a id="lbAusgabeKundeIHServer"><%= kundeIHServer %></a><br>
+
+           <input type="submit" value="Eingaben in DB schreiben"/>
+       </form>
+       <br>
+
+
+       </main>
+       <footer class="footer-Login">
+               <!-- Reihenfolge -->
+               <div style="float: left; background-color: lightgray;"><a class="pCopyRFooterLogin">© C.Tschenet / J.Schmidt</a></div>
+               <div style="float: right; background-color: lightgray;"><a class="pDateFooterLogin">Dez. 2022 / Jan. 2023</a></div>
+               <div style="margin: 0 auto; width: 100px;"><a>Version 1.0</a></a></div>
+       </footer>
+       <scirpt>
+       </script>
+
+       <input type="button" onclick="location.href='/api/v1/login2';" value="logOut" />
+   </body>
+
+   </html>

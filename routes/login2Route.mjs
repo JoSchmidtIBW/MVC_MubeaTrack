@@ -3,6 +3,7 @@ import express from "express";
 //import loginControllerPost from "../controllers/login2Controller.mjs";
 import {loginControllerGet, loginControllerPost} from '../controllers/login2Controller.mjs'
 
+
 const router = express.Router();
 
 // localhost:/api/v1/login2/....

@@ -26,13 +26,20 @@ router.get('/',(req,res)=>{
 
 
 //router.use("/", authenticateUser); //soll überall verfügbar sein
-// localhost/q  und danach alles
+// localhost/q  und danach alles  --> localhost:/q/w
 router.get('/w',checkAuthentication,(req,res)=>{
     console.log("ich bin adminChange- Route.mjs");
     console.log("req.body: "+req.body);
     //header
     res.send("<h1>Hello adminUserChange-Route  GET</h1>");
 });
+
+/*
+app.get('/logout',(req,res) => {
+    req.session.destroy();
+    res.redirect('/');
+});
+ */
 
 
 export default router;

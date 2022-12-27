@@ -7,10 +7,16 @@ import bodyParser from "body-parser";
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 
+import jwt from "jsonwebtoken";
+import methodOverride from 'method-override';
 
 import loginRoutes from './routes/loginRoute.mjs';
 import adminUserNewDeleteChangeRoute from "./routes/adminUserNewDeleteChangeRoute.mjs";
 import login2Route from './routes/login2Route.mjs';
+import inHomeRoutes from "./routes/inHomeRoute.mjs";
+
+
+//import {authentificateUser} from "../utils/authenticateUser.mjs";
 
 
 const app = express();
@@ -31,7 +37,7 @@ console.log(typeof config, config) // object { BASIC : 'basic' }
 process.env.STATUS === 'production' ? (PORT = process.env.DEV_PORT) : (PORT = process.env.PROD_PORT);
 
 
-console.log("resultDotenv: "+resultDotenv.parsed);  // [object Object]
+//console.log("resultDotenv: "+resultDotenv.parsed);  // [object Object]
 
 
 
@@ -43,6 +49,7 @@ app.set("view engine", "ejs");
 //Middleware
 app.use(express.json());
 // parsing the incoming data
+// parse requests of content-type - application/x-www-form-urlencoded   bei true
 app.use(express.urlencoded({ extended: false }));//cookie was mit true
 app.use(bodyParser.urlencoded({ extended: false }))
 
@@ -51,6 +58,7 @@ app.use( express.static( "./public" ) );
 app.use('/q', adminUserNewDeleteChangeRoute);
 app.use('/api/v1/login2', login2Route);
 
+app.use(methodOverride('_method'));
 
 // cookie parser middleware
 app.use(cookieParser());
@@ -70,6 +78,16 @@ app.use(session({
     cookie: { maxAge: date },
     resave: false
 }));
+
+// app.use(session({
+//     secret: 'keyboard cat',
+//     resave: false,
+//     saveUninitialized: false,
+//     cookie: { secure: true }
+// }));
+
+app.use('/api/v1/inHome', inHomeRoutes);
+
 
 // a variable to save a session
 //var session;

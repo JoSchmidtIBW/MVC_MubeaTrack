@@ -20,6 +20,7 @@ Frameworks:
 npm install body-parser
 `npm install --save express-session`
 `npm install  cookie-parser`
+`npm install method-override`
 
 start server with `npm run dev` --> start with nodemon (server start automatically, when do some code- changes)
 
