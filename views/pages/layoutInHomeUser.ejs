@@ -20,6 +20,8 @@
    <main>
 
        <h1>Wellcome <%=werIstAngemeldetH%> inHome</h1>
+             <form action="" method="post">
+             <input type="submit"  value="Post"/>
        <br>
 
        <a>hi <%=MaNummerServer%></a>
@@ -54,16 +56,17 @@
 
 
        </main>
-       <footer class="footer-Login">
-               <!-- Reihenfolge -->
+       <%- include('../partials/footer'); %>
+       <!--<footer class="footer-Login">
+               <!-- Reihenfolge
                <div style="float: left; background-color: lightgray;"><a class="pCopyRFooterLogin">© C.Tschenet / J.Schmidt</a></div>
                <div style="float: right; background-color: lightgray;"><a class="pDateFooterLogin">Dez. 2022 / Jan. 2023</a></div>
                <div style="margin: 0 auto; width: 100px;"><a>Version 1.0</a></a></div>
-       </footer>
+       </footer> -->
        <scirpt>
        </script>
 
-       <input type="button" onclick="location.href='/api/v1/login2';" value="logOut" />
+      <!-- <input type="button" onclick="location.href='/api/v1/login2';" value="logOut" /> -->
    </body>
 
    </html>

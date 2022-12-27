@@ -32,3 +32,11 @@ h1 {
     font-weight: bold;
     font-size: 30px;
 }
+
+.formAdminHeader{
+    display: inline-block;
+}
+
+.formUserHeader{
+    display: inline-block;
+}
