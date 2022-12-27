@@ -14,6 +14,7 @@ import loginRoutes from './routes/loginRoute.mjs';
 import adminUserNewDeleteChangeRoute from "./routes/adminUserNewDeleteChangeRoute.mjs";
 import login2Route from './routes/login2Route.mjs';
 import inHomeRoutes from "./routes/inHomeRoute.mjs";
+import kundenVerwaltungRoutes from './routes/kundenVerwaltungRoute.mjs'
 
 
 //import {authentificateUser} from "../utils/authenticateUser.mjs";
@@ -87,6 +88,8 @@ app.use(session({
 // }));
 
 app.use('/api/v1/inHome', inHomeRoutes);
+//app.use('/api/v1/inHome/:0001*rTtGwkAwxI6ajLjBmMtZ3w==/kundenVerwaltung', kundenVerwaltungRoutes);
+app.use('/api/v1/kundenVerwaltung', kundenVerwaltungRoutes);
 
 
 // a variable to save a session

@@ -5,8 +5,14 @@
             <a class="MubeaTrack">Track</a>
             <a class="headerAdmin">headerAdmin</a>
 
-            <input type="button" onclick="location.href='/api/v1/registrieren';" value="Mitarbeiterverwaltung" />
-            <input type="button" onclick="location.href='/api/v1/registrieren';" value="Kundenverwaltung" />
+        <form action="/MitarbeiterVerwaltung" method="post" class="formAdminHeader">
+            <input type="submit"  value="MitarbeiterVerwaltung"/>
+        </form>
+        <!-- <form action="/api/v1/inHome/kundenVerwaltung" method="" class="formAdminHeader"> -->
+        <form action="/api/v1/kundenVerwaltung" method="" class="formAdminHeader">
+            <input type="submit"  value="KundenVerwaltung"/>
+        </form>
+
                                                    <!-- <form action="/api/v1/login2/" method="delete"> -->
             <form action="?_method=DELETE" method="post" class="formAdminHeader">
                  <input type="submit"  value="LogOut"/>

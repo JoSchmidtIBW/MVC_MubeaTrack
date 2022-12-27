@@ -184,5 +184,14 @@ export let inHomeControllerDelete = async (req, res) => {
 export let inHomeControllerPost = async (req, res) => {
     console.log("bin im inHomeRoute.mjs - POST")
     res.send('hallllllloo Post');
+
+    // $which = $app->request()->post('which')
+    // if ('first_form' === $which) {
+    //     // do something
+    // } else if ('second_form' === $which){
+    //     // do something else
+    // }
+
+
 };
 export default {inHomeControllerGet, inHomeControllerDelete,inHomeControllerPost};

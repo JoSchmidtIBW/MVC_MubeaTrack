@@ -3,7 +3,7 @@ import express from "express";
 //import inHomeControllerGet from '../controllers/inHomeController.mjs';
 import {inHomeControllerGet, inHomeControllerDelete, inHomeControllerPost} from '../controllers/inHomeController.mjs';
 //import checkAuthentication from "../utils/authentifizierungUser.mjs";
-import checkAuthentication from "../utils/authentifizierungUser.mjs";
+//import checkAuthentication from "../utils/authentifizierungUser.mjs";
 import {authentificateUser} from "../utils/authenticateUser.mjs";
 
 
