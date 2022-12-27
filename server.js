@@ -12,7 +12,6 @@ const DB = process.env.DATABASE.replace(
 // eslint-disable-next-line no-use-before-define
 dbConnect().catch((err) => console.log(err));
 
-
 async function dbConnect() {
   mongoose.set('strictQuery', false);
   await mongoose.connect(DB);
