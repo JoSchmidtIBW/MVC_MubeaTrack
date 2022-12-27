@@ -8,7 +8,7 @@ import cookieParser from 'cookie-parser';
 import session from 'express-session';
 
 import jwt from "jsonwebtoken";
-
+import methodOverride from 'method-override';
 
 import loginRoutes from './routes/loginRoute.mjs';
 import adminUserNewDeleteChangeRoute from "./routes/adminUserNewDeleteChangeRoute.mjs";
@@ -58,7 +58,7 @@ app.use( express.static( "./public" ) );
 app.use('/q', adminUserNewDeleteChangeRoute);
 app.use('/api/v1/login2', login2Route);
 
-
+app.use(methodOverride('_method'));
 
 // cookie parser middleware
 app.use(cookieParser());

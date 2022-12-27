@@ -108,7 +108,8 @@ export let loginControllerPost = async(req, res)=>{
         let userData2 = {
             "name": "hans"
         }
-        userEingeloggtArray.push(userData1,userData2);
+        //userEingeloggtArray.push(userData1,userData2);
+        userEingeloggtArray.push(userData1);
        // console.log("userData1: "+ JSON.stringify(userData1))
       //  console.log("userData2: "+ JSON.stringify(userData2))
      //   console.log("userArrayuserArray.toString(): "+ JSON.stringify(userEingeloggtArray[0]))

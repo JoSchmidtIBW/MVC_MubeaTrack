@@ -1,7 +1,7 @@
 import express from "express";
 //import {inHomeControllerGet, inHomeControllerPost} from "../controllers/login2Controller.mjs";
 //import inHomeControllerGet from '../controllers/inHomeController.mjs';
-import {inHomeControllerGet, inHomeControllerDelete} from '../controllers/inHomeController.mjs';
+import {inHomeControllerGet, inHomeControllerDelete, inHomeControllerPost} from '../controllers/inHomeController.mjs';
 //import checkAuthentication from "../utils/authentifizierungUser.mjs";
 import checkAuthentication from "../utils/authentifizierungUser.mjs";
 import {authentificateUser} from "../utils/authenticateUser.mjs";
@@ -21,6 +21,7 @@ const router = express.Router();
 // mit .route geht auth. nicht!!
 router.get('/:irgendwas',authentificateUser,inHomeControllerGet);
 router.delete('/:irgendwas',authentificateUser,inHomeControllerDelete);
+router.post('/:irgendwas',authentificateUser,inHomeControllerPost);
 //https://dev.to/moz5691/method-override-for-put-and-delete-in-html-3fp2
 //router.post('/:irgendwas',authentificateUser,inHomeControllerDelete);
 // router.get('/:maNummer',checkAuthentication, async (req,res)=>{

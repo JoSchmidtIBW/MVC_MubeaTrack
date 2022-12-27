@@ -6,12 +6,15 @@
             <a class="headerUser">headerUser</a>
 
                                        <!-- <form action="/api/v1/login2/" method="delete"> -->
-                                        <form action="" method="post">
+                                        <form action="?_method=DELETE" method="post">
                                         @method('DELETE')
                                         @csrf
                                             <input type="submit"  value="LogOut"/>
                                         </form>
 
+      <form action="" method="post">
+      <input type="submit"  value="Post"/>
+                                        </form>
                       <!-- <button class = 'btn btn-primary' onclick = "%= xLogOut %">xClicker</button> -->
 
         </div>

@@ -33,6 +33,8 @@ function isAuthorized(req, res, next) {
         res.send('Not permitted');
     }
 }
+
+var foundImEingeloggt;
 //mit der User-Rolle, admin, chef, mitarbeiter, nein, nur vorwärts oder rückwärts
 export function authentificateUser(req, res, next){
    // console.log("ich bin authentificateUser-Funktion in utils/authentificateUser.js")
@@ -57,14 +59,26 @@ export function authentificateUser(req, res, next){
     const myArr1 = gesplittetVonURLdenUserTeil.split('*');
 //    console.log("authentificateUser-Funktion gesplittet myArr1[0]: " + myArr1[0] + "    authentificateUser-Funktion.mjs gesplittet myArr1[1]: " + myArr1[1]);
 
-    let maNummerURL = myArr1[0];
-    let passwortURL = myArr1[1];
+    let maNummerURLAuth = myArr1[0];
+    let passwortURLAuth = myArr1[1];
 
-    // console.log("maNummerURL: " + maNummerURL);
-    // console.log("passwortURL: "+passwortURL)
+     console.log("Authentic maNummerURL: " + maNummerURLAuth);
+     console.log("Authentic passwortURL: "+passwortURLAuth);
 
-    let foundImEingeloggt = userEingeloggtArray.find(userE =>({from, to}) => from.includes(userE.MaNummer_D = maNummerURL) && to.includes(userE.Passwort_D = passwortURL));
- //   console.log("foundImEingeloggt: "+JSON.stringify(foundImEingeloggt));
+    console.log("+++++++++++++++--------------------: ")
+    console.log("Authentic userEingeloggtArray.length "+userEingeloggtArray.length)   // 2
+   // console.log("Authentic JSON.stringify(userEingeloggtArray) "+JSON.stringify(userEingeloggtArray))
+
+    let myArray = [{'id':'73','foo':'bar'},{'id':'45','foo':'bar'}]
+    console.log("+++++++++++++++: "+myArray.find(x => x.id === '45').foo);
+    foundImEingeloggt = userEingeloggtArray.find(x => (x.MaNummer_D === maNummerURLAuth && x.Passwort_D===passwortURLAuth))
+    //console.log("+++++++++++++++: "+ JSON.stringify(fff));
+
+
+    // todo hier ist es ein fehler, wenn sich jemand anmeldet, und ein anderer, dann steht hier das zuvor gesuchte
+    //foundImEingeloggt = userEingeloggtArray.find(userE =>({from, to}) => from.includes(userE.MaNummer_D = maNummerURLAuth) && to.includes(userE.Passwort_D = passwortURLAuth));//funktioniert, aber flasch
+    //foundImEingeloggt = userEingeloggtArray.find(userE =>({from, to}) => from.includes(userE.MaNummer_D = maNummerURLAuth) && to.includes(userE.Passwort_D = passwortURLAuth));
+    console.log("Authentic foundImEingeloggt: "+JSON.stringify(foundImEingeloggt));
 
     //console.log("wer? "+foundImEingeloggt.ErfasstDatumU_D)//funktioniert
     //console.log("split???: "+splitDB_DBObj(foundImEingeloggt))
@@ -72,11 +86,12 @@ export function authentificateUser(req, res, next){
     || foundImEingeloggt.Passwort_D.length===0 || foundImEingeloggt.Passwort_D === undefined){
        //return res.send("401 Unautorized :) :)");
         res.send("401 Unautorized :) :)");
-    } else if(maNummerURL != foundImEingeloggt.MaNummer_D){
+    } else if(maNummerURLAuth != foundImEingeloggt.MaNummer_D){
         // achtung, wenn server neustartet ist user nicht im array!!!!!!
+        // einen Button, wo man zur login seite gehen könnte, aber nicht automatisch, möchte fehlermeldung sehen
         res.send("MaNummer ist falsch, 401 Unautorized :) :)");
     }
-    else if(passwortURL != foundImEingeloggt.Passwort_D){
+    else if(passwortURLAuth != foundImEingeloggt.Passwort_D){
         res.send("passwort ist falsch, 401 Unautorized :) :)");
     }
     else{
