@@ -1,5 +1,8 @@
 import express from "express";
 
+// alles hier drin zum lernen authentic-zeugs....
+
+
 // irgendwas mit express-session        versuch, soll 10sec session haben
 //const cookieParser = require("cookie-parser");
 //const sessions = require('express-session');
