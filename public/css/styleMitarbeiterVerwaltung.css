@@ -1,6 +1,9 @@
 h1 {
-    background-color: rgb(208, 224, 208);
+    background-color: rgb(115, 236, 115);
 }
+
+
+
 
 .MubeaLogo {
     margin: 1px;
@@ -19,12 +22,7 @@ h1 {
 }
 
 
-.headerUser{
-    color: gold;
-    font-style: italic;
-    font-weight: bold;
-    font-size: 30px;
-}
+
 
 .headerAdmin{
     color: red;
