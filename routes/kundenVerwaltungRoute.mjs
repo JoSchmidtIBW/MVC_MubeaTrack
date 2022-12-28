@@ -1,101 +1,129 @@
 import express from "express";
-import userEingeloggtArray from "../utils/userEingeloggtArray.mjs";
-import {sucheInDBKunden} from "../models/kundenVerwaltungDB.mjs";
+import {kundenVerwaltungControllerGet,kundenVerwaltungControllerPost,kundenVerwaltungControllerDelete} from "../controllers/kundenVerwaltungController.mjs";
+import {authentificateUser} from "../utils/authenticateUser.mjs";
 
 const router = express.Router();
 
-//router.get('/kundenVerwaltung/:irgendwas',authentificateUser,kundenVerwaltungControllerGet);
-//router.delete('/:irgendwas',authentificateUser,inHomeControllerDelete);
-//router.post('/:irgendwas',authentificateUser,kundenVerwaltungControllerGetControllerPost);
 
 
-//:irgendwas
-// router.get("/", async (req, res) => {
-//     console.log("bin kundenVerwaltungRozute.mjs")
-//
-//      res.render('pages/layoutKundenVerwaltungAdmin', {
-//          data: await sucheInDBKunden(),
-//          FooterWerIstAngemeldet: "Seppe" + " " + "Toni"
-//      });
-// });
-
-router.get("/:irgendwas", async (req, res) => {
-    console.log("bin kundenVerwaltungRozute.mjs")
-
-    const nachURLDoppelpunktArr = req.path.split(':');
-    let gesplittetVonURLabDoppelpunkt = nachURLDoppelpunktArr[1];
-    const gesplittetVonURLabDoppelpunktmitStern = gesplittetVonURLabDoppelpunkt.split('*');
-    let maNummerURLAngemeldet = gesplittetVonURLabDoppelpunktmitStern[0];
-    let passwortURLAngemeldet = gesplittetVonURLabDoppelpunktmitStern[1];
-
-    console.log("maNummerURLAngemeldetPOST: "+maNummerURLAngemeldet)
-    console.log("passwortURLAngemeldetPOST: "+passwortURLAngemeldet)
-
-    let mitarbeiterVerwaltungButton = req.body.mitarbeiterVerwaltungButton;
-    console.log("MitarbeiterVerwaltungButton: "+mitarbeiterVerwaltungButton)
+router.get('/:irgendwas',authentificateUser,kundenVerwaltungControllerGet);
+router.delete('/:irgendwas',authentificateUser,kundenVerwaltungControllerDelete);
+router.post('/:irgendwas',authentificateUser,kundenVerwaltungControllerPost);
 
 
-        res.render('pages/layoutKundenVerwaltungAdmin', {
-            data: await sucheInDBKunden(),
-            FooterWerIstAngemeldet: "Seppe" + " " + "Toni"
-        });
-});
-
-
-router.post("/:irgendwas", async (req, res) => {
-    console.log("bin mitarbeiterVerwaltungRoute.mjs")
-
-    const nachURLDoppelpunktArr = req.path.split(':');
-    let gesplittetVonURLabDoppelpunkt = nachURLDoppelpunktArr[1];
-    const gesplittetVonURLabDoppelpunktmitStern = gesplittetVonURLabDoppelpunkt.split('*');
-    let maNummerURLAngemeldet = gesplittetVonURLabDoppelpunktmitStern[0];
-    let passwortURLAngemeldet = gesplittetVonURLabDoppelpunktmitStern[1];
-
-    console.log("maNummerURLAngemeldetPOST: "+maNummerURLAngemeldet)
-    console.log("passwortURLAngemeldetPOST: "+passwortURLAngemeldet)
-
-    let mitarbeiterVerwaltungButton = req.body.mitarbeiterVerwaltungButton;
-    console.log("MitarbeiterVerwaltungButton: "+mitarbeiterVerwaltungButton)
-
-    if(req.body.kundenVerwaltungButtonRetourInHomeNameEjs==="Zurück zur Verladungserfassung"){
-        res.redirect('/api/v1/inHome/:'+ maNummerURLAngemeldet+"*"+passwortURLAngemeldet);
-    }
-    else if(req.body.mitarbeiterVerwaltungButtonNameEjs==="MitarbeiterVerwaltung"){
-        res.redirect("/api/v1/inHome/mitarbeiterVerwaltung/:"+maNummerURLAngemeldet+"*"+passwortURLAngemeldet)
-    }
-
-});
-
-
-
-router.delete("/:irgendwas", (req, res) => {
-    console.log("bin kundenVerwaltungRozute.mjs")
-
-    const nachURLDoppelpunktArr = req.path.split(':');
-    let gesplittetVonURLabDoppelpunkt = nachURLDoppelpunktArr[1];
-    const gesplittetVonURLabDoppelpunktmitStern = gesplittetVonURLabDoppelpunkt.split('*');
-    let maNummerURLAngemeldet = gesplittetVonURLabDoppelpunktmitStern[0];
-    let passwortURLAngemeldet = gesplittetVonURLabDoppelpunktmitStern[1];
-
-    console.log("maNummerURLAngemeldetPOST: "+maNummerURLAngemeldet)
-    console.log("passwortURLAngemeldetPOST: "+passwortURLAngemeldet)
-    //suche im Array, ob User Admin eingeloggt, wenn gefunden, dann löschen
-    let foundAdminImEingeloggt = userEingeloggtArray.find(x => (x.MaNummer_D === maNummerURLAngemeldet && x.Nachname_D==='Administrator'))
-    console.log("foundAdminImEingeloggt: "+JSON.stringify(foundAdminImEingeloggt));
-
-    for( let i = 0; i < userEingeloggtArray.length; i++){
-        if ( userEingeloggtArray[i] === foundAdminImEingeloggt) {
-            userEingeloggtArray.splice(i, 1);
-        }
-    }
-    res.redirect('/api/v1/login2');
-});
 
 export default router;
 
 
 
 
+
+
+
+
+//---------------------------------------früher ALT ---------------------------------
+// import express from "express";
+// //import userEingeloggtArray from "../utils/userEingeloggtArray.mjs";
+// //import {sucheInDBKunden} from "../models/kundenVerwaltungDB.mjs";
+// import {kundenVerwaltungControllerGet,kundenVerwaltungControllerPost,kundenVerwaltungControllerDelete} from "../controllers/kundenVerwaltungController.mjs";
+// import {authentificateUser} from "../utils/authenticateUser.mjs";
+//
+// const router = express.Router();
+//
+// //router.get('/kundenVerwaltung/:irgendwas',authentificateUser,kundenVerwaltungControllerGet);
+// //router.delete('/:irgendwas',authentificateUser,inHomeControllerDelete);
+// //router.post('/:irgendwas',authentificateUser,kundenVerwaltungControllerGetControllerPost);
+//
+//
+// //:irgendwas
+// // router.get("/", async (req, res) => {
+// //     console.log("bin kundenVerwaltungRozute.mjs")
+// //
+// //      res.render('pages/layoutKundenVerwaltungAdmin', {
+// //          data: await sucheInDBKunden(),
+// //          FooterWerIstAngemeldet: "Seppe" + " " + "Toni"
+// //      });
+// // });
+//
+// router.get('/:irgendwas',authentificateUser,kundenVerwaltungControllerGet);
+// router.delete('/:irgendwas',authentificateUser,kundenVerwaltungControllerDelete);
+// router.post('/:irgendwas',authentificateUser,kundenVerwaltungControllerPost);
+//
+// // router.get("/:irgendwas", async (req, res) => {
+// //     console.log("bin kundenVerwaltungRozute.mjs")
+// //
+// //     const nachURLDoppelpunktArr = req.path.split(':');
+// //     let gesplittetVonURLabDoppelpunkt = nachURLDoppelpunktArr[1];
+// //     const gesplittetVonURLabDoppelpunktmitStern = gesplittetVonURLabDoppelpunkt.split('*');
+// //     let maNummerURLAngemeldet = gesplittetVonURLabDoppelpunktmitStern[0];
+// //     let passwortURLAngemeldet = gesplittetVonURLabDoppelpunktmitStern[1];
+// //
+// //     console.log("maNummerURLAngemeldetPOST: "+maNummerURLAngemeldet)
+// //     console.log("passwortURLAngemeldetPOST: "+passwortURLAngemeldet)
+// //
+// //     let mitarbeiterVerwaltungButton = req.body.mitarbeiterVerwaltungButton;
+// //     console.log("MitarbeiterVerwaltungButton: "+mitarbeiterVerwaltungButton)
+// //
+// //
+// //         res.render('pages/layoutKundenVerwaltungAdmin', {
+// //             data: await sucheInDBKunden(),
+// //             FooterWerIstAngemeldet: maNummerURLAngemeldet + " " + passwortURLAngemeldet
+// //         });
+// // });
+// //
+// //
+// // router.post("/:irgendwas", async (req, res) => {
+// //     console.log("bin mitarbeiterVerwaltungRoute.mjs")
+// //
+// //     const nachURLDoppelpunktArr = req.path.split(':');
+// //     let gesplittetVonURLabDoppelpunkt = nachURLDoppelpunktArr[1];
+// //     const gesplittetVonURLabDoppelpunktmitStern = gesplittetVonURLabDoppelpunkt.split('*');
+// //     let maNummerURLAngemeldet = gesplittetVonURLabDoppelpunktmitStern[0];
+// //     let passwortURLAngemeldet = gesplittetVonURLabDoppelpunktmitStern[1];
+// //
+// //     console.log("maNummerURLAngemeldetPOST: "+maNummerURLAngemeldet)
+// //     console.log("passwortURLAngemeldetPOST: "+passwortURLAngemeldet)
+// //
+// //     let mitarbeiterVerwaltungButton = req.body.mitarbeiterVerwaltungButton;
+// //     console.log("MitarbeiterVerwaltungButton: "+mitarbeiterVerwaltungButton)
+// //
+// //     if(req.body.kundenVerwaltungButtonRetourInHomeNameEjs==="Zurück zur Verladungserfassung"){
+// //         res.redirect('/api/v1/inHome/:'+ maNummerURLAngemeldet+"*"+passwortURLAngemeldet);
+// //     }
+// //     else if(req.body.mitarbeiterVerwaltungButtonNameEjs==="MitarbeiterVerwaltung"){
+// //         res.redirect("/api/v1/inHome/mitarbeiterVerwaltung/:"+maNummerURLAngemeldet+"*"+passwortURLAngemeldet)
+// //     }
+// //
+// // });
+// //
+// //
+// //
+// // router.delete("/:irgendwas", (req, res) => {
+// //     console.log("bin kundenVerwaltungRozute.mjs")
+// //
+// //     const nachURLDoppelpunktArr = req.path.split(':');
+// //     let gesplittetVonURLabDoppelpunkt = nachURLDoppelpunktArr[1];
+// //     const gesplittetVonURLabDoppelpunktmitStern = gesplittetVonURLabDoppelpunkt.split('*');
+// //     let maNummerURLAngemeldet = gesplittetVonURLabDoppelpunktmitStern[0];
+// //     let passwortURLAngemeldet = gesplittetVonURLabDoppelpunktmitStern[1];
+// //
+// //     console.log("maNummerURLAngemeldetPOST: "+maNummerURLAngemeldet)
+// //     console.log("passwortURLAngemeldetPOST: "+passwortURLAngemeldet)
+// //     //suche im Array, ob User Admin eingeloggt, wenn gefunden, dann löschen
+// //     let foundAdminImEingeloggt = userEingeloggtArray.find(x => (x.MaNummer_D === maNummerURLAngemeldet && x.Nachname_D==='Administrator'))
+// //     console.log("foundAdminImEingeloggt: "+JSON.stringify(foundAdminImEingeloggt));
+// //
+// //     for( let i = 0; i < userEingeloggtArray.length; i++){
+// //         if ( userEingeloggtArray[i] === foundAdminImEingeloggt) {
+// //             userEingeloggtArray.splice(i, 1);
+// //         }
+// //     }
+// //     res.redirect('/api/v1/login2');
+// // });
+//
+// export default router;
+//
+//
 
 
 //--------------------------------------ALT--------------------------------------------

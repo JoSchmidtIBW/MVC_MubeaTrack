@@ -20,35 +20,8 @@
    <main>
 
        <h1>Wellcome <%=werIstAngemeldetH%> inHome</h1>
-             <form action="" method="post">
-             <input type="submit"  value="Post"/>
        <br>
-
        <a>hi <%=MaNummerServer%></a>
-       <% if(werIstAngemeldetH==='Admin Administrator'){ %>
-               <button>Hallo Admin</button>
-               <input type="button" onclick="location.href='/api/v1/registrieren';" value="Go to Registrieren Admin" />
-           <% } %>
-
-
-
-    <form class="form" action="" id="first_PostForm" method=" post">
-        <input type="submit"  value="Post1"/>
-    </form>
-
-    <form class=" form" action="" id="second_PostForm" method="post">
-        <input type="submit"  value="Post2"/>
-    </form>
-
-
-
-<td>
-<select class="admin" name="gender" id="gender">
-<option><label th:text="${infos.gender}"></label></option>
-<option value="Kunde e.f.g">Male</option>
-<option value="Kunde h.i.j">Female</option>
-</select>
-</td>
 
 
  <table>
@@ -89,27 +62,6 @@
     <br>
     <br>
 
-           <h2>nicht implementiert</h2>
-
-          <!-- <input type="button" onclick="location.href='/api/v1/inHome/passwordChange';" value="Passwort Ändern" /> -->
-          <!-- nicht der Button öffnet neuen Link, sondern gibt ein boolean retour, welcher dan ein Post mit redirekt macht -->
-          <form action="" method="post">
-           </form>
-
-           <form action="" method="post">
-       <!-- <form action="/api/inHome/:"+MaNummerServer  method="post"> -->
-       <!--<form method="post"></form>-->
-       <!--<form action="/api/inHome/:maNummer" method="post">-->
-           kunde: <input name="kundeIHEingabe" type="text" id="inputKundeIH"/>
-           <!-- <input type="submit" value="Ma-Nummer bestätigen" id="btnMaNummerL" onclick="btnMaNummerLOK()"/>  -->
-           <button type="button" id="btnKundeIH" onclick="btnKundeIHOK()">OK</button>
-           <a>Eingegebener Kunde: </a>
-            <a id="lbAusgabeKundeIHClient"></a>
-           <a id="lbAusgabeKundeIHServer"><%= kundeIHServer %></a><br>
-
-           <input type="submit" value="Eingaben in DB schreiben"/>
-       </form>
-       <br>
 
 
        </main>
@@ -123,7 +75,6 @@
        <scirpt>
        </script>
 
-      <!-- <input type="button" onclick="location.href='/api/v1/login2';" value="logOut" /> -->
    </body>
 
    </html>
