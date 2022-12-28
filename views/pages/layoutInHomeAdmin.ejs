@@ -30,6 +30,26 @@
         <% } %>
 
 
+    <form class="form" action="" id="first_PostForm" method=" post">
+        <input type="submit"  value="Post1"/>
+    </form>
+
+    <form class=" form" action="" id="second_PostForm" method="post">
+        <input type="submit"  value="Post2"/>
+    </form>
+
+
+
+<td>
+<select class="admin" name="gender" id="gender">
+<option><label th:text="${infos.gender}"></label></option>
+<option value="Kunde e.f.g">Male</option>
+<option value="Kunde h.i.j">Female</option>
+</select>
+</td>
+
+
+
         <h2>Achtung !!! Kunde schreiben "1" , "2" oder "3"</h2>
 
        <!-- <input type="button" onclick="location.href='/api/v1/inHome/passwordChange';" value="Passwort Ändern" /> -->

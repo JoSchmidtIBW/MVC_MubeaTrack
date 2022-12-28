@@ -20,14 +20,74 @@
 
     <h1>Kundenverwaltung</h1>
 
+
+<table>
+      <tr>
+        <th>ID_K</th>
+        <th>ErfasstK</th>
+        <th>KundeK</th>
+        <th>KundeNummer</th>
+        <th>OrtK</th>
+        <th>AdresseK</th>
+        <th>LandK</th>
+      </tr>
+      <br>
+<% for(var i=0; i < data.length; i++) { %>
+    <tr>
+        <!--<td><%= i+1 %></td>-->
+        <td><%= data[i].ID_K %></td>
+        <td><%= data[i].ErfasstK %></td>
+        <td><%= data[i].KundeK %></td>
+        <td><%= data[i].KundeNummer %></td>
+        <td><%= data[i].OrtK %></td>
+        <td><%= data[i].AdresseK %></td>
+        <td><%= data[i].LandK %>
+    </tr>
+
+<% } %>
+</table>
+
     <!--
 
       -->
+      <br>
+      <br>
+
+          <table>
+            <tr>
+              <th>ID_K</th>
+              <th>ErfasstK</th>
+              <th>KundeK</th>
+              <th>KundeNummer</th>
+              <th>OrtK</th>
+              <th>AdresseK</th>
+              <th>LandK</th>
+            </tr>
+            <tr>
+              <td>Alfreds Futterkiste</td>
+              <td>Maria Anders</td>
+              <td>Germany</td>
+            </tr>
+            <tr>
+              <td>Centro comercial Moctezuma</td>
+              <td>Francisco Chang</td>
+              <td>Mexico</td>
+            </tr>
+          </table>
+          <br>
+          <br>
+          <br>
+      <br>
+      <br>
 <table>
   <tr>
-      <td><%= data %></td>
+      <td></td>
   </tr>
       </table>
+
+            <tr>blabla
+              <td></td>
+            </tr>
 
 <!-- https://stackoverflow.com/questions/16660734/html-form-with-multiple-actions -->
 

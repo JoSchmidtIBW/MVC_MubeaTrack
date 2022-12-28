@@ -21,6 +21,16 @@
     <h1>Mitarbeiterverwaltung</h1>
 
 
+<td>
+<select class="admin" name="gender" id="gender">
+<option><label th:text="${infos.gender}"></label></option>
+<option value="Chef">Male</option>
+<option value="Mitarbeiter">Female</option>
+</select>
+</td>
+
+
+
     <input type="button" onclick="location.href='/api/v1/inHome/:irgendwas';" value="go ...v1/InHome/:irgendwas" />
 
 

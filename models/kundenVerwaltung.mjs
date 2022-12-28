@@ -16,10 +16,11 @@ export async  function sucheInDBKunden(){
         const res = await conn.query("SELECT  *  FROM kundeMubea");
         //conn.end();
         jsonS = JSON.stringify(res);
-        console.log("SQL-Text: "+jsonS)
+        //console.log("SQL-Text: "+jsonS)
         //    console.log("counterDB: "+counterDB);//////
         conn.end();
-        return jsonS;
+        return res;
+        //return jsonS;
 
     } catch (err) {
         console.log("DB-Error..........")
