@@ -7,7 +7,8 @@ import methodOverride from 'method-override';
 
 import login2Route from './routes/login2Route.mjs';
 import inHomeRoutes from "./routes/inHomeRoute.mjs";
-import kundenVerwaltungRoutes from './routes/kundenVerwaltungRoute.mjs'
+import kundenVerwaltungRoutes from './routes/kundenVerwaltungRoute.mjs';
+import mitarbeiterVerwaltungRoute from "./routes/mitarbeiterVerwaltungRoute.mjs";
 
 
 const app = express();
@@ -44,7 +45,8 @@ app.use(methodOverride('_method'));
 app.use(cookieParser());
 app.use('/api/v1/inHome', inHomeRoutes);
 //app.use('/api/v1/inHome/:0001*rTtGwkAwxI6ajLjBmMtZ3w==/kundenVerwaltung', kundenVerwaltungRoutes);
-app.use('/api/v1/kundenVerwaltung', kundenVerwaltungRoutes);
+app.use('/api/v1/inHome/kundenVerwaltung', kundenVerwaltungRoutes);
+app.use('/api/v1/inHome/mitarbeiterVerwaltung', mitarbeiterVerwaltungRoute);
 
 
 

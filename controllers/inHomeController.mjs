@@ -97,37 +97,25 @@ export let inHomeControllerPost = async (req, res) => {
     let mitarbeiterVerwaltungButton = req.body.mitarbeiterVerwaltungButton;
     console.log("MitarbeiterVerwaltungButton: "+mitarbeiterVerwaltungButton)
 
-    console.log("---------------------------------------------------")
-    //console.log(req.body.log)
-    console.log(req)
-    console.log("---------------------------------------------------")
-    console.log(req.body.mitarbeiterVerwaltungButton)
-    console.log("-----------------mitarbeiterVerwaltungButton: 'MitarbeiterVerwaltung'----------------------------------")
+    // console.log("---------------------------------------------------")
+    // //console.log(req.body.log)
+    // console.log(req)
+    // console.log("---------------------------------------------------")
+    // console.log(req.body.mitarbeiterVerwaltungButton)
+    // console.log("-----------------mitarbeiterVerwaltungButton: 'MitarbeiterVerwaltung'----------------------------------")
     //console.log(req.body.watch)
 
     if(req.body.mini==="#Post1"){
         res.send("Hallo Post #Post1")
-    }
+    }///api/v1/inHome/:
     else if(req.body.mitarbeiterVerwaltungButtonNameEjs==="MitarbeiterVerwaltung"){
-        res.redirect("/api/v1/inHome/MitarbeiterVerwaltung/:"+maNummerURLAngemeldet+"*"+passwortURLAngemeldet)
+        res.redirect("/api/v1/inHome/mitarbeiterVerwaltung/:"+maNummerURLAngemeldet+"*"+passwortURLAngemeldet)
         //res.send("Hallo Post MiitarbeiterVerwaltung")
     }
+    else if(req.body.kundenVerwaltungButtonNameEjs==="KundenVerwaltung"){
+        res.redirect("/api/v1/inHome/kundenVerwaltung/:"+maNummerURLAngemeldet+"*"+passwortURLAngemeldet)
+    }
 
-
-    // $which = $app->request()->post('which')
-    // if ('first_form' === $which) {
-    //     // do something
-    // } else if ('second_form' === $which){
-    //     // do something else
-    // }
-    // if (){
-    //
-    // }
-
-    // app.post('/', function(req, res) {
-    //     var someField1 = req.body.some_form_field;
-    //     var someField1 = req.body.form_field1;
-    // });
 };
 
 
