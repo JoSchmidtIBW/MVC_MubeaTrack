@@ -5,12 +5,12 @@
             <a class="MubeaTrack">Track</a>
             <a class="headerAdmin">headerAdmin</a>
 
-        <form action="/MitarbeiterVerwaltung" method="post" class="formAdminHeader">
-            <input type="submit"  value="MitarbeiterVerwaltung"/>
+        <form action="" method="post" class="formAdminHeader">
+           <input type="submit"  value="MitarbeiterVerwaltung" name="mitarbeiterVerwaltungButtonNameEjs"/>
         </form>
         <!-- <form action="/api/v1/inHome/kundenVerwaltung" method="" class="formAdminHeader"> -->
-        <form action="/api/v1/kundenVerwaltung" method="" class="formAdminHeader">
-            <input type="submit"  value="KundenVerwaltung"/>
+        <form action="" method="post" class="formAdminHeader">
+            <input type="submit"  value="KundenVerwaltung" name="kundenVerwaltungButtonNameEjs"/>
         </form>
 
                                                    <!-- <form action="/api/v1/login2/" method="delete"> -->
@@ -18,6 +18,15 @@
                  <input type="submit"  value="LogOut"/>
             </form>
 
+
+
+    <form class="form" action="#" id="first_PostForm" method="post">
+        <input type="submit"  value="#Post1" name="mini"/>
+    </form>
+
+    <form class=" form" action="/MitarbeiterVerwaltung" id="second_PostForm" method="post">
+        <input type="submit"  value="MPost2"/>
+    </form>
             <a>Avatar</a>
         </div>
     </header>

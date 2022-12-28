@@ -10,22 +10,77 @@ const router = express.Router();
 
 
 //:irgendwas
-router.get("/", async (req, res) => {
+// router.get("/", async (req, res) => {
+//     console.log("bin kundenVerwaltungRozute.mjs")
+//
+//      res.render('pages/layoutKundenVerwaltungAdmin', {
+//          data: await sucheInDBKunden(),
+//          FooterWerIstAngemeldet: "Seppe" + " " + "Toni"
+//      });
+// });
+
+router.get("/:irgendwas", async (req, res) => {
     console.log("bin kundenVerwaltungRozute.mjs")
 
-     res.render('pages/layoutKundenVerwaltungAdmin', {
-         data: await sucheInDBKunden(),
-         FooterWerIstAngemeldet: "Seppe" + " " + "Toni"
-     });
+    const nachURLDoppelpunktArr = req.path.split(':');
+    let gesplittetVonURLabDoppelpunkt = nachURLDoppelpunktArr[1];
+    const gesplittetVonURLabDoppelpunktmitStern = gesplittetVonURLabDoppelpunkt.split('*');
+    let maNummerURLAngemeldet = gesplittetVonURLabDoppelpunktmitStern[0];
+    let passwortURLAngemeldet = gesplittetVonURLabDoppelpunktmitStern[1];
+
+    console.log("maNummerURLAngemeldetPOST: "+maNummerURLAngemeldet)
+    console.log("passwortURLAngemeldetPOST: "+passwortURLAngemeldet)
+
+    let mitarbeiterVerwaltungButton = req.body.mitarbeiterVerwaltungButton;
+    console.log("MitarbeiterVerwaltungButton: "+mitarbeiterVerwaltungButton)
+
+
+        res.render('pages/layoutKundenVerwaltungAdmin', {
+            data: await sucheInDBKunden(),
+            FooterWerIstAngemeldet: "Seppe" + " " + "Toni"
+        });
+});
+
+
+router.post("/:irgendwas", async (req, res) => {
+    console.log("bin mitarbeiterVerwaltungRoute.mjs")
+
+    const nachURLDoppelpunktArr = req.path.split(':');
+    let gesplittetVonURLabDoppelpunkt = nachURLDoppelpunktArr[1];
+    const gesplittetVonURLabDoppelpunktmitStern = gesplittetVonURLabDoppelpunkt.split('*');
+    let maNummerURLAngemeldet = gesplittetVonURLabDoppelpunktmitStern[0];
+    let passwortURLAngemeldet = gesplittetVonURLabDoppelpunktmitStern[1];
+
+    console.log("maNummerURLAngemeldetPOST: "+maNummerURLAngemeldet)
+    console.log("passwortURLAngemeldetPOST: "+passwortURLAngemeldet)
+
+    let mitarbeiterVerwaltungButton = req.body.mitarbeiterVerwaltungButton;
+    console.log("MitarbeiterVerwaltungButton: "+mitarbeiterVerwaltungButton)
+
+    if(req.body.kundenVerwaltungButtonRetourInHomeNameEjs==="Zurück zur Verladungserfassung"){
+        res.redirect('/api/v1/inHome/:'+ maNummerURLAngemeldet+"*"+passwortURLAngemeldet);
+    }
+    else if(req.body.mitarbeiterVerwaltungButtonNameEjs==="MitarbeiterVerwaltung"){
+        res.redirect("/api/v1/inHome/mitarbeiterVerwaltung/:"+maNummerURLAngemeldet+"*"+passwortURLAngemeldet)
+    }
+
 });
 
 
 
-router.delete("/", (req, res) => {
+router.delete("/:irgendwas", (req, res) => {
     console.log("bin kundenVerwaltungRozute.mjs")
 
+    const nachURLDoppelpunktArr = req.path.split(':');
+    let gesplittetVonURLabDoppelpunkt = nachURLDoppelpunktArr[1];
+    const gesplittetVonURLabDoppelpunktmitStern = gesplittetVonURLabDoppelpunkt.split('*');
+    let maNummerURLAngemeldet = gesplittetVonURLabDoppelpunktmitStern[0];
+    let passwortURLAngemeldet = gesplittetVonURLabDoppelpunktmitStern[1];
+
+    console.log("maNummerURLAngemeldetPOST: "+maNummerURLAngemeldet)
+    console.log("passwortURLAngemeldetPOST: "+passwortURLAngemeldet)
     //suche im Array, ob User Admin eingeloggt, wenn gefunden, dann löschen
-    let foundAdminImEingeloggt = userEingeloggtArray.find(x => (x.MaNummer_D === '0001' && x.Nachname_D==='Administrator'))
+    let foundAdminImEingeloggt = userEingeloggtArray.find(x => (x.MaNummer_D === maNummerURLAngemeldet && x.Nachname_D==='Administrator'))
     console.log("foundAdminImEingeloggt: "+JSON.stringify(foundAdminImEingeloggt));
 
     for( let i = 0; i < userEingeloggtArray.length; i++){

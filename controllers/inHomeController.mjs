@@ -83,14 +83,39 @@ export let inHomeControllerDelete = async (req, res) => {
 
 export let inHomeControllerPost = async (req, res) => {
     console.log("bin im inHomeRoute.mjs - POST")
-    res.send('hallllllloo Post');
+    //res.send('hallllllloo Post');
 
-    // $which = $app->request()->post('which')
-    // if ('first_form' === $which) {
-    //     // do something
-    // } else if ('second_form' === $which){
-    //     // do something else
-    // }
+    const nachURLDoppelpunktArr = req.path.split(':');
+    let gesplittetVonURLabDoppelpunkt = nachURLDoppelpunktArr[1];
+    const gesplittetVonURLabDoppelpunktmitStern = gesplittetVonURLabDoppelpunkt.split('*');
+    let maNummerURLAngemeldet = gesplittetVonURLabDoppelpunktmitStern[0];
+    let passwortURLAngemeldet = gesplittetVonURLabDoppelpunktmitStern[1];
+
+    console.log("maNummerURLAngemeldetPOST: "+maNummerURLAngemeldet)
+    console.log("passwortURLAngemeldetPOST: "+passwortURLAngemeldet)
+
+    let mitarbeiterVerwaltungButton = req.body.mitarbeiterVerwaltungButton;
+    console.log("MitarbeiterVerwaltungButton: "+mitarbeiterVerwaltungButton)
+
+    // console.log("---------------------------------------------------")
+    // //console.log(req.body.log)
+    // console.log(req)
+    // console.log("---------------------------------------------------")
+    // console.log(req.body.mitarbeiterVerwaltungButton)
+    // console.log("-----------------mitarbeiterVerwaltungButton: 'MitarbeiterVerwaltung'----------------------------------")
+    //console.log(req.body.watch)
+
+    if(req.body.mini==="#Post1"){
+        res.send("Hallo Post #Post1")
+    }///api/v1/inHome/:
+    else if(req.body.mitarbeiterVerwaltungButtonNameEjs==="MitarbeiterVerwaltung"){
+        res.redirect("/api/v1/inHome/mitarbeiterVerwaltung/:"+maNummerURLAngemeldet+"*"+passwortURLAngemeldet)
+        //res.send("Hallo Post MiitarbeiterVerwaltung")
+    }
+    else if(req.body.kundenVerwaltungButtonNameEjs==="KundenVerwaltung"){
+        res.redirect("/api/v1/inHome/kundenVerwaltung/:"+maNummerURLAngemeldet+"*"+passwortURLAngemeldet)
+    }
+
 };
 
 
