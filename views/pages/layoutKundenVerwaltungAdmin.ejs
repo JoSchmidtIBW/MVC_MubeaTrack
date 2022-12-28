@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="de">
+
+    <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link type="text/css" rel="stylesheet" href="/css/styleInHome.css" media="all">
+
+    <title>KundenVerwaltung</title>
+</head>
+
+<body>
+
+<%- include('../partials/headerAdmin'); %>
+
+    <main>
+
+    <h1>Kundenverwaltung</h1>
+
+    <table>
+      <tr>
+        <th>ID_K</th>
+        <th>ErfasstK</th>
+        <th>KundeK</th>
+        <th>KundenNummer</th>
+        <th>OrtK</th>
+        <th>AdresseK</th>
+        <th>LandK</th>
+      </tr>
+      <br>
+      <% for(var i=0; i < data.length; i++) { %>
+        <tr>
+        <!--<td><%= i+1 %></td>-->
+        <td><%= data[i].ID_K %></td>
+        <td><%= data[i].ErfasstK %></td>
+        <td><%= data[i].KundeK %></td>
+        <td><%= data[i].KundenNummer %></td>
+        <td><%= data[i].OrtK %></td>
+        <td><%= data[i].AdresseK %></td>
+        <td><%= data[i].LandK %>
+        </tr>
+      <% } %>
+    </table>
+
+    <br>
+    <button>Kunde Bearbeiten</button>
+    <button>neuer Kunde erfassen</button>
+    <br>
+    <br>
+    <input type="button" onclick="location.href='/api/v1/inHome/:0001*rTtGwkAwxI6ajLjBmMtZ3w==';" value="Zurück zur Verlade-Erfassung ...go ...v1/InHome/:irgendwas, aber das ist irgendwie falsch, weil im link des Buttons der Admin PW usw" />
+    <br>
+    <br>
+
+
+    </main>
+    <%- include('../partials/footerAdminUser'); %>
+
+    <scirpt>
+    </script>
+
+</body>
+
+</html>

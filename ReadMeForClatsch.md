@@ -1,6 +1,6 @@
 # Datenbank_Einfügtext für versuch
-# nur noch passwort andern in lib/db.mjs, name der db muss fleich sein
-#Einfügtext, zu testzwecken, könnte sich noch ändern
+# nur noch passwort andern in utils/db.mjs
+
 
 //mariaDB:
 MYSQL -u root -p
@@ -11,6 +11,7 @@ pw 70220:   1234
 pw 70223:   abcd
 pw 70225:   1
 
+#Einfügtext, zu testzwecken, könnte sich noch ändern   einfach crtl+c und crtl+v
 
 DROP DATABASE mubeaVerkaufDataBase;
 CREATE DATABASE mubeaVerkaufDataBase;
@@ -117,169 +118,10 @@ SELECT * FROM kundeMubea;
 UPDATE kundeMubea SET KundeK ='Firma Brosch' WHERE ID_K=1;
 SELECT * FROM kundeMubea;
 SELECT * FROM versandlisteMubea;
-
+SELECT * FROM userVerkaufMubea;
 
 
 #Die Tabelle, welche man sehen möchte:
 SELECT versandListeMubea.ID_E, versandListeMubea.VnameE, versandListeMubea.NnameE, versandListeMubea.DatumE, versandListeMubea.UhrzeitE, versandListeMubea.WunschDatum, kundeMubea.KundeK, versandListeMubea.MengeTo, versandListeMubea.ArtikelAnLager, versandListeMubea.LSimLeitSystem, versandListeMubea.R_K, versandListeMubea.ArtikelNichtProd FROM versandListeMubea INNER JOIN kundeMubea ON kundeMubea.ID_K=versandListeMubea.ID_KV;
 
 
-
-
-
-
-#------------------------ab hier nicht in DB kopieren------------------------------------------------
-#--------------------------------------------------------------------------------------------
-#---------------------***************************+funktioniert
-DROP DATABASE mubeaVerkauf1DataBase;
-CREATE DATABASE mubeaVerkauf1DataBase;
-SHOW DATABASES;
-USE mubeaVerkauf1DataBase;
-
-CREATE TABLE author (
-id int AUTO_INCREMENT,
-name VARCHAR(100),
-PRIMARY KEY (id)
-);
-
-CREATE TABLE book (
-id int AUTO_INCREMENT,
-title VARCHAR(200),
-author_id int,
-FOREIGN KEY (author_id) REFERENCES author (id)
-ON DELETE CASCADE
-ON UPDATE RESTRICT,
-PRIMARY KEY (id)
-);
-
-SHOW TABLES;
-DESCRIBE author;
-DESCRIBE book;
-#-------------------------------------------------------------------------
-#  https://www.youtube.com/watch?v=rFssfx37UJw
-DROP DATABASE mubeaVerkauf2DataBase;
-CREATE DATABASE mubeaVerkauf2DataBase;
-SHOW DATABASES;
-USE mubeaVerkauf2DataBase;
-
-CREATE TABLE customers (
-customer_id INT PRIMARY KEY AUTO_INCREMENT,
-first_name VARCHAR(50),
-last_name VARCHAR(50)
-);
-
-INSERT INTO customers (first_name, last_name)
-VALUES  
-("Fred", "Fish"),
-("Larry", "Lobster"),
-("Bubble", "Bass");
-
-SELECT * FROM customers;
-
-
-
-# Add a named foreign key constraint to a new table
-
-CREATE TABLE transactions (
-transaction_id INT PRIMARY KEY AUTO_INCREMENT,
-amount DECIMAL(5, 2),
-customer_id INT,
-FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
-);
-
-INSERT INTO transactions(amount, customer_id)
-VALUES (4.99, 3),
-(2.89, 2),
-(3.38, 3),
-(4.99, 1);
-
-SELECT * FROM transactions;
-
-SELECT * FROM transactions, customers;
-
-UPDATE customers SET first_name = 'Hansoo' WHERE customer_id=1;
-SELECT * FROM transactions, customers;
-
-
-#----------------------------------------.
-#  https://www.youtube.com/watch?v=rFssfx37UJw
-DROP DATABASE mubeaVerkauf2DataBase;
-CREATE DATABASE mubeaVerkauf2DataBase;
-SHOW DATABASES;
-USE mubeaVerkauf2DataBase;
-
-CREATE TABLE customers (
-customer_id INT PRIMARY KEY AUTO_INCREMENT,
-first_name VARCHAR(50),
-last_name VARCHAR(50)
-);
-
-INSERT INTO customers (first_name, last_name)
-VALUES  
-("Fred", "Fish"),
-("Larry", "Lobster"),
-("Bubble", "Bass");
-
-SELECT * FROM customers;
-
-
-
-# Add a named foreign key constraint to a new table
-
-CREATE TABLE transactions (
-transaction_id INT PRIMARY KEY AUTO_INCREMENT,
-amount DECIMAL(5, 2),
-customer_idT INT,
-FOREIGN KEY (customer_idT) REFERENCES customers(customer_id)
-);
-
-INSERT INTO transactions(amount, customer_idT)
-VALUES (4.99, 3),
-(2.89, 2),
-(3.38, 3),
-(4.99, 1);
-
-SELECT * FROM transactions;
-
-SELECT * FROM transactions, customers;
-
-UPDATE customers SET first_name = 'Hansoo' WHERE customer_id=1;
-SELECT * FROM transactions, customers;
-
-
-#---------------------------------------------------+
-#https://www.youtube.com/watch?v=unREmbNASaI
-DROP DATABASE mubeaVerkauf3DataBase;
-CREATE DATABASE mubeaVerkauf3DataBase;
-SHOW DATABASES;
-USE mubeaVerkauf3DataBase;
-
-CREATE TABLE city (
-c_id INT NOT NULL AUTO_INCREMENT,
-cityname VARCHAR(50) NOT NULL,
-PRIMARY KEY (c_id)
-);
-INSERT INTO city(cityname)
-VALUES ('chur'),
-('landquart'),
-('Zurich');
-
-CREATE TABLE customers(
-id INT NOT NULL,
-fname VARCHAR(50),
-lname VARCHAR(50),
-city INT NOT NULL,
-PRIMARY KEY (id),
-Foreign KEY (city) REFERENCES city(c_id)
-);
-INSERT INTO customers(id,fname, lname, city)
-VALUES (24, 'hans', 'deen',1),
-(25, 'peter','muster',2),
-(26, 'maria', 'mariadb',3);
-
-SELECT * FROM customers;
-SELECT * FROM city;
-SELECT customers.id, customers.fname, customers.lname, city.cityname FROM customers INNER JOIN city ON city.c_id=customers.city;
-#funktioniert mit inner Join, nun kann man sich vorstellen, wie die DB ausschauen soll...
-#SELECT * FROM customers, city;
-#SELECT cityname,id,fname from city, customers;
