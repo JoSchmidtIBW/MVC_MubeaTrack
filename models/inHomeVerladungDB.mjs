@@ -12,7 +12,7 @@ export async  function sucheInDBVerladung(){
         conn = await poolDB.getConnection();
         const res = await conn.query("SELECT versandListeMubea.ID_E, versandListeMubea.VnameE, versandListeMubea.NnameE, versandListeMubea.DatumE, versandListeMubea.UhrzeitE, versandListeMubea.WunschDatum, kundeMubea.KundeK, versandListeMubea.MengeTo, versandListeMubea.ArtikelAnLager, versandListeMubea.LSimLeitSystem, versandListeMubea.R_K, versandListeMubea.ArtikelNichtProd FROM versandListeMubea INNER JOIN kundeMubea ON kundeMubea.ID_K=versandListeMubea.ID_KV;");
         jsonS = JSON.stringify(res);
-        console.log("SQL-Text: "+jsonS)
+        //console.log("SQL-Text: "+jsonS)
         //    console.log("counterDB: "+counterDB);
         conn.end();
         //return jsonS;

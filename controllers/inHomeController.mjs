@@ -83,7 +83,36 @@ export let inHomeControllerDelete = async (req, res) => {
 
 export let inHomeControllerPost = async (req, res) => {
     console.log("bin im inHomeRoute.mjs - POST")
-    res.send('hallllllloo Post');
+    //res.send('hallllllloo Post');
+
+    const nachURLDoppelpunktArr = req.path.split(':');
+    let gesplittetVonURLabDoppelpunkt = nachURLDoppelpunktArr[1];
+    const gesplittetVonURLabDoppelpunktmitStern = gesplittetVonURLabDoppelpunkt.split('*');
+    let maNummerURLAngemeldet = gesplittetVonURLabDoppelpunktmitStern[0];
+    let passwortURLAngemeldet = gesplittetVonURLabDoppelpunktmitStern[1];
+
+    console.log("maNummerURLAngemeldetPOST: "+maNummerURLAngemeldet)
+    console.log("passwortURLAngemeldetPOST: "+passwortURLAngemeldet)
+
+    let mitarbeiterVerwaltungButton = req.body.mitarbeiterVerwaltungButton;
+    console.log("MitarbeiterVerwaltungButton: "+mitarbeiterVerwaltungButton)
+
+    console.log("---------------------------------------------------")
+    //console.log(req.body.log)
+    console.log(req)
+    console.log("---------------------------------------------------")
+    console.log(req.body.mitarbeiterVerwaltungButton)
+    console.log("-----------------mitarbeiterVerwaltungButton: 'MitarbeiterVerwaltung'----------------------------------")
+    //console.log(req.body.watch)
+
+    if(req.body.mini==="#Post1"){
+        res.send("Hallo Post #Post1")
+    }
+    else if(req.body.mitarbeiterVerwaltungButtonNameEjs==="MitarbeiterVerwaltung"){
+        res.redirect("/api/v1/inHome/MitarbeiterVerwaltung/:"+maNummerURLAngemeldet+"*"+passwortURLAngemeldet)
+        //res.send("Hallo Post MiitarbeiterVerwaltung")
+    }
+
 
     // $which = $app->request()->post('which')
     // if ('first_form' === $which) {
@@ -91,6 +120,14 @@ export let inHomeControllerPost = async (req, res) => {
     // } else if ('second_form' === $which){
     //     // do something else
     // }
+    // if (){
+    //
+    // }
+
+    // app.post('/', function(req, res) {
+    //     var someField1 = req.body.some_form_field;
+    //     var someField1 = req.body.form_field1;
+    // });
 };
 
 
