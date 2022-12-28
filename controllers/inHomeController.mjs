@@ -1,5 +1,7 @@
 import Console from "console";
 import userEingeloggtArray from "../utils/userEingeloggtArray.mjs";
+import {sucheInDBKunden} from "../models/kundenVerwaltung.mjs";
+import {sucheInDBVerladung} from "../models/inHomeVerladungDB.mjs";
 
 let myCounter = 0;
 function xLogOut() {
@@ -52,6 +54,7 @@ export let inHomeControllerGet = async (req, res) => {
             werIstAngemeldetH: foundImEingeloggt.MaNummer_D + " " + foundImEingeloggt.Vorname_D,
             kundeIHServer: "hoi kunde",
             MaNummerServer: foundImEingeloggt.MaNummer_D,
+            data: await sucheInDBVerladung(),
             FooterWerIstAngemeldet: foundImEingeloggt.MaNummer_D + " " + foundImEingeloggt.Vorname_D
         });
     } else if(foundImEingeloggt.RolleUser_D==="Chef" || foundImEingeloggt.RolleUser_D==="Mitarbeiter"){
@@ -66,6 +69,7 @@ export let inHomeControllerGet = async (req, res) => {
             werIstAngemeldetH: foundImEingeloggt.MaNummer_D + " " + foundImEingeloggt.Vorname_D,
             kundeIHServer: "hoi kunde",
             MaNummerServer: foundImEingeloggt.MaNummer_D,
+            data: await sucheInDBVerladung(),
             FooterWerIstAngemeldet: foundImEingeloggt.MaNummer_D + " " + foundImEingeloggt.Vorname_D
         });
     }

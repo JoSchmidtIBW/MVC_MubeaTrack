@@ -51,12 +51,49 @@
 </td>
 
 
-           <h2>Achtung !!! Kunde schreiben "1" , "2" oder "3"</h2>
+ <table>
+      <tr>
+        <th>ID_E</th>
+        <th>VnameE</th>
+        <th>NnameE</th>
+        <th>DatumE</th>
+        <th>UhrzeitE</th>
+        <th>WunschDatum</th>
+        <th>KundeK</th>
+        <th>MengeTo</th>
+        <th>ArtikelAnLager</th>
+        <th>LSimLeitSystem</th>
+        <th>R_K</th>
+        <th>ArtikelNichtProd</th>
+      </tr>
+      <br>
+      <% for(var i=0; i < data.length; i++) { %>
+        <tr>
+        <!--<td><%= i+1 %></td>-->
+        <td><%= data[i].ID_E %></td>
+        <td><%= data[i].VnameE %></td>
+        <td><%= data[i].NnameE %></td>
+        <td><%= data[i].DatumE %></td>
+        <td><%= data[i].UhrzeitE %></td>
+        <td><%= data[i].WunschDatum %></td>
+        <td><%= data[i].KundeK %></td>
+        <td><%= data[i].MengeTo %></td>
+        <td><%= data[i].ArtikelAnLager %></td>
+        <td><%= data[i].LSimLeitSystem %></td>
+        <td><%= data[i].R_K %></td>
+        <td><%= data[i].ArtikelNichtProd %>
+        </tr>
+      <% } %>
+    </table>
+
+    <br>
+    <br>
+
+           <h2>nicht implementiert</h2>
 
           <!-- <input type="button" onclick="location.href='/api/v1/inHome/passwordChange';" value="Passwort Ändern" /> -->
           <!-- nicht der Button öffnet neuen Link, sondern gibt ein boolean retour, welcher dan ein Post mit redirekt macht -->
           <form action="" method="post">
-
            </form>
 
            <form action="" method="post">

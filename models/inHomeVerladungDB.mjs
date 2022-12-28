@@ -19,7 +19,8 @@ export async  function sucheInDBVerladung(){
         console.log("SQL-Text: "+jsonS)
         //    console.log("counterDB: "+counterDB);//////
         conn.end();
-        return jsonS;
+        //return jsonS;
+        return res;
 
     } catch (err) {
         console.log("DB-Error..........")
