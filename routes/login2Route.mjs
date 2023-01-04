@@ -5,7 +5,7 @@ import {loginControllerGet, loginControllerPost} from '../controllers/login2Cont
 const router = express.Router();
 
 // localhost:/api/v1/login2/....
-router.route('/').get(loginControllerGet).post(loginControllerPost);
+//router.route('/').get(loginControllerGet).post(loginControllerPost);
 
 
 export default router;
@@ -53,7 +53,7 @@ export default router;
 // let myCounter = 0;
 // function clicker() {
 //     myCounter = myCounter +1;
-//     console.log("Button Working! ich bin loginRoute.mjs, myCounter: " + myCounter);
+//     console.log("Button Working! ich bin loginRoute1.mjs, myCounter: " + myCounter);
 // };
 // */
 // export default router;

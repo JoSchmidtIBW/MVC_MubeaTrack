@@ -2,13 +2,14 @@ import express from "express";
 
 import {inHomeControllerGet, inHomeControllerDelete, inHomeControllerPost} from '../controllers/inHomeController.mjs';
 import {authentificateUser} from "../utils/authenticateUser.mjs";
-
+import {authentificateUser1} from "../utils/authenticateUser.mjs";
 
 const router = express.Router();
 
-router.get('/:irgendwas',authentificateUser,inHomeControllerGet);
-router.delete('/:irgendwas',authentificateUser,inHomeControllerDelete);
-router.post('/:irgendwas',authentificateUser,inHomeControllerPost);
+//router.get('/:irgendwas',authentificateUser,inHomeControllerGet);
+router.get('/:irgendwas',authentificateUser1,inHomeControllerGet);
+router.delete('/:irgendwas',authentificateUser1,inHomeControllerDelete);
+router.post('/:irgendwas',authentificateUser1,inHomeControllerPost);
 
 export default router;
 

@@ -1,14 +1,14 @@
 import express from "express";
 import {kundenVerwaltungControllerGet,kundenVerwaltungControllerPost,kundenVerwaltungControllerDelete} from "../controllers/kundenVerwaltungController.mjs";
-import {authentificateUser} from "../utils/authenticateUser.mjs";
+import {authentificateUser1} from "../utils/authenticateUser.mjs";
 
 const router = express.Router();
 
 
 
-router.get('/:irgendwas',authentificateUser,kundenVerwaltungControllerGet);
-router.delete('/:irgendwas',authentificateUser,kundenVerwaltungControllerDelete);
-router.post('/:irgendwas',authentificateUser,kundenVerwaltungControllerPost);
+router.get('/:irgendwas',authentificateUser1,kundenVerwaltungControllerGet);
+router.delete('/:irgendwas',authentificateUser1,kundenVerwaltungControllerDelete);
+router.post('/:irgendwas',authentificateUser1,kundenVerwaltungControllerPost);
 
 
 

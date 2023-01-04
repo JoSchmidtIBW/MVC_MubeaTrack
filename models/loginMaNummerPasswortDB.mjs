@@ -36,8 +36,8 @@ export async function sucheInDBmaNummerPasswort(maNummerLClient,encryptedStringP
         conn = await poolDB.getConnection();
         const res = await conn.query("SELECT * FROM userVerkaufMubea WHERE MA_Nummer = (?) AND Passwort_User = (?)", [maNummerLClient,encryptedStringPasswortLClient]);
         jsonS = JSON.stringify(res);
-        console.log("SQL-Text: "+jsonS)
-        console.log("counterDB: "+counterDB);//////
+        //console.log("SQL-Text: "+jsonS)
+        //console.log("counterDB: "+counterDB);//////
         conn.end();
         return jsonS;
     } catch (err) {

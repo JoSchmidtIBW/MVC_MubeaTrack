@@ -6,10 +6,14 @@ import session from 'express-session';
 import methodOverride from 'method-override';
 import helmet from "helmet";
 
+//import loginRoute1 from './routes/loginRoute1.mjs';
 import login2Route from './routes/login2Route.mjs';
 import inHomeRoutes from "./routes/inHomeRoute.mjs";
 import kundenVerwaltungRoutes from './routes/kundenVerwaltungRoute.mjs';
 import mitarbeiterVerwaltungRoute from "./routes/mitarbeiterVerwaltungRoute.mjs";
+
+import session2 from './utils/session.mjs'
+import loginRoute1 from "./routes/loginRoute1.mjs";
 
 //import app from "./app.mjs";
 
@@ -33,7 +37,7 @@ if (resultDotenv.error) {
 }
 const buf = Buffer.from('BASIC=basic')
 const config = dotenv.parse(buf) // will return an object
-console.log(typeof config, config) // object { BASIC : 'basic' }
+//console.log(typeof config, config) // object { BASIC : 'basic' }
 process.env.STATUS === 'production' ? (PORT = process.env.DEV_PORT) : (PORT = process.env.PROD_PORT);
 
 //server.use(app)
@@ -53,13 +57,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));//cookie was mit true
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use( express.static( "./public" ) );
-app.use('/api/v1/login2', login2Route);
+
 app.use(methodOverride('_method'));
 app.use(cookieParser());
-app.use('/api/v1/inHome', inHomeRoutes);
-//app.use('/api/v1/inHome/:0001*rTtGwkAwxI6ajLjBmMtZ3w==/kundenVerwaltung', kundenVerwaltungRoutes);
-app.use('/api/v1/inHome/kundenVerwaltung', kundenVerwaltungRoutes);
-app.use('/api/v1/inHome/mitarbeiterVerwaltung', mitarbeiterVerwaltungRoute);
+
+
+// app.use(
+//     helmet({
+//         contentSecurityPolicy: false,
+//         crossOriginResourcePolicy: false,
+//         crossOriginEmbedderPolicy: false,
+//     }),
+// );
 
 
 // app.use((req, res, next) => {
@@ -123,7 +132,7 @@ app.disable('x-powered-by') //sicherheit, damit nicht weiss im Browser, das expr
 
 
 app.get('/', (req, res) => {
-    res.send("<link rel=\"icon\" type=\"image/png\" href=\"/images/favicon/favicon.png\"><h1>Hello Wolrd</h1><input type=\"button\" onclick=\"location.href='/api/v1/login2';\" value=\"Go to login\" />")
+    res.send("<link rel=\"icon\" type=\"image/png\" href=\"/images/favicon/favicon.png\"><h1>Hello Wolrd</h1><input type=\"button\" onclick=\"location.href='/api/v1/login1';\" value=\"Go to login\" />")
 });
 
 //------------------------Versuch Cookie-----------------------------------------
@@ -135,12 +144,14 @@ var date = new Date();
 date.setTime(date.getTime() + (2 * 1000)); //add 30s to current date-time 1s = 1000ms
 
 //session middleware
-app.use(session({
-    secret: "Shh, its a secret!",//"thisismysecrctekeyfhrgfgrfrty84fwir767",
-    saveUninitialized:true,
-    cookie: { maxAge: date },
-    resave: false
-}));
+// app.use(session({
+//     secret: "Shh, its a secret!",//"thisismysecrctekeyfhrgfgrfrty84fwir767",
+//     saveUninitialized:true,
+//     cookie: { maxAge: date },
+//     resave: false
+// }));
+
+//app.use(session2());
 
 // app.use(session({
 //     secret: 'keyboard cat',
@@ -158,9 +169,11 @@ app.use(session({
 app.get('/xx',(req,res) => {
     let x = 1;
     let session=req.session;
-    // session = x;
-    console.log(req.session);
-    console.log(session)
+    // let session = x;
+    console.log("xxxreq.session: "+req.session);//[object Object]
+    console.log("xxxxJSON.stringifyreq.session: "+JSON.stringify(req.session))
+    console.log("xxxsession: "+session)//[object Object]
+    console.log("xxxJSON.stringifysession: "+JSON.stringify(session))
     if(req.session.cookie.maxAge){
         req.session.cookie.maxAge = false;
         res.send('Hello XXXXXXXX!');
@@ -185,8 +198,10 @@ app.get('/logout',(req,res) => {
 
 
 
+
+
 app.get('/c', function(req, res){
-    console.log("bin in cccccccc")
+    console.log("bin in /c und: " +JSON.stringify(req.session.page_views))
     if(req.session.page_views){
         req.session.page_views++;
         res.send("You visited this page " + req.session.page_views + " times");
@@ -197,20 +212,30 @@ app.get('/c', function(req, res){
 });
 //-------------------------------------------------------------------------------
 
+//achtung, muss unterhalb von session sein!!!
+app.use('/api/v1/login1', loginRoute1);
+app.use('/api/v1/login2', login2Route);
+app.use('/api/v1/inHome', inHomeRoutes);
+//app.use('/api/v1/inHome/:0001*rTtGwkAwxI6ajLjBmMtZ3w==/kundenVerwaltung', kundenVerwaltungRoutes);
+app.use('/api/v1/inHome/kundenVerwaltung', kundenVerwaltungRoutes);
+app.use('/api/v1/inHome/mitarbeiterVerwaltung', mitarbeiterVerwaltungRoute);
+
+
+
 
 // für UNIT-TEST- Versuch
 export default function sum(a, b) {
     return a + b;
 }
-console.log("Für Unit Test... sum: "+sum(4,3));
+//console.log("Für Unit Test... sum: "+sum(4,3));
 
 a_Plus_b(1,2);
 function a_Plus_b(a,b){
     let result = a+b;
-    console.log("UnitTest... a+b= "+ result);
+   // console.log("UnitTest... a+b= "+ result);
 }
 
-console.log("ich bin server.mjs");
+//console.log("ich bin server.mjs");
 
 app.listen(PORT, () => {
     console.log(`Server running on port: http://localhost:${PORT}`);
@@ -312,7 +337,7 @@ app.listen(PORT, () => {
 // import jwt from "jsonwebtoken";
 // import methodOverride from 'method-override';
 //
-// //import loginRoutes from './routes/loginRoute.mjs';
+// //import loginRoutes from './routes/loginRoute1.mjs';
 // //import adminUserNewDeleteChangeRoute from "./routes/adminUserNewDeleteChangeRoute.mjs";
 // import login2Route from './routes/login2Route.mjs';
 // import inHomeRoutes from "./routes/inHomeRoute.mjs";

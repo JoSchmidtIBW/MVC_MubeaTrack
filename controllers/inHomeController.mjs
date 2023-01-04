@@ -6,38 +6,44 @@ export let inHomeControllerGet = async (req, res) => {
     console.log("bin im inHomeRoute.mjs - GET")
 
     // splitte von URL /:irgendwas
-    const nachURLDoppelpunktArr = req.path.split(':');
-    let gesplittetVonURLabDoppelpunkt = nachURLDoppelpunktArr[1];
-    const gesplittetVonURLabDoppelpunktmitStern = gesplittetVonURLabDoppelpunkt.split('*');
-    let maNummerURLAngemeldet = gesplittetVonURLabDoppelpunktmitStern[0];
-    let passwortURLAngemeldet = gesplittetVonURLabDoppelpunktmitStern[1];
+    const myArrFullPath = req.path.split(':');
+    console.log("myArrPath: "+myArrFullPath)
+    let gesplittetVonURLdenUserTeil = myArrFullPath[1];
+    console.log("gesplittetVonURLdenUserTeil: "+gesplittetVonURLdenUserTeil)
+    const myArr1PathMitStern = gesplittetVonURLdenUserTeil.split('*');
+    let maNummerURLinHome = myArr1PathMitStern[0];
+    let idURLinHome = myArr1PathMitStern[1];
+    console.log("inHome maNummerURLinHome: " + maNummerURLinHome);
+    console.log("inHome idURLinHome: " + idURLinHome);
 
-    let foundImEingeloggt = userEingeloggtArray.find(x => (x.MaNummer_D === maNummerURLAngemeldet && x.Passwort_D===passwortURLAngemeldet))
+    let foundImEingeloggtinHome = userEingeloggtArray.find(x => (x.MaNummer_D === maNummerURLinHome && x.userID_D === parseInt(idURLinHome)));// x.Passwort_D==='rTtGwkAwxI6ajLjBmMtZ3w=='))//x.userID_D === idURLAuth))//; x.Passwort_D===passwortURLAuth))
+    console.log("inHome foundImEingeloggtinHome: "+JSON.stringify(foundImEingeloggtinHome));
+
+    //let foundImEingeloggt = userEingeloggtArray.find(x => (x.MaNummer_D === maNummerURLAngemeldet && x.Passwort_D===passwortURLAngemeldet))
     //let foundImEingeloggt = userEingeloggtArray.find(userE =>({from, to}) => from.includes(userE.MaNummer_D = maNummerURL) && to.includes(userE.Passwort_D = passwortURL));
 
-    if(foundImEingeloggt===undefined||foundImEingeloggt.MaNummer_D.length===0 || foundImEingeloggt.MaNummer_D === undefined
-        || foundImEingeloggt.Passwort_D.length===0 || foundImEingeloggt.Passwort_D === undefined){
+    if(foundImEingeloggtinHome===undefined){
         console.log("etwas ist schief gelaufen, wenn es bis nach hier kommt")
         res.send("OHA.....");
-    } else if(foundImEingeloggt.RolleUser_D==="Admin"){
+    } else if(foundImEingeloggtinHome.RolleUser_D==="Admin"){
         // achtung, wenn server neustartet ist user nicht im array!!!!!!
         //res.send("Bisch Admin");
         res.render('pages/layoutInHomeAdmin', {
-            werIstAngemeldetH: foundImEingeloggt.MaNummer_D + " " + foundImEingeloggt.Vorname_D,
+            werIstAngemeldetH: foundImEingeloggtinHome.MaNummer_D + " " + foundImEingeloggtinHome.Vorname_D,
             kundeIHServer: "hoi kunde",
-            MaNummerServer: foundImEingeloggt.MaNummer_D,
+            MaNummerServer: foundImEingeloggtinHome.MaNummer_D,
             data: await sucheInDBVerladung(),
-            FooterWerIstAngemeldet: foundImEingeloggt.MaNummer_D + " " + foundImEingeloggt.Vorname_D
+            FooterWerIstAngemeldet: foundImEingeloggtinHome.MaNummer_D + " " + foundImEingeloggtinHome.Vorname_D
         });
-    } else if(foundImEingeloggt.RolleUser_D==="Chef" || foundImEingeloggt.RolleUser_D==="Mitarbeiter"){
+    } else if(foundImEingeloggtinHome.RolleUser_D==="Chef" || foundImEingeloggtinHome.RolleUser_D==="Mitarbeiter"){
         // achtung, wenn server neustartet ist user nicht im array!!!!!!
         //res.send("Bisch Chef oder Mitarbeiter");
         res.render('pages/layoutInHomeUser', {
-            werIstAngemeldetH: foundImEingeloggt.MaNummer_D + " " + foundImEingeloggt.Vorname_D,
+            werIstAngemeldetH: foundImEingeloggtinHome.MaNummer_D + " " + foundImEingeloggtinHome.Vorname_D,
             kundeIHServer: "hoi kunde",
-            MaNummerServer: foundImEingeloggt.MaNummer_D,
+            MaNummerServer: foundImEingeloggtinHome.MaNummer_D,
             data: await sucheInDBVerladung(),
-            FooterWerIstAngemeldet: foundImEingeloggt.MaNummer_D + " " + foundImEingeloggt.Vorname_D
+            FooterWerIstAngemeldet: foundImEingeloggtinHome.MaNummer_D + " " + foundImEingeloggtinHome.Vorname_D
         });
     }
 };
@@ -47,27 +53,21 @@ export let inHomeControllerDelete = async (req, res) => {
     console.log("inHomeRoute.mjs req.session: "+JSON.stringify(req.session));
 
     //splitte von url.... /:irgendwas
-    const myArra = req.path.split(':');
-    let gesplittetVonURLdenUserTeilDelete = myArra[1];
-    console.log("inHomeRoute.mjs gesplittetVonURLdenUserTeilDelete: " + gesplittetVonURLdenUserTeilDelete)
-    console.log("inHomeRoute.mjs gesplittetVonURLdenUserTeiiiilDelete: " + gesplittetVonURLdenUserTeilDelete)
-    const myArr11 = gesplittetVonURLdenUserTeilDelete.split('*');
-    console.log("inHomeRoute.mjs gesplittet myArr1[0]: " + myArr11[0] + "inHomeRoute.mjs gesplittet myArr1[1]: " + myArr11[1]);
+    const myArrFullPath = req.path.split(':');
+    console.log("myArrPath: "+myArrFullPath)
+    let gesplittetVonURLdenUserTeil = myArrFullPath[1];
+    console.log("gesplittetVonURLdenUserTeil: "+gesplittetVonURLdenUserTeil)
+    const myArr1PathMitStern = gesplittetVonURLdenUserTeil.split('*');
+    let maNummerURLinHome = myArr1PathMitStern[0];
+    let idURLinHome = myArr1PathMitStern[1];
+    console.log("inHome DELETE maNummerURLinHome: " + maNummerURLinHome);
+    console.log("inHome DELETE idURLinHome: " + idURLinHome);
 
-    let maNummerURLdelete = myArr11[0];
-    let passwortURLdelete = myArr11[1];
-
-    console.log("maNummerURLdelete: " + maNummerURLdelete);
-    console.log("passwortURLdelete: "+passwortURLdelete)
-    console.log("userEingeloggtArray.length "+userEingeloggtArray.length)   // 2
-    console.log("userEingeloggtArray.toString() "+userEingeloggtArray.toString()) // [object Object],[object Object]
-    console.log("JSON.stringify(userEingeloggtArray) "+JSON.stringify(userEingeloggtArray))
-
-    let foundImEingeloggt = userEingeloggtArray.find(x => (x.MaNummer_D === maNummerURLdelete && x.Passwort_D===passwortURLdelete))
-    console.log("foundImEingeloggt: "+JSON.stringify(foundImEingeloggt));
+    let foundImEingeloggtinHome = userEingeloggtArray.find(x => (x.MaNummer_D === maNummerURLinHome && x.userID_D === parseInt(idURLinHome)));// x.Passwort_D==='rTtGwkAwxI6ajLjBmMtZ3w=='))//x.userID_D === idURLAuth))//; x.Passwort_D===passwortURLAuth))
+    console.log("inHome DELETE foundImEingeloggtinHome: "+JSON.stringify(foundImEingeloggtinHome));
 
     for( let i = 0; i < userEingeloggtArray.length; i++){
-        if ( userEingeloggtArray[i] === foundImEingeloggt) {
+        if ( userEingeloggtArray[i] === foundImEingeloggtinHome) {
             userEingeloggtArray.splice(i, 1);
         }
     }
@@ -75,7 +75,7 @@ export let inHomeControllerDelete = async (req, res) => {
     console.log(`myArray.length nach del: `+userEingeloggtArray.length);
 
 
-    res.redirect('/api/v1/login2');
+    res.redirect('/api/v1/login1');
 };
 
 
@@ -85,14 +85,18 @@ export let inHomeControllerPost = async (req, res) => {
     console.log("bin im inHomeRoute.mjs - POST")
     //res.send('hallllllloo Post');
 
-    const nachURLDoppelpunktArr = req.path.split(':');
-    let gesplittetVonURLabDoppelpunkt = nachURLDoppelpunktArr[1];
-    const gesplittetVonURLabDoppelpunktmitStern = gesplittetVonURLabDoppelpunkt.split('*');
-    let maNummerURLAngemeldet = gesplittetVonURLabDoppelpunktmitStern[0];
-    let passwortURLAngemeldet = gesplittetVonURLabDoppelpunktmitStern[1];
+    const myArrFullPath = req.path.split(':');
+    console.log("myArrPath: "+myArrFullPath)
+    let gesplittetVonURLdenUserTeil = myArrFullPath[1];
+    console.log("gesplittetVonURLdenUserTeil: "+gesplittetVonURLdenUserTeil)
+    const myArr1PathMitStern = gesplittetVonURLdenUserTeil.split('*');
+    let maNummerURLinHome = myArr1PathMitStern[0];
+    let idURLinHome = myArr1PathMitStern[1];
+    console.log("inHome maNummerURLinHome: " + maNummerURLinHome);
+    console.log("inHome idURLinHome: " + idURLinHome);
 
-    console.log("maNummerURLAngemeldetPOST: "+maNummerURLAngemeldet)
-    console.log("passwortURLAngemeldetPOST: "+passwortURLAngemeldet)
+    let foundImEingeloggtinHome = userEingeloggtArray.find(x => (x.MaNummer_D === maNummerURLinHome && x.userID_D === parseInt(idURLinHome)));// x.Passwort_D==='rTtGwkAwxI6ajLjBmMtZ3w=='))//x.userID_D === idURLAuth))//; x.Passwort_D===passwortURLAuth))
+    console.log("inHome foundImEingeloggtinHome: "+JSON.stringify(foundImEingeloggtinHome));
 
     let mitarbeiterVerwaltungButton = req.body.mitarbeiterVerwaltungButton;
     console.log("MitarbeiterVerwaltungButton: "+mitarbeiterVerwaltungButton)
@@ -109,11 +113,11 @@ export let inHomeControllerPost = async (req, res) => {
         res.send("Hallo Post #Post1")
     }///api/v1/inHome/:
     else if(req.body.mitarbeiterVerwaltungButtonNameEjs==="MitarbeiterVerwaltung"){
-        res.redirect("/api/v1/inHome/mitarbeiterVerwaltung/:"+maNummerURLAngemeldet+"*"+passwortURLAngemeldet)
+        res.redirect("/api/v1/inHome/mitarbeiterVerwaltung/:"+maNummerURLinHome+"*"+idURLinHome)
         //res.send("Hallo Post MiitarbeiterVerwaltung")
     }
     else if(req.body.kundenVerwaltungButtonNameEjs==="KundenVerwaltung"){
-        res.redirect("/api/v1/inHome/kundenVerwaltung/:"+maNummerURLAngemeldet+"*"+passwortURLAngemeldet)
+        res.redirect("/api/v1/inHome/kundenVerwaltung/:"+maNummerURLinHome+"*"+idURLinHome)
     }
 
 };

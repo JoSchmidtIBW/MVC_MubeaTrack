@@ -4,10 +4,11 @@ export default class User {
 
     static id = 0;
 
-    constructor(erfasstDatumU,erfasstZeitU,maNummerU,vornameU,nachnameU,passwortU,rolleU,avatarFarbeU, id) {
+    constructor(id_UserU,erfasstDatumU,erfasstZeitU,maNummerU,vornameU,nachnameU,passwortU,rolleU,avatarFarbeU, id) {
         this.id = ++User.id;
-        console.log("bin UserInLoggt Class User, und this.id"+this.id);
+        console.log("bin UserInLoggt Class User, und this.id: "+this.id);
 
+        this.id_UserU = id_UserU;
         this.erfasstDatumU = erfasstDatumU;
         this.erfasstZeitU = erfasstZeitU;
         this.maNummerU = maNummerU;
@@ -29,6 +30,12 @@ export default class User {
         return User._counter;
     }
     //-------------------------
+    getId_UserU() {
+        return this.id_UserU;
+    }
+    setId_UserU(id_UserU) {
+        this.id_UserU = id_UserU;
+    }
     getErfasstDatumU() {
         return this.erfasstDatumU;
     }
