@@ -44,15 +44,15 @@ export function authentificateUser1(req, res, next){
         res.send("<h1>Sie haben sich ausgeloggt, 401 Unautorized :) :)</h1><input type=\"button\" onclick=\"location.href='/api/v1/login1';\" value=\"Go to login\" />");
     }
     else {
-         //if(req.session.cookie.maxAge){
-        //     req.session.cookie.maxAge = false;
+         if(req.session.cookie.maxAge){
+             req.session.cookie.maxAge = false;
         //     //res.send("hello")
              return next();
-        // }
-        // else{
-        //     req.session.destroy();
-        //     res.send("<h1>Sie waren zu lange eingeloggt, Sie müssen sich nochmals einloggen, 401 Unautorized :) :)</h1><input type=\"button\" onclick=\"location.href='/api/v1/login1';\" value=\"Go to login\" />");
-        // }
+         }
+         else{
+             req.session.destroy();
+            res.send("<h1>Sie waren zu lange eingeloggt, Sie müssen sich nochmals einloggen, 401 Unautorized :) :)</h1><input type=\"button\" onclick=\"location.href='/api/v1/login1';\" value=\"Go to login\" />");
+         }
         //res.send("1111")
     }
 
