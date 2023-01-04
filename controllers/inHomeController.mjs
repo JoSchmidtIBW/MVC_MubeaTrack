@@ -21,9 +21,9 @@ export let inHomeControllerGet = async (req, res) => {
 
     //let foundImEingeloggt = userEingeloggtArray.find(x => (x.MaNummer_D === maNummerURLAngemeldet && x.Passwort_D===passwortURLAngemeldet))
     //let foundImEingeloggt = userEingeloggtArray.find(userE =>({from, to}) => from.includes(userE.MaNummer_D = maNummerURL) && to.includes(userE.Passwort_D = passwortURL));
-    let cookieVorhanden = req.cookies.cokMaNummer;
-    console.log("cookieVorhanden: " + cookieVorhanden);
-    if(cookieVorhanden){
+    // let cookieVorhanden = req.cookies.cokMaNummer;
+    // console.log("cookieVorhanden: " + cookieVorhanden);
+    // if(cookieVorhanden){
         if(foundImEingeloggtinHome===undefined){
             console.log("etwas ist schief gelaufen, wenn es bis nach hier kommt")
             res.send("OHA.....");
@@ -48,9 +48,9 @@ export let inHomeControllerGet = async (req, res) => {
                 FooterWerIstAngemeldet: foundImEingeloggtinHome.MaNummer_D + " " + foundImEingeloggtinHome.Vorname_D
             });
         }
-    }else{
-        res.send("Coockiealarm")
-    }
+    // }else{
+    //     res.send("Coockiealarm")
+    // }
 
     // if(foundImEingeloggtinHome===undefined){
     //     console.log("etwas ist schief gelaufen, wenn es bis nach hier kommt")
