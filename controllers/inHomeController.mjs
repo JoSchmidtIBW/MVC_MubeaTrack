@@ -4,6 +4,9 @@ import {sucheInDBVerladung} from "../models/inHomeVerladungDB.mjs";
 
 export let inHomeControllerGet = async (req, res) => {
     console.log("bin im inHomeRoute.mjs - GET")
+    // console.log("inHome param maNummer:"+req.params['maNummerPATH']);
+    // console.log("inHome param maNummer:"+req.params['idPATH']);
+
 
     // splitte von URL /:irgendwas
     const myArrFullPath = req.path.split(':');
@@ -104,6 +107,7 @@ export let inHomeControllerDelete = async (req, res) => {
     console.log("JSON.stringify(userEingeloggtArray) nach del "+JSON.stringify(userEingeloggtArray))
     console.log(`myArray.length nach del: `+userEingeloggtArray.length);
 
+    res.clearCookie('cokMaNummer');
 
     res.redirect('/api/v1/login1');
 };

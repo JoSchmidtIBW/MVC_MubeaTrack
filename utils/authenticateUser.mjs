@@ -20,6 +20,11 @@ export function authentificateUser1(req, res, next){
     let cookieVorhanden = req.cookies.cokMaNummer;
     console.log("Authentic1 cookieVorhanden: " + cookieVorhanden);
 
+    console.log("auth params: "+JSON.stringify(req.params))
+    console.log("auth param: "+req.params)
+    console.log("auth param maNummer:"+req.params['maNummerPATH']);
+    console.log("auth param maNummer:"+req.params['idPATH']);
+
    // console.log("aut1 req.session---------: "+JSON.stringify(req.session))
 
   //  const token = req.cookies.access_token;

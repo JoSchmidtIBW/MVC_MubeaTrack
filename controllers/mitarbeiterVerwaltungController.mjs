@@ -88,5 +88,6 @@ export let mitarbeiterVerwaltungControllerDelete = (req, res) => {
             userEingeloggtArray.splice(i, 1);
         }
     }
+    res.clearCookie('cokMaNummer');
     res.redirect('/api/v1/login1');
 };

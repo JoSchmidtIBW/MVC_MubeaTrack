@@ -131,7 +131,7 @@ export let login1ControllerPost = async(req, res)=>{
 
 
         res.cookie('cokMaNummer', (await user1).getMaNummerU(), {
-            maxAge: 1000 * 6, // 1 min
+            maxAge: 1000 * 60, // 1 min
             httpOnly: true // http only, prevents JavaScript cookie access
         });
 
