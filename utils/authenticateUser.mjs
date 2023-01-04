@@ -16,6 +16,9 @@ export function authentificateUser1(req, res, next){
     console.log("Authentic1 maNummerURLAuth: " + maNummerURLAuth);
     console.log("Authentic1 idURLAuth: " + idURLAuth);
 
+    //let cookieVal = req.cookies.username;
+    let cookieVorhanden = req.cookies.cokMaNummer;
+    console.log("Authentic1 cookieVorhanden: " + cookieVorhanden);
 
    // console.log("aut1 req.session---------: "+JSON.stringify(req.session))
 
@@ -40,19 +43,37 @@ export function authentificateUser1(req, res, next){
    // console.log("expires: "+ req.session.cookie.expires)
    // let session = req.session;
 
+
     if(foundImEingeloggt===undefined){
         res.send("<h1>Sie haben sich ausgeloggt, 401 Unautorized :) :)</h1><input type=\"button\" onclick=\"location.href='/api/v1/login1';\" value=\"Go to login\" />");
     }
     else {
-         if(req.session.cookie.maxAge){
-             req.session.cookie.maxAge = false;
-        //     //res.send("hello")
-             return next();
-         }
-         else{
-             req.session.destroy();
+        if(cookieVorhanden){
+            return next();
+        }else{
             res.send("<h1>Sie waren zu lange eingeloggt, Sie müssen sich nochmals einloggen, 401 Unautorized :) :)</h1><input type=\"button\" onclick=\"location.href='/api/v1/login1';\" value=\"Go to login\" />");
-         }
+        }
+         //if(req.cookies.cokMaNummer.maxAge){
+             //return next();
+        // console.log("req.cookies.cokMaNummer "+req.cookies.cokMaNummer)
+        // console.log("JSON.stringify(req.cookies) "+JSON.stringify(req.cookies));
+        // console.log("req.cookies.cokMaNummer.age "+req.cookies.cokMaNummer.age);
+        //     res.send(req.cookies.cokMaNummer+" "+req.cookies.cokMaNummer.age)
+         //}
+         //else{
+             // req.session.destroy();
+             //res.send("<h1>Sie waren zu lange eingeloggt, Sie müssen sich nochmals einloggen, 401 Unautorized :) :)</h1><input type=\"button\" onclick=\"location.href='/api/v1/login1';\" value=\"Go to login\" />");
+        // }
+
+        //  if(req.session.cookie.maxAge){
+        //      //req.session.cookie.maxAge = false;
+        // //     //res.send("hello")
+        //      return next();
+        //  }
+        //  else{
+        //     // req.session.destroy();
+        //     res.send("<h1>Sie waren zu lange eingeloggt, Sie müssen sich nochmals einloggen, 401 Unautorized :) :)</h1><input type=\"button\" onclick=\"location.href='/api/v1/login1';\" value=\"Go to login\" />");
+        //  }
         //res.send("1111")
     }
 

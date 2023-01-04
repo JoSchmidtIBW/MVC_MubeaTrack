@@ -140,8 +140,8 @@ app.get('/', (req, res) => {
 // creating 24 hours from milliseconds
 const oneDay = 1000 * 60 * 60 * 24;
 
-var date = new Date();
-date.setTime(date.getTime() + (2 * 1000)); //add 30s to current date-time 1s = 1000ms
+let date = new Date();
+date.setTime(date.getTime() + (4 * 1000)); //add 30s to current date-time 1s = 1000ms
 
 //session middleware
 app.use(session({
@@ -160,7 +160,87 @@ app.use(session({
 //     cookie: { secure: true }
 // }));
 
+app.get('/qq/:irgendwas', (req,res)=>{
+    console.log("req.path: "+req.path)
+    console.log("req.params: "+JSON.stringify(req.params))
+    const myArrFullPath = req.path.split(':');
+    console.log("myArrPath: "+myArrFullPath)
+    let gesplittetVonURLdenUserTeil = myArrFullPath[0];
+    let myArr2 = req.path.split('q/');
+    console.log("myArr2: "+myArr2[1])
+    res.cookie(myArr2[1],myArr2[1])//req.path)
+        .send("Helllo Cockieee"+"<p>Coockie Set: <a href='/qq'>View Here</a>")
+})
+app.get('/qq', (req,res)=>{
+    console.log(req.cookies.name)
+    res.send(req.cookies.name)
+})
 
+app.get('/tt', (req, res) => {
+
+    let cookieVal = req.cookies.username;
+    let show;
+
+    if (cookieVal) {
+        show = `Hi ${cookieVal} <br><a href="/delete-cookie">Delete Cookie</a>`;
+    } else {
+        show = `<a href="/set-cookie">Set Cookie</a><br>
+        <a href="/delete-cookie">Delete Cookie</a><br>`;
+    }
+
+    res.send(show);
+});
+
+// SET COOKIE
+app.get('/set-cookie', (req, res) => {
+    res.cookie('username', 'Webtutorials.ME', {
+        maxAge: 1000 * 60, // 1 min
+        httpOnly: true // http only, prevents JavaScript cookie access
+    });
+    // REDIRECT OT HOME
+    res.redirect('/tt');
+});
+
+// DELETE COOKIE
+app.get('/delete-cookie', (req, res) => {
+    //DELETING username COOKIE
+    res.clearCookie('username');
+    // REDIRECT OT HOME
+    res.redirect('/tt');
+
+});
+// // SET COOKIE
+// app.get('/set-cookie', (req, res) => {
+//     res.cookie('username', 'Webtutorials.ME', {
+//         maxAge: 1000 * 60, // 1 min
+//         httpOnly: true // http only, prevents JavaScript cookie access
+//     });
+//     // REDIRECT OT HOME
+//     res.redirect('/tt');
+// });
+// app.get('/tt', (req, res) => {
+//
+//     let cookieVal = req.cookies.username;
+//     console.log("req.cookies.username: " + cookieVal);
+//     let show;
+//
+//     if (cookieVal) {
+//         show = `Hi ${cookieVal} <br><a href="/delete-cookie">Delete Cookie</a>`;
+//     } else {
+//         show = `<a href="/set-cookie">Set Cookie</a><br>
+//         <a href="/delete-cookie">Delete Cookie</a><br>`;
+//     }
+//
+//     res.send(show);
+// });
+
+// app.get('/qq', (req,res)=>{
+//     res.cookie("meinCoockie",req.path)
+//         .send("Helllo Cockieee"+"<p>Coockie Set: <a href='/ww'>View Here</a>")
+// })
+// app.get('/ww', (req,res)=>{
+//     res.send(req.cookies.name)
+// })
 
 // a variable to save a session
 //var session;
@@ -170,12 +250,12 @@ app.get('/xx',(req,res) => {
     let x = 1;
     let session=req.session;
     // let session = x;
-    console.log("xxxreq.session: "+req.session);//[object Object]
-    console.log("xxxxJSON.stringifyreq.session: "+JSON.stringify(req.session))
-    console.log("xxxsession: "+session)//[object Object]
-    console.log("xxxJSON.stringifysession: "+JSON.stringify(session))
+    //console.log("xxxreq.session: "+req.session);//[object Object]
+    console.log("xxx JSON.stringify(req.session): "+JSON.stringify(req.session))
+    //console.log("xxxsession: "+session)//[object Object]
+    console.log("xxx JSON.stringify(session): "+JSON.stringify(session))
     if(req.session.cookie.maxAge){
-        req.session.cookie.maxAge = false;
+        //req.session.cookie.maxAge = false;
         res.send('Hello XXXXXXXX!');
     }
     else{

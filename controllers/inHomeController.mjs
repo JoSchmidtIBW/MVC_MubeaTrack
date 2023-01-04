@@ -21,31 +21,61 @@ export let inHomeControllerGet = async (req, res) => {
 
     //let foundImEingeloggt = userEingeloggtArray.find(x => (x.MaNummer_D === maNummerURLAngemeldet && x.Passwort_D===passwortURLAngemeldet))
     //let foundImEingeloggt = userEingeloggtArray.find(userE =>({from, to}) => from.includes(userE.MaNummer_D = maNummerURL) && to.includes(userE.Passwort_D = passwortURL));
-
-    if(foundImEingeloggtinHome===undefined){
-        console.log("etwas ist schief gelaufen, wenn es bis nach hier kommt")
-        res.send("OHA.....");
-    } else if(foundImEingeloggtinHome.RolleUser_D==="Admin"){
-        // achtung, wenn server neustartet ist user nicht im array!!!!!!
-        //res.send("Bisch Admin");
-        res.render('pages/layoutInHomeAdmin', {
-            werIstAngemeldetH: foundImEingeloggtinHome.MaNummer_D + " " + foundImEingeloggtinHome.Vorname_D,
-            kundeIHServer: "hoi kunde",
-            MaNummerServer: foundImEingeloggtinHome.MaNummer_D,
-            data: await sucheInDBVerladung(),
-            FooterWerIstAngemeldet: foundImEingeloggtinHome.MaNummer_D + " " + foundImEingeloggtinHome.Vorname_D
-        });
-    } else if(foundImEingeloggtinHome.RolleUser_D==="Chef" || foundImEingeloggtinHome.RolleUser_D==="Mitarbeiter"){
-        // achtung, wenn server neustartet ist user nicht im array!!!!!!
-        //res.send("Bisch Chef oder Mitarbeiter");
-        res.render('pages/layoutInHomeUser', {
-            werIstAngemeldetH: foundImEingeloggtinHome.MaNummer_D + " " + foundImEingeloggtinHome.Vorname_D,
-            kundeIHServer: "hoi kunde",
-            MaNummerServer: foundImEingeloggtinHome.MaNummer_D,
-            data: await sucheInDBVerladung(),
-            FooterWerIstAngemeldet: foundImEingeloggtinHome.MaNummer_D + " " + foundImEingeloggtinHome.Vorname_D
-        });
+    let cookieVorhanden = req.cookies.cokMaNummer;
+    console.log("cookieVorhanden: " + cookieVorhanden);
+    if(cookieVorhanden){
+        if(foundImEingeloggtinHome===undefined){
+            console.log("etwas ist schief gelaufen, wenn es bis nach hier kommt")
+            res.send("OHA.....");
+        } else if(foundImEingeloggtinHome.RolleUser_D==="Admin"){
+            // achtung, wenn server neustartet ist user nicht im array!!!!!!
+            //res.send("Bisch Admin");
+            res.render('pages/layoutInHomeAdmin', {
+                werIstAngemeldetH: foundImEingeloggtinHome.MaNummer_D + " " + foundImEingeloggtinHome.Vorname_D,
+                kundeIHServer: "hoi kunde",
+                MaNummerServer: foundImEingeloggtinHome.MaNummer_D,
+                data: await sucheInDBVerladung(),
+                FooterWerIstAngemeldet: foundImEingeloggtinHome.MaNummer_D + " " + foundImEingeloggtinHome.Vorname_D
+            });
+        } else if(foundImEingeloggtinHome.RolleUser_D==="Chef" || foundImEingeloggtinHome.RolleUser_D==="Mitarbeiter"){
+            // achtung, wenn server neustartet ist user nicht im array!!!!!!
+            //res.send("Bisch Chef oder Mitarbeiter");
+            res.render('pages/layoutInHomeUser', {
+                werIstAngemeldetH: foundImEingeloggtinHome.MaNummer_D + " " + foundImEingeloggtinHome.Vorname_D,
+                kundeIHServer: "hoi kunde",
+                MaNummerServer: foundImEingeloggtinHome.MaNummer_D,
+                data: await sucheInDBVerladung(),
+                FooterWerIstAngemeldet: foundImEingeloggtinHome.MaNummer_D + " " + foundImEingeloggtinHome.Vorname_D
+            });
+        }
+    }else{
+        res.send("Coockiealarm")
     }
+
+    // if(foundImEingeloggtinHome===undefined){
+    //     console.log("etwas ist schief gelaufen, wenn es bis nach hier kommt")
+    //     res.send("OHA.....");
+    // } else if(foundImEingeloggtinHome.RolleUser_D==="Admin"){
+    //     // achtung, wenn server neustartet ist user nicht im array!!!!!!
+    //     //res.send("Bisch Admin");
+    //     res.render('pages/layoutInHomeAdmin', {
+    //         werIstAngemeldetH: foundImEingeloggtinHome.MaNummer_D + " " + foundImEingeloggtinHome.Vorname_D,
+    //         kundeIHServer: "hoi kunde",
+    //         MaNummerServer: foundImEingeloggtinHome.MaNummer_D,
+    //         data: await sucheInDBVerladung(),
+    //         FooterWerIstAngemeldet: foundImEingeloggtinHome.MaNummer_D + " " + foundImEingeloggtinHome.Vorname_D
+    //     });
+    // } else if(foundImEingeloggtinHome.RolleUser_D==="Chef" || foundImEingeloggtinHome.RolleUser_D==="Mitarbeiter"){
+    //     // achtung, wenn server neustartet ist user nicht im array!!!!!!
+    //     //res.send("Bisch Chef oder Mitarbeiter");
+    //     res.render('pages/layoutInHomeUser', {
+    //         werIstAngemeldetH: foundImEingeloggtinHome.MaNummer_D + " " + foundImEingeloggtinHome.Vorname_D,
+    //         kundeIHServer: "hoi kunde",
+    //         MaNummerServer: foundImEingeloggtinHome.MaNummer_D,
+    //         data: await sucheInDBVerladung(),
+    //         FooterWerIstAngemeldet: foundImEingeloggtinHome.MaNummer_D + " " + foundImEingeloggtinHome.Vorname_D
+    //     });
+    // }
 };
 
 export let inHomeControllerDelete = async (req, res) => {

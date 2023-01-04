@@ -126,9 +126,14 @@ export let login1ControllerPost = async(req, res)=>{
 
 
         userEingeloggtArray.push(userData1);
-        console.log("login userEingeloggtArray: "+userEingeloggtArray)
+        //console.log("login userEingeloggtArray: "+userEingeloggtArray)
 
 
+
+        res.cookie('cokMaNummer', (await user1).getMaNummerU(), {
+            maxAge: 1000 * 6, // 1 min
+            httpOnly: true // http only, prevents JavaScript cookie access
+        });
 
 
         //console.log("req.session: "+req.session);
