@@ -401,6 +401,8 @@ h1 {
     /*margin-top: 100px;*/
     /*margin-bottom: 10px;*/
     padding: 10px;
+    position: fixed;
+    bottom: 2px;
 }
 
 .pCopyRFooterLogin {

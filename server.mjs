@@ -4,19 +4,28 @@ import bodyParser from "body-parser";
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import methodOverride from 'method-override';
+import helmet from "helmet";
 
 import login2Route from './routes/login2Route.mjs';
 import inHomeRoutes from "./routes/inHomeRoute.mjs";
 import kundenVerwaltungRoutes from './routes/kundenVerwaltungRoute.mjs';
 import mitarbeiterVerwaltungRoute from "./routes/mitarbeiterVerwaltungRoute.mjs";
 
+//import app from "./app.mjs";
 
-const app = express();
+//const server = app();
+
+ const app = express();
 
 
-let PORT;// = process.env.PORT || 7088;
+//
+//
+ let PORT;// = process.env.PORT || 7088;
+
+dotenv.config({ path: './config.env' });
 
 
+//dotenv.config({ path: './config.env' });
 // .env Erfahrungen sammeln un lernen
 const resultDotenv = dotenv.config()
 if (resultDotenv.error) {
@@ -27,6 +36,10 @@ const config = dotenv.parse(buf) // will return an object
 console.log(typeof config, config) // object { BASIC : 'basic' }
 process.env.STATUS === 'production' ? (PORT = process.env.DEV_PORT) : (PORT = process.env.PROD_PORT);
 
+//server.use(app)
+
+//server.listen(app);// .use(app)
+//
 
 
 
@@ -49,15 +62,68 @@ app.use('/api/v1/inHome/kundenVerwaltung', kundenVerwaltungRoutes);
 app.use('/api/v1/inHome/mitarbeiterVerwaltung', mitarbeiterVerwaltungRoute);
 
 
+// app.use((req, res, next) => {
+//     res.setHeader("X-XSS-Protection", "0");//0 sollte ausgeschaltet sein damit xss testen, weil nun xss nicht mehr geht, obwohl helmet ausgeschaltet
+//     next();
+// });
+//app.use(helmet.xssFilter()); // nun kann man im inputfeld zb beim Login nicht <script>alert("XSS")</script> schreiben, und es kommt kein alert    aber nicht mit script testen, sondern mit <iframe src=javascript:alert(1)>
+//app.use(helmet.xframe('sameorigin'));
 
+//app.use(helmet.);
+// app.use(
+//     helmet.contentSecurityPolicy({
+//         directives: {
+//             //defaultSrc: ["'self'"],
+//             //scriptSrc: scriptSources,
+//             // ...
+//         },
+//     })
+// )
 
+//app.use(helmet); //sicherheit, damit nicht weiss das express genutzt wird
+// app.use(helmet.contentSecurityPolicy());
+// app.use(helmet.crossOriginEmbedderPolicy());
+// app.use(helmet.crossOriginOpenerPolicy());
+// app.use(helmet.crossOriginResourcePolicy());
+// app.use(helmet.dnsPrefetchControl());
+// app.use(helmet.expectCt());
+// app.use(helmet.frameguard());
+// app.use(helmet.hidePoweredBy());
+// app.use(helmet.hsts());
+// app.use(helmet.ieNoOpen());
+// app.use(helmet.noSniff());
+// app.use(helmet.originAgentCluster());
+// app.use(helmet.permittedCrossDomainPolicies());
+// app.use(helmet.referrerPolicy());
+// app.use(helmet.xssFilter());
+
+app.disable('x-powered-by') //sicherheit, damit nicht weiss im Browser, das express genutzt wird
+
+// app.use((req, res, next) => {
+//     //res.locals.cspNonce = crypto.randomBytes(16).toString("hex");
+//     console.log("Was bin ich? "+res.locals.cspNonce)
+//     next();
+// });
+//
+// app.use(helmet.contentSecurityPolicy({
+//     //console.log(res.locals.cspNonce)
+//     useDefaults: true,
+//     directives: { // welche scriptquellen sind erlaubt?
+//         //scriptSrc: ["'self'", (req, res) => `'nonce-${res.locals.cspNonce}'`]
+//     }
+// }));
+
+//app.use('/images/favicon/favicon.png')
+//app.use('/favicon.png', express.static('./public/mages/favicon/favicon.png'));
+//app.use(express.static('/public/images/favicon/favicon.png'));
+//app.use('/images/favicon/favicon.png', express.static('/images/favicon/favicon.png'));
 
 
 // helmet solltre rein, tutorial , dann wegen ejs <%=    oder <%-
 
 
 app.get('/', (req, res) => {
-    res.send("<h1>Hello Wolrd</h1><input type=\"button\" onclick=\"location.href='/api/v1/login2';\" value=\"Go to login\" />")
+    res.send("<link rel=\"icon\" type=\"image/png\" href=\"/images/favicon/favicon.png\"><h1>Hello Wolrd</h1><input type=\"button\" onclick=\"location.href='/api/v1/login2';\" value=\"Go to login\" />")
 });
 
 //------------------------Versuch Cookie-----------------------------------------

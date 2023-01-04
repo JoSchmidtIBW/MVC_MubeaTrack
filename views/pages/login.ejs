@@ -10,6 +10,8 @@
     <!--<link type="text/css" rel="stylesheet" href="/public/css/styleLogin.css" media="all">-->
     <link type="text/css" rel="stylesheet" href="/css/styleLogin.css" media="all">
 
+    <link rel="icon" type="image/png" href="/images/favicon/favicon.png">
+
         <!-- <link rel="/public/stylesheet" href="styleLogin.css" type="text/css"> -->
     <!-- <link rel="stylesheet" href="public/styleLogin.css"> -->
    <!-- <link rel="preload" href="/js/mainLogin.mjs" as="script" /> -->
@@ -46,6 +48,20 @@
 
     <main>
     <div class="container">
+        <input id="inp">
+        <button onclick="show()">click</button>
+        <div id="out"></div>
+
+        <script type="text/javascript">
+            function show() {
+                document.getElementById('out').innerHTML = document.getElementById('inp').value
+            }
+        </script>
+         <!-- <script>alert("XSS")</script> -->
+          <form action="" method="GET">
+           <input id="query" name="query" value="Enter query here..." onfocus="this.value=''">
+           <input id="button" type="submit" value="Search">
+          </form>
       <div id="Dreieck">
         <div class="login">
          <div class="stage__content-container">
@@ -92,6 +108,19 @@
                     </div>
                 </div>
     </div>
+
+                <!-- das ist hier serversitiges javascript -->
+                <br>
+                <script>
+                    // helmet muss dafür deaktiviert sein
+                    // weil es inline ist, müsste hashwert haben zeugs
+                    // über script wird client seitig ausgeführt
+                    for (let i = 0; i < 2; i++) {
+                        document.write('<p>hääällööö</p>');
+                    }
+                </script>
+
+
 
     <a>Haaaalllllllo</a>
     <button class = 'btnClickyyy' onclick = "myFunctionClicky()">OK</button>
