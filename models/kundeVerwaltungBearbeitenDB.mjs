@@ -55,7 +55,7 @@ export async  function loescheInKundeBearbeitet(kundenname, kundennummer){
     let conn;
     let jsonS;
 
-
+    // ev anstatt löschen, schreibe Kundename = "DELETE", oder es muss erst die andere Liste gelöscht sein
     try {
         counterDB = counterDB + 1;
         conn = await poolDB.getConnection();
