@@ -147,11 +147,11 @@ export let inHomeControllerPost = async (req, res) => {
         res.send("Hallo Post #Post1")
     }///api/v1/inHome/:
     else if(req.body.mitarbeiterVerwaltungButtonNameEjs==="MitarbeiterVerwaltung"){
-        res.redirect("/api/v1/inHome/mitarbeiterVerwaltung/:"+maNummerURLinHome+"*"+idURLinHome)
+        res.redirect("/api/v1/inHome/mitarbeiterVerwaltung/:"+maNummerURLinHome+"*"+idURLinHome+"*")
         //res.send("Hallo Post MiitarbeiterVerwaltung")
     }
     else if(req.body.kundenVerwaltungButtonNameEjs==="KundenVerwaltung"){
-        res.redirect("/api/v1/inHome/kundenVerwaltung/:"+maNummerURLinHome+"*"+idURLinHome)
+        res.redirect("/api/v1/inHome/kundenVerwaltung/:"+maNummerURLinHome+"*"+idURLinHome+"*")
     }
 
 };

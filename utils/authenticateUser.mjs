@@ -7,9 +7,9 @@ export function authentificateUser1(req, res, next){
 
     // splitte alles, was in url drin steht bei inHome/:irgendwas
     const myArrFullPath = req.path.split(':');
-   // console.log("myArrPath: "+myArrFullPath)
+    console.log("myArrPath: "+myArrFullPath)
     let gesplittetVonURLdenUserTeil = myArrFullPath[1];
-   // console.log("gesplittetVonURLdenUserTeil: "+gesplittetVonURLdenUserTeil)
+    console.log("gesplittetVonURLdenUserTeil: "+gesplittetVonURLdenUserTeil)
     const myArr1PathMitStern = gesplittetVonURLdenUserTeil.split('*');
     let maNummerURLAuth = myArr1PathMitStern[0];
     let idURLAuth = myArr1PathMitStern[1];

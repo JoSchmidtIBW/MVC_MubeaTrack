@@ -131,7 +131,7 @@ export let login1ControllerPost = async(req, res)=>{
 
 
         res.cookie('cokMaNummer', (await user1).getMaNummerU(), {
-            maxAge: 1000 * 60, // 1 min
+            maxAge: 1000 * 600, // 1 min    600=10min   1000 = 1s
             httpOnly: true // http only, prevents JavaScript cookie access
         });
 
@@ -163,7 +163,7 @@ export let login1ControllerPost = async(req, res)=>{
     //         .status(200)
     //         .json({message: "Logged in successfully 😊 👌"});
     // }
-             res.redirect('/api/v1/inHome/:'+ (await user1).getMaNummerU()+"*"+(await user1).getId_UserU())//+"*"+session);
+             res.redirect('/api/v1/inHome/:'+ (await user1).getMaNummerU()+"*"+(await user1).getId_UserU()+"*")//+"*"+session);
         // }
         // else{
         //     res.send('afewrtrdfgXX!');

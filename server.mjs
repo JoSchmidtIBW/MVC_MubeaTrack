@@ -11,6 +11,7 @@ import login2Route from './routes/login2Route.mjs';
 import inHomeRoutes from "./routes/inHomeRoute.mjs";
 import kundenVerwaltungRoutes from './routes/kundenVerwaltungRoute.mjs';
 import mitarbeiterVerwaltungRoute from "./routes/mitarbeiterVerwaltungRoute.mjs";
+import kundenVerwaltungKundeBearbeitenRoutes from './routes/kundenVerwaltungBearbeitenRoute.mjs'
 
 import session2 from './utils/session.mjs'
 import loginRoute1 from "./routes/loginRoute1.mjs";
@@ -53,9 +54,14 @@ app.set("view engine", "ejs");
 
 
 //Middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));//cookie was mit true
-app.use(bodyParser.urlencoded({ extended: false }))
+//app.use(express.json());
+// app.use(express.urlencoded({ extended: false }));//cookie was mit true
+// //app.use(bodyParser.urlencoded({ extended: false }))
+// //app.use(bodyParser.urlencoded())
+// app.use(bodyParser.urlencoded({
+//     extended: true
+// }));
+// app.use(express.json());
 app.use( express.static( "./public" ) );
 
 app.use(methodOverride('_method'));
@@ -292,6 +298,17 @@ app.get('/c', function(req, res){
 });
 //-------------------------------------------------------------------------------
 
+
+//app.use(express.json());
+// app.use(express.urlencoded({ extended: false }));//cookie was mit true
+// //app.use(bodyParser.urlencoded({ extended: false }))
+// //app.use(bodyParser.urlencoded())
+
+// app.use(bodyParser.urlencoded({
+//     extended: true
+// }));
+app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: false }))
 //achtung, muss unterhalb von session sein!!!
 app.use('/api/v1/login1', loginRoute1);
 app.use('/api/v1/login2', login2Route);
@@ -299,7 +316,7 @@ app.use('/api/v1/inHome', inHomeRoutes);
 //app.use('/api/v1/inHome/:0001*rTtGwkAwxI6ajLjBmMtZ3w==/kundenVerwaltung', kundenVerwaltungRoutes);
 app.use('/api/v1/inHome/kundenVerwaltung', kundenVerwaltungRoutes);
 app.use('/api/v1/inHome/mitarbeiterVerwaltung', mitarbeiterVerwaltungRoute);
-
+app.use('/api/v1/inHome/kundenVerwaltung/kundeBearbeiten', kundenVerwaltungKundeBearbeitenRoutes);
 
 
 

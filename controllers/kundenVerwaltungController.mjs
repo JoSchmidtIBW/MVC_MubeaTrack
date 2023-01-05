@@ -23,6 +23,8 @@ export let kundenVerwaltungControllerGet = async (req, res) => {
 
 
     res.render('pages/layoutKundenVerwaltungAdmin', {
+        MaNummerServer: maNummerURLkundenVerwaltung,
+        iDUserServer: idURLkundenVerwaltung,
         data: await sucheInDBKunden(),
         FooterWerIstAngemeldet: maNummerURLkundenVerwaltung + ", " + idURLkundenVerwaltung
     });
@@ -49,10 +51,37 @@ export let kundenVerwaltungControllerPost = async (req, res) => {
     // console.log("MitarbeiterVerwaltungButton: "+mitarbeiterVerwaltungButton)
 
     if(req.body.kundenVerwaltungButtonRetourInHomeNameEjs==="Zurück zur Verladungserfassung"){
-        res.redirect('/api/v1/inHome/:'+ maNummerURLkundenVerwaltung+"*"+idURLkundenVerwaltung);
+        res.redirect('/api/v1/inHome/:'+ maNummerURLkundenVerwaltung+"*"+idURLkundenVerwaltung+"*");
     }
     else if(req.body.mitarbeiterVerwaltungButtonNameEjs==="MitarbeiterVerwaltung"){
-        res.redirect("/api/v1/inHome/mitarbeiterVerwaltung/:"+maNummerURLkundenVerwaltung+"*"+idURLkundenVerwaltung)
+        res.redirect("/api/v1/inHome/mitarbeiterVerwaltung/:"+maNummerURLkundenVerwaltung+"*"+idURLkundenVerwaltung+"*")
+    }else if(req.body.iButtonKundenBearbeitenNameEjs==="1") {
+        let ausgabe = req.body.meineEingabe
+        console.log("ausgabe: " + ausgabe)
+    } else if(req.body.iButtonKundenBearbeitenNameEjs==="X"){
+    let ausgabe = req.body.meineEingabe
+    console.log("ausgabe: "+ausgabe)
+
+
+
+
+
+
+        //res.redirect('/api/v1/inHome/kundenVerwaltung/kundeBearbeiten/:'+maNummerURLkundenVerwaltung+"*"+idURLkundenVerwaltung)
+        //res.send("111"+gDaten)
+        // res.send("111111111111111",{
+        //     gewaehlteDaten: req.body.gewaehlteDaten
+        // })
+    }else if(req.body.iButtonKundenBearbeitenNameEjs==="2"){
+        res.send("2222222222222")
+    }else if(req.body.iiButtonKundenBearbeitenNameEjs==="i"){
+        //res.send("2222222222222")
+        //let ausgabe = req.body.maNummerLEingabe1//funktioniert
+        //console.log("ausgabe: "+ausgabe)
+
+
+
+        //res.redirect('/api/v1/inHome/kundenVerwaltung/kundeBearbeiten/:'+maNummerURLkundenVerwaltung+"*"+idURLkundenVerwaltung)
     }
 
 };

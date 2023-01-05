@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="de">
+
+    <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link type="text/css" rel="stylesheet" href="/css/styleKundenVerwaltung.css" media="all">
+    <link rel="icon" type="image/png" href="/images/favicon/favicon.png">
+
+    <title>KundenVerwaltung</title>
+</head>
+
+<body>
+
+<%- include('../partials/headerAdmin'); %>
+
+    <main>
+
+        <h1>KundenBearbeiten</h1>
+   <form action="" method="post" class="formAdminHeader">
+           <!-- <input name="KundenErfasstClientEJS" value="<%= kundeErfasst %>" type="text" /> -->
+                <select name="KundenErfasstDatumClientEJS">
+               <option name="<%= kundeErfasst %>" value="<%= kundeErfasst %>">"<%= kundeErfasst %>"</option>
+<option name="DatumHeute" value="<%= new Date();%>"><%= ("0"+new Date().getDate()).slice(-2)+'.'+("0"+(new Date().getMonth()+1)).slice(-2)+'.'+new Date().getFullYear()%></option>
+              </select>
+            <input name="KundenNameClientEJS" value="<%= kundenName %>" type="text" />
+            <input name="KundenNummerClientEJS" value="<%= kundenNummer %>" type="text" />
+            <input name="KundenOrtClientEJS" value="<%= kundenOrt %>" type="text" />
+            <input name="KundenAdresseClientEJS" value="<%= kundenAdresse %>" type="text" />
+            <input name="KundenLandClientEJS" value="<%= kundenLand %>" type="text" />
+
+            <input type="submit"  value="Speichern"  name="ButtonSpeichernEjs"/>
+            <input type="submit"  value="Löschen"  name="ButtonLoeschenEjs"/>
+        </form>
+
+        <br>
+
+        <form action="" method="post" class="formAdminHeader">
+            <input type="submit"  value="Zurück zur Kundenverwaltung"  name="ButtonZuruekZurKundenVerwaltungEjs"/>
+        </form>
+
+
+    </main>
+    <%- include('../partials/footerAdminUser'); %>
+
+    <scirpt>
+    </script>
+
+</body>
+
+</html>
