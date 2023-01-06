@@ -53,14 +53,17 @@ export let kundenVerwaltungControllerPost = async (req, res) => {
     if(req.body.kundenVerwaltungButtonRetourInHomeNameEjs==="Zurück zur Verladungserfassung"){
         res.redirect('/api/v1/inHome/:'+ maNummerURLkundenVerwaltung+"*"+idURLkundenVerwaltung+"*");
     }
-    else if(req.body.mitarbeiterVerwaltungButtonNameEjs==="MitarbeiterVerwaltung"){
-        res.redirect("/api/v1/inHome/mitarbeiterVerwaltung/:"+maNummerURLkundenVerwaltung+"*"+idURLkundenVerwaltung+"*")
-    }else if(req.body.iButtonKundenBearbeitenNameEjs==="1") {
-        let ausgabe = req.body.meineEingabe
-        console.log("ausgabe: " + ausgabe)
-    } else if(req.body.iButtonKundenBearbeitenNameEjs==="X"){
-    let ausgabe = req.body.meineEingabe
-    console.log("ausgabe: "+ausgabe)
+    else if(req.body.mitarbeiterVerwaltungButtonNameEjs==="MitarbeiterVerwaltung") {
+        res.redirect("/api/v1/inHome/mitarbeiterVerwaltung/:" + maNummerURLkundenVerwaltung + "*" + idURLkundenVerwaltung + "*")
+    }else if(req.body.ButtonNeuerKundeErfassenEjs==='Neuer Kunde Erfassen'){
+        res.redirect("/api/v1/inHome/kundenVerwaltung/kundeErstellen/:" + maNummerURLkundenVerwaltung + "*" + idURLkundenVerwaltung + "*")
+    }
+    // else if(req.body.iButtonKundenBearbeitenNameEjs==="1") {
+    //     let ausgabe = req.body.meineEingabe
+    //     console.log("ausgabe: " + ausgabe)
+    // } else if(req.body.iButtonKundenBearbeitenNameEjs==="X"){
+    // let ausgabe = req.body.meineEingabe
+    // console.log("ausgabe: "+ausgabe)
 
 
 
@@ -72,17 +75,17 @@ export let kundenVerwaltungControllerPost = async (req, res) => {
         // res.send("111111111111111",{
         //     gewaehlteDaten: req.body.gewaehlteDaten
         // })
-    }else if(req.body.iButtonKundenBearbeitenNameEjs==="2"){
-        res.send("2222222222222")
-    }else if(req.body.iiButtonKundenBearbeitenNameEjs==="i"){
-        //res.send("2222222222222")
-        //let ausgabe = req.body.maNummerLEingabe1//funktioniert
-        //console.log("ausgabe: "+ausgabe)
-
-
-
-        //res.redirect('/api/v1/inHome/kundenVerwaltung/kundeBearbeiten/:'+maNummerURLkundenVerwaltung+"*"+idURLkundenVerwaltung)
-    }
+    // }else if(req.body.iButtonKundenBearbeitenNameEjs==="2"){
+    //     res.send("2222222222222")
+    // }else if(req.body.iiButtonKundenBearbeitenNameEjs==="i"){
+    //     //res.send("2222222222222")
+    //     //let ausgabe = req.body.maNummerLEingabe1//funktioniert
+    //     //console.log("ausgabe: "+ausgabe)
+    //
+    //
+    //
+    //     //res.redirect('/api/v1/inHome/kundenVerwaltung/kundeBearbeiten/:'+maNummerURLkundenVerwaltung+"*"+idURLkundenVerwaltung)
+    // }
 
 };
 

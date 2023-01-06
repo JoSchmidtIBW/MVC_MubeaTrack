@@ -41,7 +41,9 @@
     <header>
         <div class="MubeaLogo">
             <!--<img src="/images/Mubea_Logo_white_without_transparent.gif" alt="sollte Mubea-LogoBild sein" height="50" class="logo1">-->
-            <img src="/images/Mubea_logo.svg.png" alt="sollte Mubea-LogoBild sein" class="logo" height="50" width="185">
+            <!--height="50" width="185"-->
+            <!--<img src="/images/Mubea_logo.svg.png" alt="sollte Mubea-LogoBild sein" class="logo" height="50" width="185">-->
+            <a class="aLogo"><img src="/images/Mubea_logo.svg.png" alt="sollte Mubea-LogoBild sein" class="logo"  height="40" width="165"></a>
             <a class="MubeaTrack">Track</a>
         </div>
     </header>
@@ -104,6 +106,12 @@
                                 <li id="google"><a href="https://www.google.ch/">GOOGLE</a></li>
                                 <!-- xClicker sollte eine funktion aufrufen, als Versuch, funktioniert, jedoch wiso sollte button sein? -->
                                 <button class = 'btn btn-primary' onclick = "<%= xClicker %>">xClicker</button>
+
+                                    <a>Haaaalllllllo</a>
+                                    <button class = 'btnClickyyy' onclick = "myFunctionClicky()">OK</button>
+                                    <br>
+                                    <a href="#" id="joke" onclick="loadJoke()">Nächsten Witz anzeigen!</a>
+                                    <p id="j"></p>
                         </div>
                     </div>
                 </div>
@@ -111,25 +119,23 @@
 
                 <!-- das ist hier serversitiges javascript -->
                 <br>
+
+
                 <script>
                     // helmet muss dafür deaktiviert sein
                     // weil es inline ist, müsste hashwert haben zeugs
                     // über script wird client seitig ausgeführt
-                    for (let i = 0; i < 2; i++) {
-                        document.write('<p>hääällööö</p>');
-                    }
+                  //  for (let i = 0; i < 2; i++) {
+                  //      document.write('<p>hääällööö</p>');
+                  //  }
                 </script>
 
 
 
-    <a>Haaaalllllllo</a>
-    <button class = 'btnClickyyy' onclick = "myFunctionClicky()">OK</button>
-    <br>
-    <a href="#" id="joke" onclick="loadJoke()">Nächsten Witz anzeigen!</a>
-    <p id="j"></p>
+
 
     <br>
-    <% for(let i = 0; i<5;i++) { %>
+    <% for(let i = 0; i<2;i++) { %>
         <% let text = "ungerade"
         if(i%2===0) {
             text = "gerade"
@@ -168,7 +174,7 @@
         // weil es inline ist, müsste hashwert haben zeugs
         // über script wird client seitig ausgeführt
         for(let i = 0; i<5;i++){
-            document.write('<p>hallööö</p>');
+            //document.write('<p>hallööö</p>');
         }
         </script>
 

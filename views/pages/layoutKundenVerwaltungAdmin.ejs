@@ -32,24 +32,26 @@
         <th>LandK</th>
       </tr>
       <br>
-      <form action="" method="post" class="formAdminHeader">
+     <!-- <form action="" method="post" class="formAdminHeader">-->
       <% for(var i=0; i < data.length; i++) { %>
         <tr>
         <!--<td><%= i+1 %></td>-->
-        <td><a href="/api/v1/inHome/kundenVerwaltung/kundeBearbeiten/:<%=MaNummerServer%>*<%=iDUserServer%>*-<%= data[i].KundeK %>-<%= data[i].KundenNummer %>">X</a></td>
-        <td id="iData"><%= i+1 %></td>
+
+        <!--<td><%= i+1 %></td>-->
         <td><%= data[i].ID_K %></td>
         <td><%= data[i].ErfasstK %></td>
-        <td name="tdEingabe"><%= data[i].KundeK %><input name="tdxEingabe" value="<%= data[i].KundeK %>" type="text"/></td>
+        <td><%= data[i].KundeK %>
         <td><%= data[i].KundenNummer %></td>
         <td><%= data[i].OrtK %></td>
         <td><%= data[i].AdresseK %></td>
         <td><%= data[i].LandK %>
-
-                        <input name="meineEingabe" value="<%= data[i].KundeK %>" type="text" readonly="readonly"/>
+       <!-- <td><a href="/api/v1/inHome/kundenVerwaltung/kundeBearbeiten/:<%=MaNummerServer%>*<%=iDUserServer%>*-<%= data[i].KundeK %>-<%= data[i].KundenNummer %>">Bearbeiten</a></td>-->
+        <!--<td><input type="button" onclick="location.href='/api/v1/inHome/kundenVerwaltung/kundeBearbeiten/:<%=MaNummerServer%>*<%=iDUserServer%>*-<%= data[i].KundeK %>-<%= data[i].KundenNummer %>" value="Go to Registrieren"/></td>-->
+        <td><input type="button" onclick="location.href='/api/v1/inHome/kundenVerwaltung/kundeBearbeiten/:<%=MaNummerServer%>*<%=iDUserServer%>*-<%= data[i].KundeK %>-<%= data[i].KundenNummer %>';" value="Bearbeiten" /></td>
+                      <!--  <input name="meineEingabe" value="<%= data[i].KundeK %>" type="text" readonly="readonly"/> -->
                         <!--<input type="submit"  value="<%=i+1%>"  name="iButtonKundenBearbeitenNameEjs"/>-->
-                        <input type="submit"  value="X"  name="iButtonKundenBearbeitenNameEjs"/>
-                    </form>
+                     <!--   <input type="submit"  value="X"  name="iButtonKundenBearbeitenNameEjs"/> -->
+                  <!--  </form>-->
                     <!-- readonly="readonly" -->
         </tr>
       <% } %>
@@ -57,26 +59,14 @@
 
 <!-- enctype='multipart/form-data  enctype="application/json-->
     <br>
-    <button>Kunde Bearbeiten</button>
-    <button>neuer Kunde erfassen</button>
-    <br>
-    <br>
-                        <form action="" method="post" class="formAdminHeader" ">
-                            <input name="meineEingabe3"  type="text"/>
-                            <input type="submit"  value="4"  name="i3ButtonKundenBearbeitenNameEjs"/>
-                        </form>
-    <!-- <input type="button" onclick="location.href='/api/v1/inHome/:0001*rTtGwkAwxI6ajLjBmMtZ3w==';" value="Zurück zur Verlade-Erfassung ...go ...v1/InHome/:irgendwas, aber das ist irgendwie falsch, weil im link des Buttons der Admin PW usw" /> -->
-    <br>
-                              <br>
+    <!--<button>Kunde Bearbeiten</button>-->
 
-                                <form action="#" method="post">
-                                    <input name="maNummerLEingabe1" type="text" id="inputMaNummerL"/>
-                                    <input name="passwortLEingabe1" type="text" id="inputPasswortL"/>
-                                    <input type="submit" value="i" name="iiButtonKundenBearbeitenNameEjs"/>
-                                </form>
-                                <br>
+                <form action="" method="post" class="formAdminHeader">
+                    <input type="submit"  value="Neuer Kunde Erfassen" name="ButtonNeuerKundeErfassenEjs"/>
+                </form>
     <br>
-            <br>
+    <br>
+
             <br>
             <form action="" method="post" class="formAdminHeader">
                 <input type="submit"  value="Zurück zur Verladungserfassung" name="kundenVerwaltungButtonRetourInHomeNameEjs"/>

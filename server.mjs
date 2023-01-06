@@ -12,6 +12,9 @@ import inHomeRoutes from "./routes/inHomeRoute.mjs";
 import kundenVerwaltungRoutes from './routes/kundenVerwaltungRoute.mjs';
 import mitarbeiterVerwaltungRoute from "./routes/mitarbeiterVerwaltungRoute.mjs";
 import kundenVerwaltungKundeBearbeitenRoutes from './routes/kundenVerwaltungBearbeitenRoute.mjs'
+import kundenVerwaltungKundeErstellenRoutes from './routes/kundenVerwaltungKundeErstellen.mjs'
+import mitarbeiterVerwaltungMitarbeiterBearbeitenRoute from './routes/mitarbeiterVerwaltungMitarbeiterBearbeitenRoute.mjs'
+import mitarbeiterVerwaltungMitarbeiterErfassenRoute from './routes/mitarbeiterVerwaltungMitarbeiterErfassenRoute.mjs'
 
 import session2 from './utils/session.mjs'
 import loginRoute1 from "./routes/loginRoute1.mjs";
@@ -317,8 +320,9 @@ app.use('/api/v1/inHome', inHomeRoutes);
 app.use('/api/v1/inHome/kundenVerwaltung', kundenVerwaltungRoutes);
 app.use('/api/v1/inHome/mitarbeiterVerwaltung', mitarbeiterVerwaltungRoute);
 app.use('/api/v1/inHome/kundenVerwaltung/kundeBearbeiten', kundenVerwaltungKundeBearbeitenRoutes);
-
-
+app.use('/api/v1/inHome/kundenVerwaltung/kundeErstellen', kundenVerwaltungKundeErstellenRoutes);
+app.use('/api/v1/inHome/mitarbeiterVerwaltung/mitarbeiterBearbeiten', mitarbeiterVerwaltungMitarbeiterBearbeitenRoute);
+app.use('/api/v1/inHome/mitarbeiterVerwaltung/MitarbeiterErfassen', mitarbeiterVerwaltungMitarbeiterErfassenRoute);
 
 // für UNIT-TEST- Versuch
 export default function sum(a, b) {

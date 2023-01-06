@@ -28,7 +28,8 @@ header {
 
 main {
     background-image: url('https://www.w3docs.com/uploads/media/default/0001/01/477719675fecaac0362957c214fb9aa56fca99b5.jpeg');
-    background-image: url('/images/rohre_ersatz.jpg');
+    /*background-image: url('/images/rohre_ersatz.jpg');*/
+    background-image: url('/images/background.png');
     background-repeat: no-repeat;
     background-attachment: fixed;
     /* background-position: center;*/
@@ -37,10 +38,15 @@ main {
     background-position-y: bottom;
 
     /*background-size: auto;*/
-    background-size: 100% 100%;
-
+    /*background-size: 100% 100%;*/
+    background-size: 100% 75%;
     font-family: 'Hanken Grotesk', sans-serif;
     margin: 0px;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
 }
 
 /*
@@ -51,17 +57,26 @@ main {
     color: #004b95;
 }
 */
+.aLogo{
+    height: 560px;
+}
 .MubeaLogo {
     margin: 1px;
     margin-left: 10px;
-    margin-top: 6px;
+    margin-top: 3px;
     padding: 0;
     box-sizing: border-box;
+    /*height:2px;
+    width:3px;*/
 }
 .MubeaTrack{
     color: #c8ed10;
-    font-size: 2em;
-    font-weight: bold;/*
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: -3px;
+    /*display: block;*/
+    padding: 0;
+    /*
     margin-bottom: -5px;
     padding: -5px;
     height: 30px;*/
@@ -70,12 +85,14 @@ main {
 
 .container {
     width: 650px;
-    height: 600px;
+    height: 680px;
     position:relative;
     background-color:transparent;
     border-color: red tomato tomato tomato;
     border-style: solid;
 }
+
+
 #Dreieck {
     width: 640px;
     height: 590px;
@@ -388,7 +405,7 @@ h1 {
     color: #696969;
     border-style: solid;
     border-color: silver darkgray darkgray darkgray;
-    border-top-left-radius: 0.4em;
+    border-top-left-radius: 0.0em;
     border-width: 1px;
     background-color: lightgray;
     font-family: 'Khand';
@@ -396,13 +413,13 @@ h1 {
     /*damit foot immer ganz unten, geht auch mit flex*/
     position: absolute;
     bottom: 0;
-    width: 99.5%;
-    margin-left: 1px;
+    width: 100%;/*99.5%;*/
+    margin-left: 0px;
     /*margin-top: 100px;*/
     /*margin-bottom: 10px;*/
-    padding: 10px;
+    padding: 4px;
     position: fixed;
-    bottom: 2px;
+    bottom: 0px;
 }
 
 .pCopyRFooterLogin {

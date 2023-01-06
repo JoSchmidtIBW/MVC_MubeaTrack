@@ -1,5 +1,5 @@
 import userEingeloggtArray from "../utils/userEingeloggtArray.mjs";
-
+import {sucheInDBMitarbeiter} from "../models/mitarbeiterVerwaltung.mjs";
 
 export let mitarbeiterVerwaltungControllerGet = async (req, res) => {
     console.log("bin GET mitarbeiterVerwaltungRoute.mjs")
@@ -11,8 +11,8 @@ export let mitarbeiterVerwaltungControllerGet = async (req, res) => {
     const myArr1PathMitStern = gesplittetVonURLdenUserTeil.split('*');
     let maNummerURLmitarbeiterVerwaltung = myArr1PathMitStern[0];
     let idURLmitarbeiterVerwaltung = myArr1PathMitStern[1];
-    console.log("GET maNummerURLmitarbeiterVerwaltung: " + maNummerURLmitarbeiterVerwaltung);
-    console.log("GET idURLmitarbeiterVerwaltung: " + idURLmitarbeiterVerwaltung);
+    //console.log("GET maNummerURLmitarbeiterVerwaltung: " + maNummerURLmitarbeiterVerwaltung);
+    //console.log("GET idURLmitarbeiterVerwaltung: " + idURLmitarbeiterVerwaltung);
 
     let foundImEingeloggtmitarbeiterVerwaltung = userEingeloggtArray.find(x => (x.MaNummer_D === maNummerURLmitarbeiterVerwaltung && x.userID_D === parseInt(idURLmitarbeiterVerwaltung)));// x.Passwort_D==='rTtGwkAwxI6ajLjBmMtZ3w=='))//x.userID_D === idURLAuth))//; x.Passwort_D===passwortURLAuth))
     //console.log("GET foundImEingeloggtmitarbeiterVerwaltung: "+JSON.stringify(foundImEingeloggtmitarbeiterVerwaltung));
@@ -23,7 +23,9 @@ export let mitarbeiterVerwaltungControllerGet = async (req, res) => {
 
 
     res.render('pages/layoutMitarbeiterVerwaltungAdmin', {
-        //data: await sucheInDBKunden(),
+        data: await sucheInDBMitarbeiter(),
+        MaNummerServer: maNummerURLmitarbeiterVerwaltung,
+        iDUserServer: idURLmitarbeiterVerwaltung,
         FooterWerIstAngemeldet: maNummerURLmitarbeiterVerwaltung + " " + idURLmitarbeiterVerwaltung
     });
 };
@@ -39,8 +41,8 @@ export let mitarbeiterVerwaltungControllerPost =async (req, res) => {
     const myArr1PathMitStern = gesplittetVonURLdenUserTeil.split('*');
     let maNummerURLmitarbeiterVerwaltung = myArr1PathMitStern[0];
     let idURLmitarbeiterVerwaltung = myArr1PathMitStern[1];
-    console.log("POST maNummerURLmitarbeiterVerwaltung: " + maNummerURLmitarbeiterVerwaltung);
-    console.log("POST idURLmitarbeiterVerwaltung: " + idURLmitarbeiterVerwaltung);
+    //console.log("POST maNummerURLmitarbeiterVerwaltung: " + maNummerURLmitarbeiterVerwaltung);
+    //console.log("POST idURLmitarbeiterVerwaltung: " + idURLmitarbeiterVerwaltung);
 
     let foundImEingeloggtmitarbeiterVerwaltung = userEingeloggtArray.find(x => (x.MaNummer_D === maNummerURLmitarbeiterVerwaltung && x.userID_D === parseInt(idURLmitarbeiterVerwaltung)));// x.Passwort_D==='rTtGwkAwxI6ajLjBmMtZ3w=='))//x.userID_D === idURLAuth))//; x.Passwort_D===passwortURLAuth))
     //console.log("POST foundImEingeloggtmitarbeiterVerwaltung: "+JSON.stringify(foundImEingeloggtmitarbeiterVerwaltung));
@@ -49,15 +51,17 @@ export let mitarbeiterVerwaltungControllerPost =async (req, res) => {
     // let mitarbeiterVerwaltungButton = req.body.mitarbeiterVerwaltungButton;
     // console.log("MitarbeiterVerwaltungButton: "+mitarbeiterVerwaltungButton)
      let mitarbeiterVerwaltungButtonRetourInHomeNameEjs = req.body.mitarbeiterVerwaltungButtonRetourInHomeNameEjs;
-     console.log("mitarbeiterVerwaltungButtonRetourInHomeNameEjs "+mitarbeiterVerwaltungButtonRetourInHomeNameEjs)
+     //console.log("mitarbeiterVerwaltungButtonRetourInHomeNameEjs "+mitarbeiterVerwaltungButtonRetourInHomeNameEjs)
 
     if(req.body.mitarbeiterVerwaltungButtonRetourInHomeNameEjs==="Zurück zur Verladungserfassung"){
-        console.log("mitarbeiterVerwaltungButtonRetourInHomeNameEjs -----------------------------------------------sollte kommen")
+        //console.log("mitarbeiterVerwaltungButtonRetourInHomeNameEjs -----------------------------------------------sollte kommen")
         res.redirect('/api/v1/inHome/:'+ maNummerURLmitarbeiterVerwaltung+"*"+idURLmitarbeiterVerwaltung+"*");//
     }
     else if(req.body.kundenVerwaltungButtonNameEjs==="KundenVerwaltung"){
-        console.log("kundenVerwaltungButtonNameEjs********************************************************************** sollte kommen")
+       // console.log("kundenVerwaltungButtonNameEjs********************************************************************** sollte kommen")
         res.redirect("/api/v1/inHome/kundenVerwaltung/:"+maNummerURLmitarbeiterVerwaltung+"*"+idURLmitarbeiterVerwaltung+"*")
+    } else if(req.body.ButtonNeuerMitarbeiterErfassenEjs==='Neuer Mitarbeiter Erfassen'){
+        res.redirect("/api/v1/inHome/mitarbeiterVerwaltung/MitarbeiterErfassen/:"+maNummerURLmitarbeiterVerwaltung+"*"+idURLmitarbeiterVerwaltung+"*")
     }
 
 };
@@ -76,11 +80,11 @@ export let mitarbeiterVerwaltungControllerDelete = (req, res) => {
     const myArr1PathMitStern = gesplittetVonURLdenUserTeil.split('*');
     let maNummerURLmitarbeiterVerwaltung = myArr1PathMitStern[0];
     let idURLmitarbeiterVerwaltung = myArr1PathMitStern[1];
-    console.log("DELETE maNummerURLmitarbeiterVerwaltung: " + maNummerURLmitarbeiterVerwaltung);
-    console.log("DELETE idURLmitarbeiterVerwaltung: " + idURLmitarbeiterVerwaltung);
+    //console.log("DELETE maNummerURLmitarbeiterVerwaltung: " + maNummerURLmitarbeiterVerwaltung);
+    //console.log("DELETE idURLmitarbeiterVerwaltung: " + idURLmitarbeiterVerwaltung);
 
     let foundImEingeloggtmitarbeiterVerwaltung = userEingeloggtArray.find(x => (x.MaNummer_D === maNummerURLmitarbeiterVerwaltung && x.userID_D === parseInt(idURLmitarbeiterVerwaltung)));// x.Passwort_D==='rTtGwkAwxI6ajLjBmMtZ3w=='))//x.userID_D === idURLAuth))//; x.Passwort_D===passwortURLAuth))
-    console.log("DELETE foundImEingeloggtmitarbeiterVerwaltung: "+JSON.stringify(foundImEingeloggtmitarbeiterVerwaltung));
+    //console.log("DELETE foundImEingeloggtmitarbeiterVerwaltung: "+JSON.stringify(foundImEingeloggtmitarbeiterVerwaltung));
 
 
     for( let i = 0; i < userEingeloggtArray.length; i++){

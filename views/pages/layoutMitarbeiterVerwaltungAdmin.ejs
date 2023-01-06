@@ -21,6 +21,40 @@
 
     <h1>Mitarbeiterverwaltung</h1>
 
+    <table>
+      <tr>
+        <th>ID_User</th>
+        <th>Erfasst_D_U</th>
+        <th>Erfasst_Z_U</th>
+        <th>MA_Nummer</th>
+        <th>Vorname</th>
+        <th>Nachname</th>
+        <th>Passwort_User</th>
+        <th>RolleUser</th>
+        <th>AvatarFarbe</th>
+      </tr>
+      <br>
+      <% for(var i=0; i < data.length; i++) { %>
+        <tr>
+        <!--<td><%= i+1 %></td>-->
+        <td><%= data[i].ID_User %></td>
+        <td><%= data[i].Erfasst_D_U %></td>
+        <td><%= data[i].Erfasst_Z_U %>
+        <td><%= data[i].MA_Nummer %></td>
+        <td><%= data[i].Vorname %></td>
+        <td><%= data[i].Nachname %></td>
+        <td><%= data[i].Passwort_User %></td>
+        <td><%= data[i].RolleUser %></td>
+        <td><%= data[i].AvatarFarbe %>
+       <td><input type="button" onclick="location.href='/api/v1/inHome/mitarbeiterVerwaltung/mitarbeiterBearbeiten/:<%=MaNummerServer%>*<%=iDUserServer%>*-<%= data[i].Vorname %>-<%= data[i].MA_Nummer %>';" value="Bearbeiten" /></td>
+        </tr>
+      <% } %>
+    </table>
+
+            <br>
+                <form action="" method="post" class="formAdminHeader">
+                    <input type="submit"  value="Neuer Mitarbeiter Erfassen" name="ButtonNeuerMitarbeiterErfassenEjs"/>
+                </form>
             <br>
             <br>
             <form action="" method="post" class="formAdminHeader">

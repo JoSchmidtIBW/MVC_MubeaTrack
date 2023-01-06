@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="de">
+
+    <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link type="text/css" rel="stylesheet" href="/css/styleKundenVerwaltung.css" media="all">
+    <link rel="icon" type="image/png" href="/images/favicon/favicon.png">
+
+    <title>MitarbeiterErfassen</title>
+</head>
+
+<body>
+
+<%- include('../partials/headerAdmin'); %>
+
+    <main>
+
+        <h1>MitarbeiterErfassen</h1>
+   <form action="" method="post" class="formAdminHeader">
+            neuMitarbeiterErfasstDatum: <input name="neuMitarbeiterErfasstDatumClientEJS" value="<%= ("0"+new Date().getDate()).slice(-2)+'.'+("0"+(new Date().getMonth()+1)).slice(-2)+'.'+new Date().getFullYear()%>" type="text" />
+            <br>
+            neuMitarbeiterErfasstZeit: <input name="neuMitarbeiterErfasstZeitClientEJS" value="<%= new Date().toLocaleTimeString() %>" type="text" />
+            <br>
+            neuMitarbeiterMaNummer: <input name="neuMitarbeiterMaNummerClientEJS" value="" type="text" />
+            <br>
+            neuMitarbeiterVorname: <input name="neuMitarbeiterVornameClientEJS" value="" type="text" />
+            <br>
+            neuMitarbeiterNachname: <input name="neuMitarbeiterNachnameClientEJS" value="" type="text" />
+            <br>
+            neuMitarbeiterPasswort: <input name="neuMitarbeiterPasswortClientEJS" value="" type="text" />
+            <br>
+            neuMitarbeiterRolle:<select name="neuMitarbeiterRolleSelectClientEJS">
+                                            <option name="ChefName" value="Chef">"Chef"</option>
+                                            <option name="MitarbeiterName" value="Mitarbeiter">"Mitarbeiter"</option>
+                                      </select>
+            <br>
+            neuMitarbeiterAvatarFarbe:<select name="neuMitarbeiterAvatarFarbeSelectClientEJS">
+                                            <option name="BlauName" value="Blau">"Farbe Blau"</option>
+                                            <option name="RotName" value="Rot">"Farbe Rot"</option>
+                                      </select>
+            <br>
+            <input type="submit"  value="Speichern"  name="ButtonSpeichernEjs"/>
+            <input type="submit"  value="Abrechen"  name="ButtonAbrechenEjs"/>
+        </form>
+
+        <br>
+        <br>
+        <form action="" method="post" class="formAdminHeader">
+            <input type="submit"  value="Zurück zur Mitarbeiterverwaltung"  name="ButtonZuruekZurMitarbeiterVerwaltungEjs"/>
+        </form>
+
+
+    </main>
+    <%- include('../partials/footerAdminUser'); %>
+
+    <scirpt>
+    </script>
+
+</body>
+
+</html>

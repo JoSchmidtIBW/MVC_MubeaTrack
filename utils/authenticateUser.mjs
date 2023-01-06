@@ -7,9 +7,9 @@ export function authentificateUser1(req, res, next){
 
     // splitte alles, was in url drin steht bei inHome/:irgendwas
     const myArrFullPath = req.path.split(':');
-    console.log("myArrPath: "+myArrFullPath)
+    //console.log("myArrPath: "+myArrFullPath)
     let gesplittetVonURLdenUserTeil = myArrFullPath[1];
-    console.log("gesplittetVonURLdenUserTeil: "+gesplittetVonURLdenUserTeil)
+    //console.log("gesplittetVonURLdenUserTeil: "+gesplittetVonURLdenUserTeil)
     const myArr1PathMitStern = gesplittetVonURLdenUserTeil.split('*');
     let maNummerURLAuth = myArr1PathMitStern[0];
     let idURLAuth = myArr1PathMitStern[1];
@@ -18,12 +18,12 @@ export function authentificateUser1(req, res, next){
 
     //let cookieVal = req.cookies.username;
     let cookieVorhanden = req.cookies.cokMaNummer;
-    console.log("Authentic1 cookieVorhanden: " + cookieVorhanden);
+    //console.log("Authentic1 cookieVorhanden: " + cookieVorhanden);
 
-    console.log("auth params: "+JSON.stringify(req.params))
-    console.log("auth param: "+req.params)
-    console.log("auth param maNummer:"+req.params['maNummerPATH']);
-    console.log("auth param maNummer:"+req.params['idPATH']);
+    //console.log("auth params: "+JSON.stringify(req.params))
+    //console.log("auth param: "+req.params)
+    //.log("auth param maNummer:"+req.params['maNummerPATH']);
+    //console.log("auth param maNummer:"+req.params['idPATH']);
 
    // console.log("aut1 req.session---------: "+JSON.stringify(req.session))
 
@@ -40,9 +40,9 @@ export function authentificateUser1(req, res, next){
     //console.log("Authentic1 passwortURL: "+passwortURLAuth);
     //console.log("Authentic1 userEingeloggtArray.length "+userEingeloggtArray.length)   // 2)
 
-    console.log("Authentic1 userEingeloggtArray: "+JSON.stringify(userEingeloggtArray));
+    //console.log("Authentic1 userEingeloggtArray: "+JSON.stringify(userEingeloggtArray));
      foundImEingeloggt = userEingeloggtArray.find(x => (x.MaNummer_D === maNummerURLAuth && x.userID_D === parseInt(idURLAuth)));// x.Passwort_D==='rTtGwkAwxI6ajLjBmMtZ3w=='))//x.userID_D === idURLAuth))//; x.Passwort_D===passwortURLAuth))
-     console.log("Authentic1 foundImEingeloggt: "+JSON.stringify(foundImEingeloggt));
+     //console.log("Authentic1 foundImEingeloggt: "+JSON.stringify(foundImEingeloggt));
     //console.log("Authentic1 foundImEingeloggt: "+foundImEingeloggt);
 
    // console.log("expires: "+ req.session.cookie.expires)
