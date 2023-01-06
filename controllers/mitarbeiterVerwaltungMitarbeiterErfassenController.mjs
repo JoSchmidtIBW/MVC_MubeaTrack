@@ -22,6 +22,7 @@ export let mitarbeiterErfassenControllerGet = async (req, res) => {
     console.log("inHome foundImEingeloggtmitarbeiterErfassen: " + JSON.stringify(foundImEingeloggtmitarbeiterErfassen));
 
     res.render('pages/layoutMitarbeiterErfassen', {
+        FehlerEingabeMaNummer: "",
          FooterWerIstAngemeldet: foundImEingeloggtmitarbeiterErfassen.MaNummer_D + " " + foundImEingeloggtmitarbeiterErfassen.Vorname_D
     });
 }
@@ -71,9 +72,17 @@ export let mitarbeiterErfassenControllerPOST = async (req, res) => {
     console.log("encryptedNeuMitarbeiterPasswort: " + encryptedNeuMitarbeiterPasswort);//genrated encryption String:  swBX2r1Av2tKpdN7CYisMg==
     //--------------------------------------------------------------------------
     if(req.body.ButtonSpeichernEjs === 'Speichern'){
+        if(neuMitarbeiterMaNummer===undefined || neuMitarbeiterMaNummer === null || neuMitarbeiterMaNummer===""){
+            res.render('pages/layoutMitarbeiterErfassen', {
+                FehlerEingabeMaNummer: "MaNummer muss geschrieben werden!",
+                FooterWerIstAngemeldet: foundImEingeloggtmitarbeiterErfassen.MaNummer_D + " " + foundImEingeloggtmitarbeiterErfassen.Vorname_D
+            });
+
+            //res.redirect("/api/v1/inHome/mitarbeiterVerwaltung/MitarbeiterErfassen/:" + maNummerURLmitarbeiterErfassen + "*" + idURLmitarbeiterErfassen + "*")
+        }
         schreibeInDBMitarbeiterErstellen(neuMitarbeiterErfasstDatum,neuMitarbeiterErfasstZeit,neuMitarbeiterMaNummer,neuMitarbeiterVorname,neuMitarbeiterNachname,encryptedNeuMitarbeiterPasswort,neuMitarbeiterRolle,neuMitarbeiterAvatarFarbe)
 
-        res.redirect("/api/v1/inHome/kundenVerwaltung/:" + maNummerURLmitarbeiterErfassen + "*" + idURLmitarbeiterErfassen + "*")
+        res.redirect("/api/v1/inHome/mitarbeiterVerwaltung/:" + maNummerURLmitarbeiterErfassen + "*" + idURLmitarbeiterErfassen + "*")
     } else if(req.body.ButtonAbrechenEjs==='Abrechen'){
         res.redirect("/api/v1/inHome/mitarbeiterVerwaltung/:" + maNummerURLmitarbeiterErfassen + "*" + idURLmitarbeiterErfassen + "*")
     } else if(req.body.ButtonZuruekZurMitarbeiterVerwaltungEjs=== 'Zurück zur Mitarbeiterverwaltung') {

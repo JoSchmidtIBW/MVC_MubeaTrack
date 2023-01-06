@@ -10,16 +10,16 @@
     <link type="text/css" rel="stylesheet" href="/css/styleInHome.css" media="all">
     <link rel="icon" type="image/png" href="/images/favicon/favicon.png">
 
-    <title>Home</title>
+    <title>Verladung Erfassen</title>
 </head>
 
 <body>
 
-<%- include('../partials/headerAdmin'); %>
+<%- include('../partials/headerUser'); %>
 
     <main>
 
-    <h1>Wellcome <%=werIstAngemeldetH%> inHome</h1>
+    <h1>Verladung Erfassen</h1>
 
     <br>
 
@@ -51,23 +51,7 @@
         <th>ArtikelNichtProd</th>
       </tr>
       <br>
-      <% for(var i=0; i < data.length; i++) { %>
-        <tr>
-        <!--<td><%= i+1 %></td>-->
-        <td><%= data[i].ID_E %></td>
-        <td><%= data[i].VnameE %></td>
-        <td><%= data[i].NnameE %></td>
-        <td><%= data[i].DatumE %></td>
-        <td><%= data[i].UhrzeitE %></td>
-        <td><%= data[i].WunschDatum %></td>
-        <td><%= data[i].KundeK %></td>
-        <td><%= data[i].MengeTo %></td>
-        <td><%= data[i].ArtikelAnLager %></td>
-        <td><%= data[i].LSimLeitSystem %></td>
-        <td><%= data[i].R_K %></td>
-        <td><%= data[i].ArtikelNichtProd %>
-        </tr>
-      <% } %>
+
     </table>
 
     <br>
@@ -75,7 +59,7 @@
 
 
             <form action="" method="post" class="formAdminHeader">
-                <input type="submit"  value="Verladung Erfassen"  name="ButtonVerladungErfassenEjs"/>
+                <input type="submit"  value="Zurück zu Verladungen"  name="ButtonZurueckVerladungenEjs"/>
             </form>
 
     </main>

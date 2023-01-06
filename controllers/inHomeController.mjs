@@ -153,6 +153,9 @@ export let inHomeControllerPost = async (req, res) => {
     else if(req.body.kundenVerwaltungButtonNameEjs==="KundenVerwaltung"){
         res.redirect("/api/v1/inHome/kundenVerwaltung/:"+maNummerURLinHome+"*"+idURLinHome+"*")
     }
+    else if(req.body.ButtonVerladungErfassenEjs==="Verladung Erfassen"){
+        res.redirect("/api/v1/inHome/VerladungErfassen/:"+maNummerURLinHome+"*"+idURLinHome+"*")
+    }
 
 };
 

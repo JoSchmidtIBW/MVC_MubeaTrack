@@ -22,7 +22,7 @@
    <form action="" method="post" class="formAdminHeader">
             neuKundenErfasstDatum: <input name="neuKundenErfasstDatumClientEJS" value="<%= ("0"+new Date().getDate()).slice(-2)+'.'+("0"+(new Date().getMonth()+1)).slice(-2)+'.'+new Date().getFullYear()%>" type="text" />
             <br>
-            neuKundenName: <input name="neuKundenNameClientEJS" value="" type="text" />
+            neuKundenName: <input name="neuKundenNameClientEJS" value="" type="text" /><a><%=FehlerKundenName%></a>
             <br>
             neuKundenNummer: <input name="neuKundenNummerClientEJS" value="" type="text" />
             <br>

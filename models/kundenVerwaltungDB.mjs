@@ -13,7 +13,7 @@ export async  function sucheInDBKunden(){
         conn = await poolDB.getConnection();
         const res = await conn.query("SELECT  *  FROM kundeMubea");
         jsonS = JSON.stringify(res);
-        //console.log("SQL-Text: "+jsonS)
+        console.log("SQL-Text: "+jsonS)
         //    console.log("counterDB: "+counterDB);
         conn.end();
         return res;

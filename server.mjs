@@ -15,6 +15,7 @@ import kundenVerwaltungKundeBearbeitenRoutes from './routes/kundenVerwaltungBear
 import kundenVerwaltungKundeErstellenRoutes from './routes/kundenVerwaltungKundeErstellen.mjs'
 import mitarbeiterVerwaltungMitarbeiterBearbeitenRoute from './routes/mitarbeiterVerwaltungMitarbeiterBearbeitenRoute.mjs'
 import mitarbeiterVerwaltungMitarbeiterErfassenRoute from './routes/mitarbeiterVerwaltungMitarbeiterErfassenRoute.mjs'
+import inHomeVerladungErfassenRoute from './routes/inHomeVerladungErfassenRoute.mjs'
 
 import session2 from './utils/session.mjs'
 import loginRoute1 from "./routes/loginRoute1.mjs";
@@ -316,6 +317,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use('/api/v1/login1', loginRoute1);
 app.use('/api/v1/login2', login2Route);
 app.use('/api/v1/inHome', inHomeRoutes);
+app.use('/api/v1/inHome/VerladungErfassen',inHomeVerladungErfassenRoute);
 //app.use('/api/v1/inHome/:0001*rTtGwkAwxI6ajLjBmMtZ3w==/kundenVerwaltung', kundenVerwaltungRoutes);
 app.use('/api/v1/inHome/kundenVerwaltung', kundenVerwaltungRoutes);
 app.use('/api/v1/inHome/mitarbeiterVerwaltung', mitarbeiterVerwaltungRoute);

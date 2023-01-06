@@ -53,3 +53,45 @@ h1 {
     position: fixed;
     bottom: 2px;
 }
+
+
+input::-webkit-inner-spin-button,
+input::-webkit-clear-button {
+    display: block;
+}
+
+input::-webkit-calendar-picker-indicator {
+    color: rgba(0, 0, 0, 0);
+    opacity: 1
+}
+
+input::-webkit-calendar-picker-indicator:hover {
+    background: transparent;
+    cursor: pointer;
+}
+
+input::-webkit-calendar-picker-indicator::after {
+    content: '';
+    display: block;
+    background: url(https://cdn3.iconfinder.com/data/icons/google-material-design-icons/48/ic_keyboard_arrow_down_48px-32.png) no-repeat;
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    margin-top: -16px;
+}
+
+.date {
+    position: relative;
+    width: 154px;
+    overflow: auto;
+    margin: 30px auto;
+    background: #000;
+}
+.inputx {
+    width: 140px;
+    padding: 5px;
+    height: 24px;
+    display: block;
+}

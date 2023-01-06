@@ -2,9 +2,11 @@ import {sucheInDBKunden} from "../models/kundenVerwaltungDB.mjs";
 import userEingeloggtArray from "../utils/userEingeloggtArray.mjs";
 import {
     schreibeInDBKundenBearbeitet,
-    sucheInDBKundenBearbeitenKundenNameKundenNummer
+    sucheInDBKundenBearbeitenKundenNameKundenNummer,
+    loescheInKundeBearbeitet
 } from "../models/kundeVerwaltungBearbeitenDB.mjs";
 import splitDB_DBObj from "../utils/splitDB_DBObj_General.mjs";
+//import loescheInKundeBearbeitet from '../models/kundeVerwaltungBearbeitenDB.mjs'
 
 export let kundenVerwaltungKundeBearbeitenControllerGet = async (req, res) => {
     console.log("Bin GET BearbeitenKunde")
@@ -113,7 +115,7 @@ export let kundenVerwaltungKundeBearbeitenControllerPost = async (req, res) => {
         // console.log("kundenAdresseClient: "+kundenAdresseClient)
         // console.log("kundenLandClient: "+kundenLandClient)
     } else if(req.body.ButtonLoeschenEjs=== 'Löschen') {
-        //loescheInKundeBearbeitet(kundenName, kundenNummer)
+        loescheInKundeBearbeitet(kundenName, kundenNummer)
         res.redirect("/api/v1/inHome/kundenVerwaltung/:" + maNummerURLkundenVerwaltungKundeBearbeiten + "*" + idURLkundenVerwaltungKundeBearbeiten + "*")
 
     } else if(req.body.ButtonZuruekZurKundenVerwaltungEjs=== 'Zurück zur Kundenverwaltung') {

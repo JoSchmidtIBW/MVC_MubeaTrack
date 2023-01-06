@@ -95,7 +95,7 @@ R_K VARCHAR(100),
 ArtikelNichtProd VARCHAR(100)  DEFAULT 'open',
 #FOREIGN KEY(KundeV) REFERENCES kundeMubea(KundeK),
 #FOREIGN KEY(ID_E) REFERENCES kundeMubea(ID_K),
-FOREIGN KEY(ID_KV) REFERENCES kundeMubea(ID_K),
+#FOREIGN KEY(ID_KV) REFERENCES kundeMubea(ID_K),      #funktioniert
 PRIMARY KEY (ID_E)
 );
 

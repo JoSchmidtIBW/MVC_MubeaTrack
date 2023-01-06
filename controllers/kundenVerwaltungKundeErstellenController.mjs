@@ -23,6 +23,8 @@ export let kundenVerwaltungKundeErstellenControllerGet = async (req, res) => {
     let foundImEingeloggtkundenVerwaltungKundeErstellen = userEingeloggtArray.find(x => (x.MaNummer_D === maNummerURLkundenVerwaltungKundeErstellen && x.userID_D === parseInt(idURLkundenVerwaltungKundeErstellen)));// x.Passwort_D==='rTtGwkAwxI6ajLjBmMtZ3w=='))//x.userID_D === idURLAuth))//; x.Passwort_D===passwortURLAuth))
 
      res.render('pages/layoutKundenVerwaltungKundeErstellen', {
+
+         FehlerKundenName: "",
          FooterWerIstAngemeldet: foundImEingeloggtkundenVerwaltungKundeErstellen.MaNummer_D + " " + foundImEingeloggtkundenVerwaltungKundeErstellen.Vorname_D
      });
 };
@@ -69,7 +71,15 @@ export let kundenVerwaltungKundeErstellenControllerPost = async (req, res) => {
 
         schreibeInDBKundenErstellen(neuKundenErfasstDatumClient, neuKundenNameClient, neuKundenNummerClient, neuKundenOrtClient, neuKundenAdresseClient, neuKundenLandClient)
 
-        res.redirect("/api/v1/inHome/kundenVerwaltung/:" + maNummerURLkundenVerwaltungKundeErstellen + "*" + idURLkundenVerwaltungKundeErstellen + "*")
+        if(neuKundenNameClient===""){
+            res.render('pages/layoutKundenVerwaltungKundeErstellen', {
+                FehlerKundenName: "KundenName muss geschrieben werden",
+                FooterWerIstAngemeldet: foundImEingeloggtkundenVerwaltungKundeErstellen.MaNummer_D + " " + foundImEingeloggtkundenVerwaltungKundeErstellen.Vorname_D
+            });
+        } else{
+            res.redirect("/api/v1/inHome/kundenVerwaltung/:" + maNummerURLkundenVerwaltungKundeErstellen + "*" + idURLkundenVerwaltungKundeErstellen + "*")
+
+        }
 
 
 
