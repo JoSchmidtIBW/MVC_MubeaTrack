@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "mocha ./tests/test.mjs",
-    "test:ci": "mocha ./tests/test.mjs",
+    "test:ci": "mocha ./tests/test.mjs mocha --timeout 10000 --exit",
     "dev": "nodemon server.mjs",
     "start": "node server.mjs"
   },
