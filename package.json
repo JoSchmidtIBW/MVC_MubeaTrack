@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "mocha ./tests/test.mjs",
+    "test:ci": "mocha ./tests/test.mjs",
     "dev": "nodemon server.mjs",
     "start": "node server.mjs"
   },
