@@ -12,7 +12,7 @@ router.get('/:irgendwas',authentificateUser1,inHomeControllerGet);
 router.delete('/:irgendwas',authentificateUser1,inHomeControllerDelete);
 router.post('/:irgendwas',authentificateUser1,inHomeControllerPost);
 
-export default router;
+export default router;//:)
 
 
 
