@@ -3,10 +3,9 @@ name: Unit-Testing
 on:
   push:
     branches:
-      - [dev_branch11]
-    tags:
-      - v[0-9]+.[0-9]+.[0-9]+*
-  pull_request: [dev_branch11]
+      - "dev_branch11"
+  pull_request:
+      - "dev_branch11"
 
 
 jobs:
