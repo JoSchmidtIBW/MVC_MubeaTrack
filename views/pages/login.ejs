@@ -50,59 +50,45 @@
 
     <main>
     <div class="container">
-        <input id="inp">
-        <button onclick="show()">click</button>
-        <div id="out"></div>
 
-        <script type="text/javascript">
-            function show() {
-                document.getElementById('out').innerHTML = document.getElementById('inp').value
-            }
-        </script>
-         <!-- <script>alert("XSS")</script> -->
-          <form action="" method="GET">
-           <input id="query" name="query" value="Enter query here..." onfocus="this.value=''">
-           <input id="button" type="submit" value="Search">
-          </form>
-      <div id="Dreieck">
+
+    <div id="Dreieck">
         <div class="login">
-         <div class="stage__content-container">
-                    <div class="stage_content-container-inner">
-                        <div class="stage_headline-container">
-                            <h1>das ist login.ejs xxxxin  views</h1>
-                            <br>
+        <form action="/api/v1/login1/" method="post">
+            <!--<h1>LOGIN</h1>-->
+            <br>
+            <br>
 
-                            <form action="/api/v1/login1/" method="post">
-                                <label for="username">
-                                    <!-- font awesome icon -->
-                                    <i class="fas fa-user"></i>
-                                </label>
-                                maNummerL: <input name="maNummerLEingabe" type="text" id="inputMaNummerL"/>
-                                <!-- <input type="submit" value="Ma-Nummer bestätigen" id="btnMaNummerL" onclick="btnMaNummerLOK()"/>  -->
-                                <button type="button" id="btnMaNummerL" onclick="btnMaNummerLOK()">OK</button>
-                                <a>Eingegebe Ma-Nummer: </a>
-                                <a id="lbAusgabeMaNummerLClient"></a>
-                                <a id="lbAusgabeMaNummerLServer"><%= maNummerLServer %></a>
-                                <!-- <input type="submit" value="Passwort bestätigen"/> -->
-                                <!-- </form>
-                                <br>
-                                <form action="/api/login/l" method="post"> -->
-                                <br>
-                                <label for="password">
-                                    <i class="fas fa-lock"></i>
-                                </label>
-                                passwortL: <input name="passwortLEingabe" type="text" id="inputPasswortL"/>
-                                <button type="button" id="btnPasswortL" onclick="btnPasswortLOK()">OK</button>
-                                <a>Eingegebes Passwort: </a>
-                                <!-- <input type="submit" value="Passwort bestätigen" id="btnPasswortL" onclick="btnPasswortLOK()"/> -->
-                                <a id="lbAusgabePasswortLClient"></a>
-                                <a id="lbAusgabePasswortLServer"><%= passwortLServer %></a>
-                                <br>
-                                <input type="submit" value="Anmelden"/>
-                            </form>
-                            <br>
+            <div class="vierEckLoginBtn">
 
-                                <button>Hilfe</button>
+
+                <div class="viereckloginGrid">
+                     <div class="loginTitle"><a class="titleLoginBar">LOGIN</a><br><br></div>
+                          <div class="loginGrid">
+                             <label for="username" class="one"><i class="fas fa-user"></i></label>
+                             <!--<label class="two">Ma_Nummer:</label>-->
+                             <label class="three"><input name="maNummerLEingabe" type="text" id="inputMaNummerL" placeholder="MA_Nummer*"/></label>
+                             <a class="four" id="lbAusgabeMaNummerLServer"><%= maNummerLServer %></a>
+                             <br>
+                             <label for="password" class="oneR"><i class="fas fa-lock"></i></label>
+                             <!--<label class="twoR">Passwort:</label>-->
+                             <label class="threeR"><input  name="passwortLEingabe" type="password" id="inputPasswortL" placeholder="Passwort*"/></label>
+                             <a class="fourR" id="lbAusgabePasswortLServer"><%= passwortLServer %></a>
+                          </div>
+
+                     <br>
+                     <div class="btnAnmeldenHilfe">
+                     <input type="submit" value="Anmelden" class="btnAnmelden"/>
+                     <br>
+                     <button class="btnHilfe">Hilfe</button>
+                </div>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+
+
                                 <li id="google"><a href="https://www.google.ch/">GOOGLE</a></li>
                                 <!-- xClicker sollte eine funktion aufrufen, als Versuch, funktioniert, jedoch wiso sollte button sein? -->
                                 <button class = 'btn btn-primary' onclick = "<%= xClicker %>">xClicker</button>
@@ -112,42 +98,51 @@
                                     <br>
                                     <a href="#" id="joke" onclick="loadJoke()">Nächsten Witz anzeigen!</a>
                                     <p id="j"></p>
-                        </div>
-                    </div>
-                </div>
+
+
+            </div>
+        </form>
+        </div>
+    </div>
     </div>
 
-                <!-- das ist hier serversitiges javascript -->
-                <br>
 
 
-                <script>
-                    // helmet muss dafür deaktiviert sein
-                    // weil es inline ist, müsste hashwert haben zeugs
-                    // über script wird client seitig ausgeführt
-                  //  for (let i = 0; i < 2; i++) {
-                  //      document.write('<p>hääällööö</p>');
-                  //  }
-                </script>
 
+    <script>
+       //helmet muss dafür deaktiviert sein
+       //weil es inline ist, müsste hashwert haben zeugs
+       //über script wird client seitig ausgeführt
+       //for (let i = 0; i < 2; i++) {
+           //document.write('<p>hääällööö</p>');
+       //}
+    </script>
 
 
 
 
-    <br>
-    <% for(let i = 0; i<2;i++) { %>
-        <% let text = "ungerade"
-        if(i%2===0) {
-            text = "gerade"
-        }%>
-        <!-- <p>Hallo <%=  %>  Welt, <%= i %> : <%= text%>   </p> -->
-        <p>Hallo  mit Level  Welt, <%= i %> : <%= text%>   </p>
-    <% } %>
-    <!-- %... wird server seitig ausgeführt -->
-    <br>
+    <!-- das ist hier clientsitiges javascript -->
+    <script>
+        //console.log("value: "+lbAusgabeMaNummerLServer.value)
+        let maNummerServer = <%- JSON.stringify(maNummerLServer) %>
+        let passwortLServer = <%- JSON.stringify(passwortLServer) %>
+        //console.log("maNummerServer: "+maNummerServer)
+        if(maNummerServer === "MA_Nummer gefunden :)"){
+            lbAusgabeMaNummerLServer.style.color = "#27b30b"/*"#1e9107"*/ /*"#c8ed10";*/
+            lbAusgabeMaNummerLServer.style.fontWeight = "900";
+        } else if(maNummerServer === "MA_Nummer falsch :("){
+            lbAusgabeMaNummerLServer.style.color = "#e31220";
+            lbAusgabeMaNummerLServer.style.fontWeight = "900";
+        }
+        if(passwortLServer === "Passwort richtig :)"){
+            lbAusgabePasswortLServer.style.color = "#27b30b";
+            lbAusgabePasswortLServer.style.fontWeight = "900";
+        } else if(passwortLServer === "Passwort falsch :("){
+            lbAusgabePasswortLServer.style.color = "#e31220";
+            lbAusgabePasswortLServer.style.fontWeight = "900";
+        }
 
-
-    <!-- das ist hier serversitiges javascript -->
+     </script>
 
 
 

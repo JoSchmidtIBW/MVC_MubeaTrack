@@ -75,20 +75,20 @@ export let login1ControllerPost = async(req, res)=>{
     //wenn login manummer falsch, zeige das in der loginseite an
     if(isMa_NummerInDB===true && isPasswortUserInDB===false){
         res.render('pages/login',{
-            maNummerLServer : "MA_Nummer IN db GEFUNDEN :)",
-            passwortLServer : "pw leer oder falsch",
+            maNummerLServer : "MA_Nummer gefunden :)",
+            passwortLServer : "Passwort falsch :(",
             xClicker: clicker()
         });
     }else if(isMa_NummerInDB===false&&isPasswortUserInDB===false){
         res.render('pages/login',{
-            maNummerLServer : "MA_Nummer gibt es nicht in DB :(",
-            passwortLServer : "pw ist falsch oder leer",
+            maNummerLServer : "MA_Nummer falsch :(",
+            passwortLServer : "Passwort falsch :(",
             xClicker: clicker()
         });
     }else if(isMa_NummerInDB===true&&isPasswortUserInDB===false){
         res.render('pages/login',{
             maNummerLServer : "MA_Nummer gefunden :)",
-            passwortLServer : "Passwort ist falsch :(",
+            passwortLServer : "Passwort falsch :(",
             xClicker: clicker()
         });
     }else if(isMa_NummerInDB===true&&isPasswortUserInDB===true) {
