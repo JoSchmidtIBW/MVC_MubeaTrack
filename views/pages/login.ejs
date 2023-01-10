@@ -54,7 +54,7 @@
 
     <div id="Dreieck">
         <div class="login">
-        <form action="/api/v1/login1/" method="post">
+
             <!--<h1>LOGIN</h1>-->
             <br>
             <br>
@@ -63,7 +63,9 @@
 
 
                 <div class="viereckloginGrid">
+                <form action="/api/v1/login1/" method="post">
                      <div class="loginTitle"><a class="titleLoginBar">LOGIN</a><br><br></div>
+
                           <div class="loginGrid">
                              <label for="username" class="one"><i class="fas fa-user"></i></label>
                              <!--<label class="two">Ma_Nummer:</label>-->
@@ -72,7 +74,7 @@
                              <br>
                              <label for="password" class="oneR"><i class="fas fa-lock"></i></label>
                              <!--<label class="twoR">Passwort:</label>-->
-                             <label class="threeR"><input  name="passwortLEingabe" type="password" id="inputPasswortL" placeholder="Passwort*"/></label>
+                             <label class="threeR"><input  name="passwortLEingabe" type="test" id="inputPasswortL" placeholder="Passwort*"/></label>
                              <a class="fourR" id="lbAusgabePasswortLServer"><%= passwortLServer %></a>
                           </div>
 
@@ -80,6 +82,7 @@
                      <div class="btnAnmeldenHilfe">
                      <input type="submit" value="Anmelden" class="btnAnmelden"/>
                      <br>
+                     </form>
                      <button class="btnHilfe">Hilfe</button>
                 </div>
                 <br>
@@ -101,7 +104,7 @@
 
 
             </div>
-        </form>
+
         </div>
     </div>
     </div>
