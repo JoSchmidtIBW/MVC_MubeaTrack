@@ -1,10 +1,10 @@
 import {sucheInDBKunden} from "../models/kundenVerwaltungDB.mjs";
 import userEingeloggtArray from "../utils/userEingeloggtArray.mjs";
 import schreibeInDBKundenErstellen from "../models/kundenVerwaltungErstellenKunde.mjs";
-import {
-    schreibeInDBKundenBearbeitet,
-    sucheInDBKundenBearbeitenKundenNameKundenNummer
-} from "../models/kundeVerwaltungBearbeitenDB.mjs";
+// import {
+//     schreibeInDBKundenBearbeitet,
+//     sucheInDBKundenBearbeitenKundenIDKundenNummer
+// } from "../models/kundeVerwaltungBearbeitenDB.mjs";
 import splitDB_DBObj from "../utils/splitDB_DBObj_General.mjs";
 
 export let kundenVerwaltungKundeErstellenControllerGet = async (req, res) => {
@@ -25,6 +25,7 @@ export let kundenVerwaltungKundeErstellenControllerGet = async (req, res) => {
      res.render('pages/layoutKundenVerwaltungKundeErstellen', {
 
          FehlerKundenName: "",
+         avatarFarbeServer: foundImEingeloggtkundenVerwaltungKundeErstellen.AvatarFarbeU_D,
          FooterWerIstAngemeldet: foundImEingeloggtkundenVerwaltungKundeErstellen.MaNummer_D + " " + foundImEingeloggtkundenVerwaltungKundeErstellen.Vorname_D
      });
 };

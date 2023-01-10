@@ -55,6 +55,71 @@ h1 {
 }
 
 
+
+.btnAvatar{
+    /*background: #7c907c;*/
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    border: 1px solid yellow;
+}
+
+.containerAvatarImageButton{
+
+}
+
+
+.imgAvatar{
+    width: 50px;
+    height: auto;
+    border-radius: 50%;
+}
+
+.h1_Mitarbeiterverwaltung{
+    background-color: rgb(115, 236, 115);
+}
+h1_Kundenverwaltung{
+    background-color: rgb(124, 144, 124);
+}
+
+.containerAvatarImageButton {
+    position: relative;
+    width: 100%;
+    max-width: 60px;
+}
+
+.containerAvatarImageButton img {
+    width: 100%;
+    height: auto;
+}
+
+.containerAvatarImageButton .btnAvatar {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #555;
+    color: white;
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.containerAvatarImageButton .btnAvatar:hover {
+    background-color: black;
+}
+
+
+
+
+
+
+
+/* Kalender */
 input::-webkit-inner-spin-button,
 input::-webkit-clear-button {
     display: block;

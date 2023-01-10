@@ -35,6 +35,7 @@ export let inHomeControllerGet = async (req, res) => {
             //res.send("Bisch Admin");
             res.render('pages/layoutInHomeAdmin', {
                 werIstAngemeldetH: foundImEingeloggtinHome.MaNummer_D + " " + foundImEingeloggtinHome.Vorname_D,
+                avatarFarbeServer: foundImEingeloggtinHome.AvatarFarbeU_D,
                 kundeIHServer: "hoi kunde",
                 MaNummerServer: foundImEingeloggtinHome.MaNummer_D,
                 data: await sucheInDBVerladung(),
@@ -45,6 +46,7 @@ export let inHomeControllerGet = async (req, res) => {
             //res.send("Bisch Chef oder Mitarbeiter");
             res.render('pages/layoutInHomeUser', {
                 werIstAngemeldetH: foundImEingeloggtinHome.MaNummer_D + " " + foundImEingeloggtinHome.Vorname_D,
+                avatarFarbeServer: foundImEingeloggtinHome.AvatarFarbeU_D,
                 kundeIHServer: "hoi kunde",
                 MaNummerServer: foundImEingeloggtinHome.MaNummer_D,
                 data: await sucheInDBVerladung(),

@@ -5,8 +5,8 @@ import bodyParser from "body-parser";
 import userEingeloggtArray from "../utils/userEingeloggtArray.mjs";
 //import sucheInDBKundenBearbeitenKundenNameKundenNummer from '../models/kundeVerwaltungBearbeitenDB.mjs'
 //import schreibeInDBKundenBearbeitet from '../models/kundeVerwaltungBearbeitenDB.mjs'
-import {sucheInDBKundenBearbeitenKundenNameKundenNummer,schreibeInDBKundenBearbeitet,loescheInKundeBearbeitet} from "../models/kundeVerwaltungBearbeitenDB.mjs";
-import splitDB_DBObj from '../utils/splitDB_DBObj_General.mjs'
+//import {sucheInDBKundenBearbeitenKundenNameKundenNummer,schreibeInDBKundenBearbeitet,loescheInKundeBearbeitet} from "../models/kundeVerwaltungBearbeitenDB.mjs";
+//import splitDB_DBObj from '../utils/splitDB_DBObj_General.mjs'
 import {kundenVerwaltungKundeBearbeitenControllerGet,kundenVerwaltungKundeBearbeitenControllerPost,kundenVerwaltungKundeBearbeitenControllerDelete} from "../controllers/kundenVerwaltungBearbeitenController.mjs";
 //import {sucheInDBVerladung} from "../models/inHomeVerladungDB.mjs";
 

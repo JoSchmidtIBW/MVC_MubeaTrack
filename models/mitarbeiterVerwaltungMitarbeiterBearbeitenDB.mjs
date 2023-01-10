@@ -1,7 +1,7 @@
 import poolDB from "../utils/db.mjs";
 
 let counterDB = 0;
-export  async  function sucheInDBMitarbeiterBearbeitenMaNummerVorname(maNummer,vorName){
+export  async  function sucheInDBMitarbeiterBearbeitenMaNummerID(maNummer,idMitarbeiter){
     console.log('bin MODEL sucheInDBmaNummer-Funktion, habe bekommen: ');
 
     let conn;
@@ -11,7 +11,7 @@ export  async  function sucheInDBMitarbeiterBearbeitenMaNummerVorname(maNummer,v
     try {
         counterDB = counterDB + 1;
         conn = await poolDB.getConnection();
-        const res = await conn.query("SELECT * FROM userverkaufMubea WHERE MA_Nummer = (?) AND Vorname = (?)", [maNummer,vorName]);
+        const res = await conn.query("SELECT * FROM userverkaufMubea WHERE MA_Nummer = (?) AND ID_USER = (?)", [maNummer,idMitarbeiter]);
         jsonS = JSON.stringify(res);
         console.log("SQL-Text: "+jsonS)
         console.log("counterDB: "+counterDB);
@@ -27,7 +27,7 @@ export  async  function sucheInDBMitarbeiterBearbeitenMaNummerVorname(maNummer,v
 export async  function schreibeInDBMitarbeiterBearbeitet(bearbeitetMitarbeiterErfasstDatumClient,bearbeitetMitarbeiterErfasstZeitClient,
                                                          bearbeitetMitarbeiterNummerClient,bearbeitetMitarbeiterVornameClient,bearbeitetMitarbeiterNachnameClient,
                                                          bearbeitetMitarbeiterPasswortXClient,bearbeitetMitarbeiterRolleSelectClient,bearbeitetMitarbeiterAvatarFarbeSelectClient,
-                                                         maNummer, vorName){
+                                                         maNummer, idMitarbeiter){
     console.log('bin schreibeInDBKundenBearbeitet: ');
 
     let conn;
@@ -37,9 +37,9 @@ export async  function schreibeInDBMitarbeiterBearbeitet(bearbeitetMitarbeiterEr
     try {
         counterDB = counterDB + 1;
         conn = await poolDB.getConnection();
-        const res = await conn.query("UPDATE userverkaufMubea SET Erfasst_D_U = (?), Erfasst_Z_U = (?), MA_Nummer = (?), Vorname = (?), Nachname = (?), Passwort_User = (?), RolleUser = (?), AvatarFarbe = (?) WHERE MA_Nummer = (?) AND Vorname = (?)", [bearbeitetMitarbeiterErfasstDatumClient,bearbeitetMitarbeiterErfasstZeitClient,
+        const res = await conn.query("UPDATE userverkaufMubea SET Erfasst_D_U = (?), Erfasst_Z_U = (?), MA_Nummer = (?), Vorname = (?), Nachname = (?), Passwort_User = (?), RolleUser = (?), AvatarFarbe = (?) WHERE MA_Nummer = (?) AND ID_User = (?)", [bearbeitetMitarbeiterErfasstDatumClient,bearbeitetMitarbeiterErfasstZeitClient,
             bearbeitetMitarbeiterNummerClient,bearbeitetMitarbeiterVornameClient,bearbeitetMitarbeiterNachnameClient,
-            bearbeitetMitarbeiterPasswortXClient,bearbeitetMitarbeiterRolleSelectClient,bearbeitetMitarbeiterAvatarFarbeSelectClient,maNummer, vorName]);
+            bearbeitetMitarbeiterPasswortXClient,bearbeitetMitarbeiterRolleSelectClient,bearbeitetMitarbeiterAvatarFarbeSelectClient,maNummer, idMitarbeiter]);
         //jsonS = JSON.stringify(res);
         //console.log("SQL-Text: "+jsonS)
         //console.log("counterDB: "+counterDB);
@@ -53,7 +53,7 @@ export async  function schreibeInDBMitarbeiterBearbeitet(bearbeitetMitarbeiterEr
     }
 }
 
-export async  function loescheInDBMitarbeiterBearbeitet(maNummer, vorName){
+export async  function loescheInDBMitarbeiterBearbeitet(maNummer, idMitarbeiter){
     console.log('bin loescheInKundeBearbeitet: ');
 
     let conn;
@@ -63,7 +63,7 @@ export async  function loescheInDBMitarbeiterBearbeitet(maNummer, vorName){
     try {
         counterDB = counterDB + 1;
         conn = await poolDB.getConnection();
-        const res = await conn.query("DELETE FROM userverkaufMubea WHERE MA_Nummer = (?) AND Vorname = (?)", [maNummer, vorName]);
+        const res = await conn.query("DELETE FROM userverkaufMubea WHERE MA_Nummer = (?) AND ID_User = (?)", [maNummer, idMitarbeiter]);
         //jsonS = JSON.stringify(res);
         //console.log("SQL-Text: "+jsonS)
         //console.log("counterDB: "+counterDB);

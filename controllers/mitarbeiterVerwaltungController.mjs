@@ -26,6 +26,7 @@ export let mitarbeiterVerwaltungControllerGet = async (req, res) => {
         data: await sucheInDBMitarbeiter(),
         MaNummerServer: maNummerURLmitarbeiterVerwaltung,
         iDUserServer: idURLmitarbeiterVerwaltung,
+        avatarFarbeServer: foundImEingeloggtmitarbeiterVerwaltung.AvatarFarbeU_D,
         FooterWerIstAngemeldet: maNummerURLmitarbeiterVerwaltung + " " + idURLmitarbeiterVerwaltung
     });
 };

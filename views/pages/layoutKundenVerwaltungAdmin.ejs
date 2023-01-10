@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link type="text/css" rel="stylesheet" href="/css/styleKundenVerwaltung.css" media="all">
+    <link type="text/css" rel="stylesheet" href="/css/styleInHome.css" media="all">
     <link rel="icon" type="image/png" href="/images/favicon/favicon.png">
 
     <title>KundenVerwaltung</title>
@@ -18,7 +18,7 @@
 
     <main>
 
-    <h1>Kundenverwaltung</h1>
+    <h1 class="h1_Kundenverwaltung">Kundenverwaltung</h1>
     <a>hi <%=MaNummerServer%></a>
 
     <table>
@@ -47,7 +47,7 @@
         <td><%= data[i].LandK %>
        <!-- <td><a href="/api/v1/inHome/kundenVerwaltung/kundeBearbeiten/:<%=MaNummerServer%>*<%=iDUserServer%>*-<%= data[i].KundeK %>-<%= data[i].KundenNummer %>">Bearbeiten</a></td>-->
         <!--<td><input type="button" onclick="location.href='/api/v1/inHome/kundenVerwaltung/kundeBearbeiten/:<%=MaNummerServer%>*<%=iDUserServer%>*-<%= data[i].KundeK %>-<%= data[i].KundenNummer %>" value="Go to Registrieren"/></td>-->
-        <td><input type="button" onclick="location.href='/api/v1/inHome/kundenVerwaltung/kundeBearbeiten/:<%=MaNummerServer%>*<%=iDUserServer%>*-<%= data[i].KundeK %>-<%= data[i].KundenNummer %>';" value="Bearbeiten" /></td>
+        <td><input type="button" onclick="location.href='/api/v1/inHome/kundenVerwaltung/kundeBearbeiten/:<%=MaNummerServer%>*<%=iDUserServer%>*-<%= data[i].ID_K %>-<%= data[i].KundenNummer %>';" value="Bearbeiten" /></td>
                       <!--  <input name="meineEingabe" value="<%= data[i].KundeK %>" type="text" readonly="readonly"/> -->
                         <!--<input type="submit"  value="<%=i+1%>"  name="iButtonKundenBearbeitenNameEjs"/>-->
                      <!--   <input type="submit"  value="X"  name="iButtonKundenBearbeitenNameEjs"/> -->

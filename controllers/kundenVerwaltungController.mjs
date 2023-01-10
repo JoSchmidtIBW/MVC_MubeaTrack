@@ -26,6 +26,7 @@ export let kundenVerwaltungControllerGet = async (req, res) => {
         MaNummerServer: maNummerURLkundenVerwaltung,
         iDUserServer: idURLkundenVerwaltung,
         data: await sucheInDBKunden(),
+        avatarFarbeServer: foundImEingeloggtkundenVerwaltung.AvatarFarbeU_D,
         FooterWerIstAngemeldet: maNummerURLkundenVerwaltung + ", " + idURLkundenVerwaltung
     });
 };

@@ -23,6 +23,7 @@ export let mitarbeiterErfassenControllerGet = async (req, res) => {
 
     res.render('pages/layoutMitarbeiterErfassen', {
         FehlerEingabeMaNummer: "",
+        avatarFarbeServer: foundImEingeloggtmitarbeiterErfassen.AvatarFarbeU_D,
          FooterWerIstAngemeldet: foundImEingeloggtmitarbeiterErfassen.MaNummer_D + " " + foundImEingeloggtmitarbeiterErfassen.Vorname_D
     });
 }

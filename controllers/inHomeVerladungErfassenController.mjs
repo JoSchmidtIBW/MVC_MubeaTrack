@@ -50,6 +50,7 @@ export let inHomeVerladungErfassenControllerGet = async (req, res) => {
              data:await sucheInDBKunden(),
              MaNummerServer: foundImEingeloggtinHomeVerladungErfassen.MaNummer_D,
         //     data: await sucheInDBVerladung(),
+             avatarFarbeServer: foundImEingeloggtinHomeVerladungErfassen.AvatarFarbeU_D,
              FooterWerIstAngemeldet: foundImEingeloggtinHomeVerladungErfassen.MaNummer_D + " " + foundImEingeloggtinHomeVerladungErfassen.Vorname_D
         });
     }else {
@@ -59,6 +60,7 @@ export let inHomeVerladungErfassenControllerGet = async (req, res) => {
             data: await sucheInDBKunden(),
             MaNummerServer: foundImEingeloggtinHomeVerladungErfassen.MaNummer_D,
             //     data: await sucheInDBVerladung(),
+            avatarFarbeServer: foundImEingeloggtinHomeVerladungErfassen.AvatarFarbeU_D,
             FooterWerIstAngemeldet: foundImEingeloggtinHomeVerladungErfassen.MaNummer_D + " " + foundImEingeloggtinHomeVerladungErfassen.Vorname_D
         });
     }

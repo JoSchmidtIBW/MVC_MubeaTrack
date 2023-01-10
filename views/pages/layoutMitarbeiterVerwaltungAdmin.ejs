@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- <link type="text/css" rel="stylesheet" href="/public/css/styleInHome.css" media="all"> -->
-    <link type="text/css" rel="stylesheet" href="/css/styleMitarbeiterVerwaltung.css" media="all">
+    <link type="text/css" rel="stylesheet" href="/css/styleInHome.css" media="all">
     <link rel="icon" type="image/png" href="/images/favicon/favicon.png">
 
     <title>MitarbeiterVerwaltung</title>
@@ -19,9 +19,9 @@
 
     <main>
 
-    <h1>Mitarbeiterverwaltung</h1>
+    <h1 class="h1_Mitarbeiterverwaltung">Mitarbeiterverwaltung</h1>
 
-    <table>
+    <table class="table_Mitarbeiterverwaltung">
       <tr>
         <th>ID_User</th>
         <th>Erfasst_D_U</th>
@@ -46,7 +46,7 @@
         <td><%= data[i].Passwort_User %></td>
         <td><%= data[i].RolleUser %></td>
         <td><%= data[i].AvatarFarbe %>
-       <td><input type="button" onclick="location.href='/api/v1/inHome/mitarbeiterVerwaltung/mitarbeiterBearbeiten/:<%=MaNummerServer%>*<%=iDUserServer%>*-<%= data[i].Vorname %>-<%= data[i].MA_Nummer %>';" value="Bearbeiten" /></td>
+       <td><input type="button" onclick="location.href='/api/v1/inHome/mitarbeiterVerwaltung/mitarbeiterBearbeiten/:<%=MaNummerServer%>*<%=iDUserServer%>*-<%= data[i].ID_User %>-<%= data[i].MA_Nummer %>';" value="Bearbeiten" /></td>
         </tr>
       <% } %>
     </table>

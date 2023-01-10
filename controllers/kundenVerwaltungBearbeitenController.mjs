@@ -2,7 +2,7 @@ import {sucheInDBKunden} from "../models/kundenVerwaltungDB.mjs";
 import userEingeloggtArray from "../utils/userEingeloggtArray.mjs";
 import {
     schreibeInDBKundenBearbeitet,
-    sucheInDBKundenBearbeitenKundenNameKundenNummer,
+    sucheInDBKundenBearbeitenKundenIDKundenNummer,
     loescheInKundeBearbeitet
 } from "../models/kundeVerwaltungBearbeitenDB.mjs";
 import splitDB_DBObj from "../utils/splitDB_DBObj_General.mjs";
@@ -31,15 +31,15 @@ export let kundenVerwaltungKundeBearbeitenControllerGet = async (req, res) => {
     let gewaehlteKundenDatenURLStrich = myArr1PathMitStern[2]
     console.log("GET gewaehlteKundenDatenURLStrich: " + gewaehlteKundenDatenURLStrich);
     let gesplittetGewaehlteKundenDatenURLStrich = gewaehlteKundenDatenURLStrich.split("-")
-    let kundenName = gesplittetGewaehlteKundenDatenURLStrich[1]
-    console.log("GET kundenName: " + kundenName);// ersetze %20 als lehrzeichen
-    kundenName=kundenName.replace(/%20/g, " ");
-    console.log("GET kundenName: " + kundenName);// ersetze %20 als lehrzeichen
+    let kundenID = gesplittetGewaehlteKundenDatenURLStrich[1]
+    console.log("GET kundenID: " + kundenID);// ersetze %20 als lehrzeichen
+    //kundenName=kundenName.replace(/%20/g, " ");
+    //console.log("GET kundenName: " + kundenName);// ersetze %20 als lehrzeichen
     let kundenNummer = gesplittetGewaehlteKundenDatenURLStrich[2]
     console.log("GET kundenNummer: " + kundenNummer);// ersetze %20 als lehrzeichen
 
-    console.log("GET SQLSuche: "+await sucheInDBKundenBearbeitenKundenNameKundenNummer(kundenName,kundenNummer))
-    let kundeGewaehltUndGefundenDBobj = await sucheInDBKundenBearbeitenKundenNameKundenNummer(kundenName,kundenNummer)
+    console.log("GET SQLSuche: "+await sucheInDBKundenBearbeitenKundenIDKundenNummer(kundenID,kundenNummer))
+    let kundeGewaehltUndGefundenDBobj = await sucheInDBKundenBearbeitenKundenIDKundenNummer(kundenID, kundenNummer)
     // console.log("GET dbOBJ: "+JSON.stringify(splitDB_DBObj(kundeGewaehltUndGefundenDB)))//.ID_K)
     // let kundeGewaehltUndGefundenDBJson = JSON.stringify(splitDB_DBObj(kundeGewaehltUndGefundenDB))
     // console.log("GET ??: "+kundeGewaehltUndGefundenDBJson.ID_K)
@@ -55,6 +55,7 @@ export let kundenVerwaltungKundeBearbeitenControllerGet = async (req, res) => {
         kundenOrt: kundenObj.OrtK,
         kundenAdresse: kundenObj.AdresseK,
         kundenLand: kundenObj.LandK,
+        avatarFarbeServer: foundImEingeloggtkundenVerwaltung.AvatarFarbeU_D,
         FooterWerIstAngemeldet: foundImEingeloggtkundenVerwaltung.MaNummer_D + " " + foundImEingeloggtkundenVerwaltung.Vorname_D
     });
 };
@@ -78,10 +79,10 @@ export let kundenVerwaltungKundeBearbeitenControllerPost = async (req, res) => {
     let gewaehlteKundenDatenURLStrich = myArr1PathMitStern[2]
     console.log("POST gewaehlteKundenDatenURLStrich: " + gewaehlteKundenDatenURLStrich);
     let gesplittetGewaehlteKundenDatenURLStrich = gewaehlteKundenDatenURLStrich.split("-")
-    let kundenName = gesplittetGewaehlteKundenDatenURLStrich[1]
-    console.log("POST kundenName: " + kundenName);// ersetze %20 als lehrzeichen
-    kundenName=kundenName.replace(/%20/g, " ");
-    console.log("POST kundenName: " + kundenName);// ersetze %20 als lehrzeichen
+    let kundenID = gesplittetGewaehlteKundenDatenURLStrich[1]
+    console.log("POST kundenID: " + kundenID);// ersetze %20 als lehrzeichen
+    //kundenName=kundenName.replace(/%20/g, " ");
+    //console.log("POST kundenName: " + kundenName);// ersetze %20 als lehrzeichen
     let kundenNummer = gesplittetGewaehlteKundenDatenURLStrich[2]
     console.log("POST kundenNummer: " + kundenNummer);// ersetze %20 als lehrzeichen
 
@@ -105,7 +106,7 @@ export let kundenVerwaltungKundeBearbeitenControllerPost = async (req, res) => {
         console.log("kundenErfasstDatumClient: "+kundenErfasstDatumClient)
         console.log("kundenErfasstDatumClient.length: "+kundenErfasstDatumClient.length)
 
-        schreibeInDBKundenBearbeitet(kundenErfasstDatumClient, kundenNameClient, kundenNummerClient, kundenOrtClient, kundenAdresseClient, kundenLandClient, kundenName, kundenNummer)
+        schreibeInDBKundenBearbeitet(kundenErfasstDatumClient, kundenNameClient, kundenNummerClient, kundenOrtClient, kundenAdresseClient, kundenLandClient, kundenID, kundenNummer)
 
         res.redirect("/api/v1/inHome/kundenVerwaltung/:" + maNummerURLkundenVerwaltungKundeBearbeiten + "*" + idURLkundenVerwaltungKundeBearbeiten + "*")
 
@@ -115,7 +116,7 @@ export let kundenVerwaltungKundeBearbeitenControllerPost = async (req, res) => {
         // console.log("kundenAdresseClient: "+kundenAdresseClient)
         // console.log("kundenLandClient: "+kundenLandClient)
     } else if(req.body.ButtonLoeschenEjs=== 'Löschen') {
-        loescheInKundeBearbeitet(kundenName, kundenNummer)
+        loescheInKundeBearbeitet(kundenID, kundenNummer)
         res.redirect("/api/v1/inHome/kundenVerwaltung/:" + maNummerURLkundenVerwaltungKundeBearbeiten + "*" + idURLkundenVerwaltungKundeBearbeiten + "*")
 
     } else if(req.body.ButtonZuruekZurKundenVerwaltungEjs=== 'Zurück zur Kundenverwaltung') {

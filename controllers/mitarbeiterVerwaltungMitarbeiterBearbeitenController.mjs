@@ -1,10 +1,10 @@
 import userEingeloggtArray from "../utils/userEingeloggtArray.mjs";
 import {sucheInDBVerladung} from "../models/inHomeVerladungDB.mjs";
-import {sucheInDBKundenBearbeitenKundenNameKundenNummer} from "../models/kundeVerwaltungBearbeitenDB.mjs";
+//import {sucheInDBKundenBearbeitenKundenNameKundenNummer} from "../models/kundeVerwaltungBearbeitenDB.mjs";
 import {
     loescheInDBMitarbeiterBearbeitet,
     schreibeInDBMitarbeiterBearbeitet,
-    sucheInDBMitarbeiterBearbeitenMaNummerVorname
+    sucheInDBMitarbeiterBearbeitenMaNummerID
 } from "../models/mitarbeiterVerwaltungMitarbeiterBearbeitenDB.mjs";
 import splitDB_DBObj from "../utils/splitDB_DBObj_General.mjs";
 import {decryptData} from "../utils/crypto.mjs";
@@ -31,13 +31,13 @@ export let mitarbeiterBearbeitenControllerGet = async (req, res) => {
     let gewaehlteMitarbeiterDatenURLStrich = myArr1PathMitStern[2]
     console.log("GET gewaehlteMitarbeiterDatenURLStrich: " + gewaehlteMitarbeiterDatenURLStrich);
     let gesplittetGewaehlteMitarbeiterDatenURLStrich = gewaehlteMitarbeiterDatenURLStrich.split("-")
-    let vorName = gesplittetGewaehlteMitarbeiterDatenURLStrich[1]
-    console.log("GET vorName: " + vorName);
+    let idMitarbeiter = gesplittetGewaehlteMitarbeiterDatenURLStrich[1]
+    console.log("GET idMitarbeiter: " + idMitarbeiter);
     let maNummer = gesplittetGewaehlteMitarbeiterDatenURLStrich[2]
     console.log("GET maNummer: " + maNummer);// ersetze %20 als lehrzeichen
 
-    console.log("GET SQLSuche: "+await sucheInDBMitarbeiterBearbeitenMaNummerVorname(maNummer,vorName))
-    let mitarbeiterGewaehltUndGefundenDBobj = await sucheInDBMitarbeiterBearbeitenMaNummerVorname(maNummer,vorName)
+    console.log("GET SQLSuche: "+await sucheInDBMitarbeiterBearbeitenMaNummerID(maNummer,idMitarbeiter))
+    let mitarbeiterGewaehltUndGefundenDBobj = await sucheInDBMitarbeiterBearbeitenMaNummerID(maNummer,idMitarbeiter)
 
     const mitarbeiterObj = splitDB_DBObj(mitarbeiterGewaehltUndGefundenDBobj)//kundeGewaehltUndGefundenDB//JSON.stringify(splitDB_DBObj(kundeGewaehltUndGefundenDB))//{"name":"John", "age":30, "car":null};
     console.log("GET mitarbeiterObj.Nachname: "+mitarbeiterObj.Nachname)//document.getElementById("demo").innerHTML = myObj.name;
@@ -65,6 +65,7 @@ export let mitarbeiterBearbeitenControllerGet = async (req, res) => {
         mitarbeiterPasswort: decryptedMitarbeiterPasswort,
         mitarbeiterRolle: mitarbeiterObj.RolleUser,
         mitarbeiterAvatarFarbe: mitarbeiterObj.AvatarFarbe,
+        avatarFarbeServer: foundImEingeloggtmitarbeiterBearbeiten.AvatarFarbeU_D,
         FooterWerIstAngemeldet: foundImEingeloggtmitarbeiterBearbeiten.MaNummer_D + " " + foundImEingeloggtmitarbeiterBearbeiten.Vorname_D
     });
 
@@ -90,8 +91,8 @@ export let mitarbeiterBearbeitenControllerPost = async (req, res) => {
     let gewaehlteMitarbeiterDatenURLStrich = myArr1PathMitStern[2]
     console.log("GET gewaehlteMitarbeiterDatenURLStrich: " + gewaehlteMitarbeiterDatenURLStrich);
     let gesplittetGewaehlteMitarbeiterDatenURLStrich = gewaehlteMitarbeiterDatenURLStrich.split("-")
-    let vorName = gesplittetGewaehlteMitarbeiterDatenURLStrich[1]
-    console.log("GET vorName: " + vorName);
+    let idMitarbeiter = gesplittetGewaehlteMitarbeiterDatenURLStrich[1]
+    console.log("GET idMitarbeiter: " + idMitarbeiter);
     let maNummer = gesplittetGewaehlteMitarbeiterDatenURLStrich[2]
     console.log("GET maNummer: " + maNummer);// ersetze %20 als lehrzeichen
 
@@ -158,12 +159,12 @@ export let mitarbeiterBearbeitenControllerPost = async (req, res) => {
         schreibeInDBMitarbeiterBearbeitet(bearbeitetMitarbeiterErfasstDatumClient,bearbeitetMitarbeiterErfasstZeitClient,
             bearbeitetMitarbeiterNummerClient,bearbeitetMitarbeiterVornameClient,bearbeitetMitarbeiterNachnameClient,
             bearbeitetMitarbeiterPasswortXClient,bearbeitetMitarbeiterRolleSelectClient,bearbeitetMitarbeiterAvatarFarbeSelectClient,
-            maNummer, vorName)
+            maNummer, idMitarbeiter)
 
         res.redirect("/api/v1/inHome/mitarbeiterVerwaltung/:" + maNummerURLmitarbeiterBearbeiten + "*" + idURLmitarbeiterBearbeiten + "*")
     } else if(req.body.ButtonLoeschenEjs === 'Löschen'){
 
-        loescheInDBMitarbeiterBearbeitet(maNummer, vorName)
+        loescheInDBMitarbeiterBearbeitet(maNummer, idMitarbeiter)
         res.redirect("/api/v1/inHome/mitarbeiterVerwaltung/:" + maNummerURLmitarbeiterBearbeiten + "*" + idURLmitarbeiterBearbeiten + "*")
     }
 

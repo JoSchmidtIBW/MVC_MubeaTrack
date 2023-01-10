@@ -1,7 +1,7 @@
 import poolDB from "../utils/db.mjs";
 
 let counterDB = 0;
-export  async  function sucheInDBKundenBearbeitenKundenNameKundenNummer(kundenname, kundennummer){
+export  async  function sucheInDBKundenBearbeitenKundenIDKundenNummer(kundenID, kundennummer){
     console.log('bin MODEL sucheInDBmaNummer-Funktion, habe bekommen: ');
 
     let conn;
@@ -11,7 +11,7 @@ export  async  function sucheInDBKundenBearbeitenKundenNameKundenNummer(kundenna
     try {
         counterDB = counterDB + 1;
         conn = await poolDB.getConnection();
-        const res = await conn.query("SELECT * FROM kundeMubea WHERE KundeK = (?) AND KundenNummer = (?)", [kundenname,kundennummer]);
+        const res = await conn.query("SELECT * FROM kundeMubea WHERE ID_K = (?) AND KundenNummer = (?)", [kundenID,kundennummer]);
         jsonS = JSON.stringify(res);
         console.log("SQL-Text: "+jsonS)
         console.log("counterDB: "+counterDB);
@@ -25,7 +25,7 @@ export  async  function sucheInDBKundenBearbeitenKundenNameKundenNummer(kundenna
 }
 
 export async  function schreibeInDBKundenBearbeitet(
-    kundenErfasstDatumClient, kundenNameClient, kundenNummerClient, kundenOrtClient, kundenAdresseClient, kundenLandClient, kundenname, kundennummer){
+    kundenErfasstDatumClient, kundenNameClient, kundenNummerClient, kundenOrtClient, kundenAdresseClient, kundenLandClient, kundenID, kundennummer){
     console.log('bin schreibeInDBKundenBearbeitet: ');
 
     let conn;
@@ -35,7 +35,7 @@ export async  function schreibeInDBKundenBearbeitet(
     try {
         counterDB = counterDB + 1;
         conn = await poolDB.getConnection();
-        const res = await conn.query("UPDATE kundeMubea SET ErfasstK = (?), KundeK = (?), KundenNummer = (?), OrtK = (?), AdresseK = (?), LandK = (?) WHERE KundeK = (?) AND KundenNummer = (?)", [kundenErfasstDatumClient,kundenNameClient,kundenNummerClient,kundenOrtClient,kundenAdresseClient,kundenLandClient,kundenname,kundennummer]);
+        const res = await conn.query("UPDATE kundeMubea SET ErfasstK = (?), KundeK = (?), KundenNummer = (?), OrtK = (?), AdresseK = (?), LandK = (?) WHERE ID_K = (?) AND KundenNummer = (?)", [kundenErfasstDatumClient,kundenNameClient,kundenNummerClient,kundenOrtClient,kundenAdresseClient,kundenLandClient,kundenID,kundennummer]);
         //jsonS = JSON.stringify(res);
         //console.log("SQL-Text: "+jsonS)
         //console.log("counterDB: "+counterDB);
@@ -49,7 +49,7 @@ export async  function schreibeInDBKundenBearbeitet(
     }
 }
 
-export async  function loescheInKundeBearbeitet(kundenname, kundennummer){
+export async  function loescheInKundeBearbeitet(kundenID, kundennummer){
     console.log('bin loescheInKundeBearbeitet: ');
 
     let conn;
@@ -59,7 +59,7 @@ export async  function loescheInKundeBearbeitet(kundenname, kundennummer){
     try {
         counterDB = counterDB + 1;
         conn = await poolDB.getConnection();
-        const res = await conn.query("DELETE FROM kundeMubea WHERE KundeK = (?) AND KundenNummer = (?)", [kundenname,kundennummer]);
+        const res = await conn.query("DELETE FROM kundeMubea WHERE ID_K = (?) AND KundenNummer = (?)", [kundenID,kundennummer]);
         //jsonS = JSON.stringify(res);
         //console.log("SQL-Text: "+jsonS)
         //console.log("counterDB: "+counterDB);
@@ -72,4 +72,4 @@ export async  function loescheInKundeBearbeitet(kundenname, kundennummer){
         throw err;
     }
 }
-export default  {sucheInDBKundenBearbeitenKundenNameKundenNummer,schreibeInDBKundenBearbeitet, loescheInKundeBearbeitet}
+export default  {sucheInDBKundenBearbeitenKundenIDKundenNummer,schreibeInDBKundenBearbeitet, loescheInKundeBearbeitet}
