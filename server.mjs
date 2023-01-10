@@ -315,7 +315,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }))
 //achtung, muss unterhalb von session sein!!!
 app.use('/api/v1/login1', loginRoute1);
-app.use('/api/v1/login2', login2Route);
+//app.use('/api/v1/login2', login2Route);
 app.use('/api/v1/inHome', inHomeRoutes);
 app.use('/api/v1/inHome/VerladungErfassen',inHomeVerladungErfassenRoute);
 //app.use('/api/v1/inHome/:0001*rTtGwkAwxI6ajLjBmMtZ3w==/kundenVerwaltung', kundenVerwaltungRoutes);

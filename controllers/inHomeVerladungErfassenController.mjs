@@ -1,8 +1,10 @@
 import userEingeloggtArray from "../utils/userEingeloggtArray.mjs";
 import {sucheInDBVerladung} from "../models/inHomeVerladungDB.mjs";
 import {sucheInDBKunden} from "../models/kundenVerwaltungDB.mjs";
+import {sucheInDBKundeMitKundenNummer} from '../models/verladungErfassenDB.mjs'
 import splitDB_DBObj from "../utils/splitDB_DBObj_General.mjs";
 import splitDB_DBObj_General from "../utils/splitDB_DBObj_General.mjs";
+import schreibeInDBErstellteVerladung from "../models/verladungErfassenDB.mjs";
 
 export let inHomeVerladungErfassenControllerGet = async (req, res) => {
     console.log("inHomeVerladungErfassenControllerGet")
@@ -108,6 +110,7 @@ export let inHomeVerladungErfassenControllerPost = async (req, res) => {
             let datumWunsch = req.body.erfasstDatumWunschClientEJS
             let datumWunschKalender = req.body.erfasstDatumWunschKalenderClientEJS
             let kunde = req.body.erfassenKundeClientEJS
+            let kundenNummerAusgewaelt = req.body.erfassenKundeNameClientEJS
             let mengeTO = req.body.erfasstMengeToClientEJS
             let artikelAL = req.body.erfasstArtikelAnLagerSelectClientEJS
             let lsILS = req.body.erfasstLSImLeitSystemSelectClientEJS
@@ -123,6 +126,7 @@ export let inHomeVerladungErfassenControllerPost = async (req, res) => {
             console.log("POST datumWunsch: " + datumWunsch);
             console.log("POST datumWunschKalender: " + datumWunschKalender);
             console.log("POST kunde: " + kunde);
+            console.log("POST kundenNummerAusgewaelt: " + kundenNummerAusgewaelt);
             console.log("POST mengeTO: " + mengeTO);
             console.log("POST artikelAL: " + artikelAL);
             console.log("POST lsILS: " + lsILS);
@@ -130,7 +134,33 @@ export let inHomeVerladungErfassenControllerPost = async (req, res) => {
             console.log("POST artikelNProd: " + artikelNProd);
 
 
-            //res.redirect("/api/v1/inHome/:"+maNummerURLinHomeVerladungErfassen+"*"+idURLinHomeVerladungErfassen+"*")
+            console.log("sucheInDBKundeMitKundenNummer: "+ await sucheInDBKundeMitKundenNummer(kundenNummerAusgewaelt))
+            let id_K = await sucheInDBKundeMitKundenNummer(kundenNummerAusgewaelt)
+            console.log("splitDB_DBObj(JSON.stringify(id_K)): " +splitDB_DBObj(JSON.stringify(id_K)))
+            console.log("JSON.stringify(id_K): " +JSON.stringify(id_K))
+            let JsonSid_K =JSON.stringify(id_K)
+            console.log("JsonSid_K: " +JsonSid_K)
+            console.log("id_K: " +JSON.stringify(splitDB_DBObj(JsonSid_K)))
+            let xxx = JSON.stringify(splitDB_DBObj(JsonSid_K))
+            let parseID_Kdata = JSON.parse(xxx);
+            console.log("jeeeeeee: "+parseID_Kdata.ID_K)
+            let parseIntParseID_Kdata = parseInt(parseID_Kdata.ID_K)
+
+            schreibeInDBErstellteVerladung(vorName, nachName, datum, Zeit, datumWunschKalender, parseIntParseID_Kdata, mengeTO, artikelAL, lsILS, r_K,artikelNProd)
+
+            // console.log("xxx:"+xxx)
+            // console.log("JSON.stringify(xxx.ID_K):"+JSON.stringify(xxx.ID_K))
+            //
+            // console.log("id_K.id_K:"+id_K.ID_K)
+            //
+            // let id_KData = await sucheInDBKundeMitKundenNummer(kundenNummerAusgewaelt)
+            // console.log("data: "+id_KData.ID_K)
+            // console.log("data: "+JSON.parse(xxx.ID_K))
+            //console.log("splitDB_DBObj(id_K):"+splitDB_DBObj(id_K))
+
+            //console.log("id_K.id_K:"+JSON.stringify(splitDB_DBObj(id_K)).ID_K)
+            //schreibeInDBErstellteVerladung(vorName, nachName, datum, Zeit, datumWunschKalender,)
+            res.redirect("/api/v1/inHome/:"+maNummerURLinHomeVerladungErfassen+"*"+idURLinHomeVerladungErfassen+"*")
         }
 
 

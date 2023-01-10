@@ -35,7 +35,7 @@
 
 
 
- <table>
+ <table id="table">
       <tr>
         <th>ID_E</th>
         <th>VnameE</th>
@@ -74,9 +74,9 @@
             Kunde: <input name="erfassenKundeClientEJS" value="" type="text" />
             <br>
             <br>
-            KundenName: <select name="erfasstArtikelAnLagerSelectClientEJS">
+            KundenName: <select name="erfassenKundeNameClientEJS">
                           <% for(var i=0; i < data.length; i++) { %>
-                             <option name="keinX_AAL" value="">"<%= data[i].KundeK %>, <%= data[i].KundenNummer %>, <%= data[i].OrtK %>, <%= data[i].AdresseK %>, <%= data[i].LandK %>"</option>
+                             <option name="keinX_AAL" value="<%= data[i].KundenNummer %>">"<%= data[i].KundeK %>, <%= data[i].KundenNummer %>, <%= data[i].OrtK %>, <%= data[i].AdresseK %>, <%= data[i].LandK %>"</option>
                           <% } %>
                         </select>
                         <br>
