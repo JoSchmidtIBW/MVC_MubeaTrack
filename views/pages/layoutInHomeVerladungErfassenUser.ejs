@@ -33,9 +33,7 @@
 
 
 
-
-
- <table>
+<table id="table">
       <tr>
         <th>ID_E</th>
         <th>VnameE</th>
@@ -53,7 +51,60 @@
       <br>
 
     </table>
+<form action="" method="post" class="formAdminHeader">
+            Vorname: <input name="erfassenVornameClientEJS" value="<%=vorName%>" type="text" readonly="readonly"/>
+            <br>
+            Nachname: <input name="erfassenNachnameClientEJS" value="<%=nachName%>" type="text" readonly="readonly"/>
+            <br>
+            ErfassenDatum: <input name="erfassenDatumClientEJS" value="<%= ("0"+new Date().getDate()).slice(-2)+'.'+("0"+(new Date().getMonth()+1)).slice(-2)+'.'+new Date().getFullYear()%>" readonly="readonly" type="text" />
+            <br>
+            ErfassenUhrzeit: <input name="erfassenZeitClientEJS" value="<%= new Date().toLocaleTimeString() %>" type="text" readonly="readonly"/>
+            <br>
+            WunschDatum: <input name="erfassenWunschDatumClientEJS" value="" type="text" /><a id="AusgabeMaNummerFehlerServer"></a>
+            <br>
+<input type="text" data-role="calendarpicker" data-cls-calendar="compact"
+    data-input-format="%d.%m.%y" value="" placeholder="05.03.1997" name="erfasstDatumWunschClientEJS">
+            <br>
+                        <!--<div class="date">-->
+                         WunschDatum: <input type="date" class="inputx" name="erfasstDatumWunschKalenderClientEJS"/>
+                        <!--</div>-->
+            <br>
+            Kunde: <input name="erfassenKundeClientEJS" value="" type="text" />
+            <br>
+            <br>
+            KundenName: <select name="erfassenKundeNameClientEJS">
+                          <% for(var i=0; i < data.length; i++) { %>
+                             <option name="keinX_AAL" value="<%= data[i].KundenNummer %>">"<%= data[i].KundeK %>, <%= data[i].KundenNummer %>, <%= data[i].OrtK %>, <%= data[i].AdresseK %>, <%= data[i].LandK %>"</option>
+                          <% } %>
+                        </select>
+                        <br>
+            <br>
+            Menge In Tonnen: <input name="erfasstMengeToClientEJS" value="" type="text" />
+            <br>
+            Artikel An Lager: <select name="erfasstArtikelAnLagerSelectClientEJS">
+                                            <option name="keinX_AAL" value="">"kein X"</option>
+                                            <option name="X_AAL" value="X">"X"</option>
+                                      </select>
+            <br>
+            LS im Leitsystem: <select name="erfasstLSImLeitSystemSelectClientEJS">
+                                            <option name="keinX_LSILS" value="">"kein X"</option>
+                                            <option name="X_LSILS" value="X">"X"</option>
+                                      </select>
+            <br>
+            R_K: <select name="erfasstR_KSelectClientEJS">
+                                            <option name="keinX_R_K" value="">"kein X"</option>
+                                            <option name="X_R_K" value="X">"X"</option>
+                                      </select>
+            <br>
+            Artikel Nicht Produziert: <input name="erfasstArtikelNichtProdClientEJS" value="" type="text" />
+            <br>
 
+
+
+            <br>
+            <input type="submit"  value="Speichern"  name="ButtonSpeichernEjs"/>
+            <input type="submit"  value="Abrechen"  name="ButtonAbrechenEjs"/>
+        </form>
     <br>
     <br>
 
