@@ -230,7 +230,7 @@ export async function erstelleUser(maNummerLClient, encryptedStringPasswortLClie
     ausgabeDB = await sucheInDBmaNummerPasswort(maNummerLClient, encryptedStringPasswortLClient);
     console.log("////////*************** ausgabe:"+ausgabeDB)
     let u1 = new User();
-
+    console.log("---------------------------------------------------------------------------"+u1.setId_UserU(splitDB_DBObj(ausgabeDB)))
     u1.setId_UserU(splitDB_DBObj(ausgabeDB).ID_User)
     u1.setErfasstDatumU(splitDB_DBObj(ausgabeDB).Erfasst_D_U);
     u1.setErfasstZeitU(splitDB_DBObj(ausgabeDB).Erfasst_Z_U);
