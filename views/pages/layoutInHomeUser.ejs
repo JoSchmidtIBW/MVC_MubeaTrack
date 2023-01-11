@@ -8,6 +8,7 @@
 
     <!-- <link type="text/css" rel="stylesheet" href="/public/css/styleInHome.css" media="all"> -->
     <link type="text/css" rel="stylesheet" href="/css/styleInHome.css" media="all">
+    <link rel="icon" type="image/png" href="/images/favicon/favicon.png">
 
     <title>Home</title>
 </head>
@@ -22,9 +23,9 @@
        <h1>Wellcome <%=werIstAngemeldetH%> inHome</h1>
        <br>
        <a>hi <%=MaNummerServer%></a>
+        <a>AvatarFarbe: <%=avatarFarbeServer%></a>
 
-
- <table>
+ <table id="table">
       <tr>
         <th>ID_E</th>
         <th>VnameE</th>
@@ -62,6 +63,9 @@
     <br>
     <br>
 
+            <form action="" method="post" class="formAdminHeader">
+                <input type="submit"  value="Verladung Erfassen"  name="ButtonVerladungErfassenEjs"/>
+            </form>
 
 
        </main>

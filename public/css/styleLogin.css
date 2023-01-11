@@ -10,7 +10,7 @@ font-family: 'Poppins', sans-serif;
 *{
     margin: 0;                   /*rand zwischen header und seite*/
     padding: 0;                  /*damit kein andere Browser was macht*/
-    box-sizing: border-box;      /*standart setzen*/
+     box-sizing: border-box;      /*standart setzen*/
 }
 
 /*------------------------------------------------------------------------------------------------------*/
@@ -28,7 +28,8 @@ header {
 
 main {
     background-image: url('https://www.w3docs.com/uploads/media/default/0001/01/477719675fecaac0362957c214fb9aa56fca99b5.jpeg');
-    background-image: url('/images/rohre_ersatz.jpg');
+    /*background-image: url('/images/rohre_ersatz.jpg');*/
+    background-image: url('/images/background.png');
     background-repeat: no-repeat;
     background-attachment: fixed;
     /* background-position: center;*/
@@ -37,10 +38,15 @@ main {
     background-position-y: bottom;
 
     /*background-size: auto;*/
-    background-size: 100% 100%;
-
+    /*background-size: 100% 100%;*/
+    background-size: 100% 75%;
     font-family: 'Hanken Grotesk', sans-serif;
     margin: 0px;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
 }
 
 /*
@@ -51,17 +57,26 @@ main {
     color: #004b95;
 }
 */
+.aLogo{
+    height: 560px;
+}
 .MubeaLogo {
     margin: 1px;
     margin-left: 10px;
-    margin-top: 6px;
+    margin-top: 3px;
     padding: 0;
     box-sizing: border-box;
+    /*height:2px;
+    width:3px;*/
 }
 .MubeaTrack{
     color: #c8ed10;
-    font-size: 2em;
-    font-weight: bold;/*
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: -3px;
+    /*display: block;*/
+    padding: 0;
+    /*
     margin-bottom: -5px;
     padding: -5px;
     height: 30px;*/
@@ -70,19 +85,19 @@ main {
 
 .container {
     width: 650px;
-    height: 600px;
+    height: 680px;
     position:relative;
     background-color:transparent;
-    border-color: red tomato tomato tomato;
-    border-style: solid;
+    /* border: 1px solid blueviolet;   zum sehen*/
 }
+
+
 #Dreieck {
-    width: 640px;
-    height: 590px;
-    border-color: green green green green;
-    border-style: solid;
+    width: 100px;
+    height: 200px;
+    /*border: 1px solid darkslateblue;   zum sehen*/
     /*display: block;*/    /*120% ist grösse */
-    background:linear-gradient(to bottom right,#004b95 35%,transparent 55%) bottom left/100% 100% no-repeat,
+    background:linear-gradient(to bottom right,#004b95 15%,transparent 55%) bottom left/100% 100% no-repeat,
     transparent;
     min-height: 10vh;
     /*filter:drop-shadow(0 0px);*/
@@ -90,12 +105,11 @@ main {
 
 .login {
     /*width: 200px;*/
-    height: 400px;
+    height: 500px;
     /*position:;*/
-    margin: 10px;
+    margin-left: 120px;
     background-color:transparent;
-    border-color: red tomato tomato tomato;
-    border-style: solid;
+    /*border: 1px solid darkgreen;   zum sehen*/
 }
 
 
@@ -383,12 +397,110 @@ h1 {
 
 
 
+
+
+
+.vierEckLoginBtn{
+    width: 520px;
+    height: 220px;
+    /*border: 1px solid black;   zum sehen*/
+}
+.btnAnmelden{
+    width:200px;
+    background: #F9FDE7;/*rgba(255,0,0,0.5);/*#c8ed10;*/
+    border:none;
+    height: 25px;
+
+}
+
+
+.titleLoginBar{
+    font-size: 18px;
+    color: #012448;
+    font-weight: bolder;
+}
+
+
+.viereckloginGrid{
+    width: 398px;
+    height: 189px;
+    border: 1px solid darkslateblue;
+    padding-left: 10px;
+    padding-top: 5px;
+}
+.loginTitle{
+    width: 530px;
+}
+
+.loginGrid {
+    padding-left: 5px;
+    display: grid;
+    /*grid-template-columns: repeat(1, 0.4fr);original*/
+    grid-template-columns: repeat(1, 5px  0fr 0.1fr 1fr);
+    gap: 10px;
+    grid-auto-rows: minmax(3px, auto);
+}
+.one {
+    grid-column: 1;
+    grid-row: 1;
+}
+.two {
+    grid-column: 2;
+    grid-row: 1;
+}
+.three {
+    grid-column: 3;
+    grid-row: 1;
+}
+.four {
+    grid-column: 4;
+    grid-row: 1;
+}
+
+.oneR {
+    grid-column: 1;
+    grid-row: 2;
+}
+.twoR {
+    grid-column: 2;
+    grid-row: 2;
+}
+.threeR {
+    grid-column: 3;
+    grid-row: 2;
+}
+.fourR {
+    grid-column: 4;
+    grid-row: 2;
+}
+
+.btnAnmeldenHilfe{
+    width: 200px;
+    height: 40px;
+   /* border: 1px solid blue;   zum sehen*/
+}
+
+.btnHilfe{
+    float:right;
+    background:none;
+    border:none;
+    margin-top:10px;
+    padding:0;
+    cursor: pointer;
+    color: aliceblue;
+}
+
+
+
+
+
+
 .footer-Login {
     position: fixed;
     color: #696969;
     border-style: solid;
     border-color: silver darkgray darkgray darkgray;
-    border-top-left-radius: 0.4em;
+    border-top-left-radius: 0.0em;
     border-width: 1px;
     background-color: lightgray;
     font-family: 'Khand';
@@ -396,11 +508,13 @@ h1 {
     /*damit foot immer ganz unten, geht auch mit flex*/
     position: absolute;
     bottom: 0;
-    width: 99.5%;
-    margin-left: 1px;
+    width: 100%;/*99.5%;*/
+    margin-left: 0px;
     /*margin-top: 100px;*/
     /*margin-bottom: 10px;*/
-    padding: 10px;
+    padding: 4px;
+    position: fixed;
+    bottom: 0px;
 }
 
 .pCopyRFooterLogin {

@@ -47,4 +47,8 @@ h1 {
     border-color: silver darkgray darkgray darkgray;
     border-top-left-radius: 0.4em;
     border-width: 1px;
+
+    position: fixed;
+    bottom: 2px;
+    width: 99.5%;
 }

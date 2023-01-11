@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="de">
+
+    <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link type="text/css" rel="stylesheet" href="/css/styleInHome.css" media="all">
+    <link rel="icon" type="image/png" href="/images/favicon/favicon.png">
+
+    <title>MitarbeiterBearbeiten</title>
+</head>
+
+<body>
+
+<%- include('../partials/headerAdmin'); %>
+
+    <main>
+
+        <h1>MitarbeiterBearbeiten</h1>
+   <form action="" method="post" class="formAdminHeader">
+             MitarbeiterErfasstDatum: <select name="MitarbeiterErfasstDatumClientEJS">
+                <option name="<%= mitarbeiterErfasstDatum %>" value="<%= mitarbeiterErfasstDatum %>">"<%= mitarbeiterErfasstDatum %>"</option>
+                <option name="DatumHeute" value="<%= new Date();%>"><%= ("0"+new Date().getDate()).slice(-2)+'.'+("0"+(new Date().getMonth()+1)).slice(-2)+'.'+new Date().getFullYear()%></option>
+              </select>
+            <br>
+             MitarbeiterErfasstZeit: <select name="MitarbeiterErfasstZeitClientEJS">
+                <option name="<%= mitarbeiterErfasstZeit %>" value="<%= mitarbeiterErfasstZeit %>">"<%= mitarbeiterErfasstZeit %>"</option>
+                <option name="ZeitJetzt" value="<%= new Date();%>"><%= new Date().toLocaleTimeString() %></option>
+              </select>
+            <br>
+            MitarbeiterNummer: <input name="MitarbeiterNummerClientEJS" value="<%= mitarbeiterNummer %>" type="text" />
+            <br>
+            MitarbeiterVorname: <input name="MitarbeiterVornameClientEJS" value="<%= mitarbeiterVorname %>" type="text" />
+            <br>
+            MitarbeiterNachname: <input name="MitarbeiterNachnameClientEJS" value="<%= mitarbeiterNachname %>" type="text" />
+            <br>
+            MitarbeiterPasswortX: <input name="MitarbeiterPasswortXClientEJS" value="<%= mitarbeiterPasswortX %>" type="text" readonly="readonly"/>
+            <br>
+            MitarbeiterPasswort: <input name="MitarbeiterPasswortClientEJS" value="<%= mitarbeiterPasswort %>" type="text" readonly="readonly"/>
+            <br>
+            MitarbeiterRolle:<select name="MitarbeiterRolleSelectClientEJS">
+                                   <option name="ChefName" value="Chef">"Chef"</option>
+                                   <option name="MitarbeiterName" value="Mitarbeiter">"Mitarbeiter"</option>
+                             </select>
+            <br>
+            MitarbeiterAvatarFarbe:<select name="MitarbeiterAvatarFarbeSelectClientEJS">
+                                        <option name="BlauName" value="Blau">"Farbe Blau"</option>
+                                        <option name="RotName" value="Rot">"Farbe Rot"</option>
+                                   </select>
+            <br>
+
+
+            <input type="submit"  value="Speichern"  name="ButtonSpeichernEjs"/>
+            <input type="submit"  value="Löschen"  name="ButtonLoeschenEjs"/>
+            <input type="submit"  value="Abrechen"  name="ButtonAbrechenEjs"/>
+        </form>
+
+        <br>
+
+        <form action="" method="post" class="formAdminHeader">
+            <input type="submit"  value="Zurück zur Mitarbeiterverwaltung"  name="ButtonZuruekZurMitarbeiterVerwaltungEjs"/>
+        </form>
+
+
+    </main>
+    <%- include('../partials/footerAdminUser'); %>
+
+    <scirpt>
+    </script>
+
+</body>
+
+</html>

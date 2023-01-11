@@ -6,6 +6,9 @@ import {encryptData, decryptData} from "../utils/crypto.mjs";
 import User from "../utils/User.mjs";
 import userEingeloggtArray from "../utils/userEingeloggtArray.mjs";
 
+import cookieParser from 'cookie-parser';
+import session from 'express-session';
+
 
 let maNummerLEingabeClient;
 let passwortLEingabeClient;
@@ -19,6 +22,15 @@ export let loginControllerGet = (req, res) => {
             passwortLServer : passwortLEingabeClient,
             xClicker: clicker()     // test mit einer Funktion namens clicker()....
         });
+
+    //console.log("lllreq.session.page_views: "+JSON.stringify(req.session.page_views))
+    // if(req.session.page_views){
+    //     req.session.page_views++;
+    //     res.send("You visited this page " + req.session.page_views + " times");
+    // } else {
+    //     req.session.page_views = 1;
+    //     res.send("Welcome to this page for the first time!");
+    // }
 };
 
 
@@ -121,7 +133,27 @@ export let loginControllerPost = async(req, res)=>{
 
         //console.log("req.session: "+req.session);
         console.log("////////////////////////// hier käme inHome....////////////////////////////////////////////////////////////");
-        res.redirect('/api/v1/inHome/:'+ (await user1).getMaNummerU()+"*"+(await user1).getPasswortU());
+        //res.redirect('/api/v1/inHome/:'+ (await user1).getMaNummerU()+"*"+(await user1).getPasswortU());
+
+        let x = 1;
+        //let session=req.session;
+         let session = (await user1).getID();
+        console.log("llreq.session: "+req.session);//[object Object]
+        console.log("llJSON.stringifyreq.session: "+JSON.stringify(req.session))
+        console.log("llsession: "+session)//[object Object]
+        console.log("llJSON.stringifysession: "+JSON.stringify(session))
+        if(req.session.cookie.maxAge){
+            req.session.cookie.maxAge = false;
+            res.redirect('/api/v1/inHome/:'+ (await user1).getMaNummerU()+"*"+(await user1).getPasswortU());
+        }
+        else{
+            res.send('afewrtrdfgXX!');
+        }
+
+
+
+
+
         //res.redirect('/api/v1/inHome/:'+JSON.stringify(userData1));
         //res.redirect('/api/v1/inHome/:'+accessToken);
         //res.redirect('/api/v1/inHome/:'+(await user1).getMaNummerU()+(await user1).getPasswortU()+(await user1).getID()+(await user1).getRolleU())
@@ -164,7 +196,7 @@ export let loginControllerPost = async(req, res)=>{
 let myCounter = 0;
 function clicker() {
     myCounter = myCounter +1;
-    console.log("Button Working! ich bin loginRoute.mjs, myCounter: " + myCounter);
+    console.log("Button Working! ich bin loginRoute1.mjs, myCounter: " + myCounter);
 };
 
 
@@ -203,16 +235,16 @@ export default {loginControllerGet, loginControllerPost};
 // zum lernen, braucht es nicht, aber hier entsteht jedesmal ein neuer hash
 //------------------------------+++++++++++++-+--------------------------------------------------
 //import CryptoJS from 'crypto-js';         erstellt jedesmal ein neuer hash
-let cipherPasswortL = CryptoJS.AES.encrypt("1", 'secret key 123').toString();////
-console.log("cipherPasswortL: "+cipherPasswortL)
+//let cipherPasswortL = CryptoJS.AES.encrypt("1", 'secret key 123').toString();////
+//console.log("cipherPasswortL: "+cipherPasswortL)
 //problem: man kann ma-nummer suchen, objekt erstellen mit pw, wenn pw gleich decrypt dann gut
 //aber mann möchte ma_nummer und pw suchen in db, was wenn es zwei gleiche ma_nummern hat
 // Decrypt
 let bytes  = CryptoJS.AES.decrypt("U2FsdGVkX1+nJNyUfcMjzGmoApYQeogYR3oBzoCB19Q=", 'secret key 123');
-console.log("bytespasswortL: "+bytes)
+//console.log("bytespasswortL: "+bytes)
 let originalText = bytes.toString(CryptoJS.enc.Utf8);
 
-console.log("originalTextpasswortL: "+originalText); // 'my message'
+//console.log("originalTextpasswortL: "+originalText); // 'my message'
 //------------------------------------+++++++++++++++++---------------------------------------------
 
 
@@ -461,7 +493,7 @@ console.log("originalTextpasswortL: "+originalText); // 'my message'
 // let myCounter = 0;
 // function clicker() {
 //     myCounter = myCounter +1;
-//     console.log("Button Working! ich bin loginRoute.mjs, myCounter: " + myCounter);
+//     console.log("Button Working! ich bin loginRoute1.mjs, myCounter: " + myCounter);
 // };
 // //----------------------------------------------------------------------------------
 //

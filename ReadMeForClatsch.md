@@ -86,7 +86,8 @@ DatumE VARCHAR(100),
 UhrzeitE VARCHAR(100),
 WunschDatum VARCHAR(100),
 #KundeV VARCHAR(100) NOT NULL,
-ID_KV int NOT NULL,
+#ID_KV int NOT NULL,
+ID_KV int,
 MengeTo VARCHAR(100),
 ArtikelAnLager VARCHAR(100),
 LSimLeitsystem VARCHAR(100),
@@ -94,7 +95,7 @@ R_K VARCHAR(100),
 ArtikelNichtProd VARCHAR(100)  DEFAULT 'open',
 #FOREIGN KEY(KundeV) REFERENCES kundeMubea(KundeK),
 #FOREIGN KEY(ID_E) REFERENCES kundeMubea(ID_K),
-FOREIGN KEY(ID_KV) REFERENCES kundeMubea(ID_K),
+#FOREIGN KEY(ID_KV) REFERENCES kundeMubea(ID_K),      #funktioniert
 PRIMARY KEY (ID_E)
 );
 
@@ -116,10 +117,10 @@ SHOW TABLES;
 
 SELECT * FROM kundeMubea;
 UPDATE kundeMubea SET KundeK ='Firma Brosch' WHERE ID_K=1;
-SELECT * FROM kundeMubea;
+
 SELECT * FROM versandlisteMubea;
 SELECT * FROM userVerkaufMubea;
-
+SELECT * FROM kundeMubea;
 
 #Die Tabelle, welche man sehen möchte:
 SELECT versandListeMubea.ID_E, versandListeMubea.VnameE, versandListeMubea.NnameE, versandListeMubea.DatumE, versandListeMubea.UhrzeitE, versandListeMubea.WunschDatum, kundeMubea.KundeK, versandListeMubea.MengeTo, versandListeMubea.ArtikelAnLager, versandListeMubea.LSimLeitSystem, versandListeMubea.R_K, versandListeMubea.ArtikelNichtProd FROM versandListeMubea INNER JOIN kundeMubea ON kundeMubea.ID_K=versandListeMubea.ID_KV;

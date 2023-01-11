@@ -19,6 +19,30 @@
             </form>
 
 
-            <a>Avatar</a>
+            <button class="btnAvatar" id="btnAvatar">ME</button>
         </div>
+
+
+
+        <script>
+            console.log("avatarFarbe: "+<%- JSON.stringify(avatarFarbeServer) %>)
+            let avatarFarbe = <%- JSON.stringify(avatarFarbeServer) %>
+            if(avatarFarbe === "blau"){
+                //document.getelementbyid('btnAvatar').style.background = "blue"/*"#1e9107"*/ /*"#c8ed10";*/
+               btnAvatar.style.background = "blue"
+            } else if(avatarFarbe === "rot"){
+                btnAvatar.style.background = "red"
+               // document.getelementbyid('btnAvatar').style.background = "red"
+                //lbAusgabeMaNummerLServer.style.fontWeight = "900";
+            } else if(avatarFarbe === "grün"){
+                //lbAusgabePasswortLServer.style.color = "#27b30b";
+                //lbAusgabePasswortLServer.style.fontWeight = "900";
+            } else if(avatarFarbe === "orange"){
+                //lbAusgabePasswortLServer.style.color = "#e31220";
+                //lbAusgabePasswortLServer.style.fontWeight = "900";
+            } else if(avatarFarbe === "pink"){
+               // lbAusgabePasswortLServer.style.color = "#e31220";
+            }
+
+         </script>
     </header>

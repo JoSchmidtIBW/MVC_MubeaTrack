@@ -1,5 +1,5 @@
 import express from "express";
-import {authentificateUser} from "../utils/authenticateUser.mjs";
+import {authentificateUser1} from "../utils/authenticateUser.mjs";
 import {mitarbeiterVerwaltungControllerGet,mitarbeiterVerwaltungControllerDelete,mitarbeiterVerwaltungControllerPost} from "../controllers/mitarbeiterVerwaltungController.mjs";
 
 
@@ -7,9 +7,9 @@ const router = express.Router();
 
 
 
-router.get('/:irgendwas',authentificateUser,mitarbeiterVerwaltungControllerGet);
-router.delete('/:irgendwas',authentificateUser,mitarbeiterVerwaltungControllerDelete);
-router.post('/:irgendwas',authentificateUser,mitarbeiterVerwaltungControllerPost);
+router.get('/:irgendwas',authentificateUser1,mitarbeiterVerwaltungControllerGet);
+router.delete('/:irgendwas',authentificateUser1,mitarbeiterVerwaltungControllerDelete);
+router.post('/:irgendwas',authentificateUser1,mitarbeiterVerwaltungControllerPost);
 
 
 export default router;

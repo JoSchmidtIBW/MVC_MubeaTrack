@@ -2,6 +2,103 @@ import {sucheInDBmaNummer, sucheInDBmaNummerPasswort} from "../models/loginMaNum
 import splitDB_DBObj from "./splitDB_DBObj_General.mjs";
 import userEingeloggtArray from "./userEingeloggtArray.mjs";
 
+export function authentificateUser1(req, res, next){
+    // console.log("ich bin authentificateUser-Funktion in utils/authentificateUser.js")
+
+    // splitte alles, was in url drin steht bei inHome/:irgendwas
+    const myArrFullPath = req.path.split(':');
+    //console.log("myArrPath: "+myArrFullPath)
+    let gesplittetVonURLdenUserTeil = myArrFullPath[1];
+    //console.log("gesplittetVonURLdenUserTeil: "+gesplittetVonURLdenUserTeil)
+    const myArr1PathMitStern = gesplittetVonURLdenUserTeil.split('*');
+    let maNummerURLAuth = myArr1PathMitStern[0];
+    let idURLAuth = myArr1PathMitStern[1];
+    console.log("Authentic1 maNummerURLAuth: " + maNummerURLAuth);
+    console.log("Authentic1 idURLAuth: " + idURLAuth);
+
+    //let cookieVal = req.cookies.username;
+    let cookieVorhanden = req.cookies.cokMaNummer;
+    //console.log("Authentic1 cookieVorhanden: " + cookieVorhanden);
+
+    //console.log("auth params: "+JSON.stringify(req.params))
+    //console.log("auth param: "+req.params)
+    //.log("auth param maNummer:"+req.params['maNummerPATH']);
+    //console.log("auth param maNummer:"+req.params['idPATH']);
+
+   // console.log("aut1 req.session---------: "+JSON.stringify(req.session))
+
+  //  const token = req.cookies.access_token;
+  //  console.log("token: "+ token)
+
+
+    // if (!token) {
+    //     return res.sendStatus(403);
+    // }
+    // // Even more logic goes here
+
+
+    //console.log("Authentic1 passwortURL: "+passwortURLAuth);
+    //console.log("Authentic1 userEingeloggtArray.length "+userEingeloggtArray.length)   // 2)
+
+    //console.log("Authentic1 userEingeloggtArray: "+JSON.stringify(userEingeloggtArray));
+     foundImEingeloggt = userEingeloggtArray.find(x => (x.MaNummer_D === maNummerURLAuth && x.userID_D === parseInt(idURLAuth)));// x.Passwort_D==='rTtGwkAwxI6ajLjBmMtZ3w=='))//x.userID_D === idURLAuth))//; x.Passwort_D===passwortURLAuth))
+     //console.log("Authentic1 foundImEingeloggt: "+JSON.stringify(foundImEingeloggt));
+    //console.log("Authentic1 foundImEingeloggt: "+foundImEingeloggt);
+
+   // console.log("expires: "+ req.session.cookie.expires)
+   // let session = req.session;
+
+
+    if(foundImEingeloggt===undefined){
+        res.send("<h1>Sie haben sich ausgeloggt, 401 Unautorized :) :)</h1><input type=\"button\" onclick=\"location.href='/api/v1/login1';\" value=\"Go to login\" />");
+    }
+    else {
+        if(cookieVorhanden){
+            return next();
+        }else{
+            res.send("<h1>Sie waren zu lange eingeloggt, Sie müssen sich nochmals einloggen, 401 Unautorized :) :)</h1><input type=\"button\" onclick=\"location.href='/api/v1/login1';\" value=\"Go to login\" />");
+        }
+         //if(req.cookies.cokMaNummer.maxAge){
+             //return next();
+        // console.log("req.cookies.cokMaNummer "+req.cookies.cokMaNummer)
+        // console.log("JSON.stringify(req.cookies) "+JSON.stringify(req.cookies));
+        // console.log("req.cookies.cokMaNummer.age "+req.cookies.cokMaNummer.age);
+        //     res.send(req.cookies.cokMaNummer+" "+req.cookies.cokMaNummer.age)
+         //}
+         //else{
+             // req.session.destroy();
+             //res.send("<h1>Sie waren zu lange eingeloggt, Sie müssen sich nochmals einloggen, 401 Unautorized :) :)</h1><input type=\"button\" onclick=\"location.href='/api/v1/login1';\" value=\"Go to login\" />");
+        // }
+
+        //  if(req.session.cookie.maxAge){
+        //      //req.session.cookie.maxAge = false;
+        // //     //res.send("hello")
+        //      return next();
+        //  }
+        //  else{
+        //     // req.session.destroy();
+        //     res.send("<h1>Sie waren zu lange eingeloggt, Sie müssen sich nochmals einloggen, 401 Unautorized :) :)</h1><input type=\"button\" onclick=\"location.href='/api/v1/login1';\" value=\"Go to login\" />");
+        //  }
+        //res.send("1111")
+    }
+
+    // if(foundImEingeloggt===undefined||foundImEingeloggt.MaNummer_D.length===0 || foundImEingeloggt.MaNummer_D === undefined
+    //     || foundImEingeloggt.Passwort_D.length===0 || foundImEingeloggt.Passwort_D === undefined){
+    //     //return res.send("401 Unautorized :) :)");
+    //     res.send("<h1>401 Unautorized :) :)</h1><input type=\"button\" onclick=\"location.href='/api/v1/login2';\" value=\"Go to login\" />")
+    // } else if(maNummerURLAuth != foundImEingeloggt.MaNummer_D){
+    //     // achtung, wenn server neustartet ist user nicht im array!!!!!!
+    //     res.send("<h1>MaNummer ist falsch, 401 Unautorized :) :)</h1><input type=\"button\" onclick=\"location.href='/api/v1/login2';\" value=\"Go to login\" />");
+    // }
+    // else if(passwortURLAuth != foundImEingeloggt.Passwort_D){
+    //     res.send("<h1>passwort ist falsch, 401 Unautorized :) :)</h1><input type=\"button\" onclick=\"location.href='/api/v1/login2';\" value=\"Go to login\" />");
+    // }
+    // else{
+        //res.send("1111")
+        //return next();
+    // }
+
+}
 
 var foundImEingeloggt;
 // sucht, ob name von url, ob das objekt im array mit eingeloggten objekten drin ist
