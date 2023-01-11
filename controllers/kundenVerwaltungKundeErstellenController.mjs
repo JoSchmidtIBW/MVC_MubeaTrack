@@ -6,6 +6,7 @@ import schreibeInDBKundenErstellen from "../models/kundenVerwaltungErstellenKund
 //     sucheInDBKundenBearbeitenKundenIDKundenNummer
 // } from "../models/kundeVerwaltungBearbeitenDB.mjs";
 import splitDB_DBObj from "../utils/splitDB_DBObj_General.mjs";
+import isPositivNumber from "../utils/kundenErstellenValidate.mjs";
 
 export let kundenVerwaltungKundeErstellenControllerGet = async (req, res) => {
     console.log("Bin GET ErstelleKunde")
@@ -25,6 +26,10 @@ export let kundenVerwaltungKundeErstellenControllerGet = async (req, res) => {
      res.render('pages/layoutKundenVerwaltungKundeErstellen', {
 
          FehlerKundenName: "",
+         FehlerKundenNummer: "",
+         FehlerKundenOrt: "",
+         FehlerKundenAdresse: "",
+         FehlerKundenLand: "",
          avatarFarbeServer: foundImEingeloggtkundenVerwaltungKundeErstellen.AvatarFarbeU_D,
          FooterWerIstAngemeldet: foundImEingeloggtkundenVerwaltungKundeErstellen.MaNummer_D + " " + foundImEingeloggtkundenVerwaltungKundeErstellen.Vorname_D
      });
@@ -56,6 +61,12 @@ export let kundenVerwaltungKundeErstellenControllerPost = async (req, res) => {
         let neuKundenAdresseClient = req.body.neuKundenAdresseClientEJS
         let neuKundenLandClient = req.body.neuKundenLandClientEJS
 
+        neuKundenNameClient = neuKundenNameClient.trim();
+        neuKundenNummerClient = neuKundenNummerClient.trim()
+        neuKundenOrtClient = neuKundenOrtClient.trim()
+        neuKundenAdresseClient = neuKundenAdresseClient.trim()
+        neuKundenLandClient = neuKundenLandClient.trim()
+
         console.log("neuKundenNameClient: "+neuKundenNameClient)
         console.log("neuKundenNummerClient: "+neuKundenNummerClient)
         console.log("neuKundenOrtClient: "+neuKundenOrtClient)
@@ -70,14 +81,67 @@ export let kundenVerwaltungKundeErstellenControllerPost = async (req, res) => {
         console.log("neuKundenErfasstDatumClient: "+neuKundenErfasstDatumClient)
         console.log("neuKundenErfasstDatumClient.length: "+neuKundenErfasstDatumClient.length)
 
-        schreibeInDBKundenErstellen(neuKundenErfasstDatumClient, neuKundenNameClient, neuKundenNummerClient, neuKundenOrtClient, neuKundenAdresseClient, neuKundenLandClient)
 
-        if(neuKundenNameClient===""){
+        let isNeuKundenNameClientPositivNumber = false;
+        //console.log("isNeuKundenNameClientNumber: "+isPositivNumber(neuKundenNummerClient))
+
+        isNeuKundenNameClientPositivNumber = isPositivNumber(neuKundenNummerClient);
+        console.log(neuKundenNummerClient + ": " + (isNeuKundenNameClientPositivNumber ? "Yes" : "No"));
+
+
+        if(neuKundenNameClient==="") {
             res.render('pages/layoutKundenVerwaltungKundeErstellen', {
-                FehlerKundenName: "KundenName muss geschrieben werden",
+                FehlerKundenName: "Fehlende Eingabe!",
+                FehlerKundenNummer: neuKundenNummerClient,
+                FehlerKundenOrt: neuKundenOrtClient,
+                FehlerKundenAdresse: neuKundenAdresseClient,
+                FehlerKundenLand: neuKundenLandClient,
+                avatarFarbeServer: foundImEingeloggtkundenVerwaltungKundeErstellen.AvatarFarbeU_D,
+                FooterWerIstAngemeldet: foundImEingeloggtkundenVerwaltungKundeErstellen.MaNummer_D + " " + foundImEingeloggtkundenVerwaltungKundeErstellen.Vorname_D
+            });
+        } else if(neuKundenNummerClient==="") {
+            res.render('pages/layoutKundenVerwaltungKundeErstellen', {
+                FehlerKundenName: neuKundenNameClient,
+                FehlerKundenNummer: "Fehlende Eingabe!",
+                FehlerKundenOrt: neuKundenOrtClient,
+                FehlerKundenAdresse: neuKundenAdresseClient,
+                FehlerKundenLand: neuKundenLandClient,
+                avatarFarbeServer: foundImEingeloggtkundenVerwaltungKundeErstellen.AvatarFarbeU_D,
+                FooterWerIstAngemeldet: foundImEingeloggtkundenVerwaltungKundeErstellen.MaNummer_D + " " + foundImEingeloggtkundenVerwaltungKundeErstellen.Vorname_D
+            });
+
+        } else if(isNeuKundenNameClientPositivNumber===false){
+            res.render('pages/layoutKundenVerwaltungKundeErstellen', {
+                FehlerKundenName: neuKundenNameClient,
+                FehlerKundenNummer: "Falsche Eingabe! Nur positive Zahlen!",
+                FehlerKundenOrt: neuKundenOrtClient,
+                FehlerKundenAdresse: neuKundenAdresseClient,
+                FehlerKundenLand: neuKundenLandClient,
+                avatarFarbeServer: foundImEingeloggtkundenVerwaltungKundeErstellen.AvatarFarbeU_D,
+                FooterWerIstAngemeldet: foundImEingeloggtkundenVerwaltungKundeErstellen.MaNummer_D + " " + foundImEingeloggtkundenVerwaltungKundeErstellen.Vorname_D
+            });
+        } else if(neuKundenNameClient==="" && neuKundenNummerClient==="") {
+            res.render('pages/layoutKundenVerwaltungKundeErstellen', {
+                FehlerKundenName: "Fehlende Eingabe!",
+                FehlerKundenNummer: "Fehlende Eingabe!",
+                FehlerKundenOrt: neuKundenOrtClient,
+                FehlerKundenAdresse: neuKundenAdresseClient,
+                FehlerKundenLand: neuKundenLandClient,
+                avatarFarbeServer: foundImEingeloggtkundenVerwaltungKundeErstellen.AvatarFarbeU_D,
+                FooterWerIstAngemeldet: foundImEingeloggtkundenVerwaltungKundeErstellen.MaNummer_D + " " + foundImEingeloggtkundenVerwaltungKundeErstellen.Vorname_D
+            });
+        } else if(neuKundenNameClient==="" && isNeuKundenNameClientPositivNumber===false) {
+            res.render('pages/layoutKundenVerwaltungKundeErstellen', {
+                FehlerKundenName: "Fehlende Eingabe!",
+                FehlerKundenNummer: "Falsche Eingabe! Nur positive Zahlen!",
+                FehlerKundenOrt: neuKundenOrtClient,
+                FehlerKundenAdresse: neuKundenAdresseClient,
+                FehlerKundenLand: neuKundenLandClient,
+                avatarFarbeServer: foundImEingeloggtkundenVerwaltungKundeErstellen.AvatarFarbeU_D,
                 FooterWerIstAngemeldet: foundImEingeloggtkundenVerwaltungKundeErstellen.MaNummer_D + " " + foundImEingeloggtkundenVerwaltungKundeErstellen.Vorname_D
             });
         } else{
+            schreibeInDBKundenErstellen(neuKundenErfasstDatumClient, neuKundenNameClient, neuKundenNummerClient, neuKundenOrtClient, neuKundenAdresseClient, neuKundenLandClient)
             res.redirect("/api/v1/inHome/kundenVerwaltung/:" + maNummerURLkundenVerwaltungKundeErstellen + "*" + idURLkundenVerwaltungKundeErstellen + "*")
 
         }

@@ -18,19 +18,19 @@
 
     <main>
 
-        <h1>KundenErstellen</h1>
+        <h1>Kunden Erstellen</h1>
    <form action="" method="post" class="formAdminHeader">
             neuKundenErfasstDatum: <input name="neuKundenErfasstDatumClientEJS" value="<%= ("0"+new Date().getDate()).slice(-2)+'.'+("0"+(new Date().getMonth()+1)).slice(-2)+'.'+new Date().getFullYear()%>" type="text" />
             <br>
-            neuKundenName: <input name="neuKundenNameClientEJS" value="" type="text" /><a><%=FehlerKundenName%></a>
+            neuKundenName: <input name="neuKundenNameClientEJS" value="" id="inputKundenName" type="text" /><a id="ausgabeFehlerKundenName"><%=FehlerKundenName%></a>
             <br>
-            neuKundenNummer: <input name="neuKundenNummerClientEJS" value="" type="text" />
+            neuKundenNummer: <input name="neuKundenNummerClientEJS" value="" type="text" /><a id="ausgabeFehlerKundenNummer"><%=FehlerKundenNummer%></a>
             <br>
-            neuKundenOrt: <input name="neuKundenOrtClientEJS" value="" type="text" />
+            neuKundenOrt: <input name="neuKundenOrtClientEJS" value="" type="text" /><a id="ausgabeFehlerKundenOrt"><%=FehlerKundenOrt%></a>
             <br>
-            neuKundenAdresse: <input name="neuKundenAdresseClientEJS" value="" type="text" />
+            neuKundenAdresse: <input name="neuKundenAdresseClientEJS" value="" type="text" /><a id="ausgabeFehlerKundenAdresse"><%=FehlerKundenAdresse%></a>
             <br>
-            neuKundenLand: <input name="neuKundenLandClientEJS" value="" type="text" />
+            neuKundenLand: <input name="neuKundenLandClientEJS" value="" type="text" /><a id="ausgabeFehlerKundenLand"><%=FehlerKundenLand%></a>
             <br>
             <br>
             <input type="submit"  value="Speichern"  name="ButtonSpeichernEjs"/>
@@ -47,7 +47,71 @@
     </main>
     <%- include('../partials/footerAdminUser'); %>
 
-    <scirpt>
+
+    <script>
+//         let fehlerKundenName ="";
+//         console.log("avatarFarbe: "+<%- JSON.stringify(avatarFarbeServer) %>)
+//         fehlerKundenName= <%- JSON.stringify(FehlerKundenName) %>
+//         console.log("fehlerKundenName: "+<%- JSON.stringify(FehlerKundenName) %>)
+//                 let fehlerKundenName = <%-FehlerKundenName%>
+//                 let fehlerKundenNummer = <%-FehlerKundenNummer%>
+//                 let fehlerKundenOrt = <%-FehlerKundenOrt%>
+//                 let fehlerKundenAdresse = <%-FehlerKundenAdresse%>
+//                 let fehlerKundenLand = <%-FehlerKundenLand%>
+//         console.log("fehlerKundenName: "+fehlerKundenName)
+//                 if(fehlerKundenName === "Fehlende Eingabe!"){
+//                 console.log("fehlerKundenName: "+fehlerKundenName)
+//                     ausgabeFehlerKundenName.style.color = "#e31220";
+//                 }else if(fehlerKundenNummer === "Falsche Eingabe!\nNur positive Zahlen!"||fehlerKundenNummer === "Fehlende Eingabe!"){
+//                     ausgabeFehlerKundenNummer.style.color = "#e31220";
+//                 } else {
+//                     ausgabeFehlerKundenName.style.color = "#27b30b";
+//                     ausgabeFehlerKundenNummer.style.color = "#27b30b";
+//                     ausgabeFehlerKundenAdresse.style.color = "#27b30b";
+//                     ausgabeFehlerKundenOrt.style.color = "#27b30b";
+//                     ausgabeFehlerKundenLand.style.color = "#27b30b";
+//                 }
+    </script>
+
+
+
+    <script>
+        let fehlerKundenName = <%-JSON.stringify(FehlerKundenName)%>
+        let fehlerKundenNummer = <%-JSON.stringify(FehlerKundenNummer)%>
+        let fehlerKundenOrt = <%-JSON.stringify(FehlerKundenOrt)%>
+        let fehlerKundenAdresse = <%-JSON.stringify(FehlerKundenAdresse)%>
+        let fehlerKundenLand = <%-JSON.stringify(FehlerKundenLand)%>
+        console.log("fehlerKundenName: "+fehlerKundenName)
+
+        if(fehlerKundenName === "Fehlende Eingabe!" && !(fehlerKundenNummer === "Falsche Eingabe! Nur positive Zahlen!"||fehlerKundenNummer === "Fehlende Eingabe!")){
+        console.log("fehlerKundenName: "+fehlerKundenName)
+            ausgabeFehlerKundenName.style.color = "#e31220";
+
+                        ausgabeFehlerKundenNummer.style.color = "#27b30b";
+                        ausgabeFehlerKundenAdresse.style.color = "#27b30b";
+                        ausgabeFehlerKundenOrt.style.color = "#27b30b";
+                        ausgabeFehlerKundenLand.style.color = "#27b30b";
+
+        }else if((fehlerKundenNummer === "Falsche Eingabe! Nur positive Zahlen!"||fehlerKundenNummer === "Fehlende Eingabe!") &&!(fehlerKundenName === "Fehlende Eingabe!")){
+            ausgabeFehlerKundenName.style.color = "#27b30b";
+            ausgabeFehlerKundenNummer.style.color = "#e31220";
+                        ausgabeFehlerKundenAdresse.style.color = "#27b30b";
+                        ausgabeFehlerKundenOrt.style.color = "#27b30b";
+                        ausgabeFehlerKundenLand.style.color = "#27b30b";
+        } else if((fehlerKundenNummer === "Falsche Eingabe! Nur positive Zahlen!"||fehlerKundenNummer === "Fehlende Eingabe!") &&(fehlerKundenName === "Fehlende Eingabe!")){
+                           ausgabeFehlerKundenName.style.color = "#e31220";
+                           ausgabeFehlerKundenNummer.style.color = "#e31220";
+                                       ausgabeFehlerKundenAdresse.style.color = "#27b30b";
+                                       ausgabeFehlerKundenOrt.style.color = "#27b30b";
+                                       ausgabeFehlerKundenLand.style.color = "#27b30b";
+        } else {// if(!(fehlerKundenName === "Fehlende Eingabe!")&&!(fehlerKundenNummer === "Falsche Eingabe! Nur positive Zahlen!"||fehlerKundenNummer === "Fehlende Eingabe!")){
+            ausgabeFehlerKundenName.style.color = "#27b30b";
+            ausgabeFehlerKundenNummer.style.color = "#27b30b";
+            ausgabeFehlerKundenAdresse.style.color = "#27b30b";
+            ausgabeFehlerKundenOrt.style.color = "#27b30b";
+            ausgabeFehlerKundenLand.style.color = "#27b30b";
+        }
+
     </script>
 
 </body>
