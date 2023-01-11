@@ -51,7 +51,7 @@ export let inHomeVerladungErfassenControllerGet = async (req, res) => {
         //     kundeIHServer: "hoi kunde",
              data:await sucheInDBKunden(),
              MaNummerServer: foundImEingeloggtinHomeVerladungErfassen.MaNummer_D,
-        //     data: await sucheInDBVerladung(),
+        //     data: await sucheInDBVerladung(),//
              avatarFarbeServer: foundImEingeloggtinHomeVerladungErfassen.AvatarFarbeU_D,
              FooterWerIstAngemeldet: foundImEingeloggtinHomeVerladungErfassen.MaNummer_D + " " + foundImEingeloggtinHomeVerladungErfassen.Vorname_D
         });
