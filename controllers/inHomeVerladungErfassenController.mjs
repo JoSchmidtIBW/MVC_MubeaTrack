@@ -43,7 +43,7 @@ export let inHomeVerladungErfassenControllerGet = async (req, res) => {
     // Alert.alert(  JSON.stringify(userDate)  );
 
 
-    if(maNummerURLinHomeVerladungErfassen==='0001'){
+    if(foundImEingeloggtinHomeVerladungErfassen.RolleUser_D==='Admin'){
          res.render('pages/layoutInHomeVerladungErfassenAdmin', {
              werIstAngemeldetH: foundImEingeloggtinHomeVerladungErfassen.MaNummer_D + " " + foundImEingeloggtinHomeVerladungErfassen.Vorname_D,
              vorName: foundImEingeloggtinHomeVerladungErfassen.Vorname_D,
@@ -55,10 +55,12 @@ export let inHomeVerladungErfassenControllerGet = async (req, res) => {
              avatarFarbeServer: foundImEingeloggtinHomeVerladungErfassen.AvatarFarbeU_D,
              FooterWerIstAngemeldet: foundImEingeloggtinHomeVerladungErfassen.MaNummer_D + " " + foundImEingeloggtinHomeVerladungErfassen.Vorname_D
         });
-    }else {
+    }else {// auch seite Admin
         res.render('pages/layoutInHomeVerladungErfassenUser', {
             werIstAngemeldetH: foundImEingeloggtinHomeVerladungErfassen.MaNummer_D + " " + foundImEingeloggtinHomeVerladungErfassen.Vorname_D,
             //     kundeIHServer: "hoi kunde",
+            vorName: foundImEingeloggtinHomeVerladungErfassen.Vorname_D,
+            nachName: foundImEingeloggtinHomeVerladungErfassen.Nachname_D,
             data: await sucheInDBKunden(),
             MaNummerServer: foundImEingeloggtinHomeVerladungErfassen.MaNummer_D,
             //     data: await sucheInDBVerladung(),
@@ -89,18 +91,19 @@ export let inHomeVerladungErfassenControllerPost = async (req, res) => {
     let foundImEingeloggtinHomeVerladungErfassen = userEingeloggtArray.find(x => (x.MaNummer_D === maNummerURLinHomeVerladungErfassen && x.userID_D === parseInt(idURLinHomeVerladungErfassen)));// x.Passwort_D==='rTtGwkAwxI6ajLjBmMtZ3w=='))//x.userID_D === idURLAuth))//; x.Passwort_D===passwortURLAuth))
     console.log("inHome foundImEingeloggtinHomeVerladungErfassen: "+JSON.stringify(foundImEingeloggtinHomeVerladungErfassen));
 
-    if(maNummerURLinHomeVerladungErfassen==='0001'){
-        if(req.body.mitarbeiterVerwaltungButtonNameEjs==="MitarbeiterVerwaltung") {
+    //if(maNummerURLinHomeVerladungErfassen==='0001'){
+    if(foundImEingeloggtinHomeVerladungErfassen.RolleUser_D==='Admin') {
+        if (req.body.mitarbeiterVerwaltungButtonNameEjs === "MitarbeiterVerwaltung") {
             res.redirect("/api/v1/inHome/mitarbeiterVerwaltung/:" + maNummerURLinHomeVerladungErfassen + "*" + idURLinHomeVerladungErfassen + "*")
-        //         //res.send("Hallo Post MiitarbeiterVerwaltung")
+            //         //res.send("Hallo Post MiitarbeiterVerwaltung")
 
-        } else if(req.body.kundenVerwaltungButtonNameEjs==="KundenVerwaltung"){
-            res.redirect("/api/v1/inHome/kundenVerwaltung/:"+maNummerURLinHomeVerladungErfassen+"*"+idURLinHomeVerladungErfassen+"*")
-        } else if(req.body.ButtonZurueckVerladungenEjs==="Zurück zu Verladungen"){
-            res.redirect("/api/v1/inHome/:"+maNummerURLinHomeVerladungErfassen+"*"+idURLinHomeVerladungErfassen+"*")
-        } else if(req.body.ButtonAbrechenEjs === 'Abrechen'){
-            res.redirect("/api/v1/inHome/:"+maNummerURLinHomeVerladungErfassen+"*"+idURLinHomeVerladungErfassen+"*")
-        } else if(req.body.ButtonSpeichernEjs === 'Speichern'){
+        } else if (req.body.kundenVerwaltungButtonNameEjs === "KundenVerwaltung") {
+            res.redirect("/api/v1/inHome/kundenVerwaltung/:" + maNummerURLinHomeVerladungErfassen + "*" + idURLinHomeVerladungErfassen + "*")
+        } else if (req.body.ButtonZurueckVerladungenEjs === "Zurück zu Verladungen") {
+            res.redirect("/api/v1/inHome/:" + maNummerURLinHomeVerladungErfassen + "*" + idURLinHomeVerladungErfassen + "*")
+        } else if (req.body.ButtonAbrechenEjs === 'Abrechen') {
+            res.redirect("/api/v1/inHome/:" + maNummerURLinHomeVerladungErfassen + "*" + idURLinHomeVerladungErfassen + "*")
+        } else if (req.body.ButtonSpeichernEjs === 'Speichern') {
 
             let vorName = req.body.erfassenVornameClientEJS
             let nachName = req.body.erfassenNachnameClientEJS
@@ -134,19 +137,19 @@ export let inHomeVerladungErfassenControllerPost = async (req, res) => {
             console.log("POST artikelNProd: " + artikelNProd);
 
 
-            console.log("sucheInDBKundeMitKundenNummer: "+ await sucheInDBKundeMitKundenNummer(kundenNummerAusgewaelt))
+            console.log("sucheInDBKundeMitKundenNummer: " + await sucheInDBKundeMitKundenNummer(kundenNummerAusgewaelt))
             let id_K = await sucheInDBKundeMitKundenNummer(kundenNummerAusgewaelt)
-            console.log("splitDB_DBObj(JSON.stringify(id_K)): " +splitDB_DBObj(JSON.stringify(id_K)))
-            console.log("JSON.stringify(id_K): " +JSON.stringify(id_K))
-            let JsonSid_K =JSON.stringify(id_K)
-            console.log("JsonSid_K: " +JsonSid_K)
-            console.log("id_K: " +JSON.stringify(splitDB_DBObj(JsonSid_K)))
+            console.log("splitDB_DBObj(JSON.stringify(id_K)): " + splitDB_DBObj(JSON.stringify(id_K)))
+            console.log("JSON.stringify(id_K): " + JSON.stringify(id_K))
+            let JsonSid_K = JSON.stringify(id_K)
+            console.log("JsonSid_K: " + JsonSid_K)
+            console.log("id_K: " + JSON.stringify(splitDB_DBObj(JsonSid_K)))
             let xxx = JSON.stringify(splitDB_DBObj(JsonSid_K))
             let parseID_Kdata = JSON.parse(xxx);
-            console.log("jeeeeeee: "+parseID_Kdata.ID_K)
+            console.log("jeeeeeee: " + parseID_Kdata.ID_K)
             let parseIntParseID_Kdata = parseInt(parseID_Kdata.ID_K)
 
-            schreibeInDBErstellteVerladung(vorName, nachName, datum, Zeit, datumWunschKalender, parseIntParseID_Kdata, mengeTO, artikelAL, lsILS, r_K,artikelNProd)
+            schreibeInDBErstellteVerladung(vorName, nachName, datum, Zeit, datumWunschKalender, parseIntParseID_Kdata, mengeTO, artikelAL, lsILS, r_K, artikelNProd)
 
             // console.log("xxx:"+xxx)
             // console.log("JSON.stringify(xxx.ID_K):"+JSON.stringify(xxx.ID_K))
@@ -160,14 +163,80 @@ export let inHomeVerladungErfassenControllerPost = async (req, res) => {
 
             //console.log("id_K.id_K:"+JSON.stringify(splitDB_DBObj(id_K)).ID_K)
             //schreibeInDBErstellteVerladung(vorName, nachName, datum, Zeit, datumWunschKalender,)
-            res.redirect("/api/v1/inHome/:"+maNummerURLinHomeVerladungErfassen+"*"+idURLinHomeVerladungErfassen+"*")
+            res.redirect("/api/v1/inHome/:" + maNummerURLinHomeVerladungErfassen + "*" + idURLinHomeVerladungErfassen + "*")
         }
 
+    }else if (foundImEingeloggtinHomeVerladungErfassen.RolleUser_D === 'Chef' || foundImEingeloggtinHomeVerladungErfassen.RolleUser_D === 'Mitarbeiter') {
 
-    }else if(req.body.ButtonZurueckVerladungenEjs==="Zurück zu Verladungen"){
-        res.redirect("/api/v1/inHome/:"+maNummerURLinHomeVerladungErfassen+"*"+idURLinHomeVerladungErfassen+"*")
+            if (req.body.ButtonZurueckVerladungenEjs === "Zurück zu Verladungen") {
+                res.redirect("/api/v1/inHome/:" + maNummerURLinHomeVerladungErfassen + "*" + idURLinHomeVerladungErfassen + "*")
+            } else if (req.body.ButtonAbrechenEjs === 'Abrechen') {
+                res.redirect("/api/v1/inHome/:" + maNummerURLinHomeVerladungErfassen + "*" + idURLinHomeVerladungErfassen + "*")
+            } else if (req.body.ButtonSpeichernEjs === 'Speichern') {
+
+                let vorName = req.body.erfassenVornameClientEJS
+                let nachName = req.body.erfassenNachnameClientEJS
+                let datum = req.body.erfassenDatumClientEJS
+                let Zeit = req.body.erfassenZeitClientEJS
+                let wunschDatum = req.body.erfassenWunschDatumClientEJS
+                let datumWunsch = req.body.erfasstDatumWunschClientEJS
+                let datumWunschKalender = req.body.erfasstDatumWunschKalenderClientEJS
+                let kunde = req.body.erfassenKundeClientEJS
+                let kundenNummerAusgewaelt = req.body.erfassenKundeNameClientEJS
+                let mengeTO = req.body.erfasstMengeToClientEJS
+                let artikelAL = req.body.erfasstArtikelAnLagerSelectClientEJS
+                let lsILS = req.body.erfasstLSImLeitSystemSelectClientEJS
+                let r_K = req.body.erfasstR_KSelectClientEJS
+                let artikelNProd = req.body.erfasstArtikelNichtProdClientEJS
+
+                console.log("******************************************************");
+                console.log("POST vorName: " + vorName);
+                console.log("POST nachName: " + nachName);
+                console.log("POST datum: " + datum);
+                console.log("POST Zeit: " + Zeit);
+                console.log("POST wunschDatum: " + wunschDatum);
+                console.log("POST datumWunsch: " + datumWunsch);
+                console.log("POST datumWunschKalender: " + datumWunschKalender);
+                console.log("POST kunde: " + kunde);
+                console.log("POST kundenNummerAusgewaelt: " + kundenNummerAusgewaelt);
+                console.log("POST mengeTO: " + mengeTO);
+                console.log("POST artikelAL: " + artikelAL);
+                console.log("POST lsILS: " + lsILS);
+                console.log("POST r_K: " + r_K);
+                console.log("POST artikelNProd: " + artikelNProd);
+
+
+                console.log("sucheInDBKundeMitKundenNummer: " + await sucheInDBKundeMitKundenNummer(kundenNummerAusgewaelt))
+                let id_K = await sucheInDBKundeMitKundenNummer(kundenNummerAusgewaelt)
+                console.log("splitDB_DBObj(JSON.stringify(id_K)): " + splitDB_DBObj(JSON.stringify(id_K)))
+                console.log("JSON.stringify(id_K): " + JSON.stringify(id_K))
+                let JsonSid_K = JSON.stringify(id_K)
+                console.log("JsonSid_K: " + JsonSid_K)
+                console.log("id_K: " + JSON.stringify(splitDB_DBObj(JsonSid_K)))
+                let xxx = JSON.stringify(splitDB_DBObj(JsonSid_K))
+                let parseID_Kdata = JSON.parse(xxx);
+                console.log("jeeeeeee: " + parseID_Kdata.ID_K)
+                let parseIntParseID_Kdata = parseInt(parseID_Kdata.ID_K)
+
+                schreibeInDBErstellteVerladung(vorName, nachName, datum, Zeit, datumWunschKalender, parseIntParseID_Kdata, mengeTO, artikelAL, lsILS, r_K, artikelNProd)
+
+                // console.log("xxx:"+xxx)
+                // console.log("JSON.stringify(xxx.ID_K):"+JSON.stringify(xxx.ID_K))
+                //
+                // console.log("id_K.id_K:"+id_K.ID_K)
+                //
+                // let id_KData = await sucheInDBKundeMitKundenNummer(kundenNummerAusgewaelt)
+                // console.log("data: "+id_KData.ID_K)
+                // console.log("data: "+JSON.parse(xxx.ID_K))
+                //console.log("splitDB_DBObj(id_K):"+splitDB_DBObj(id_K))
+
+                //console.log("id_K.id_K:"+JSON.stringify(splitDB_DBObj(id_K)).ID_K)
+                //schreibeInDBErstellteVerladung(vorName, nachName, datum, Zeit, datumWunschKalender,)
+                res.redirect("/api/v1/inHome/:" + maNummerURLinHomeVerladungErfassen + "*" + idURLinHomeVerladungErfassen + "*")
+            }
+
+
     }
-
 };
 
 
