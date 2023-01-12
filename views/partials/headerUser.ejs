@@ -6,36 +6,36 @@
             <a class="MubeaTrackUser">Track</a>
             <a class="headerUserUser">headerUser</a>
             <!-- <form action="/api/v1/login2/" method="delete"> -->
-            <form action="?_method=DELETE" method="post" class="logOutUser">
-                <input type="submit"  value="LogOut"/>
+            <form class="FormLogOutUser" action="?_method=DELETE" method="post" >
+              <button class="btnLogOutUser" type="submit"  value="LogOut"><img class="imgLogOutUser" id="imgLogOutUser1" src="/images/LogOut.svg.png" alt=""></button>
             </form>
-            <button class="btnAvatarMEUser" id="btnAvatarMe1"><img class="imgAvatarME" id="imgAvatarMe1" src="/images/Avatar.svg.png" alt=""></button>
+            <form class="FormAvatarMEUser" action="" method="post" >
+              <button class="btnAvatarMEUser" id="btnAvatarMe1"><img class="imgAvatarME" id="imgAvatarMe1" src="/images/Avatar.svg.png" alt=""></button>
+            </form>
         </div>
-    </div>  
+    </div>
 
     <script>
         console.log("avatarFarbe: "+<%- JSON.stringify(avatarFarbeServer) %>)
         let avatarFarbe = <%- JSON.stringify(avatarFarbeServer) %>
-        if(avatarFarbe === "blau"){
+        if(avatarFarbe === "Blau"){
           //document.getelementbyid('btnAvatar').style.background = "blue"/*"#1e9107"*/ /*"#c8ed10";*/
           //btnAvatarMe1.style.background = "blue"
            imgAvatarMe1.className += "imgAvatarMEblue"
-        } else if(avatarFarbe === "rot"){
+           imgLogOutUser1.className = "imgLogOutUserBlue"
+        } else if(avatarFarbe === "Rot"){
           //btnAvatarMe1.style.background = "blue"
             imgAvatarMe1.className += "imgAvatarMEred"
+            imgLogOutUser1.className = "imgLogOutUserRed"
           //btnAvatarMe1.style.border-color === 'red';
           //imgAvatarMe1.style.filter = 'invert(67%) sepia(89%) saturate(7492%) hue-rotate(346deg) brightness(84%) contrast(146%)';
           //document.getelementbyid('btnAvatar').style.background = "red"
           //lbAusgabeMaNummerLServer.style.fontWeight = "900";
-        } else if(avatarFarbe === "grün"){
+        } else if(avatarFarbe === "Gruen"){
             imgAvatarMe1.className += "imgAvatarMEgreen"
-          //lbAusgabePasswortLServer.style.color = "#27b30b";
-          //lbAusgabePasswortLServer.style.fontWeight = "900";
-        } else if(avatarFarbe === "orange"){
-          //lbAusgabePasswortLServer.style.color = "#e31220";
-          //lbAusgabePasswortLServer.style.fontWeight = "900";
-        } else if(avatarFarbe === "pink"){
-          // lbAusgabePasswortLServer.style.color = "#e31220";
+            imgLogOutUser1.className = "imgLogOutUserGreen"
+        }else if(avatarFarbe === "Schwarz"){
+
         }
     </script>
 </header>
