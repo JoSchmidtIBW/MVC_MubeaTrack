@@ -1,14 +1,16 @@
 export function splitDB_DBObj(ausgabeDBZumSplitten){
-    //console.log("bin splitDB_DBObj")
+    console.log("bin splitDB_DBObj und habe: "+ausgabeDBZumSplitten)
 
     //let text = "[{"ID_User":8,"MA_Nummer":"70999","Vorname":"urs","Nachname":"meier","Passwort_User":"12","IstChef":"keinChef"}]";
     let myArray = ausgabeDBZumSplitten.split("[");
-    // console.log("arr: "+myArray[1]);
+     console.log("arr: "+myArray[1]);
     const myArray1 = myArray[1].split("]");
 
     //wenn mehrere manummern vorhanden
     const myArray3 = myArray1[0].split(",{");
+    console.log("myArray3: "+myArray3)
     const dbObj = JSON.parse(myArray3[0]);
+    console.log("----------------------------------------+++++++++++++++++++++++++++++++++++++++++dbObj: "+ dbObj)
 
     return dbObj;
 }
