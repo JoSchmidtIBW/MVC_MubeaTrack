@@ -156,6 +156,13 @@ export let mitarbeiterBearbeitenControllerPost = async (req, res) => {
         console.log("POST bearbeitetMitarbeiterRolleSelectClient: "+bearbeitetMitarbeiterRolleSelectClient)
         console.log("POST bearbeitetMitarbeiterAvatarFarbeSelectClient: "+bearbeitetMitarbeiterAvatarFarbeSelectClient)
 
+        if(bearbeitetMitarbeiterNummerClient === '0001' || bearbeitetMitarbeiterRolleSelectClient ==='Admin'){
+            console.log("Der Admin sollte nicht seine Rolle wechseln können!")
+            //let str = 'Admin'
+            bearbeitetMitarbeiterRolleSelectClient = 'Admin'
+            console.log("POST bearbeitetMitarbeiterRolleSelectClient: "+bearbeitetMitarbeiterRolleSelectClient)
+        }
+
         schreibeInDBMitarbeiterBearbeitet(bearbeitetMitarbeiterErfasstDatumClient,bearbeitetMitarbeiterErfasstZeitClient,
             bearbeitetMitarbeiterNummerClient,bearbeitetMitarbeiterVornameClient,bearbeitetMitarbeiterNachnameClient,
             bearbeitetMitarbeiterPasswortXClient,bearbeitetMitarbeiterRolleSelectClient,bearbeitetMitarbeiterAvatarFarbeSelectClient,
@@ -163,9 +170,13 @@ export let mitarbeiterBearbeitenControllerPost = async (req, res) => {
 
         res.redirect("/api/v1/inHome/mitarbeiterVerwaltung/:" + maNummerURLmitarbeiterBearbeiten + "*" + idURLmitarbeiterBearbeiten + "*")
     } else if(req.body.ButtonLoeschenEjs === 'Löschen'){
-
-        loescheInDBMitarbeiterBearbeitet(maNummer, idMitarbeiter)
-        res.redirect("/api/v1/inHome/mitarbeiterVerwaltung/:" + maNummerURLmitarbeiterBearbeiten + "*" + idURLmitarbeiterBearbeiten + "*")
+        if(maNummer==='0001'||idMitarbeiter===1){
+            console.log("Der Admin sollte sich nicht selber löschen, und wieder getraue ich mich nicht, das auszuprobieren :)")
+            res.redirect("/api/v1/inHome/mitarbeiterVerwaltung/:" + maNummerURLmitarbeiterBearbeiten + "*" + idURLmitarbeiterBearbeiten + "*")
+        }else {
+            loescheInDBMitarbeiterBearbeitet(maNummer, idMitarbeiter)
+            res.redirect("/api/v1/inHome/mitarbeiterVerwaltung/:" + maNummerURLmitarbeiterBearbeiten + "*" + idURLmitarbeiterBearbeiten + "*")
+        }
     }
 
     //<script>alert("XSS")</script>
