@@ -45,14 +45,14 @@ console.log("aussen");
 // };
 load()
 function load() {
-         var interval = setInterval(myURL, 6000);
+         let interval1 = setInterval(myURL, 6000);
          var result = document.getElementById("result");
          result.innerHTML = "<b> The page will load after delay of 5 seconds using setInterval() method.";
       }
 
       function myURL() {
          window.open('https://www.tutorialspoint.com/index.htm', name = self);
-         clearInterval(interval);
+         clearInterval(interval1);
       }
 
 window.addEventListener('pageshow', (event) => {
