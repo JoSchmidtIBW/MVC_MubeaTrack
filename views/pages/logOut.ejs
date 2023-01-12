@@ -33,7 +33,8 @@
        <script>
        setTimeout(() => {
          console.log("Delayed for 1 second.");
-       }, "1000")
+         window.poen('http://localhost:7005/api/v1/login1')
+       }, "3000")
 console.log("aussen");
 // myFunction()
 // myFunction(){
@@ -44,7 +45,7 @@ console.log("aussen");
 // };
 load()
 function load() {
-         var interval = setInterval(myURL, 4000);
+         var interval = setInterval(myURL, 6000);
          var result = document.getElementById("result");
          result.innerHTML = "<b> The page will load after delay of 5 seconds using setInterval() method.";
       }

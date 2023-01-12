@@ -12,6 +12,7 @@ import {sucheInDBVerladung} from "../models/inHomeVerladungDB.mjs";
 // }
 
 export  let logOutGetController = async (req, res) => {
+        //res.redirect('/api/v1/login1')
         res.render('pages/logOut', {
         });
 
