@@ -1,0 +1,55 @@
+   <!DOCTYPE html>
+   <html lang="de">
+
+       <head>
+       <meta charset="UTF-8">
+       <meta http-equiv="X-UA-Compatible" content="IE=edge">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <meta name="description" content="Infos zu my Website google suche">
+
+        <meta http-equiv='cache-control' content='no-cache'>
+        <meta http-equiv='expires' content='0'>
+        <meta http-equiv='pragma' content='no-cache'>
+
+
+       <link rel="icon" type="image/png" href="/images/favicon/favicon.png">
+
+       <title>Login-Out</title>
+   </head>
+
+
+
+
+   <body>
+
+       <header>
+       </header>
+
+       <main>
+            <h3>Log out...</h3>
+
+       </main>
+
+       <script>
+
+window.onload = function(){
+   setInterval(function(){
+      console.log("Hello 1sec");
+   }, 1000);
+   console.log("aussen");
+};
+
+
+window.addEventListener('pageshow', (event) => {
+    var isNavigation = event.persisted ||
+        (typeof window.performance != 'undefined' && window.performance.navigation.type === 2);
+    if (isNavigation) {
+        window.location.reload();
+    }
+});
+       </script>
+
+
+   </body>
+
+   </html>
