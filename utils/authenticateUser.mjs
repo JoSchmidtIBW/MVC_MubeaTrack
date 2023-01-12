@@ -6,6 +6,11 @@ export function authentificateUser1(req, res, next){
     // console.log("ich bin authentificateUser-Funktion in utils/authentificateUser.js")
 
     // splitte alles, was in url drin steht bei inHome/:irgendwas
+    console.log("Bin Atuth, req.path:"+req.path)
+    if(req.path===undefined||req.path==='/'){
+        console.log("Nichts im Path von der URL")
+        res.send("<h1>Sie haben sich ausgeloggt, 401 Unautorized :) :)</h1><input type=\"button\" onclick=\"location.href='/api/v1/login1';\" value=\"Go to login\" />");
+    }
     const myArrFullPath = req.path.split(':');
     //console.log("myArrPath: "+myArrFullPath)
     let gesplittetVonURLdenUserTeil = myArrFullPath[1];
