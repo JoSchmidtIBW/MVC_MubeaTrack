@@ -7,9 +7,9 @@
        <meta name="viewport" content="width=device-width, initial-scale=1.0">
        <meta name="description" content="Infos zu my Website google suche">
 
-        <meta http-equiv='cache-control' content='no-cache'>
-        <meta http-equiv='expires' content='0'>
-        <meta http-equiv='pragma' content='no-cache'>
+   <!--     <meta http-equiv='cache-control' content='no-cache'> -->
+        <!-- <meta http-equiv='expires' content='0'> -->
+        <!--<meta http-equiv='pragma' content='no-cache'> -->
 
 
        <link rel="icon" type="image/png" href="/images/favicon/favicon.png">
@@ -31,14 +31,28 @@
        </main>
 
        <script>
+       setTimeout(() => {
+         console.log("Delayed for 1 second.");
+       }, "1000")
+console.log("aussen");
+// myFunction()
+// myFunction(){
+//    setInterval(function(){
+//       console.log("Hello 1sec");
+//    }, 1000);
+//    console.log("aussen");
+// };
+load()
+function load() {
+         var interval = setInterval(myURL, 4000);
+         var result = document.getElementById("result");
+         result.innerHTML = "<b> The page will load after delay of 5 seconds using setInterval() method.";
+      }
 
-window.onload = function(){
-   setInterval(function(){
-      console.log("Hello 1sec");
-   }, 1000);
-   console.log("aussen");
-};
-
+      function myURL() {
+         window.open('https://www.tutorialspoint.com/index.htm', name = self);
+         clearInterval(interval);
+      }
 
 window.addEventListener('pageshow', (event) => {
     var isNavigation = event.persisted ||
