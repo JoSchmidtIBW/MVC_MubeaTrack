@@ -119,5 +119,6 @@ export let mitarbeiterErfassenControllerDelete = async (req, res) => {
         }
     }
     res.clearCookie('cokMaNummer');
-    res.redirect('/api/v1/login1');
+    //res.redirect('/api/v1/login1');
+    res.redirect('/api/v1/logOut');//commit und andere nicht geladen
 };
