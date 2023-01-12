@@ -37,9 +37,9 @@ SHOW TABLES;
 INSERT INTO userVerkaufMubea
 (Erfasst_D_U, Erfasst_Z_U, MA_Nummer, Vorname, Nachname, Passwort_User, RolleUser, AvatarFarbe)
 VALUES
-('01.01.1970','09.21','0001','Admin','Administrator','rTtGwkAwxI6ajLjBmMtZ3w==','Admin','blau'),
-('02.01.1970','09.22','70220','Hans','Meier','QsS4jOwHxRt7ztLW6rFOkw==','Chef','rot'),
-('03.01.1970','09.23','70223','Max','Mustermann','TKToMaJyQLLbXE0n7Bx2fQ==','Mitarbeiter','grün'),
+('01.01.1970','09.21','0001','Admin','Administrator','rTtGwkAwxI6ajLjBmMtZ3w==','Admin','Blau'),
+('02.01.1970','09.22','70220','Hans','Meier','QsS4jOwHxRt7ztLW6rFOkw==','Chef','Rot'),
+('03.01.1970','09.23','70223','Max','Mustermann','TKToMaJyQLLbXE0n7Bx2fQ==','Mitarbeiter','Gruen'),
 ('04.01.1970','09.24','70225','Güööääuendogan','MééàèaeTurc','v9fOXIvcjOuJeDRAnY2+Mw==','Mitarbeiter','orange');
 
 DESCRIBE userVerkaufMubea;

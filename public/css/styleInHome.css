@@ -2,7 +2,19 @@ h1 {
     background-color: rgb(208, 224, 208);
 }
 
+.headerAdmin{
+    color: red;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 30px;
+}
 
+.formAdminHeader{
+    margin-top: 20px;
+    grid-column: 5;
+    grid-row: 1;
+    display: inline-block;
+}
 
 .h1_Mitarbeiterverwaltung{
     background-color: rgb(115, 236, 115);
@@ -30,7 +42,7 @@ h1_Kundenverwaltung{
 
     display: grid;
     /*grid-template-columns: repeat(1, 0.4fr);original*/
-    grid-template-columns: repeat(1, 165px  200px 200px 200px) 200px;
+    grid-template-columns: repeat(1, 165px  200px 600px 80px) 200px;
     gap: 10px;
     grid-auto-rows: minmax(3px, auto);
 }
@@ -62,26 +74,89 @@ h1_Kundenverwaltung{
     grid-row: 1;
 }
 
-.headerAdmin{
-    color: red;
-    font-style: italic;
-    font-weight: bold;
-    font-size: 30px;
-}
+/*
 
-.formAdminHeader{
-    margin-top: 20px;
-    grid-column: 5;
-    grid-row: 1;
-    display: inline-block;
-}
-
+*/
+/*
 .logOutUser{
     margin-top: 20px;
     grid-column: 5;
     grid-row: 1;
     display: inline-block;
 }
+*/
+.FormLogOutUser{
+    border-radius: 50%;
+    /* border: 1px solid red; */
+    border: none;
+    height: 46px;
+    width: 46px;
+    margin-top: 5px;
+    grid-column: 5;
+    grid-row: 1;
+}
+
+.btnLogOutUser{
+    border-radius: 50%;
+    /* border: 1px solid yellow;*/
+    border: none;
+    font-size: 90px;
+    margin-top: 0px;
+    margin-left: 1px;
+    height: 38px;
+    width: 38px;
+    cursor: pointer;
+    /* background-color: none; */
+    background-color: inherit;
+}
+
+.imgLogOutUser{
+    border: 1px solid black;
+    height: 38px;
+    width: 38px;
+    border-radius: 50%;
+    margin-top: 0px;
+    margin-left: -5px;
+    margin-bottom: 42px;
+    /*filter: invert(42%) sepia(20%) saturate(1000%) hue-rotate(70deg) brightness(131%) contrast(132%);*/
+}
+
+.imgLogOutUserRed{
+    border: 1px solid green;
+    height: 38px;
+    width: 38px;
+    border-radius: 50%;
+    margin-left: -5px;
+    margin-bottom: 42px;
+    /* red */
+    filter: invert(67%) sepia(89%) saturate(7492%) hue-rotate(346deg) brightness(84%) contrast(146%);
+}
+
+.imgLogOutUserBlue{
+    border: 1px solid green;
+    height: 38px;
+    width: 38px;
+    border-radius: 50%;
+    margin-left: -5px;
+    margin-bottom: 42px;
+    /* blue */
+    filter: invert(9%) sepia(100%) saturate(5655%) hue-rotate(245deg) brightness(101%) contrast(149%);
+}
+
+.imgLogOutUserGreen{
+    border: 1px solid green;
+    height: 38px;
+    width: 38px;
+    border-radius: 50%;
+    margin-left: -5px;
+    margin-bottom: 42px;
+    /* green */
+    filter: invert(62%) sepia(65%) saturate(3453%) hue-rotate(81deg) brightness(111%) contrast(132%);
+}
+
+
+
+
 
 /*Button AvatarME*/
 .btnAvatarMEUser{
@@ -104,26 +179,21 @@ h1_Kundenverwaltung{
 }
 
 .imgAvatarME{
-    border: 1px solid green;
+    border: 1px solid black;
     font-size: 80px;
-    height: 1.1em;
-    width: 10px;
+    height: 38px;
+    width: 38px;
     border-radius: 50%;
-    padding-top: 11px;
-    /* red */
-    /*filter: invert(67%) sepia(89%) saturate(7492%) hue-rotate(346deg) brightness(84%) contrast(146%);*/
-    /* green */
-    /* filter: invert(62%) sepia(65%) saturate(3453%) hue-rotate(81deg) brightness(111%) contrast(132%); */
-    /* blue */
-    filter: invert(9%) sepia(100%) saturate(5655%) hue-rotate(245deg) brightness(101%) contrast(149%);
-
+    margin-left: -4px;
+    margin-bottom: 42px;
+    /*schwarz*/
 }
 
 .imgAvatarMEimgAvatarMEred{
     border: 1px solid green;
     font-size: 80px;
-    height: 37x;
-    width: 37px;
+    height: 38px;
+    width: 38px;
     border-radius: 50%;
     margin-left: -4px;
     margin-bottom: 42px;
@@ -134,8 +204,8 @@ h1_Kundenverwaltung{
 .imgAvatarMEimgAvatarMEblue{
     border: 1px solid green;
     font-size: 80px;
-    height: 37x;
-    width: 37px;
+    height: 38px;
+    width: 38px;
     border-radius: 50%;
     margin-left: -4px;
     margin-bottom: 42px;
@@ -146,7 +216,7 @@ h1_Kundenverwaltung{
 .imgAvatarMEimgAvatarMEgreen{
     border: 1px solid green;
     font-size: 80px;
-    height: 37x;
+    height: 37px;
     width: 37px;
     border-radius: 50%;
     margin-left: -4px;
@@ -157,8 +227,224 @@ h1_Kundenverwaltung{
 
 
 
+/*HeaderAdmin----------------------------------------------------------------------------------------------------*/
+
+.HeaderGridAdmin{
+    width: 100%;
+    height: 50px;
+    border: 1px solid darkslateblue;
+    padding-left: 10px;
+    padding-top: 0px;
+    margin-top: -5px;
+}
+
+.MubeaLogoGridAdmin {
+    margin: 1px;
+    margin-left: 0px;
+    margin-top: 0px;
+    margin-bottom: 20px;
+    padding: 0;
+    box-sizing: border-box;
+
+    display: grid;
+    /*grid-template-columns: repeat(1, 0.4fr);original*/
+    grid-template-columns: repeat(1, 165px  350px 300px 180px 220px 80px 50px) 200px;
+    gap: 10px;
+    grid-auto-rows: minmax(3px, auto);
+}
+
+.logoAdmin{
+    margin-left: -10px;
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.MubeaTrackAdmin{
+    color: #c8ed10;
+    font-size: 2em;
+    font-weight: bold;
+    margin-top: 23px;
+    /*padding: -5px;
+    height: 30px;*/
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.headerAdminAdmin{
+    color: red;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 30px;
+    margin-top: 10px;
+    grid-column: 3;
+    grid-row: 1;
+}
+
+.FormmitarbeiterVerwaltungAdmin{
+    margin-top: 20px;
+    grid-column: 4;
+    grid-row: 1;
+    display: inline-block;
+}
+
+.FormkundenVerwaltungAdmin{
+    margin-top: 20px;
+    grid-column: 5;
+    grid-row: 1;
+    display: inline-block;
+}
+
+.FormLogOutAdmin{
+    border-radius: 50%;
+    /* border: 1px solid red; */
+    border: none;
+    height: 46px;
+    width: 46px;
+    margin-top: 3px;
+    grid-column: 7;
+    grid-row: 1;
+}
+
+.btnLogOutAdmin{
+    border-radius: 50%;
+    /* border: 1px solid yellow;*/
+    border: none;
+    font-size: 90px;
+    margin-top: 1px;
+    margin-left: 1px;
+    height: 43px;
+    width: 43px;
+    cursor: pointer;
+    /* background-color: none; */
+    background-color: inherit;
+}
+
+.imgLogOutAdmin{
+    border: 1px solid black;
+    height: 38px;
+    width: 38px;
+    border-radius: 50%;
+    margin-top: 0px;
+    margin-left: -5px;
+    margin-bottom: 42px;
+    /*filter: invert(42%) sepia(20%) saturate(1000%) hue-rotate(70deg) brightness(131%) contrast(132%);*/
+}
+
+.imgLogOutAdminRed{
+    border: 1px solid green;
+    height: 38px;
+    width: 38px;
+    border-radius: 50%;
+    margin-left: -5px;
+    margin-bottom: 42px;
+    /* red */
+    filter: invert(67%) sepia(89%) saturate(7492%) hue-rotate(346deg) brightness(84%) contrast(146%);
+}
+
+.imgLogOutAdminBlue{
+    border: 1px solid green;
+    height: 38px;
+    width: 38px;
+    border-radius: 50%;
+    margin-left: -5px;
+    margin-bottom: 42px;
+    /* blue */
+    filter: invert(9%) sepia(100%) saturate(5655%) hue-rotate(245deg) brightness(101%) contrast(149%);
+}
+
+.imgLogOutAdminGreen{
+    border: 1px solid green;
+    height: 38px;
+    width: 38px;
+    border-radius: 50%;
+    margin-left: -5px;
+    margin-bottom: 42px;
+    /* green */
+    filter: invert(62%) sepia(65%) saturate(3453%) hue-rotate(81deg) brightness(111%) contrast(132%);
+}
 
 
+.FormAvatarMEAdmin{
+    border-radius: 50%;
+    /* border: 1px solid red; */
+    border: none;
+    height: 46px;
+    width: 46px;
+    margin-top: 3px;
+    grid-column: 6;
+    grid-row: 1;
+}
+
+/*Button AvatarME*/
+.btnAvatarMEAdmin{
+    border-radius: 50%;
+    /* border: 1px solid yellow;
+     border: 1px solid ;
+   /*  border-color: none; /*rgb(71, 205, 214);*/
+    border: none;
+
+    font-size: 90px;
+    margin-top: 1px;
+    margin-left: 1px;
+    height: 43px;
+    width: 43px;
+
+    cursor: pointer;
+    /* background-color: none; */
+    background-color: inherit;
+    /*appearance: none;*/
+
+}
+
+.imgAvatarMEAdmin{
+    border: 1px solid black;
+    height: 38px;
+    width: 38px;
+    border-radius: 50%;
+    margin-left: -5px;
+    margin-bottom: 42px;
+    /* red */
+    /*filter: invert(67%) sepia(89%) saturate(7492%) hue-rotate(346deg) brightness(84%) contrast(146%);*/
+    /* green */
+    /* filter: invert(62%) sepia(65%) saturate(3453%) hue-rotate(81deg) brightness(111%) contrast(132%); */
+    /* blue */
+    /*filter: invert(9%) sepia(100%) saturate(5655%) hue-rotate(245deg) brightness(101%) contrast(149%);*/
+    /*filter: invert(42%) sepia(20%) saturate(1000%) hue-rotate(70deg) brightness(131%) contrast(132%);*/
+}
+
+.imgAvatarMEAdminRed{
+    border: 1px solid green;
+    height: 38px;
+    width: 38px;
+    border-radius: 50%;
+    margin-left: -5px;
+    margin-bottom: 42px;
+    /* red */
+    filter: invert(67%) sepia(89%) saturate(7492%) hue-rotate(346deg) brightness(84%) contrast(146%);
+}
+
+.imgAvatarMEAdminBlue{
+    border: 1px solid green;
+    height: 38px;
+    width: 38px;
+    border-radius: 50%;
+    margin-left: -5px;
+    margin-bottom: 42px;
+    /* blue */
+    filter: invert(9%) sepia(100%) saturate(5655%) hue-rotate(245deg) brightness(101%) contrast(149%);
+}
+
+.imgAvatarMEAdminGreen{
+    border: 1px solid green;
+    height: 38px;
+    width: 38px;
+    border-radius: 50%;
+    margin-left: -5px;
+    margin-bottom: 42px;
+    /* green */
+    filter: invert(62%) sepia(65%) saturate(3453%) hue-rotate(81deg) brightness(111%) contrast(132%);
+}
+/*--------------------------------------------------------------------------------------------------------------------------*/
 
 
 
@@ -185,8 +471,6 @@ h1_Kundenverwaltung{
     background-color: #04AA6D;
     color: white;
 }
-
-
 
 
 
@@ -238,8 +522,6 @@ h1_Kundenverwaltung{
 .containerAvatarImageButton .btnAvatar:hover {
     background-color: black;
 }
-
-
 
 
 

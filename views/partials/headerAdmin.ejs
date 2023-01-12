@@ -1,48 +1,53 @@
-    <header>
-        <div class="MubeaLogo">
+<header>
+    <div class="HeaderGridAdmin">
+        <div class="MubeaLogoGridAdmin">
             <!--<img src="/images/Mubea_Logo_white_without_transparent.gif" alt="sollte Mubea-LogoBild sein" height="50" class="logo1">-->
-            <img src="/images/Mubea_logo.svg.png" alt="sollte Mubea-LogoBild sein" class="logo" height="50" width="185">
-            <a class="MubeaTrack">Track</a>
-            <a class="headerAdmin">headerAdmin</a>
+            <img class="logoAdmin" src="/images/Mubea_logo.svg.png" alt="sollte Mubea-LogoBild sein"  height="50" width="185">
+            <a class="MubeaTrackAdmin">Track</a>
+            <a class="headerAdminAdmin">headerAdmin</a>
 
-        <form action="" method="post" class="formAdminHeader">
-           <input type="submit"  value="MitarbeiterVerwaltung" name="mitarbeiterVerwaltungButtonNameEjs"/>
-        </form>
-        <!-- <form action="/api/v1/inHome/kundenVerwaltung" method="" class="formAdminHeader"> -->
-        <form action="" method="post" class="formAdminHeader">
-            <input type="submit"  value="KundenVerwaltung" name="kundenVerwaltungButtonNameEjs"/>
-        </form>
-
-                                                   <!-- <form action="/api/v1/login2/" method="delete"> -->
-            <form action="?_method=DELETE" method="post" class="formAdminHeader">
-                 <input type="submit"  value="LogOut"/>
+            <form action="" method="post" class="FormmitarbeiterVerwaltungAdmin">
+                <input class="mitarbeiterVerwaltungAdmin" type="submit"  value="MitarbeiterVerwaltung" name="mitarbeiterVerwaltungButtonNameEjs"/>
+            </form>
+            <!-- <form action="/api/v1/inHome/kundenVerwaltung" method="" class="formAdminHeader"> -->
+            <form action="" method="post" class="FormkundenVerwaltungAdmin">
+                <input class="kundenVerwaltungAdmin" type="submit"  value="KundenVerwaltung" name="kundenVerwaltungButtonNameEjs"/>
+            </form>
+            <!-- <form action="/api/v1/login2/" method="delete"> -->
+            <form class="FormLogOutAdmin" action="?_method=DELETE" method="post" >
+                 <button class="btnLogOutAdmin" type="submit"  value="LogOut"><img class="imgLogOutAdmin" id="imgLogOutAdmin1" src="/images/LogOut.svg.png" alt=""></button>
             </form>
 
-
-            <button class="btnAvatar" id="btnAvatar">ME</button>
+            <form class="FormAvatarMEAdmin" action="" method="post" >
+                <button class="btnAvatarMEAdmin" id="btnAvatarMe1"><img class="imgAvatarMEAdmin" id="imgAvatarMeAdmin1" src="/images/Avatar.svg.png" alt=""></button>
+            </form>
         </div>
+    </div>
 
+    <script>
+        console.log("avatarFarbe: "+<%- JSON.stringify(avatarFarbeServer) %>)
+        let avatarFarbe = <%- JSON.stringify(avatarFarbeServer) %>
+        if(avatarFarbe === "Blau"){
+          //document.getelementbyid('btnAvatar').style.background = "blue"/*"#1e9107"*/ /*"#c8ed10";*/
+          //btnAvatarMe1.style.background = "blue"
+            imgAvatarMeAdmin1.className = "imgAvatarMEAdminBlue"
+            imgLogOutAdmin1.className = "imgLogOutAdminBlue"
+        } else if(avatarFarbe === "Rot"){
+          //btnAvatarMe1.style.background = "blue"
+            imgAvatarMeAdmin1.className = "imgAvatarMEAdminRed"
+            imgLogOutAdmin1.className = "imgLogOutAdminRed"
+          //btnAvatarMe1.style.border-color === 'red';
+          //imgAvatarMe1.style.filter = 'invert(67%) sepia(89%) saturate(7492%) hue-rotate(346deg) brightness(84%) contrast(146%)';
+          //document.getelementbyid('btnAvatar').style.background = "red"
+          //lbAusgabeMaNummerLServer.style.fontWeight = "900";
+        } else if(avatarFarbe === "Gruen"){
+            imgAvatarMeAdmin1.className = "imgAvatarMEAdminGreen"
+            imgLogOutAdmin1.className = "imgLogOutAdminGreen"
+          //lbAusgabePasswortLServer.style.color = "#27b30b";
+          //lbAusgabePasswortLServer.style.fontWeight = "900";
+        } else if(avatarFarbe === "Schwarz"){
 
+        }
+    </script>
+</header>
 
-        <script>
-            console.log("avatarFarbe: "+<%- JSON.stringify(avatarFarbeServer) %>)
-            let avatarFarbe = <%- JSON.stringify(avatarFarbeServer) %>
-            if(avatarFarbe === "blau"){
-                //document.getelementbyid('btnAvatar').style.background = "blue"/*"#1e9107"*/ /*"#c8ed10";*/
-               btnAvatar.style.background = "blue"
-            } else if(avatarFarbe === "rot"){
-                btnAvatar.style.background = "red"
-               // document.getelementbyid('btnAvatar').style.background = "red"
-                //lbAusgabeMaNummerLServer.style.fontWeight = "900";
-            } else if(avatarFarbe === "grün"){
-                //lbAusgabePasswortLServer.style.color = "#27b30b";
-                //lbAusgabePasswortLServer.style.fontWeight = "900";
-            } else if(avatarFarbe === "orange"){
-                //lbAusgabePasswortLServer.style.color = "#e31220";
-                //lbAusgabePasswortLServer.style.fontWeight = "900";
-            } else if(avatarFarbe === "pink"){
-               // lbAusgabePasswortLServer.style.color = "#e31220";
-            }
-
-         </script>
-    </header>
