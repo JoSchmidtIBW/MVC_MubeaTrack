@@ -30,6 +30,14 @@
 
        </main>
 
+<script>
+   if(!!window.performance && window.performance.navigation.type === 2){
+       console.log('Reloading');
+    window.location.reload();
+}</script>
+
+
+
        <script>
        setTimeout(() => {
          console.log("Delayed for 1 second.");

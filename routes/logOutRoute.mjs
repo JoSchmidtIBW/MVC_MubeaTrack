@@ -6,8 +6,8 @@ import {authentificateUser1} from "../utils/authenticateUser.mjs";
 
 const router = express.Router();
 
-//router.get('/',logOutGetController);
-router.get('/',authentificateUser1,logOutGetController);
+//router.get('/:out',logOutGetController);
+router.get('/:out',logOutGetController);
 // router.get('/',(req,res)=>{
 //     //res.send("Hello")
 //     res.render('pages/logOut')
