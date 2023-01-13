@@ -21,11 +21,20 @@ export let mitarbeiterErfassenControllerGet = async (req, res) => {
     let foundImEingeloggtmitarbeiterErfassen = userEingeloggtArray.find(x => (x.MaNummer_D === maNummerURLmitarbeiterErfassen && x.userID_D === parseInt(idURLmitarbeiterErfassen)));// x.Passwort_D==='rTtGwkAwxI6ajLjBmMtZ3w=='))//x.userID_D === idURLAuth))//; x.Passwort_D===passwortURLAuth))
     console.log("inHome foundImEingeloggtmitarbeiterErfassen: " + JSON.stringify(foundImEingeloggtmitarbeiterErfassen));
 
-    res.render('pages/layoutMitarbeiterErfassen', {
-        FehlerEingabeMaNummer: "",
-        avatarFarbeServer: foundImEingeloggtmitarbeiterErfassen.AvatarFarbeU_D,
-         FooterWerIstAngemeldet: foundImEingeloggtmitarbeiterErfassen.MaNummer_D + " " + foundImEingeloggtmitarbeiterErfassen.Vorname_D
-    });
+    let cookieVorhanden = req.cookies.cokMaNummer;
+    console.log("coockie:"+cookieVorhanden)
+        if(cookieVorhanden){
+            console.log("coockie:"+cookieVorhanden)
+            res.render('pages/layoutMitarbeiterErfassen', {
+                FehlerEingabeMaNummer: "",
+                avatarFarbeServer: foundImEingeloggtmitarbeiterErfassen.AvatarFarbeU_D,
+                FooterWerIstAngemeldet: foundImEingeloggtmitarbeiterErfassen.MaNummer_D + " " + foundImEingeloggtmitarbeiterErfassen.Vorname_D
+            });
+        }else{
+            res.send("<h1>Sie waren zu lange eingeloggt, Sie müssen sich nochmals einloggen, 401 Unautorized :) :)</h1><input type=\"button\" onclick=\"location.href='/api/v1/login1';\" value=\"Go to login\" />");
+        }
+
+
 }
 
 
@@ -119,6 +128,30 @@ export let mitarbeiterErfassenControllerDelete = async (req, res) => {
         }
     }
     res.clearCookie('cokMaNummer');
+    //res.clearCookie('cokMaNummer',maNummerURLmitarbeiterErfassen);
+
+    //res.clearCookie("key");
+
+    let cookieVorhanden = req.cookies.cokMaNummer;
+    //cookieVorhanden.set('cokMaNummer', {maxAge: 0})
+    console.log("coockie:"+cookieVorhanden)
+
+    //res.clean()
+
+//    res.clearCookie('cokMaNummer', {domain: COOKIE_DOMAIN, path: COOKIE_PATH});
+
+//     res.clearCookie('cokMaNummer',  {
+//         sameSite: "none",
+//         secure: true,
+//     });
+
+    res.cookie('cokMaNummer', maNummerURLmitarbeiterErfassen, {
+        maxAge: 0, // 1 min    600=10min   1000 = 1s
+        httpOnly: true // http only, prevents JavaScript cookie access
+    });
+    let cookieVorhanden1 = req.cookies.cokMaNummer;
+    console.log("coockie1:"+cookieVorhanden1)
+
     //res.redirect('/api/v1/login1');
-    res.redirect('/api/v1/logOut');//commit und andere nicht geladen
+    res.redirect('/api/v1/logOut/:out');//commit und andere nicht geladen
 };

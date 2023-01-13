@@ -14,6 +14,13 @@ export function authentificateUser1(req, res, next){
     const myArrFullPath = req.path.split(':');
     //console.log("myArrPath: "+myArrFullPath)
     let gesplittetVonURLdenUserTeil = myArrFullPath[1];
+
+    if(gesplittetVonURLdenUserTeil==='out'){
+        console.log("Nichts im Path von der URL")
+
+        res.render('/pages/logOut')
+    }
+
     //console.log("gesplittetVonURLdenUserTeil: "+gesplittetVonURLdenUserTeil)
     const myArr1PathMitStern = gesplittetVonURLdenUserTeil.split('*');
     let maNummerURLAuth = myArr1PathMitStern[0];
