@@ -6,6 +6,10 @@
 
 // import this class from selenium
 import { Builder, By } from "selenium-webdriver"
+
+import * as assert from 'assert';
+//import assert from 'assert'
+//var assert = require("assert");
 //const { Builder, By } = require("selenium-webdriver");
 
 
@@ -58,8 +62,45 @@ import { Builder, By } from "selenium-webdriver"
 
     }
 
-
-
-
-
 })();
+
+
+
+
+
+//var assert = require("assert");
+
+// describe test
+describe("Perform Search", function () {
+    // it describes expected behaviour when user perfroms search on google
+    it("A user performs a Search on Google", async function () {
+        // open chrome browser
+        let driver = await new Builder().forBrowser("chrome").build();
+        try {
+            // navigate to to this website
+            await driver.get("http://www.google.com/");
+
+            // find a search box element with name ='q'
+            await driver.findElement(By.name("q"));
+
+            // type 'reflect run' in the search box then press ENTER Key
+            await driver.findElement(By.name("q")).sendKeys("Reflect run", Key.RETURN);
+
+            /* wait for the page to load the search result untill the page
+              title is equal to `Reflect run - Google Search */
+            await driver.wait(until.titleIs("Reflect run - Google Search"), 1000);
+
+            // Get the pagetitle of the current Page
+            let pageTitle = await driver.getTitle();
+
+            // assert that the current pageTitle is equal to 'Reflect run - Google Search'
+            assert.strictEqual(pageTitle, "Reflect run - Google Search");
+            if (pageTitle) {
+                console.log("Page Title:", pageTitle);
+            }
+        } finally {
+            // close the browser
+            await driver.quit();
+        }
+    });
+});
