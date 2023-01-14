@@ -25,7 +25,7 @@ import loginRoute1 from "./routes/loginRoute1.mjs";
 
 //const server = app();
 
- const app = express();
+export const app = express();
 
 
 //
@@ -118,6 +118,9 @@ app.use(cookieParser());
 // app.use(helmet.xssFilter());
 
 app.disable('x-powered-by') //sicherheit, damit nicht weiss im Browser, das express genutzt wird
+app.disable('view cache');
+
+
 
 // app.use((req, res, next) => {
 //     //res.locals.cspNonce = crypto.randomBytes(16).toString("hex");
@@ -314,6 +317,13 @@ app.get('/c', function(req, res){
 // }));
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }))
+
+app.use((req, res, next) => {
+    res.set('Cache-Control', 'no-store')
+    next()
+})
+
+
 //achtung, muss unterhalb von session sein!!!
 app.use('/api/v1/login1', loginRoute1);
 //app.use('/api/v1/login2', login2Route);
@@ -327,6 +337,23 @@ app.use('/api/v1/inHome/kundenVerwaltung/kundeErstellen', kundenVerwaltungKundeE
 app.use('/api/v1/inHome/mitarbeiterVerwaltung/mitarbeiterBearbeiten', mitarbeiterVerwaltungMitarbeiterBearbeitenRoute);
 app.use('/api/v1/inHome/mitarbeiterVerwaltung/MitarbeiterErfassen', mitarbeiterVerwaltungMitarbeiterErfassenRoute);
 app.use('/api/v1/logOut', logOutRoute);
+
+
+
+// app.use(function(req, res, next) {
+//     // if (!req.user) {
+//     res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+//     res.header('Expires', '-1');
+//     res.header('Pragma', 'no-cache');
+//     // }
+//      next();
+// });
+//
+// app.use((req, res, next) => {
+//     res.set('Cache-Control', 'no-store')
+//     next()
+// })
+
 // für UNIT-TEST- Versuch
 export default function sum(a, b) {
     return a + b;
@@ -346,7 +373,7 @@ app.listen(PORT, () => {
 });
 
 
-
+//module.export = app
 
 
 
