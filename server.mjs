@@ -25,7 +25,7 @@ import loginRoute1 from "./routes/loginRoute1.mjs";
 
 //const server = app();
 
- const app = express();
+export const app = express();
 
 
 //
@@ -373,7 +373,7 @@ app.listen(PORT, () => {
 });
 
 
-
+//module.export = app
 
 
 
