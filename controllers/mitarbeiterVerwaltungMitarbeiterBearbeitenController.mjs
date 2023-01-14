@@ -163,6 +163,9 @@ export let mitarbeiterBearbeitenControllerPost = async (req, res) => {
             console.log("POST bearbeitetMitarbeiterRolleSelectClient: "+bearbeitetMitarbeiterRolleSelectClient)
         }
 
+        //todo absichern, das mitarbeiter seine manummer nicht ändern kann das kommt in avatar!!!
+        //if(!bearbeitetMitarbeiterNummerClient === '0001' && bearbeitetMitarbeiterNummerClient === maNummer){}
+
         schreibeInDBMitarbeiterBearbeitet(bearbeitetMitarbeiterErfasstDatumClient,bearbeitetMitarbeiterErfasstZeitClient,
             bearbeitetMitarbeiterNummerClient,bearbeitetMitarbeiterVornameClient,bearbeitetMitarbeiterNachnameClient,
             bearbeitetMitarbeiterPasswortXClient,bearbeitetMitarbeiterRolleSelectClient,bearbeitetMitarbeiterAvatarFarbeSelectClient,
