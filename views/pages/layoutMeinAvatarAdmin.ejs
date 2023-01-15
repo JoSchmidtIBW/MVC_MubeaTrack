@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="de">
+
+    <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- <link type="text/css" rel="stylesheet" href="/public/css/styleInHome.css" media="all"> -->
+    <link type="text/css" rel="stylesheet" href="/css/styleInHome.css" media="all">
+    <link rel="icon" type="image/png" href="/images/favicon/favicon.png">
+
+    <title>MeinAvatar</title>
+</head>
+
+<body>
+
+<%- include('../partials/headerAdmin'); %>
+
+    <main>
+
+    <h1>Hi <%=werIstAngemeldetH%> Deine AvatarEinstellungen</h1>
+    <p>Hier kannst du dein Passwort ändern oder deine Farben einstellen</p>
+    <br>
+
+    <a>hi <%=MaNummerServer%></a>
+    <br>
+    <a>AvatarFarbe: <%=avatarFarbeServer%></a>
+    <br>
+    <form action="" method="post" class="formAdminHeader">
+        <br>
+        meine MitarbeiterNummer: <input name="MitarbeiterNummerClientEJS" value="<%= mitarbeiterNummer %>" type="text" readonly="readonly"/>
+        <br>
+        mein MitarbeiterVorname: <input name="MitarbeiterVornameClientEJS" value="<%= mitarbeiterVorname %>" type="text" />
+        <br>
+        mein MitarbeiterNachname: <input name="MitarbeiterNachnameClientEJS" value="<%= mitarbeiterNachname %>" type="text" />
+        <br>
+        meine AvatarFarbe:<select name="MitarbeiterAvatarFarbeSelectClientEJS">
+                              <option name="BlauName" value="Blau">"Farbe Blau"</option>
+                              <option name="RotName" value="Rot">"Farbe Rot"</option>
+                              <option name="GruenName" value="Gruen">"Farbe Grün"</option>
+                              <option name="SchwarzName" value="Schwarz">"Farbe Schwarz"</option>
+                          </select>
+        <br>
+
+    </form>
+    <br>
+    <br>
+    <input type="submit"  value="Speichern"  name="ButtonSpeichernEjs"/>
+    <form action="" method="post" class="formAdminHeader">
+        <input type="submit"  value="Abrechen"  name="ButtonAbrechenEjs"/>
+    </form>
+    <br>
+
+
+    <br>
+    <a>Möchtest du dein Passwort ändern?</a>
+    <br>
+    altest Passwort: <input name="AltesPasswortClientEJS" value="" type="text" />
+    <br>
+    neues Passwort: <input name="neuesPasswortClientEJS" value="" type="text" />
+    <br>
+    neues Passwort wiederholen: <input name="neuesPasswortWiederholenClientEJS" value="" type="text" />
+    <br>
+    <input type="submit"  value="Passwort ändern OK"  name="ButtonPasswortAendernEjs"/>
+    <br>
+    <br>
+            <form action="" method="post" class="formAdminHeader">
+                <input type="submit"  value="Zurück zur Verladungserfassung" name="meinAvatarButtonRetourInHomeNameEjs"/>
+            </form>
+    <br>
+
+    </main>
+    <%- include('../partials/footerAdminUser'); %>
+
+    <scirpt>
+    </script>
+
+</body>
+
+</html>

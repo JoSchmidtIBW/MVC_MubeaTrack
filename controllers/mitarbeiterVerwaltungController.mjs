@@ -58,7 +58,9 @@ export let mitarbeiterVerwaltungControllerPost =async (req, res) => {
         //console.log("mitarbeiterVerwaltungButtonRetourInHomeNameEjs -----------------------------------------------sollte kommen")
         res.redirect('/api/v1/inHome/:'+ maNummerURLmitarbeiterVerwaltung+"*"+idURLmitarbeiterVerwaltung+"*");//
     }
-    else if(req.body.kundenVerwaltungButtonNameEjs==="KundenVerwaltung"){
+    else if(req.body.meinAvatarButtonNameEjs==="meinAvatar") {
+        res.redirect("/api/v1/inHome/meinAvatar/:" + maNummerURLmitarbeiterVerwaltung+"*"+idURLmitarbeiterVerwaltung+"*")
+    } else if(req.body.kundenVerwaltungButtonNameEjs==="KundenVerwaltung"){
        // console.log("kundenVerwaltungButtonNameEjs********************************************************************** sollte kommen")
         res.redirect("/api/v1/inHome/kundenVerwaltung/:"+maNummerURLmitarbeiterVerwaltung+"*"+idURLmitarbeiterVerwaltung+"*")
     } else if(req.body.ButtonNeuerMitarbeiterErfassenEjs==='Neuer Mitarbeiter Erfassen'){

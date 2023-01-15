@@ -152,6 +152,8 @@ export let kundenVerwaltungKundeErstellenControllerPost = async (req, res) => {
         res.redirect("/api/v1/inHome/kundenVerwaltung/:" + maNummerURLkundenVerwaltungKundeErstellen + "*" + idURLkundenVerwaltungKundeErstellen + "*")
     } else if(req.body.ButtonZuruekZurKundenVerwaltungEjs=== 'Zurück zur Kundenverwaltung') {
         res.redirect("/api/v1/inHome/kundenVerwaltung/:" + maNummerURLkundenVerwaltungKundeErstellen + "*" + idURLkundenVerwaltungKundeErstellen + "*")
+    } else if(req.body.meinAvatarButtonNameEjs==="meinAvatar") {
+        res.redirect("/api/v1/inHome/meinAvatar/:" +  maNummerURLkundenVerwaltungKundeErstellen + "*" + idURLkundenVerwaltungKundeErstellen + "*")
     } else if(req.body.mitarbeiterVerwaltungButtonNameEjs==="MitarbeiterVerwaltung") {
         res.redirect("/api/v1/inHome/mitarbeiterVerwaltung/:" + maNummerURLkundenVerwaltungKundeErstellen + "*" + idURLkundenVerwaltungKundeErstellen + "*")
     } else if(req.body.kundenVerwaltungButtonNameEjs==="KundenVerwaltung"){

@@ -96,8 +96,10 @@ export let mitarbeiterBearbeitenControllerPost = async (req, res) => {
     let maNummer = gesplittetGewaehlteMitarbeiterDatenURLStrich[2]
     console.log("GET maNummer: " + maNummer);// ersetze %20 als lehrzeichen
 
-    if(req.body.ButtonZuruekZurMitarbeiterVerwaltungEjs === 'Zurück zur Mitarbeiterverwaltung'){
+    if(req.body.ButtonZuruekZurMitarbeiterVerwaltungEjs === 'Zurück zur Mitarbeiterverwaltung') {
         res.redirect("/api/v1/inHome/mitarbeiterVerwaltung/:" + maNummerURLmitarbeiterBearbeiten + "*" + idURLmitarbeiterBearbeiten + "*")
+    } else if(req.body.meinAvatarButtonNameEjs==="meinAvatar") {
+            res.redirect("/api/v1/inHome/meinAvatar/:" + maNummerURLmitarbeiterBearbeiten + "*" + idURLmitarbeiterBearbeiten + "*")
     } else if(req.body.kundenVerwaltungButtonNameEjs==="KundenVerwaltung"){
         res.redirect("/api/v1/inHome/kundenVerwaltung/:"+ maNummerURLmitarbeiterBearbeiten + "*" + idURLmitarbeiterBearbeiten + "*")
     } else if(req.body.mitarbeiterVerwaltungButtonNameEjs==="MitarbeiterVerwaltung") {

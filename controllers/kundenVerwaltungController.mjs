@@ -53,8 +53,9 @@ export let kundenVerwaltungControllerPost = async (req, res) => {
 
     if(req.body.kundenVerwaltungButtonRetourInHomeNameEjs==="Zurück zur Verladungserfassung"){
         res.redirect('/api/v1/inHome/:'+ maNummerURLkundenVerwaltung+"*"+idURLkundenVerwaltung+"*");
-    }
-    else if(req.body.mitarbeiterVerwaltungButtonNameEjs==="MitarbeiterVerwaltung") {
+    } else if(req.body.meinAvatarButtonNameEjs==="meinAvatar") {
+        res.redirect("/api/v1/inHome/meinAvatar/:" + maNummerURLkundenVerwaltung+"*"+idURLkundenVerwaltung+"*");
+    }else if(req.body.mitarbeiterVerwaltungButtonNameEjs==="MitarbeiterVerwaltung") {
         res.redirect("/api/v1/inHome/mitarbeiterVerwaltung/:" + maNummerURLkundenVerwaltung + "*" + idURLkundenVerwaltung + "*")
     }else if(req.body.ButtonNeuerKundeErfassenEjs==='Neuer Kunde Erfassen'){
         res.redirect("/api/v1/inHome/kundenVerwaltung/kundeErstellen/:" + maNummerURLkundenVerwaltung + "*" + idURLkundenVerwaltung + "*")
