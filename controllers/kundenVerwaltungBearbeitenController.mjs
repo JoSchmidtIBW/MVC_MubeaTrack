@@ -124,7 +124,8 @@ export let kundenVerwaltungKundeBearbeitenControllerPost = async (req, res) => {
     } else if(req.body.mitarbeiterVerwaltungButtonNameEjs==="MitarbeiterVerwaltung") {
         res.redirect("/api/v1/inHome/mitarbeiterVerwaltung/:" + maNummerURLkundenVerwaltungKundeBearbeiten + "*" + idURLkundenVerwaltungKundeBearbeiten + "*")
         //         //res.send("Hallo Post MiitarbeiterVerwaltung")
-
+    } else if(req.body.meinAvatarButtonNameEjs==="meinAvatar"){
+        res.redirect("/api/v1/inHome/meinAvatar/:"+maNummerURLkundenVerwaltungKundeBearbeiten+"*"+idURLkundenVerwaltungKundeBearbeiten+"*")
     } else if(req.body.kundenVerwaltungButtonNameEjs==="KundenVerwaltung"){
         res.redirect("/api/v1/inHome/kundenVerwaltung/:"+maNummerURLkundenVerwaltungKundeBearbeiten+"*"+idURLkundenVerwaltungKundeBearbeiten+"*")
     }

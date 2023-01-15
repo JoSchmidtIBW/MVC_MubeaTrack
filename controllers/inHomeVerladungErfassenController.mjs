@@ -96,7 +96,8 @@ export let inHomeVerladungErfassenControllerPost = async (req, res) => {
         if (req.body.mitarbeiterVerwaltungButtonNameEjs === "MitarbeiterVerwaltung") {
             res.redirect("/api/v1/inHome/mitarbeiterVerwaltung/:" + maNummerURLinHomeVerladungErfassen + "*" + idURLinHomeVerladungErfassen + "*")
             //         //res.send("Hallo Post MiitarbeiterVerwaltung")
-
+        } else if(req.body.meinAvatarButtonNameEjs==="meinAvatar"){
+                res.redirect("/api/v1/inHome/meinAvatar/:"+ maNummerURLinHomeVerladungErfassen + "*" + idURLinHomeVerladungErfassen + "*")
         } else if (req.body.kundenVerwaltungButtonNameEjs === "KundenVerwaltung") {
             res.redirect("/api/v1/inHome/kundenVerwaltung/:" + maNummerURLinHomeVerladungErfassen + "*" + idURLinHomeVerladungErfassen + "*")
         } else if (req.body.ButtonZurueckVerladungenEjs === "Zurück zu Verladungen") {
@@ -170,6 +171,8 @@ export let inHomeVerladungErfassenControllerPost = async (req, res) => {
 
             if (req.body.ButtonZurueckVerladungenEjs === "Zurück zu Verladungen") {
                 res.redirect("/api/v1/inHome/:" + maNummerURLinHomeVerladungErfassen + "*" + idURLinHomeVerladungErfassen + "*")
+            } else if(req.body.meinAvatarButtonNameEjs==="meinAvatar"){
+                res.redirect("/api/v1/inHome/meinAvatar/:"+maNummerURLinHomeVerladungErfassen + "*" + idURLinHomeVerladungErfassen + "*")
             } else if (req.body.ButtonAbrechenEjs === 'Abrechen') {
                 res.redirect("/api/v1/inHome/:" + maNummerURLinHomeVerladungErfassen + "*" + idURLinHomeVerladungErfassen + "*")
             } else if (req.body.ButtonSpeichernEjs === 'Speichern') {

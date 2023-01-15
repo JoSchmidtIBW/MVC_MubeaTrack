@@ -17,6 +17,7 @@ import mitarbeiterVerwaltungMitarbeiterBearbeitenRoute from './routes/mitarbeite
 import mitarbeiterVerwaltungMitarbeiterErfassenRoute from './routes/mitarbeiterVerwaltungMitarbeiterErfassenRoute.mjs'
 import inHomeVerladungErfassenRoute from './routes/inHomeVerladungErfassenRoute.mjs'
 import logOutRoute from './routes/logOutRoute.mjs'
+import meinAvatarRoute from "./routes/meinAvatarRoute.mjs";
 
 import session2 from './utils/session.mjs'
 import loginRoute1 from "./routes/loginRoute1.mjs";
@@ -337,6 +338,7 @@ app.use('/api/v1/inHome/kundenVerwaltung/kundeErstellen', kundenVerwaltungKundeE
 app.use('/api/v1/inHome/mitarbeiterVerwaltung/mitarbeiterBearbeiten', mitarbeiterVerwaltungMitarbeiterBearbeitenRoute);
 app.use('/api/v1/inHome/mitarbeiterVerwaltung/MitarbeiterErfassen', mitarbeiterVerwaltungMitarbeiterErfassenRoute);
 app.use('/api/v1/logOut', logOutRoute);
+app.use('/api/v1/inHome/meinAvatar', meinAvatarRoute);
 
 
 

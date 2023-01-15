@@ -95,6 +95,8 @@ export let mitarbeiterErfassenControllerPOST = async (req, res) => {
         res.redirect("/api/v1/inHome/mitarbeiterVerwaltung/:" + maNummerURLmitarbeiterErfassen + "*" + idURLmitarbeiterErfassen + "*")
     } else if(req.body.ButtonAbrechenEjs==='Abrechen'){
         res.redirect("/api/v1/inHome/mitarbeiterVerwaltung/:" + maNummerURLmitarbeiterErfassen + "*" + idURLmitarbeiterErfassen + "*")
+    } else if(req.body.meinAvatarButtonNameEjs==="meinAvatar") {
+        res.redirect("/api/v1/inHome/meinAvatar/:" + maNummerURLmitarbeiterErfassen + "*" + idURLmitarbeiterErfassen + "*")
     } else if(req.body.ButtonZuruekZurMitarbeiterVerwaltungEjs=== 'Zurück zur Mitarbeiterverwaltung') {
         res.redirect("/api/v1/inHome/mitarbeiterVerwaltung/:" + maNummerURLmitarbeiterErfassen + "*" + idURLmitarbeiterErfassen + "*")
     } else if(req.body.mitarbeiterVerwaltungButtonNameEjs==="MitarbeiterVerwaltung") {

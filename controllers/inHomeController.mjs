@@ -158,7 +158,9 @@ export let inHomeControllerPost = async (req, res) => {
     else if(req.body.ButtonVerladungErfassenEjs==="Verladung Erfassen"){
         res.redirect("/api/v1/inHome/VerladungErfassen/:"+maNummerURLinHome+"*"+idURLinHome+"*")
     }
-
+    else if(req.body.meinAvatarButtonNameEjs==="meinAvatar"){
+        res.redirect("/api/v1/inHome/meinAvatar/:"+maNummerURLinHome+"*"+idURLinHome+"*")
+    }
 };
 
 
