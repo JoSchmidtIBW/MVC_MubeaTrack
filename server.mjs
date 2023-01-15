@@ -372,11 +372,11 @@ app.listen(PORT, () => {
     console.log(`Server running on port: http://localhost:${PORT}`);
 });
 
-
+//export {app}
 //module.export = app
 
 
-
+//export default app
 
 //------------------------Versuch Cookie-----------------------------------------
 //
