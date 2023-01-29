@@ -34,7 +34,7 @@ jobs:
         run: |
           npm i
           echo Add other actions to build,
-          npm run dev,
+          npm run start,
           echo test, and deploy your project.
 
   test:
