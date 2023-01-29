@@ -4,23 +4,24 @@ import bodyParser from "body-parser";
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import methodOverride from 'method-override';
-import helmet from "helmet";
+//import helmet from "helmet";
 
 //import loginRoute1 from './routes/loginRoute1.mjs';
 import login2Route from './routes/login2Route.mjs';
 import inHomeRoutes from "./routes/inHomeRoute.mjs";
 import kundenVerwaltungRoutes from './routes/kundenVerwaltungRoute.mjs';
 import mitarbeiterVerwaltungRoute from "./routes/mitarbeiterVerwaltungRoute.mjs";
-import kundenVerwaltungKundeBearbeitenRoutes from './routes/kundenVerwaltungBearbeitenRoute.mjs'
-import kundenVerwaltungKundeErstellenRoutes from './routes/kundenVerwaltungKundeErstellen.mjs'
-import mitarbeiterVerwaltungMitarbeiterBearbeitenRoute from './routes/mitarbeiterVerwaltungMitarbeiterBearbeitenRoute.mjs'
-import mitarbeiterVerwaltungMitarbeiterErfassenRoute from './routes/mitarbeiterVerwaltungMitarbeiterErfassenRoute.mjs'
+import kundenVerwaltungKundeBearbeitenRoutes from './routes/kundenBearbeitenRoute.mjs'
+import kundenVerwaltungKundeErstellenRoutes from './routes/kundenErstellenRoute.mjs'
+import mitarbeiterVerwaltungMitarbeiterBearbeitenRoute from './routes/mitarbeiterBearbeitenRoute.mjs'
+import mitarbeiterVerwaltungMitarbeiterErfassenRoute from './routes/mitarbeiterErfassenRoute.mjs'
 import inHomeVerladungErfassenRoute from './routes/inHomeVerladungErfassenRoute.mjs'
 import logOutRoute from './routes/logOutRoute.mjs'
 import meinAvatarRoute from "./routes/meinAvatarRoute.mjs";
 
 import session2 from './utils/session.mjs'
 import loginRoute1 from "./routes/loginRoute1.mjs";
+import helmet from "helmet";
 
 //import app from "./app.mjs";
 
@@ -72,7 +73,7 @@ app.use( express.static( "./public" ) );
 
 app.use(methodOverride('_method'));
 app.use(cookieParser());
-
+//app.use(helmet())
 
 // app.use(
 //     helmet({
@@ -145,9 +146,26 @@ app.disable('view cache');
 
 // helmet solltre rein, tutorial , dann wegen ejs <%=    oder <%-
 
+// let helmetCrypto = 1;
+// app.use((req, res, next) => {
+//    let helmetCrypto = 1;
+//     console.log(helmetCrypto)
+//     next();
+// });
+//helmet sagen, welche scripte doch erlaubt sind
+// app.use(helmet.contentSecurityPolicy({
+//     useDefaults: true,
+//     Content-Security-Policy: script-src 'unsafe-inline';
+// directives: { // welche scriptquellen sind erlaubt?
+//         scriptSrc: ["'self'", (req, res) => `'nonce-${helmetCrypto}'`]
+//     }
+// }));
+// app.use(helmet.referrerPolicy({
+//     policy: 'same-origin'
+// }))
 
 app.get('/', (req, res) => {
-    res.send("<link rel=\"icon\" type=\"image/png\" href=\"/images/favicon/favicon.png\"><h1>Hello Wolrd</h1><input type=\"button\" onclick=\"location.href='/api/v1/login1';\" value=\"Go to login\" />")
+    res.send("<link rel=\"icon\" type=\"image/png\" href=\"/images/favicon/favicon.png\"><h1>Hello Wolrd</h1><input type=\"button\" onclick=\"location.href='/api/v1/login1';\" value=\"Go to login\" /><script nonce=\"<%= self %>\"></script>")
 });
 
 //------------------------Versuch Cookie-----------------------------------------
