@@ -33,7 +33,7 @@ jobs:
       - name: Run a multi-line script
         run: |
           npm i
-          npm run start
+          npm run dev
           echo Add other actions to build,
           echo test, and deploy your project.
 
